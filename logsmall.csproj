@@ -50,8 +50,11 @@
     <Compile Include="LineInfo.cs" />
     <Compile Include="MesenLine.cs" />
     <Compile Include="OpLookup.cs" />
+    <Compile Include="OverWorldMap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ram.cs" />
+    <Compile Include="Rom.cs" />
     <Compile Include="SimpleLine.cs" />
     <Compile Include="SNES.cs" />
     <Compile Include="Statics.cs" />

@@ -10,8 +10,15 @@ namespace logsmall {
 			return Enumerable.Range(0, str.Length / chunkSize)
 				.Select(x => str.Substring(x * chunkSize, chunkSize));
 		}
+
 		public static string FlipBytes(this string value) {
 			return string.Join("", value.Split(2).Reverse());
 		}
+		/*
+		public static int LengthWithTabs(this string value) {
+			if (value)
+
+		}
+		*/
 	}
 }

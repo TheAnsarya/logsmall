@@ -9,32 +9,6 @@ using System.Threading.Tasks;
 
 namespace logsmall {
 	class Program {
-		static string romfilename = @"c:\working\Dragon Quest III - Soshite Densetsu he... (J).smc";
-
-		private static byte[] _rom = null;
-		public static byte[] ROM {
-			get {
-				if (_rom == null) {
-					var size = (int)new FileInfo(romfilename).Length;
-					_rom = new byte[size];
-					using (var romstream = File.OpenRead(romfilename)) {
-						romstream.Read(_rom, 0, size);
-					}
-				}
-
-				return _rom;
-			}
-		}
-
-		public static string GetRomSegment(int address, int length) {
-			string segment = "";
-
-			for (int i = 0; i < length; i++) {
-				segment += ROM[address + i].ToString("x2");
-			}
-
-			return segment.ToLowerInvariant();
-		}
 		static void Main(string[] args) {
 			//TrimLog();
 
@@ -52,11 +26,11 @@ namespace logsmall {
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 - decompressing ow bg1.log";
 			//processBSNES(filename);
 
-			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 decompress overworld map - bg1.txt";
-			//processMesen(filename);
+			var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 decompress overworld map - bg1 - from c0539b - wuth zeros.txt";
+			processMesen(filename);
 
-			var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
-			processSimple(filename);
+			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
+			//processSimple(filename);
 		}
 
 		private static string BuildFolder(string filename) {
@@ -894,7 +868,7 @@ namespace logsmall {
 						new {
 							Line = x,
 							Converted = x.Bytecode,
-							Rom = GetRomSegment((int)(x.AddressRaw - 0xC00000U), x.ByteLength)
+							Rom = Rom.GetString(x.AddressRaw, x.ByteLength)
 						}
 					)
 					.Where(x => x.Converted != x.Rom)
