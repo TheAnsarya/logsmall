@@ -54,7 +54,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ram.cs" />
+    <Compile Include="RamWordArray.cs" />
     <Compile Include="Rom.cs" />
+    <Compile Include="RamByteArray.cs" />
+    <Compile Include="RomByteArray.cs" />
     <Compile Include="SimpleLine.cs" />
     <Compile Include="SNES.cs" />
     <Compile Include="Statics.cs" />

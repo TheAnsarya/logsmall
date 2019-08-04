@@ -69,5 +69,9 @@ namespace logsmall {
 			var addy = (int)(address - AddressOffset);
 			return (uint)((ROM[addy + 2] << 16) + (ROM[addy + 1] << 8) + ROM[addy]);
 		}
+
+		public static RomByteArray ByteArray(int address) {
+			return new RomByteArray { Address = address };
+		}
 	}
 }
