@@ -26,8 +26,28 @@ namespace logsmall {
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 - decompressing ow bg1.log";
 			//processBSNES(filename);
 
-			var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 decompress overworld map - bg1 - from c0539b - wuth zeros.txt";
-			processMesen(filename);
+			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 decompress overworld map - bg1 - from c0539b - wuth zeros.txt";
+			//processMesen(filename);
+
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600bd -- jsl $c6061f.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c1 -- jsl $c609e0.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c5 -- jsl $c6029a.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c9 -- jsl $c60f42.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600cd -- jsl $c60286.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d1 -- jsl $c60951.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d5 -- jsl $c60706.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d9 -- jsl $c60b57.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600dd -- jsl $c60f98.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e1 -- jsl $c6072b.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e5 -- jsl $7e9893.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e9 -- jsl $7e9897.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600ed -- jsl $7e989b.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f1 -- jsl $c60654.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f5 -- jsl $7e989f.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f9 -- jsl $c0629e.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600fd -- jsl $c907cc.txt");
+
+
 
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
 			//processSimple(filename);
@@ -332,7 +352,6 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
 						newline = x.Groups[1].Value + x.Groups[2].Value + " " + x.Groups[3].Value + " .Branch_" + x.Groups[1].Value + x.Groups[4].Value,
 						label = ".Branch_" + x.Groups[1].Value + x.Groups[4].Value,
 						targetaddress = x.Groups[1].Value + x.Groups[4].Value
@@ -347,7 +366,6 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
 						newline = x.Groups[1].Value + " brl .Branch_" + x.Groups[2].Value,
 						label = ".Branch_" + x.Groups[2].Value,
 						targetaddress = x.Groups[2].Value
@@ -362,7 +380,6 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
 						newline = x.Groups[1].Value + x.Groups[2].Value + " jsr Routine_" + x.Groups[1].Value + x.Groups[3].Value,
 						label = "Routine_" + x.Groups[1].Value + x.Groups[3].Value + ":",
 						targetaddress = x.Groups[1].Value + x.Groups[3].Value
@@ -377,7 +394,6 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
 						newline = x.Groups[1].Value + " jsl Routine_" + x.Groups[2].Value,
 						label = "Routine_" + x.Groups[2].Value + ":",
 						targetaddress = x.Groups[2].Value
@@ -392,7 +408,6 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
 						newline = x.Groups[1].Value + x.Groups[2].Value + " jmp Jump_" + x.Groups[1].Value + x.Groups[3].Value,
 						label = "Jump_" + x.Groups[1].Value + x.Groups[3].Value + ":",
 						targetaddress = x.Groups[1].Value + x.Groups[3].Value
@@ -407,7 +422,6 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
 						newline = x.Groups[1].Value + " jml Jump_" + x.Groups[2].Value,
 						label = "Jump_" + x.Groups[2].Value + ":",
 						targetaddress = x.Groups[2].Value
@@ -470,7 +484,7 @@ namespace logsmall {
 
 		private class LabelMatch {
 			public string line;
-			public Match match;
+			//public Match match;
 			public string newline;
 			public string label;
 			public string targetaddress;
@@ -612,17 +626,22 @@ namespace logsmall {
 		}
 
 		static List<string> LabelCode(List<string> lines) {
-			var branchRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) (bcc|bcs|beq|bmi|bne|bpl|bra|bvc|bvs) \$([a-f0-9]{4})$", RegexOptions.Compiled);
+			var branchRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) (bcc|bcs|beq|bmi|bne|bpl|bra|bvc|bvs) \$([a-f0-9]{4}|[a-f0-9]{6})$", RegexOptions.Compiled);
 			var branches =
 				lines.Where(x => branchRegex.IsMatch(x))
 				.Select(x => branchRegex.Match(x))
+				.Select(x => new {
+					line = x.Value,
+					address = $"{x.Groups[1].Value}{x.Groups[2].Value}",
+					target = x.Groups[4].Value.Length == 4 ? $"{x.Groups[1].Value}{x.Groups[4].Value}" : x.Groups[4].Value,
+					op = x.Groups[3].Value
+				})
 				.Select(
 					x => new LabelMatch {
-						line = x.Value,
-						match = x,
-						newline = x.Groups[1].Value + x.Groups[2].Value + " " + x.Groups[3].Value + " .Branch_" + x.Groups[1].Value + x.Groups[4].Value,
-						label = ".Branch_" + x.Groups[1].Value + x.Groups[4].Value,
-						targetaddress = x.Groups[1].Value + x.Groups[4].Value
+						line = x.line,
+						newline = $"{x.address} {x.op} .Branch_{x.target}",
+						label = $".Branch_{x.target}",
+						targetaddress = x.target
 					}
 				);
 
@@ -633,24 +652,27 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
-						newline = x.Groups[1].Value + " brl .Branch_" + x.Groups[2].Value,
-						label = ".Branch_" + x.Groups[2].Value,
+						newline = $"{x.Groups[1].Value} brl .Branch_{x.Groups[2].Value}",
+						label = $".Branch_{x.Groups[2].Value}",
 						targetaddress = x.Groups[2].Value
 					}
 				);
 
-			var jsrRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jsr \$([a-f0-9]{4})$", RegexOptions.Compiled);
+			var jsrRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jsr \$([a-f0-9]{4}|[a-f0-9]{6})$", RegexOptions.Compiled);
 			var jsr =
 				lines.Where(x => jsrRegex.IsMatch(x))
 				.Select(x => jsrRegex.Match(x))
+				.Select(x => new {
+					line = x.Value,
+					address = $"{x.Groups[1].Value}{x.Groups[2].Value}",
+					target = x.Groups[3].Value.Length == 4 ? $"{x.Groups[1].Value}{x.Groups[3].Value}" : x.Groups[3].Value
+				})
 				.Select(
 					x => new LabelMatch {
-						line = x.Value,
-						match = x,
-						newline = x.Groups[1].Value + x.Groups[2].Value + " jsr Routine_" + x.Groups[1].Value + x.Groups[3].Value,
-						label = "Routine_" + x.Groups[1].Value + x.Groups[3].Value + ":",
-						targetaddress = x.Groups[1].Value + x.Groups[3].Value
+						line = x.line,
+						newline = $"{x.address} jsr Routine_{x.target}",
+						label = $"Routine_{x.target}:",
+						targetaddress = x.target
 					}
 				);
 
@@ -661,24 +683,27 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
-						newline = x.Groups[1].Value + " jsl Routine_" + x.Groups[2].Value,
-						label = "Routine_" + x.Groups[2].Value + ":",
+						newline = $"{x.Groups[1].Value} jsl Routine_{x.Groups[2].Value}",
+						label = $"Routine_{x.Groups[2].Value}:",
 						targetaddress = x.Groups[2].Value
 					}
 				);
 
-			var jmpRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jmp \$([a-f0-9]{4})$", RegexOptions.Compiled);
+			var jmpRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jmp \$([a-f0-9]{4}|[a-f0-9]{6})$", RegexOptions.Compiled);
 			var jmp =
 				lines.Where(x => jmpRegex.IsMatch(x))
 				.Select(x => jmpRegex.Match(x))
+				.Select(x => new {
+					line = x.Value,
+					address = $"{x.Groups[1].Value}{x.Groups[2].Value}",
+					target = x.Groups[3].Value.Length == 4 ? $"{x.Groups[1].Value}{x.Groups[3].Value}" : x.Groups[3].Value
+				})
 				.Select(
 					x => new LabelMatch {
-						line = x.Value,
-						match = x,
-						newline = x.Groups[1].Value + x.Groups[2].Value + " jmp Jump_" + x.Groups[1].Value + x.Groups[3].Value,
-						label = "Jump_" + x.Groups[1].Value + x.Groups[3].Value + ":",
-						targetaddress = x.Groups[1].Value + x.Groups[3].Value
+						line = x.line,
+						newline = $"{x.address} jmp Jump_{x.target}",
+						label = $"Jump_{x.target}:",
+						targetaddress =  x.target 
 					}
 				);
 
@@ -689,9 +714,8 @@ namespace logsmall {
 				.Select(
 					x => new LabelMatch {
 						line = x.Value,
-						match = x,
-						newline = x.Groups[1].Value + " jml Jump_" + x.Groups[2].Value,
-						label = "Jump_" + x.Groups[2].Value + ":",
+						newline = $"{x.Groups[1].Value} jml Jump_{x.Groups[2].Value}",
+						label = $"Jump_{x.Groups[2].Value}:",
 						targetaddress = x.Groups[2].Value
 					}
 				);

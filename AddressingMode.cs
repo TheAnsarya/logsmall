@@ -24,7 +24,9 @@ namespace logsmall {
 		// adc $000000,y
 		public static Regex AbsoluteLongIndexedX = new Regex(@"^\$([0-9a-z]{6}),x$", RegexOptions.Compiled);
 		// ror a
-		public static Regex Accumulator = new Regex(@"^a$", RegexOptions.Compiled);
+		//public static Regex Accumulator = new Regex(@"^a$", RegexOptions.Compiled);
+		// Mesen is using "rol" instead of "rol a"
+		public static Regex Accumulator = new Regex(@"^$", RegexOptions.Compiled);
 		// adc $00
 		public static Regex DirectPage = new Regex(@"^\$([0-9a-z]{2})$", RegexOptions.Compiled);
 		// adc ($00,x)

@@ -58,6 +58,7 @@
     <Compile Include="Rom.cs" />
     <Compile Include="RamByteArray.cs" />
     <Compile Include="RomByteArray.cs" />
+    <Compile Include="RoutineXc60b57.cs" />
     <Compile Include="SimpleLine.cs" />
     <Compile Include="SNES.cs" />
     <Compile Include="Statics.cs" />

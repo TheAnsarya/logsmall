@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace logsmall {
 	class MesenLine : Line, ILine {
-		public static Regex CreateRegex = new Regex(@"^([0-9A-Z]{6}) ([\$0-9A-Z ]{15}) ([A-Z]{3}) (\S*) (?:\[([0-9A-Z]{6})\] = \$([0-9A-Z]+))?\s+A:([0-9A-Z]{4}) X:([0-9A-Z]{4}) Y:([0-9A-Z]{4}) S:([0-9A-Z]{4}) D:([0-9A-Z]{4}) DB:([0-9A-Z]{2}) P:([a-zA-Z]{8}) V:([0-9 ]{3}) H:([0-9 ]{3})$", RegexOptions.Compiled);
+		public static Regex CreateRegex = new Regex(@"^([0-9A-Z]{6}) ([\$0-9A-Z ]{15}) ([A-Z]{3}) (\S*) (?:\[([0-9A-Z]{6})\] = \$([0-9A-Z]+))?\s+A:([0-9A-Z]{4}) X:([0-9A-Z]{4}) Y:([0-9A-Z]{4}) S:([0-9A-Z]{4}) D:([0-9A-Z]{4}) DB:([0-9A-Z]{2}) P:([a-zA-Z]{8}|[0-9A-F]{2}) V:([0-9 ]{3}) H:([0-9 ]{3})$", RegexOptions.Compiled);
 
 		public string BytecodeOriginal { get; set; }
 
@@ -44,7 +44,7 @@ namespace logsmall {
 				this.S = match.Groups[10].Value.ToLowerInvariant();
 				this.D = match.Groups[11].Value.ToLowerInvariant();
 				this.DB = match.Groups[12].Value.ToLowerInvariant();
-				this.P = new ProcessorStatus(match.Groups[13].Value);
+				//this.P = new ProcessorStatus(match.Groups[13].Value);
 				this.V = int.Parse(match.Groups[14].Value.Trim());
 				this.H = int.Parse(match.Groups[15].Value.Trim());
 			}
