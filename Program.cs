@@ -29,25 +29,29 @@ namespace logsmall {
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 decompress overworld map - bg1 - from c0539b - wuth zeros.txt";
 			//processMesen(filename);
 
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600bd -- jsl $c6061f.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c1 -- jsl $c609e0.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c5 -- jsl $c6029a.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c9 -- jsl $c60f42.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600cd -- jsl $c60286.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d1 -- jsl $c60951.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d5 -- jsl $c60706.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d9 -- jsl $c60b57.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600dd -- jsl $c60f98.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e1 -- jsl $c6072b.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e5 -- jsl $7e9893.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e9 -- jsl $7e9897.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600ed -- jsl $7e989b.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f1 -- jsl $c60654.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f5 -- jsl $7e989f.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f9 -- jsl $c0629e.txt");
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600fd -- jsl $c907cc.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600bd -- jsl $c6061f.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c1 -- jsl $c609e0.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c5 -- jsl $c6029a.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600c9 -- jsl $c60f42.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600cd -- jsl $c60286.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d1 -- jsl $c60951.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d5 -- jsl $c60706.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d9 -- jsl $c60b57.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600dd -- jsl $c60f98.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e1 -- jsl $c6072b.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e5 -- jsl $7e9893.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600e9 -- jsl $7e9897.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600ed -- jsl $7e989b.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f1 -- jsl $c60654.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f5 -- jsl $7e989f.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f9 -- jsl $c0629e.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600fd -- jsl $c907cc.txt");
 
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\trying to find water 02.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d9 -- jsl $c60b57 -- c086 stuff.txt");
 
+			//OverworldMap2.MakeTilesImage();
+			//OverworldMap2.GetMapImage();
 
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
 			//processSimple(filename);
@@ -771,7 +775,8 @@ namespace logsmall {
 
 		static void processMesen(string filename) {
 			var rawlines = File.ReadAllLines(filename);
-			var folder = Path.Combine(Path.GetDirectoryName(filename), $"{Path.GetFileNameWithoutExtension(filename)} {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}");
+			//var folder = Path.Combine(Path.GetDirectoryName(filename), $"{Path.GetFileNameWithoutExtension(filename)} {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}");
+			var folder = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
 			Directory.CreateDirectory(folder);
 
 			// Raw input
@@ -808,6 +813,22 @@ namespace logsmall {
 					.ToList();
 			File.WriteAllLines(Path.Combine(folder, "address-usage.txt"), addresses);
 			addresses = null;
+
+			// Code instruction counts
+			var codeAddresses =
+				lines
+					.Select(x=>x.Address)
+					.GroupBy(x => x)
+					.Select(x => $"{x.Key} {x.Count()}")
+					.OrderBy(x => x)
+					.ToList();
+			File.WriteAllLines(Path.Combine(folder, "code-address-counts.txt"), codeAddresses);
+			codeAddresses = null;
+
+			var olines = Line.ToLines(lines);
+			var groups = LineGroup.MakeGroups(olines);
+			var missing = GetMissingOutput(groups, (x) => x.ToString());
+			File.WriteAllLines(Path.Combine(folder, "with-missing.txt"), missing);
 
 			// Jump targets
 			Regex targetsRegex = new Regex(@"^(?:jsr|jrl|jmp|jml)$", RegexOptions.Compiled);

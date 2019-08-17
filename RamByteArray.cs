@@ -9,8 +9,9 @@ namespace logsmall {
 		public int Address;
 		public Ram Ram;
 
-		public ushort this[int offset] {
+		public byte this[int offset] {
 			get => this.Ram.Byte(this.Address + offset);
+			set => this.Ram.Byte(this.Address + offset, value);
 		}
 	}
 }

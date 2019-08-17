@@ -11,6 +11,7 @@ namespace logsmall {
 
 		public ushort this[int offset] {
 			get => this.Ram.Word(this.Address + offset);
+			set => this.Ram.Word(this.Address + offset, value);
 		}
 	}
 }

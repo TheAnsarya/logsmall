@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,13 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressingMode.cs" />
-    <Compile Include="ILine.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="LineGroup.cs" />
     <Compile Include="LineInfo.cs" />
     <Compile Include="MesenLine.cs" />
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="OpLookup.cs" />
     <Compile Include="OverWorldMap.cs" />
+    <Compile Include="OverworldMap2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ram.cs" />
@@ -58,13 +60,24 @@
     <Compile Include="Rom.cs" />
     <Compile Include="RamByteArray.cs" />
     <Compile Include="RomByteArray.cs" />
-    <Compile Include="RoutineXc60b57.cs" />
+    <Compile Include="Routine_c60b57.cs" />
     <Compile Include="SimpleLine.cs" />
     <Compile Include="SNES.cs" />
     <Compile Include="Statics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dq3\debug logs\trying to find water 02\address-usage.txt" />
+    <Content Include="dq3\debug logs\trying to find water 02\code-address-counts.txt" />
+    <Content Include="dq3\debug logs\trying to find water 02\code-labeled.txt" />
+    <Content Include="dq3\debug logs\trying to find water 02\code.txt" />
+    <Content Include="dq3\debug logs\trying to find water 02\jump-targets.txt" />
+    <Content Include="dq3\debug logs\trying to find water 02\raw.txt" />
+    <Content Include="dq3\debug logs\trying to find water 02\with-missing.txt" />
+    <Content Include="dq3\debug logs\trying to find water 02\wrong-bytecode.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

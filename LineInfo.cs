@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace logsmall {
 	class LineInfo {
-		public ILine Line { get; set; }
+		public Line Line { get; set; }
 		private List<string> Labels { get; set; }
 	}
 }

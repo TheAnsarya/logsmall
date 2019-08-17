@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 namespace logsmall {
 	class SNES {
 
+		public static bool IsNegative16(int value) => (value & 0x8000) == 0x8000;
+		public static bool IsNegative8(int value) => (value & 0x80) == 0x80;
 
 
 		public static string GetValue(Regex mode, string line) {

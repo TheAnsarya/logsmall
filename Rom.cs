@@ -9,7 +9,7 @@ namespace logsmall {
 	class Rom {
 		static readonly string filename = @"c:\working\Dragon Quest III - Soshite Densetsu he... (J).smc";
 
-		public const uint AddressOffset = 0xc10000U;
+		public const uint AddressOffset = 0xc00000U;
 
 		private static byte[] _rom = null;
 		public static byte[] ROM {

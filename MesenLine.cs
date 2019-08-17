@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace logsmall {
-	class MesenLine : Line, ILine {
+	class MesenLine : Line {
 		public static Regex CreateRegex = new Regex(@"^([0-9A-Z]{6}) ([\$0-9A-Z ]{15}) ([A-Z]{3}) (\S*) (?:\[([0-9A-Z]{6})\] = \$([0-9A-Z]+))?\s+A:([0-9A-Z]{4}) X:([0-9A-Z]{4}) Y:([0-9A-Z]{4}) S:([0-9A-Z]{4}) D:([0-9A-Z]{4}) DB:([0-9A-Z]{2}) P:([a-zA-Z]{8}|[0-9A-F]{2}) V:([0-9 ]{3}) H:([0-9 ]{3})$", RegexOptions.Compiled);
 
 		public string BytecodeOriginal { get; set; }
@@ -84,7 +84,7 @@ namespace logsmall {
 			this.State = new EmuState(match);
 		}
 
-		public override ILine ToLine() {
+		public override Line ToLine() {
 			return new Line {
 				Address = this.Address,
 				Op = this.Op,
@@ -92,7 +92,7 @@ namespace logsmall {
 			};
 		}
 
-		public static ILine MakeLine(string line) {
+		public static Line MakeLine(string line) {
 			var match = CreateRegex.Match(line);
 			return new Line {
 				Address = match.Groups[1].Value.ToLowerInvariant(),

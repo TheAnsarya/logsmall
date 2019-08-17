@@ -20,5 +20,10 @@ namespace logsmall {
 
 		}
 		*/
+
+		public static byte H(this ushort value) => (byte)(value >> 8);
+		public static ushort H(this ushort value, byte b) => (ushort)((value & 0x00ff) + (b << 8));
+		public static byte L(this ushort value) => (byte)value;
+		public static ushort L(this ushort value, byte b) => (ushort)((value & 0xff00) + b);
 	}
 }
