@@ -50,10 +50,9 @@ namespace logsmall {
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\trying to find water 02.txt");
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d9 -- jsl $c60b57 -- c086 stuff.txt");
 
-			OverworldMap2.TestGetLayout();
-
+			//OverworldMap2.TestGetLayout();
 			//MakeTilesImage();
-			//OverworldMap2.GetMapImage();
+			OverworldMap2.GetMapImage();
 
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
 			//processSimple(filename);
@@ -709,7 +708,7 @@ namespace logsmall {
 						line = x.line,
 						newline = $"{x.address} jmp Jump_{x.target}",
 						label = $"Jump_{x.target}:",
-						targetaddress =  x.target 
+						targetaddress = x.target
 					}
 				);
 
@@ -819,7 +818,7 @@ namespace logsmall {
 			// Code instruction counts
 			var codeAddresses =
 				lines
-					.Select(x=>x.Address)
+					.Select(x => x.Address)
 					.GroupBy(x => x)
 					.Select(x => $"{x.Key} {x.Count()}")
 					.OrderBy(x => x)
