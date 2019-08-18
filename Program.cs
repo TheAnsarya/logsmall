@@ -47,10 +47,12 @@ namespace logsmall {
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600f9 -- jsl $c0629e.txt");
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600fd -- jsl $c907cc.txt");
 
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\trying to find water 02.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\trying to find water 02.txt");
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d9 -- jsl $c60b57 -- c086 stuff.txt");
 
-			//OverworldMap2.MakeTilesImage();
+			OverworldMap2.TestGetLayout();
+
+			//MakeTilesImage();
 			//OverworldMap2.GetMapImage();
 
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";

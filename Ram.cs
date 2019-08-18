@@ -29,7 +29,7 @@ namespace logsmall {
 		public void Word(int address, ushort value) {
 			var addy = address - AddressOffset;
 			wram[addy] = (byte)(value & 0x00FF);
-			wram[addy + 1] = (byte)(value & 0xFF00 >> 8);
+			wram[addy + 1] = (byte)((value & 0xFF00) >> 8);
 		}
 
 		public int Long(int address) {
@@ -40,8 +40,8 @@ namespace logsmall {
 		public void Long(int address, int value) {
 			var addy = address - AddressOffset;
 			wram[addy] = (byte)(value & 0x00FF);
-			wram[addy + 1] = (byte)(value & 0xFF00 >> 8);
-			wram[addy + 2] = (byte)(value & 0xFF0000 >> 0x10);
+			wram[addy + 1] = (byte)((value & 0xFF00) >> 8);
+			wram[addy + 2] = (byte)((value & 0xFF0000) >> 0x10);
 		}
 
 		public RamWordArray WordArray(int address) {
