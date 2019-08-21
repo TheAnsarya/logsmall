@@ -52,7 +52,11 @@ namespace logsmall {
 
 			//OverworldMap2.TestGetLayout();
 			//MakeTilesImage();
-			OverworldMap2.GetMapImage();
+			//OverworldMap2.GetMapImage();
+			//OverworldMap2.TestTilemapToChunks();
+			//OverworldMap2.ProcessDQ4NesMap();
+			OverworldMap2.TranslateDQ4Map();
+			OverworldMap2.DrawDQ4SnesMap();
 
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
 			//processSimple(filename);

@@ -49,6 +49,7 @@
     <Compile Include="LineGroup.cs" />
     <Compile Include="LineInfo.cs" />
     <Compile Include="MesenLine.cs" />
+    <Compile Include="MoreLinq\MoreEnumerable.Batch.cs" />
     <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="OpLookup.cs" />
     <Compile Include="OverWorldMap.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="SimpleLine.cs" />
     <Compile Include="SNES.cs" />
     <Compile Include="Statics.cs" />
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
