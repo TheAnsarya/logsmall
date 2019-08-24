@@ -1,4 +1,5 @@
-﻿using System;
+﻿using logsmall.DataStructures;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,6 +25,10 @@ namespace logsmall {
 
 				return _rom;
 			}
+		}
+
+		public static ByteArrayStream GetStream(int address) {
+			return new ByteArrayStream(ROM, (int)(address - AddressOffset));
 		}
 
 		public static string GetString(uint address, int length) {

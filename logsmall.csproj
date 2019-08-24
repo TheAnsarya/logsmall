@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressingMode.cs" />
+    <Compile Include="DataStructures\ByteRingBuffer.cs" />
+    <Compile Include="Compression.cs" />
+    <Compile Include="DataStructures\ByteArrayStream.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="LineGroup.cs" />
     <Compile Include="LineInfo.cs" />
