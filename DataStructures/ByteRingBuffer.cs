@@ -12,7 +12,7 @@ namespace logsmall.DataStructures {
 				return _address;
 			}
 			set {
-				_address %= Size;
+				_address = value % Size;
 			}
 		}
 

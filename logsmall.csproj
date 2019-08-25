@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressingMode.cs" />
+    <Compile Include="Compression\BasicRing400.cs" />
+    <Compile Include="Compression\ReverseWindowReader.cs" />
     <Compile Include="DataStructures\ByteRingBuffer.cs" />
-    <Compile Include="Compression.cs" />
+    <Compile Include="CompressionStuff.cs" />
     <Compile Include="DataStructures\ByteArrayStream.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="LineGroup.cs" />

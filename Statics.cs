@@ -26,6 +26,11 @@ namespace logsmall {
 			queue.Enqueue(value);
 		}
 
+		// Allows collection initialization for Stacks
+		public static void Add<T>(this Stack<T> stack, T value) {
+			stack.Push(value);
+		}
+
 		// bits to bools
 		public static Queue<bool> ToBooleanQueue(this byte value) {
 			return new Queue<bool> {

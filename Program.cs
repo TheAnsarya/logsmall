@@ -1,4 +1,5 @@
-﻿using System;
+﻿using logsmall.Compression;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -10,16 +11,15 @@ using System.Threading.Tasks;
 namespace logsmall {
 	class Program {
 		static void Main(string[] args) {
+
+			BasicRing400.TestLayout();
+
+
 			//TrimLog();
-
 			//MergeTrace();
-
 			//FixA16();
-
 			//TestRange64();
-
 			//ConvertBranches();
-
 			//sortAddresses();
 
 			//var filename = @"c:\working\dq3\dq3-a.log"
@@ -55,8 +55,8 @@ namespace logsmall {
 			//OverworldMap2.GetMapImage();
 			//OverworldMap2.TestTilemapToChunks();
 			//OverworldMap2.ProcessDQ4NesMap();
-			OverworldMap2.TranslateDQ4Map();
-			OverworldMap2.DrawDQ4SnesMap();
+			//OverworldMap2.TranslateDQ4Map();
+			//OverworldMap2.DrawDQ4SnesMap();
 
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
 			//processSimple(filename);
