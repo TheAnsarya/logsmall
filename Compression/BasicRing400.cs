@@ -241,7 +241,8 @@ namespace logsmall.Compression {
 
 			public int NextAddress => Address - Command.CopySize;
 
-			public int Size => Command.Simple ? 2 : 3;
+			// 1 command bit plus 1 or 2 data bytes
+			public int Size => Command.Simple ? 9 : 17;
 
 			public int PathLength { get; set; }
 		}
