@@ -1,4 +1,7 @@
 
+
+Looks like a 16bit * 16bit into 32bit multiply 
+
 $40 [ P, Q, R, S ] = [ 04, 00, -, - ]
 A [ low = A, high = B ] = [07, 00]
 
