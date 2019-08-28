@@ -20,6 +20,8 @@ namespace logsmall.DataStructures {
 			Address = startAddress;
 		}
 
+		public ByteArrayStream(byte[] buffer) : this(buffer, 0) { }
+
 		public ByteArrayStream(byte[] buffer, int startAddress) {
 			Buffer = buffer;
 			Address = startAddress;

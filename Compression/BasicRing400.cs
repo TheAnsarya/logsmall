@@ -20,7 +20,7 @@ namespace logsmall.Compression {
 		private const int MinCopySize = 3;
 
 		public static byte[] Decompress(byte[] source, int outputSize) {
-			return Decompress(new ByteArrayStream(source, 0), outputSize);
+			return Decompress(new ByteArrayStream(source), outputSize);
 		}
 
 		public static byte[] Decompress(ByteArrayStream source, int outputSize) {

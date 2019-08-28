@@ -85,6 +85,7 @@
     <Content Include="dq3\debug logs\trying to find water 02\raw.txt" />
     <Content Include="dq3\debug logs\trying to find water 02\with-missing.txt" />
     <Content Include="dq3\debug logs\trying to find water 02\wrong-bytecode.txt" />
+    <Content Include="notes\c01146 - multiply routine.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
