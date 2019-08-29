@@ -1,0 +1,211 @@
+
+Parameters are stored after JSL call
+Code resumes $b bytes after JSL
+
+Parameters:
+	Y or X => array index or used in multiply to find address, call it XY
+				two entry points, one for X and one for Y
+
+	P[1] =>
+		if P[1] == 0 then do multiply calculation for address
+			A.final = (word P[2-3] * word XY) + P[4-6] + P[7-8]
+
+		if P[1] != 0 then index an array for address
+			P[4-6] => address to array
+				array is of addressses to the arrays containing the final values
+				first byte in array is bank for all array entries
+				rest of array is word values for the bottom 2 bytes of the address to the next data structure
+			P[7-8] => add to address from array (offset)
+			So A.final = value.24@(bank = value.8@(P[4-6]), value.16@(P[4-6] + index)) + P[7-8] (plus doesn't affect bank of A.final) 
+
+	value.24@(A.final)
+		AND mask with P[9-b]
+		then shift mask and value down
+
+----------------------------------
+
+; Entry point for using Y
+; $40 => Y
+c90566 php
+c90567 phb
+c90568 sei
+c90569 %setAXYto16bit()
+c9056b pha
+c9056c phx
+c9056d phy
+c9056e sty $40				; $40-$41 => Y
+c90570 bra $057c
+
+; Entry point for using X
+; $40 => X
+c90572 php
+c90573 phb
+c90574 sei
+c90575 %setAXYto16bit()
+c90577 pha
+c90578 phx
+c90579 phy
+c9057a stx $40				; $40-$41 => X
+
+;
+c9057c %setAXYto8bit()
+c9057e lda $0b,s			; Program Bank of calling routine - because parameters (P[]) are stored in code directly after JSL to this routine
+c90580 pha
+c90581 plb					; set databank
+
+c90582 ldy #$01
+c90584 lda ($09,s),y		; P[1]
+c90586 beq $058b
+c90588 brl $0610			; if p[1] is not zero, jump to $610
+
+; if (is zero) {
+
+c9058b %setAto16bit()
+c9058d ldy #$02
+c9058f lda ($09,s),y		; P[2-3]
+c90591 ldx #$40				; result in $40-$43
+c90593 jsl $c01146			; $40-$43 => word P[2-3] * word $40, (16bit * 16bit into 32bit)
+
+c90597 ldy #$04
+c90599 lda ($09,s),y		; P[4-5]
+
+c9059b ldy #$07
+c9059d clc
+c9059e adc ($09,s),y		; A=> P[4-5] + P[7-8]
+c905a0 bcc $05a5
+c905a2 inc $42				; $42, add the carry
+c905a4 clc
+
+c905a5 adc $40
+c905a7 sta $40				; $40 => $40 + A
+
+c905a9 bcc $05ad
+c905ab inc $42				; $42, add the carry
+
+c905ad %setAto8bit()
+c905af ldy #$06
+c905b1 lda ($09,s),y		; P[6] - bank of target address
+c905b3 clc
+c905b4 adc $42
+c905b6 sta $42				; $42 => loaded bank + $42 (address is 24 bit so data offset might push us into another bank)
+c905b8 %setAXYto16bit()
+
+; } else { jump to 610 then return here }
+
+
+; now we have an address in $40-$42
+; fetch 24 bit value at that address into $40-$42 (following the pointer chain)
+c905ba lda [$40]
+c905bc tax
+c905bd ldy #$0001
+c905c0 lda [$40],y
+c905c2 sta $41
+c905c4 txa
+c905c5 sta $40
+
+; P[9-b] is 24bit mask
+c905c7 ldy #$000a
+c905ca lda ($09,s),y		; P[a-b]
+c905cc and #$ff00			; only use b
+c905cf bne $05e5
+
+
+; if (P[b] == 0) { // mask for $42 is 0 (note that $42 is not cleared and does not move)
+c905d1 lda $40
+c905d3 ldy #$0009
+c905d6 and ($09,s),y
+c905d8 sta $40				; $40 => $40 AND P[9-a]
+
+c905da lda ($09,s),y		; A => P[9-a]
+c905dc beq $0600			; exit if statement when P[9-a] = 0 (short circuit as AND $0000 has already set $40-$41 to 0)
+	; loop {
+c905de lsr a
+c905df bcs $0600
+c905e1 lsr $40				; shift right until mask starts at bit 0 (like if mask is 00111000 then $40 => ($40 >> 3) so you can select certain bits from the value to use)
+c905e3 bra $05de
+	; }
+
+; } else { //(P[b] != 0)
+
+c905e5 lda $41
+c905e7 ldy #$000a
+c905ea and ($09,s),y
+c905ec sta $41
+c905ee lda $40
+c905f0 dey
+c905f1 and ($09,s),y
+c905f3 sta $40				; apply 24bit mask P[9-b] to $40-42
+
+c905f5 lda ($09,s),y		; mask must start in P[9-a] or this loops forever
+
+c905f7 lsr a
+c905f8 bcs $0600
+c905fa lsr $42
+c905fc ror $40
+c905fe bra $05f7			; shift $40-42 right until mask starts at bit 0
+; }
+
+; increase return address by $b (to skip the parameters) and exit
+c90600 lda $09,s
+c90602 clc
+c90603 adc #$000b
+c90606 sta $09,s
+c90608 ply
+c90609 plx
+c9060a pla
+c9060b plb
+c9060c plp
+c9060d lda $40
+c9060f rtl					; exit
+
+
+c90610 %setAXYto16bit()
+c90612 jsr $045d			; calls routine below, P[4-6] indexed by $40 ($40 << 1 + 1, the plus 1 because the first byte in the array goes into $42)
+
+c90615 ldy #$0007
+c90618 lda ($09,s),y
+c9061a clc
+c9061b adc $40
+c9061d sta $40				; $40 => $40 + P[7-8]
+
+c9061f bra $05ba			; jump up to the "fetch 24bit value at address in $40 and then mask and shift right" part
+
+------------------------
+
+; Sub-routine called at c90612:
+
+c9045d lda $40
+c9045f asl a
+c90460 inc
+c90461 tax					; X => ($40 << 1) + 1, this is used as index into array (is the y in "c90472 lda [$40],y")
+							; the plus 1 because the first byte in the array goes into $42
+
+c90462 ldy #$0004
+c90465 lda ($0b,s),y
+c90467 sta $40
+c90469 iny
+c9046a lda ($0b,s),y
+c9046c sta $41				; $40-42 => P[4-6]
+
+c9046e lda [$40]			; first byte in array is bank for all addresses in array (becomes $42)
+
+c90470 txy
+c90471 tax
+c90472 lda [$40],y			; get indexed value which will be lower word of returned address
+c90474 sta $40
+c90476 txa
+c90477 sta $42				; address bank (was first byte of array)
+c90479 rts
+
+
+
+
+
+
+
+
+
+
+
+
+

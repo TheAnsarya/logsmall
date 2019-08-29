@@ -22,7 +22,11 @@ namespace logsmall.DataStructures {
 		public ByteRingBuffer(byte[] buffer, int startAddress) : base(buffer, startAddress) {
 		}
 
-		public ByteRingBuffer Branch(int startAddress) {
+		// TODO: get rid of the new modifier?
+		public new ByteRingBuffer Branch() => Branch(0);
+
+		// TODO: get rid of the new modifier?
+		public new ByteRingBuffer Branch(int startAddress) {
 			return new ByteRingBuffer(Buffer, startAddress);
 		}
 	}

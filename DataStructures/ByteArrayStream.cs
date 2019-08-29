@@ -40,5 +40,46 @@ namespace logsmall.DataStructures {
 			byte b = Buffer[Address++];
 			return (ushort)((b << 8) + a);
 		}
+
+		public ByteArrayStream Branch() => Branch(0);
+
+		public ByteArrayStream Branch(int startAddress) {
+			return new ByteRingBuffer(Buffer, startAddress);
+		}
+
+		public List<ByteArrayStream> FindAll(byte[] searchTerm) {
+			var found = new List<ByteArrayStream>();
+
+			var lastIndex = Buffer.Length - searchTerm.Length;
+			for (int i = 0; i <= lastIndex; i++) {
+				var matches = true;
+
+				for (int j = 0; j < searchTerm.Length; j++) {
+					if (Buffer[i + j] != searchTerm[j]) {
+						matches = false;
+						break;
+					}
+				}
+
+				if (matches) {
+					found.Add(this.Branch(i));
+				}
+			}
+
+			return found;
+		}
+
+		public byte[] GetBytes(int length) => GetBytes(length, Address);
+
+		public byte[] GetBytes(int length, int address) {
+			if ((address + length) > Buffer.Length) {
+				length = Buffer.Length - address;
+			}
+
+			var output = new byte[length];
+			Array.Copy(Buffer, address, output, 0, length);
+
+			return output;
+		}
 	}
 }

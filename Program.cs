@@ -1,4 +1,5 @@
 ﻿using logsmall.Compression;
+using logsmall.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,7 +13,10 @@ namespace logsmall {
 	class Program {
 		static void Main(string[] args) {
 
-			BasicRing400.TestLayout();
+			GetC90572Parameters();
+			GetC90566Parameters();
+
+			//BasicRing400.TestLayout();
 
 
 			//TrimLog();
@@ -933,6 +937,51 @@ namespace logsmall {
 					.Select(lineToString)
 					.ToList();
 			return allraw;
+		}
+
+
+		static void GetC90572Parameters() {
+			var filename = @"c:\working\dq3\c90572 parameters.txt";
+			var searchTerm = new byte[] { 0x22, 0x72, 0x05, 0xC9 };
+
+			var spots =
+				new ByteArrayStream(Rom.ROM)
+					.FindAll(searchTerm)
+					.Select(x => new {
+						Address = x.Address + Rom.AddressOffset,
+						DataAddress = x.Address + Rom.AddressOffset + 4,
+						Data = x.GetBytes(0xb, x.Address + 4)
+					});
+
+			var lines =
+				spots
+					.Select(x =>
+						$"{x.Address.ToString("x6")} -- {x.DataAddress.ToString("x6")} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2")))}"
+					);
+
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void GetC90566Parameters() {
+			var filename = @"c:\working\dq3\c90566 parameters.txt";
+			var searchTerm = new byte[] { 0x22, 0x66, 0x05, 0xC9 };
+
+			var spots =
+			   new ByteArrayStream(Rom.ROM)
+				   .FindAll(searchTerm)
+				   .Select(x => new {
+					   Address = x.Address + Rom.AddressOffset,
+					   DataAddress = x.Address + Rom.AddressOffset + 4,
+					   Data = x.GetBytes(0xb, x.Address + 4)
+				   });
+
+			var lines =
+				spots
+					.Select(x =>
+						$"{x.Address.ToString("x6")} -- {x.DataAddress.ToString("x6")} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2")))}"
+					);
+
+			File.WriteAllLines(filename, lines);
 		}
 	}
 }
