@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace logsmall {
+namespace logsmall.SourceCode {
 	class LineGroup {
 		public uint StartAddress { get; set; }
 		public uint EndAddress { get => NextAddress - 1; }

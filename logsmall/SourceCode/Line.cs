@@ -1,4 +1,4 @@
-﻿using MoreLinq;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace logsmall {
+namespace logsmall.SourceCode {
 	class Line {
 		public string Address { get; set; }
 		// TODO: rename which address is what

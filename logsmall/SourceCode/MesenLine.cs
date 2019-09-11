@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace logsmall {
+namespace logsmall.SourceCode {
 	class MesenLine : Line {
 		public static Regex CreateRegex = new Regex(@"^([0-9A-Z]{6}) ([\$0-9A-Z ]{15}) ([A-Z]{3}) (\S*) (?:\[([0-9A-Z]{6})\] = \$([0-9A-Z]+))?\s+A:([0-9A-Z]{4}) X:([0-9A-Z]{4}) Y:([0-9A-Z]{4}) S:([0-9A-Z]{4}) D:([0-9A-Z]{4}) DB:([0-9A-Z]{2}) P:([a-zA-Z]{8}|[0-9A-F]{2}) V:([0-9 ]{3}) H:([0-9 ]{3})$", RegexOptions.Compiled);
 
@@ -44,33 +45,72 @@ namespace logsmall {
 				this.S = match.Groups[10].Value.ToLowerInvariant();
 				this.D = match.Groups[11].Value.ToLowerInvariant();
 				this.DB = match.Groups[12].Value.ToLowerInvariant();
-				//this.P = new ProcessorStatus(match.Groups[13].Value);
+				this.P = new ProcessorStatus(match.Groups[13].Value);
 				this.V = int.Parse(match.Groups[14].Value.Trim());
 				this.H = int.Parse(match.Groups[15].Value.Trim());
 			}
 		}
 
 		public class ProcessorStatus {
-			public string Flags;
+			private static Regex IsFlagsString = new Regex("^nvmxdizc$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-			public ProcessorStatus(string flags) {
-				this.Flags = flags;
+			// nvmxdizc
+			public bool Negative { get; set; }
+			public bool Overflow { get; set; }
+			public bool Accumulator { get; set; }
+			public bool Indexes { get; set; }
+			public bool Decimal { get; set; }
+			public bool IRQDisable { get; set; }
+			public bool Zero { get; set; }
+			public bool Carry { get; set; }
+
+			public string Flags {
+				get {
+					return
+						(Negative ? "N" : "n")
+						+ (Overflow ? "N" : "n")
+						+ (Accumulator ? "N" : "n")
+						+ (Indexes ? "N" : "n")
+						+ (Decimal ? "N" : "n")
+						+ (IRQDisable ? "N" : "n")
+						+ (Zero ? "N" : "n")
+						+ (Carry ? "N" : "n");
+				}
+				set {
+					if (value == null) {
+						throw new ArgumentNullException(nameof(value));
+					}
+
+					if ((value.Length == 8) && IsFlagsString.IsMatch(value)) {
+						Negative = value[0] == 'N';
+						Overflow = value[1] == 'V';
+						Accumulator = value[2] == 'M';
+						Indexes = value[3] == 'X';
+						Decimal = value[4] == 'D';
+						IRQDisable = value[5] == 'I';
+						Zero = value[6] == 'Z';
+						Carry = value[7] == 'C';
+					} else if ((value.Length == 2) && byte.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out byte flags)) {
+						Negative = (flags & 0x80) != 0;
+						Overflow = (flags & 0x40) != 0;
+						Accumulator = (flags & 0x20) != 0;
+						Indexes = (flags & 0x10) != 0;
+						Decimal = (flags & 0x08) != 0;
+						IRQDisable = (flags & 0x04) != 0;
+						Zero = (flags & 0x02) != 0;
+						Carry = (flags & 0x01) != 0;
+					} else {
+						throw new ArgumentException($"{nameof(value)} has invalid value: {value}");
+					}
+				}
 			}
 
-			//nvmxdIzc
-			public bool Negative { get { return Flags[0] == 'N'; } }
-			public bool Overflow { get { return Flags[1] == 'V'; } }
-			public bool Accumulator { get { return Flags[2] == 'M'; } }
-			public bool Indexes { get { return Flags[3] == 'X'; } }
-			public bool Decimal { get { return Flags[4] == 'D'; } }
-			public bool IRQDisable { get { return Flags[5] == 'I'; } }
-			public bool Zero { get { return Flags[6] == 'Z'; } }
-			public bool Carry { get { return Flags[7] == 'C'; } }
+			public ProcessorStatus(string flags) {
+				Flags = flags;
+			}
 		}
 
-		public static bool IsA(string line) {
-			return CreateRegex.IsMatch(line);
-		}
+		public static bool IsA(string line) => CreateRegex.IsMatch(line);
 
 		public MesenLine(string line) {
 			var match = CreateRegex.Match(line);
@@ -84,13 +124,12 @@ namespace logsmall {
 			this.State = new EmuState(match);
 		}
 
-		public override Line ToLine() {
-			return new Line {
+		public override Line ToLine() =>
+			new Line {
 				Address = this.Address,
 				Op = this.Op,
 				Parameters = this.Parameters
 			};
-		}
 
 		public static Line MakeLine(string line) {
 			var match = CreateRegex.Match(line);
@@ -101,15 +140,11 @@ namespace logsmall {
 			};
 		}
 
-		public static List<MesenLine> FromFile(string filename) {
-			var rawlines = File.ReadAllLines(filename);
-			
-			var lines =
-				rawlines
-					.Where(x => IsA(x))
-					.Select(x => new MesenLine(x))
-					.ToList();
-			return lines;
-		}
+		public static List<MesenLine> FromFile(string filename) => ConvertTrace(File.ReadAllLines(filename).ToList());
+
+		public static List<MesenLine> ConvertTrace(List<string> lines) =>
+			lines.Where(x => IsA(x))
+				.Select(x => new MesenLine(x))
+				.ToList();
 	}
 }

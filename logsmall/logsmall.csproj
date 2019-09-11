@@ -50,10 +50,12 @@
     <Compile Include="DataStructures\ByteRingBuffer.cs" />
     <Compile Include="CompressionStuff.cs" />
     <Compile Include="DataStructures\ByteArrayStream.cs" />
-    <Compile Include="Line.cs" />
-    <Compile Include="LineGroup.cs" />
-    <Compile Include="LineInfo.cs" />
-    <Compile Include="MesenLine.cs" />
+    <Compile Include="DataStructures\SNES\BGMapEntry.cs" />
+    <Compile Include="SourceCode\Line.cs" />
+    <Compile Include="SourceCode\LineGroup.cs" />
+    <Compile Include="SourceCode\LineInfo.cs" />
+    <Compile Include="SourceCode\LineMatch.cs" />
+    <Compile Include="SourceCode\MesenLine.cs" />
     <Compile Include="MoreLinq\MoreEnumerable.Batch.cs" />
     <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="OpLookup.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="OverworldMap2.cs" />
     <Compile Include="Overworld\Chunk.cs" />
     <Compile Include="Overworld\MapData.cs" />
+    <Compile Include="Overworld\MetaTileDefinition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ram.cs" />
@@ -69,8 +72,9 @@
     <Compile Include="RamByteArray.cs" />
     <Compile Include="RomByteArray.cs" />
     <Compile Include="Routine_c60b57.cs" />
-    <Compile Include="SimpleLine.cs" />
+    <Compile Include="SourceCode\SimpleLine.cs" />
     <Compile Include="SNES.cs" />
+    <Compile Include="SourceCode\SourceProcessing.cs" />
     <Compile Include="Statics.cs" />
     <Compile Include="TestData.cs" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace logsmall {
+namespace logsmall.SourceCode {
 	class SimpleLine : Line {
 		public static Regex CreateRegex = new Regex(@"^([0-9a-z]{6}) (...)(?: (\S*))?$", RegexOptions.Compiled);
 

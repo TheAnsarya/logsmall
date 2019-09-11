@@ -1,5 +1,6 @@
-﻿using logsmall.Compression;
+using logsmall.Compression;
 using logsmall.DataStructures;
+using logsmall.SourceCode;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -60,6 +61,7 @@ namespace logsmall {
 			Directory.CreateDirectory(folder);
 			return folder;
 		}
+
 		private static void TestRange64() {
 			//int maxhp = 63;
 			int maxhp = 3;
@@ -337,161 +339,6 @@ namespace logsmall {
 			}
 		}
 
-		static void ConvertBranches() {
-			//string inname = @"c:\working\dq3\dq3-all.log";
-			//string outname = @"c:\working\dq3\dq3-all-branched.log";
-			string inname = @"c:\working\dq3\small.log";
-			string outname = @"c:\working\dq3\small-branched.log";
-
-			Console.WriteLine("reading");
-			var lines = File.ReadAllLines(inname);
-
-			Console.WriteLine("branches");
-			var branchRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) (bcc|bcs|beq|bmi|bne|bpl|bra|bvc|bvs) \$([a-f0-9]{4})$", RegexOptions.Compiled);
-			var branches =
-				lines.Where(x => branchRegex.IsMatch(x))
-				.Select(x => branchRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = x.Groups[1].Value + x.Groups[2].Value + " " + x.Groups[3].Value + " .Branch_" + x.Groups[1].Value + x.Groups[4].Value,
-						label = ".Branch_" + x.Groups[1].Value + x.Groups[4].Value,
-						targetaddress = x.Groups[1].Value + x.Groups[4].Value
-					}
-				);
-
-			Console.WriteLine("longBranches");
-			var longBranchRegex = new Regex(@"^([a-f0-9]{6}) brl \$([a-f0-9]{6})$", RegexOptions.Compiled);
-			var longBranches =
-				lines.Where(x => longBranchRegex.IsMatch(x))
-				.Select(x => longBranchRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = x.Groups[1].Value + " brl .Branch_" + x.Groups[2].Value,
-						label = ".Branch_" + x.Groups[2].Value,
-						targetaddress = x.Groups[2].Value
-					}
-				);
-
-			Console.WriteLine("jsr");
-			var jsrRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jsr \$([a-f0-9]{4})$", RegexOptions.Compiled);
-			var jsr =
-				lines.Where(x => jsrRegex.IsMatch(x))
-				.Select(x => jsrRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = x.Groups[1].Value + x.Groups[2].Value + " jsr Routine_" + x.Groups[1].Value + x.Groups[3].Value,
-						label = "Routine_" + x.Groups[1].Value + x.Groups[3].Value + ":",
-						targetaddress = x.Groups[1].Value + x.Groups[3].Value
-					}
-				);
-
-			Console.WriteLine("jsl");
-			var jslRegex = new Regex(@"^([a-f0-9]{6}) jsl \$([a-f0-9]{6})$", RegexOptions.Compiled);
-			var jsl =
-				lines.Where(x => jslRegex.IsMatch(x))
-				.Select(x => jslRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = x.Groups[1].Value + " jsl Routine_" + x.Groups[2].Value,
-						label = "Routine_" + x.Groups[2].Value + ":",
-						targetaddress = x.Groups[2].Value
-					}
-				);
-
-			Console.WriteLine("jmp");
-			var jmpRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jmp \$([a-f0-9]{4})$", RegexOptions.Compiled);
-			var jmp =
-				lines.Where(x => jmpRegex.IsMatch(x))
-				.Select(x => jmpRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = x.Groups[1].Value + x.Groups[2].Value + " jmp Jump_" + x.Groups[1].Value + x.Groups[3].Value,
-						label = "Jump_" + x.Groups[1].Value + x.Groups[3].Value + ":",
-						targetaddress = x.Groups[1].Value + x.Groups[3].Value
-					}
-				);
-
-			Console.WriteLine("jml");
-			var jmlRegex = new Regex(@"^([a-f0-9]{6}) jml \$([a-f0-9]{6})$", RegexOptions.Compiled);
-			var jml =
-				lines.Where(x => jmlRegex.IsMatch(x))
-				.Select(x => jmlRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = x.Groups[1].Value + " jml Jump_" + x.Groups[2].Value,
-						label = "Jump_" + x.Groups[2].Value + ":",
-						targetaddress = x.Groups[2].Value
-					}
-				);
-
-			Console.WriteLine("concat");
-			var all = branches.Concat(longBranches).Concat(jsr).Concat(jsl).Concat(jmp).Concat(jml);
-
-			Console.WriteLine("labels");
-			var labels =
-				all.GroupBy(x => x.targetaddress)
-				.ToDictionary(
-					x => x.Key,
-					x => x.Select(y => y.label).Distinct()
-				);
-
-			var dupekeys =
-				all.GroupBy(x => x.line)
-				.Where(x => x.Count() > 1);
-
-			var emptylines = all.Count(x => x.line == "");
-			var oklines = all.Count(x => x.line != "");
-
-			Console.WriteLine("replacements");
-			var replacements = all.ToDictionary(x => x.line, x => x.newline);
-
-			Console.WriteLine("writing");
-			var addressRegex = new Regex(@"^([a-f0-9]{6}) ", RegexOptions.Compiled);
-			string last = null;
-			using (var writer = new StreamWriter(outname, false)) {
-				foreach (string line in lines) {
-					var match = addressRegex.Match(line);
-					var address = match.Success ? match.Groups[1].Value : null;
-					if ((address != null) && labels.ContainsKey(address)) {
-						// attempt to not relabel
-						if (last != labels[address].First()) {
-							writer.WriteLine(Environment.NewLine + string.Join(Environment.NewLine, labels[address]));
-							labels.Remove(address);
-						}
-					}
-
-					string newline;
-					if (replacements.TryGetValue(line, out newline)) {
-						writer.WriteLine(newline + Environment.NewLine);
-						replacements.Remove(line);
-					} else {
-						writer.WriteLine(line);
-					}
-
-					last = line;
-				}
-			}
-
-			Console.WriteLine();
-			Console.WriteLine("labels unused: " + labels.Count);
-			Console.WriteLine("replacements unused: " + replacements.Count);
-			Console.ReadKey();
-		}
-
-		private class LabelMatch {
-			public string line;
-			//public Match match;
-			public string newline;
-			public string label;
-			public string targetaddress;
-		}
-
 		// a bunch of "sep #$20" were accidently replaced to "%setAto16bit()"
 		// compares and fixes that
 		static void FixA16() {
@@ -595,7 +442,7 @@ namespace logsmall {
 			File.WriteAllLines(Path.Combine(folder, "code.txt"), code);
 
 			// Code with labels and line breaks
-			var labeled = LabelCode(code);
+			var labeled = SourceProcessing.LabelCode(code);
 			File.WriteAllLines(Path.Combine(folder, "code-labeled.txt"), labeled);
 
 			// Address/instruction usage counts
@@ -627,150 +474,6 @@ namespace logsmall {
 			File.WriteAllLines(Path.Combine(folder, "jump-targets.txt"), targets);
 		}
 
-		static List<string> LabelCode(List<string> lines) {
-			var branchRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) (bcc|bcs|beq|bmi|bne|bpl|bra|bvc|bvs) \$([a-f0-9]{4}|[a-f0-9]{6})$", RegexOptions.Compiled);
-			var branches =
-				lines.Where(x => branchRegex.IsMatch(x))
-				.Select(x => branchRegex.Match(x))
-				.Select(x => new {
-					line = x.Value,
-					address = $"{x.Groups[1].Value}{x.Groups[2].Value}",
-					target = x.Groups[4].Value.Length == 4 ? $"{x.Groups[1].Value}{x.Groups[4].Value}" : x.Groups[4].Value,
-					op = x.Groups[3].Value
-				})
-				.Select(
-					x => new LabelMatch {
-						line = x.line,
-						newline = $"{x.address} {x.op} .Branch_{x.target}",
-						label = $".Branch_{x.target}",
-						targetaddress = x.target
-					}
-				);
-
-			var longBranchRegex = new Regex(@"^([a-f0-9]{6}) brl \$([a-f0-9]{6})$", RegexOptions.Compiled);
-			var longBranches =
-				lines.Where(x => longBranchRegex.IsMatch(x))
-				.Select(x => longBranchRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = $"{x.Groups[1].Value} brl .Branch_{x.Groups[2].Value}",
-						label = $".Branch_{x.Groups[2].Value}",
-						targetaddress = x.Groups[2].Value
-					}
-				);
-
-			var jsrRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jsr \$([a-f0-9]{4}|[a-f0-9]{6})$", RegexOptions.Compiled);
-			var jsr =
-				lines.Where(x => jsrRegex.IsMatch(x))
-				.Select(x => jsrRegex.Match(x))
-				.Select(x => new {
-					line = x.Value,
-					address = $"{x.Groups[1].Value}{x.Groups[2].Value}",
-					target = x.Groups[3].Value.Length == 4 ? $"{x.Groups[1].Value}{x.Groups[3].Value}" : x.Groups[3].Value
-				})
-				.Select(
-					x => new LabelMatch {
-						line = x.line,
-						newline = $"{x.address} jsr Routine_{x.target}",
-						label = $"Routine_{x.target}:",
-						targetaddress = x.target
-					}
-				);
-
-			var jslRegex = new Regex(@"^([a-f0-9]{6}) jsl \$([a-f0-9]{6})$", RegexOptions.Compiled);
-			var jsl =
-				lines.Where(x => jslRegex.IsMatch(x))
-				.Select(x => jslRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = $"{x.Groups[1].Value} jsl Routine_{x.Groups[2].Value}",
-						label = $"Routine_{x.Groups[2].Value}:",
-						targetaddress = x.Groups[2].Value
-					}
-				);
-
-			var jmpRegex = new Regex(@"^([a-f0-9]{2})([a-f0-9]{4}) jmp \$([a-f0-9]{4}|[a-f0-9]{6})$", RegexOptions.Compiled);
-			var jmp =
-				lines.Where(x => jmpRegex.IsMatch(x))
-				.Select(x => jmpRegex.Match(x))
-				.Select(x => new {
-					line = x.Value,
-					address = $"{x.Groups[1].Value}{x.Groups[2].Value}",
-					target = x.Groups[3].Value.Length == 4 ? $"{x.Groups[1].Value}{x.Groups[3].Value}" : x.Groups[3].Value
-				})
-				.Select(
-					x => new LabelMatch {
-						line = x.line,
-						newline = $"{x.address} jmp Jump_{x.target}",
-						label = $"Jump_{x.target}:",
-						targetaddress = x.target
-					}
-				);
-
-			var jmlRegex = new Regex(@"^([a-f0-9]{6}) jml \$([a-f0-9]{6})$", RegexOptions.Compiled);
-			var jml =
-				lines.Where(x => jmlRegex.IsMatch(x))
-				.Select(x => jmlRegex.Match(x))
-				.Select(
-					x => new LabelMatch {
-						line = x.Value,
-						newline = $"{x.Groups[1].Value} jml Jump_{x.Groups[2].Value}",
-						label = $"Jump_{x.Groups[2].Value}:",
-						targetaddress = x.Groups[2].Value
-					}
-				);
-
-			var all = branches.Concat(longBranches).Concat(jsr).Concat(jsl).Concat(jmp).Concat(jml);
-
-			var labels =
-				all.GroupBy(x => x.targetaddress)
-				.ToDictionary(
-					x => x.Key,
-					x => x.Select(y => y.label).Distinct()
-				);
-
-			var dupekeys =
-				all.GroupBy(x => x.line)
-				.Where(x => x.Count() > 1);
-
-			var emptylines = all.Count(x => x.line == "");
-			var oklines = all.Count(x => x.line != "");
-
-			var replacements = all.ToDictionary(x => x.line, x => x.newline);
-
-			var addressRegex = new Regex(@"^([a-f0-9]{6}) ", RegexOptions.Compiled);
-			string last = null;
-
-			var output = new List<string>();
-
-			foreach (string line in lines) {
-				var match = addressRegex.Match(line);
-				var address = match.Success ? match.Groups[1].Value : null;
-				if ((address != null) && labels.ContainsKey(address)) {
-					output.Add("");
-					output.AddRange(labels[address]);
-					labels.Remove(address);
-				}
-
-				if (replacements.TryGetValue(line, out string newline)) {
-					output.Add(newline);
-					output.Add("");
-					replacements.Remove(line);
-				} else {
-					output.Add(line);
-					if ((line == "rts") || (line == "rtl") || (line == "rti")) {
-						output.Add("");
-					}
-				}
-
-				last = line;
-			}
-
-			return output;
-		}
-
 		static void processMesen(string filename) {
 			var rawlines = File.ReadAllLines(filename);
 			//var folder = Path.Combine(Path.GetDirectoryName(filename), $"{Path.GetFileNameWithoutExtension(filename)} {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}");
@@ -781,10 +484,7 @@ namespace logsmall {
 			File.WriteAllLines(Path.Combine(folder, "raw.txt"), rawlines);
 
 			// Parse lines into usable form
-			var lines =
-				rawlines
-					.Where(x => MesenLine.IsA(x))
-					.Select(x => new MesenLine(x));
+			var lines = MesenLine.ConvertTrace(rawlines.ToList());
 
 			// Simple, just code & address ordered
 			var code =
@@ -796,7 +496,7 @@ namespace logsmall {
 			File.WriteAllLines(Path.Combine(folder, "code.txt"), code);
 
 			// Code with labels and line breaks
-			var labeled = LabelCode(code);
+			var labeled = SourceProcessing.LabelCode(code);
 			File.WriteAllLines(Path.Combine(folder, "code-labeled.txt"), labeled);
 			labeled = null;
 
@@ -825,7 +525,7 @@ namespace logsmall {
 
 			var olines = Line.ToLines(lines);
 			var groups = LineGroup.MakeGroups(olines);
-			var missing = GetMissingOutput(groups, (x) => x.ToString());
+			var missing = SourceProcessing.GetMissingOutput(groups, (x) => x.ToString());
 			File.WriteAllLines(Path.Combine(folder, "with-missing.txt"), missing);
 
 			// Jump targets
@@ -864,69 +564,19 @@ namespace logsmall {
 
 			var groups = LineGroup.MakeGroups(lines);
 
-			var missing = GetMissingOutput(groups, (x) => x.ToString());
+			var missing = SourceProcessing.GetMissingOutput(groups, (x) => x.ToString());
 			File.WriteAllLines(Path.Combine(folder, "with-missing.txt"), missing);
 
-			var bytecodes = GetBadBytecodeConversions(lines);
+			var bytecodes = SourceProcessing.GetBadBytecodeConversions(lines);
 			File.WriteAllLines(Path.Combine(folder, "bad-bytecode-conversions.txt"), bytecodes);
 
-			var allraw = GetAllRaw(lines, (x) => x.ToString());
+			var allraw = SourceProcessing.GetAllRaw(lines, (x) => x.ToString());
 			File.WriteAllLines(Path.Combine(folder, "all-raw.txt"), allraw);
 
-			var allrawOps = GetAllRaw(lines, (x) => x.ToLongString());
+			var allrawOps = SourceProcessing.GetAllRaw(lines, (x) => x.ToLongString());
 			File.WriteAllLines(Path.Combine(folder, "all-raw-with-ops.txt"), allrawOps);
 		}
 
-		static List<string> GetMissingOutput(List<LineGroup> groups, Func<Line, string> lineToString) {
-			var missing = new List<string>();
-			LineGroup lastGroup = null;
-
-			foreach (var group in groups) {
-				if (lastGroup != null) {
-					missing.AddRange(new List<string> {
-						"",
-						$"; Missing {lastGroup.NextAddress.ToString("x6")} - {(group.StartAddress - 1).ToString("x6")} ({lastGroup.BytesBetween(group)} bytes)",
-						""
-					});
-				}
-
-				missing.AddRange(
-					group
-						.Lines
-						.Select(lineToString) //(x) => x.ToString())
-						.ToList()
-				);
-
-				lastGroup = group;
-			}
-
-			return missing;
-		}
-
-		static List<string> GetBadBytecodeConversions(IOrderedEnumerable<Line> lines) {
-			var bytecodes =
-				lines
-					.Where(x => x.AddressRaw >= 0xC00000U)
-					.Select(x =>
-						new {
-							Line = x,
-							Converted = x.Bytecode,
-							Rom = Rom.GetString(x.AddressRaw, x.ByteLength)
-						}
-					)
-					.Where(x => x.Converted != x.Rom)
-					.Select(x => $"{x.Line.ToString()}   rom={x.Rom}  converted={x.Converted}")
-					.ToList();
-			return bytecodes;
-		}
-
-		static List<string> GetAllRaw(IOrderedEnumerable<Line> lines, Func<Line, string> lineToString) {
-			var allraw =
-				lines
-					.Select(lineToString)
-					.ToList();
-			return allraw;
-		}
 
 
 		static void GetC90572Parameters() {
