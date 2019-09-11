@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall {
-	class Ram {
+	public class Ram {
 		public const int AddressOffset = 0x7e0000;
 
 		public byte[] wram = new byte[0x2_0000];

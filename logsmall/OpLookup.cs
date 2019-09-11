@@ -280,7 +280,7 @@ namespace logsmall {
 			// jmp ($0000,x)
 			new OpLookup{Op = "jmp", Byte = "7c", Mode = AddressingMode.AbsoluteIndexedIndirectX },
 			// jmp [$0000]
-			new OpLookup{Op = "jmp", Byte = "dc", Mode = AddressingMode.AbsoluteIndirectLong },
+			new OpLookup{Op = "jml", Byte = "dc", Mode = AddressingMode.AbsoluteIndirectLong },
 			// jsr $0000
 			new OpLookup{Op = "jsr", Byte = "20", Mode = AddressingMode.Absolute },
 

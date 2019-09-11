@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall {
-	class RamWordArray {
+	public class RamWordArray {
 		public int Address;
 		public Ram Ram;
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall.DataStructures {
-	class ByteArrayStream {
+	public class ByteArrayStream {
 		public byte[] Buffer;
 		public virtual int Address { get; set; }
 

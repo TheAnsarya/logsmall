@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall {
-	class RamByteArray {
+	public class RomByteArray {
 		public int Address;
-		public Ram Ram;
 
 		public byte this[int offset] {
-			get => this.Ram.Byte(this.Address + offset);
-			set => this.Ram.Byte(this.Address + offset, value);
+			get => Rom.Byte(this.Address + offset);
 		}
 	}
 }

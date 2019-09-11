@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall.Compression {
-	class BasicRing400 {
+	public class BasicRing400 {
 		// All known decompressions use 0x03be
 		private const int StartWriteAddress = 0x03be;
 
