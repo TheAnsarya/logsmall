@@ -1,6 +1,8 @@
 using logsmall.Compression;
 using logsmall.DataStructures;
 using logsmall.SourceCode;
+using logsmall.Text;
+using logsmall.Text.Data;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,13 +15,20 @@ using System.Threading.Tasks;
 namespace logsmall {
 	class Program {
 		static void Main(string[] args) {
+			LookForABunchOfStrings();
+			DecodeStringBlocks();
 
 			//GetC90572Parameters();
 			//GetC90566Parameters();
 
 			//var bytecode = SNES.OpToHex("c01576", "jml", "[$1d9a]");
 			//var t = 0;
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\enter the town.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\enter the town.txt");
+			//Getc90717Calls();
+			//GetPossibleGoldSpots();
+			//LookForAString();
+			//DecodeStringBlock();
+
 
 			//BasicRing400.TestLayout();
 
@@ -582,36 +591,117 @@ namespace logsmall {
 		static void GetC90572Parameters() {
 			var filename = @"c:\working\dq3\c90572 parameters.txt";
 			var searchTerm = new byte[] { 0x22, 0x72, 0x05, 0xC9 };
-
-			var spots =
-				new ByteArrayStream(Rom.ROM)
-					.FindAll(searchTerm)
-					.Select(x => new {
-						Address = x.Address + Rom.AddressOffset,
-						DataAddress = x.Address + Rom.AddressOffset + 4,
-						Data = x.GetBytes(0xb, x.Address + 4)
-					});
-
-			var lines =
-				spots
-					.Select(x =>
-						$"{x.Address.ToString("x6")} -- {x.DataAddress.ToString("x6")} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2")))}"
-					);
-
+			var lines = FindInRom(searchTerm, 4, 0xb);
 			File.WriteAllLines(filename, lines);
 		}
 
 		static void GetC90566Parameters() {
 			var filename = @"c:\working\dq3\c90566 parameters.txt";
 			var searchTerm = new byte[] { 0x22, 0x66, 0x05, 0xC9 };
+			var lines = FindInRom(searchTerm, 4, 0xb);
+			File.WriteAllLines(filename, lines);
+		}
 
+		static void Getc90717Calls() {
+			var filename = @"c:\working\dq3\c90717 calls.txt";
+			var searchTerm = new byte[] { 0x22, 0x17, 0x07, 0xC9 };
+			var lines = FindInRom(searchTerm, -9, 9);
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void GetPossibleGoldSpots() {
+			var filename = @"c:\working\dq3\PossibleGoldSpots.txt";
+			//var searchTerm = new byte[] { 0xad, 0x96, 0x36 };
+			var searchTerm = new byte[] { 0x96, 0x36 };
+			var lines = FindInRom(searchTerm, -32, 64);
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void LookForAString() {
+			var filename = @"c:\working\dq3\~~string search results.txt";
+
+
+			var searchTerm = "いざないのほこら";
+			//var searchTerm = "";
+			//var searchTerm = "";
+			//var searchTerm = "";
+			//var searchTerm = "";
+			//var searchTerm = "";
+			//var searchTerm = "";
+
+
+			var lines = FindSmallTextInRom(searchTerm, true);
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void LookForABunchOfStrings() {
+			var filename = @"c:\working\dq3\~~string search results.txt";
+
+			var searchTerms = DebugMenu.Instance.Known;
+
+			var lines = new List<string>();
+
+			foreach (var term in searchTerms) {
+				lines.Add(term[0]);
+				lines.Add(term[1]);
+				lines.AddRange(FindSmallTextInRom(term[0], true));
+				lines.Add(Environment.NewLine);
+			}
+
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void DecodeStringBlocks() {
+			var filename = @"c:\working\dq3\~~string block read results -- {0}.txt";
+			var lists = All.AllLists.Concat(new List<TextList> { All.Instance });
+
+			// Process each separately
+			foreach (var list in lists) {
+				var lines = new List<string>();
+
+				var maxAddress = list.RoughEndAddress - Rom.AddressOffset;
+				var stream = Rom.GetStream(list.StartAddress);
+
+				while (stream.Address < maxAddress) {
+					var (data, startAddress, endAddress) = stream.ReadUntil(SmallFontTable.EndOfString);
+					startAddress += (int)Rom.AddressOffset;
+					endAddress += (int)Rom.AddressOffset;
+					var jap = SmallFontTable.Decode(data);
+					var eng = list.ToEnglish(jap);
+					lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexSring()} -- {jap} -- {eng}");
+				}
+
+				File.WriteAllLines(string.Format(filename, list.TitleTag), lines);
+			}
+		}
+
+		static void DecodeStringBlock() {
+			var filename = @"c:\working\dq3\~~string block read results.txt";
+			var lines = new List<string>();
+
+			var maxAddress = 0xfede00 - Rom.AddressOffset;
+			var stream = Rom.GetStream(Text.Data.MonsterNames.Instance.StartAddress);
+
+			while (stream.Address < maxAddress) {
+				var (data, startAddress, endAddress) = stream.ReadUntil(SmallFontTable.EndOfString);
+				startAddress += (int)Rom.AddressOffset;
+				endAddress += (int)Rom.AddressOffset;
+				var jap = SmallFontTable.Decode(data);
+				var eng = Text.Data.MonsterNames.Instance.ToEnglish(jap);
+				lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexSring()} -- {jap} -- {eng}");
+			}
+
+			File.WriteAllLines(filename, lines);
+		}
+
+		static List<string> FindInRom(byte[] searchTerm, int dataOffset, int dataLength) {
 			var spots =
 			   new ByteArrayStream(Rom.ROM)
 				   .FindAll(searchTerm)
 				   .Select(x => new {
 					   Address = x.Address + Rom.AddressOffset,
-					   DataAddress = x.Address + Rom.AddressOffset + 4,
-					   Data = x.GetBytes(0xb, x.Address + 4)
+					   DataAddress = x.Address + Rom.AddressOffset + dataOffset,
+					   Data = x.GetBytes(dataLength, x.Address + dataOffset)
 				   });
 
 			var lines =
@@ -620,7 +710,16 @@ namespace logsmall {
 						$"{x.Address.ToString("x6")} -- {x.DataAddress.ToString("x6")} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2")))}"
 					);
 
-			File.WriteAllLines(filename, lines);
+			return lines.ToList();
+		}
+
+		static List<string> FindSmallTextInRom(string searchTerm, bool includeNextCharacter = false) {
+			if (SmallFontTable.TryEncode(searchTerm, out byte[] data)) {
+				return FindInRom(data, 0, data.Length + (includeNextCharacter ? 1 : 0));
+			}
+
+			return new List<string> { "ERROR: Couldn't encode string correctly" };
+			//throw new Exception("Couldn't encode string correctly");
 		}
 	}
 }

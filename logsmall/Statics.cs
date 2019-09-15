@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace logsmall {
 	static class Statics {
+
+		public static string ToHexSring(this byte[] data) {
+			return string.Join(" ", data.Select(x => x.ToString("x2")));
+		}
+
 		public static IEnumerable<string> Split(this string str, int chunkSize) {
 			return Enumerable.Range(0, str.Length / chunkSize)
 				.Select(x => str.Substring(x * chunkSize, chunkSize));

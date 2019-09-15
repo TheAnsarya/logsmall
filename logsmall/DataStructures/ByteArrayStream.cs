@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,6 +80,19 @@ namespace logsmall.DataStructures {
 			Array.Copy(Buffer, address, output, 0, length);
 
 			return output;
+		}
+
+		public (byte[] data, int startAddress, int endAddress) ReadUntil(byte endValue) {
+			var startAddress = Address;
+			var data = new List<byte>();
+			byte value = Byte();
+
+			while (value != endValue && HasSpace) {
+				data.Add(value);
+				value = Byte();
+			}
+
+			return (data.ToArray(), startAddress, startAddress + data.Count - 1);
 		}
 	}
 }
