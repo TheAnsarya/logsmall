@@ -216,6 +216,7 @@ namespace logsmall.Text {
 			[0xf9] = 'プ',
 			[0xfa] = 'ペ',
 			[0xfb] = 'ポ',
+			[0xfc] = '〜',
 		};
 
 		private static Dictionary<char, byte> _reverseTable = null;

@@ -19,7 +19,9 @@ namespace logsmall.Text.Data {
 					Classes.Instance,
 					Spells.Instance,
 					PartyMemberNames.Instance,
-					DebugMenu.Instance
+					DebugMenu.Instance,
+					PlaceNames.Instance,
+					Unknown.Instance
 				};
 
 		private All() {

@@ -78,6 +78,8 @@
     <Compile Include="Statics.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="Text\Data\All.cs" />
+    <Compile Include="Text\Data\Unknown.cs" />
+    <Compile Include="Text\Data\PlaceNames.cs" />
     <Compile Include="Text\Data\DebugMenu.cs" />
     <Compile Include="Text\Data\Helmet.cs" />
     <Compile Include="Text\Data\Decoration.cs" />
@@ -90,7 +92,7 @@
     <Compile Include="Text\Data\Weapons.cs" />
     <Compile Include="Text\Data\Personalities.cs" />
     <Compile Include="Text\Data\MonsterNames.cs" />
-    <Compile Include="Text\Data\TextList.cs" />
+    <Compile Include="Text\TextList.cs" />
     <Compile Include="Text\SmallFontTable.cs" />
   </ItemGroup>
   <ItemGroup>

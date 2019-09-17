@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace logsmall.Text.Data {
+namespace logsmall.Text {
 	abstract class TextList {
 		public virtual string TitleTag { get; }
 		public virtual int StartAddress { get; }

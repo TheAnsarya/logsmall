@@ -15,15 +15,15 @@ using System.Threading.Tasks;
 namespace logsmall {
 	class Program {
 		static void Main(string[] args) {
-			LookForABunchOfStrings();
-			DecodeStringBlocks();
+			//LookForABunchOfStrings();
+			//DecodeStringBlocks();
 
 			//GetC90572Parameters();
 			//GetC90566Parameters();
 
 			//var bytecode = SNES.OpToHex("c01576", "jml", "[$1d9a]");
 			//var t = 0;
-			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\enter the town.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\writing dialog to screen2.txt");
 			//Getc90717Calls();
 			//GetPossibleGoldSpots();
 			//LookForAString();
@@ -637,7 +637,7 @@ namespace logsmall {
 		static void LookForABunchOfStrings() {
 			var filename = @"c:\working\dq3\~~string search results.txt";
 
-			var searchTerms = DebugMenu.Instance.Known;
+			var searchTerms = Unknown.Instance.Known;
 
 			var lines = new List<string>();
 
