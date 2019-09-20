@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace EditorTestsWinforms {
 		}
 
 		public void DrawMapImage() {
-			var fullmap = logsmall.OverworldMap2.GetTilemapData();
+			var fullmap = logsmall.DQ3.OverworldMap2.GetTilemapData();
 
 			var sources =
 				Enumerable.Range(0, 256)

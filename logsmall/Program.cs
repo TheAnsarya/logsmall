@@ -1,8 +1,9 @@
+using logsmall.Common;
 using logsmall.Compression;
 using logsmall.DataStructures;
+using logsmall.DQ3.Text;
+using logsmall.DQ3.Text.Data;
 using logsmall.SourceCode;
-using logsmall.Text;
-using logsmall.Text.Data;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,7 +24,7 @@ namespace logsmall {
 
 			//var bytecode = SNES.OpToHex("c01576", "jml", "[$1d9a]");
 			//var t = 0;
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\writing dialog to screen2.txt");
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - maybe tilemap2 - no interrupts.txt");
 			//Getc90717Calls();
 			//GetPossibleGoldSpots();
 			//LookForAString();
@@ -495,6 +496,12 @@ namespace logsmall {
 			// Parse lines into usable form
 			var lines = MesenLine.ConvertTrace(rawlines.ToList());
 
+			var notMesen =
+				rawlines
+					.Where(x => !MesenLine.IsA(x));
+			File.WriteAllLines(Path.Combine(folder, "not-mesen.txt"), notMesen);
+			notMesen = null;
+
 			// Simple, just code & address ordered
 			var code =
 				lines
@@ -507,35 +514,68 @@ namespace logsmall {
 			// Code with labels and line breaks
 			var labeled = SourceProcessing.LabelCode(code);
 			File.WriteAllLines(Path.Combine(folder, "code-labeled.txt"), labeled);
+			code = null;
 			labeled = null;
 
 			// Address/instruction usage counts
 			var addresses =
 				lines
 					.Where(x => !string.IsNullOrEmpty(x.Target))
-					.Select(x => $"{x.Target} {x.Op}")
-					.GroupBy(x => x)
-					.Select(x => $"{x.Key} {x.Count()}")
-					.OrderBy(x => x)
-					.ToList();
-			File.WriteAllLines(Path.Combine(folder, "address-usage.txt"), addresses);
+					.Select(x => $"{x.Target} {x.Op}");
+			GroupCountAndWriteFile(addresses, Path.Combine(folder, "address-usage.txt"));
 			addresses = null;
 
 			// Code instruction counts
 			var codeAddresses =
 				lines
-					.Select(x => x.Address)
-					.GroupBy(x => x)
-					.Select(x => $"{x.Key} {x.Count()}")
-					.OrderBy(x => x)
-					.ToList();
-			File.WriteAllLines(Path.Combine(folder, "code-address-counts.txt"), codeAddresses);
+					.Select(x => x.Address);
+			GroupCountAndWriteFile(codeAddresses, Path.Combine(folder, "code-address-counts.txt"));
 			codeAddresses = null;
 
+			// Move counts
+			var moves =
+				lines
+					.Where(x => x.Op == "mvn" || x.Op == "mvp")
+					.Select(x => $"{getMoveAddresses(x)} {x.Op}");
+			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves.txt"));
+			moves = null;
+
+			// Move counts - source
+			moves =
+				lines
+					.Where(x => x.Op == "mvn" || x.Op == "mvp")
+					.Select(x => $"{getMoveAddresses(x).Split(' ')[0]} {x.Op}");
+			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves-source.txt"));
+			moves = null;
+
+			// Move counts - destination
+			moves =
+				lines
+					.Where(x => x.Op == "mvn" || x.Op == "mvp")
+					.Select(x => $"{getMoveAddresses(x).Split(' ')[2]} {x.Op}");
+			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves-destination.txt"));
+			moves = null;
+
+			// Move counts - both
+			moves =
+				lines
+					.Where(x => x.Op == "mvn" || x.Op == "mvp")
+					.Select(x => $"{getMoveAddresses(x).Split(' ')[0]} {x.Op}")
+					.Concat(
+						lines
+							.Where(x => x.Op == "mvn" || x.Op == "mvp")
+							.Select(x => $"{getMoveAddresses(x).Split(' ')[2]} {x.Op}")
+						);
+			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves-both.txt"));
+			moves = null;
+
+
+			// With missing sections
 			var olines = Line.ToLines(lines);
 			var groups = LineGroup.MakeGroups(olines);
 			var missing = SourceProcessing.GetMissingOutput(groups, (x) => x.ToString());
 			File.WriteAllLines(Path.Combine(folder, "with-missing.txt"), missing);
+			missing = null;
 
 			// Jump targets
 			Regex targetsRegex = new Regex(@"^(?:jsr|jrl|jmp|jml)$", RegexOptions.Compiled);
@@ -543,12 +583,8 @@ namespace logsmall {
 			var targets =
 				lines
 					.Where(x => targetsRegex.IsMatch(x.Op) && containsIndirect.IsMatch(x.Parameters))
-					.Select(x => $"{x.Address} {x.Op} {x.Parameters} [{x.Target}]")
-					.GroupBy(x => x)
-					.Select(x => $"{x.Key} - {x.Count()}")
-					.OrderBy(x => x)
-					.ToList();
-			File.WriteAllLines(Path.Combine(folder, "jump-targets.txt"), targets);
+					.Select(x => $"{x.Address} {x.Op} {x.Parameters} [{x.Target}]");
+			GroupCountAndWriteFile(targets, Path.Combine(folder, "jump-targets.txt"));
 			targets = null;
 
 			// Wrong bytecode conversions
@@ -561,6 +597,29 @@ namespace logsmall {
 			wrong = null;
 
 			var f = 8;
+		}
+
+		static void GroupCountAndWriteFile(IEnumerable<string> lines, string filename) {
+			var output =
+				lines
+					.GroupBy(x => x)
+					.Select(x => $"{x.Key} - {x.Count()}")
+					.OrderBy(x => x)
+					.ToList();
+			File.WriteAllLines(filename, output);
+		}
+
+		static string getMoveAddresses(MesenLine line) {
+			Match match;
+			if (AddressingMode.BlockMove.IsMatch(line.Parameters)) {
+				match = AddressingMode.BlockMove.Match(line.Parameters);
+			} else if (AddressingMode.BlockMoveArrow.IsMatch(line.Parameters)) {
+				match = AddressingMode.BlockMoveArrow.Match(line.Parameters);
+			} else { throw new Exception("Unknown addressing Mode"); }
+			var source = $"${match.Groups[1].Value}{line.State.X}";
+			var dest = $"${match.Groups[2].Value}{line.State.Y}";
+
+			return $"{source} -> {dest}";
 		}
 
 		static void processSimple(string filename) {
@@ -680,14 +739,14 @@ namespace logsmall {
 			var lines = new List<string>();
 
 			var maxAddress = 0xfede00 - Rom.AddressOffset;
-			var stream = Rom.GetStream(Text.Data.MonsterNames.Instance.StartAddress);
+			var stream = Rom.GetStream(MonsterNames.Instance.StartAddress);
 
 			while (stream.Address < maxAddress) {
 				var (data, startAddress, endAddress) = stream.ReadUntil(SmallFontTable.EndOfString);
 				startAddress += (int)Rom.AddressOffset;
 				endAddress += (int)Rom.AddressOffset;
 				var jap = SmallFontTable.Decode(data);
-				var eng = Text.Data.MonsterNames.Instance.ToEnglish(jap);
+				var eng = MonsterNames.Instance.ToEnglish(jap);
 				lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexSring()} -- {jap} -- {eng}");
 			}
 
