@@ -48,6 +48,19 @@ namespace logsmall.DataStructures {
 			Buffer[Address++] = (byte)((value & 0xff00) >> 8);
 		}
 
+		public int Long() {
+			byte a = Buffer[Address++];
+			byte b = Buffer[Address++];
+			byte c = Buffer[Address++];
+			return (c << 16) + (b << 8) + a;
+		}
+
+		public void Long(int value) {
+			Buffer[Address++] = (byte)(value & 0x0000ff);
+			Buffer[Address++] = (byte)((value & 0x00ff00) >> 8);
+			Buffer[Address++] = (byte)((value & 0xff0000) >> 16);
+		}
+
 		public ByteArrayStream Branch() => Branch(0);
 
 		public ByteArrayStream Branch(int startAddress) {

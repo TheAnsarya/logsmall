@@ -29,6 +29,12 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] Decompress(ByteArrayStream source, int outputSize) {
+			var (comp, decomp) = DecompressFull(source, outputSize);
+			return decomp;
+		}
+
+		public static (byte[] comp, byte[] decomp) DecompressFull(ByteArrayStream source, int outputSize) {
+			var startAddress = source.Address;
 			var dataSourceOffset = source.Word();
 			var dataSource = source.Branch(source.Address + dataSourceOffset);
 
@@ -46,7 +52,7 @@ namespace logsmall.Compression {
 					var length = ((command & 0xf0) >> 4) + 2;
 
 					var address = output.Address - source.Byte() - 1;
-					if (address <= 0) {
+					if (address < 0) {
 						throw new IndexOutOfRangeException($"{nameof(address)} cannot be less than 0");
 					}
 
@@ -54,11 +60,11 @@ namespace logsmall.Compression {
 				}
 			}
 
-			// TODO: check for unfilled output buffer
-			return output.Buffer;
+			var comp = source.GetBytes(dataSource.Address - startAddress, startAddress);
+			var decomp = output.GetBytes(output.Address, 0);
+			return (comp, decomp);
 		}
 
-		// NOTE: Copy from output is at least 3 bytes and so is always preferred on its own
 		public static byte[] Compress(byte[] target) {
 			return Compress(new ByteArrayStream(target));
 		}
@@ -69,7 +75,7 @@ namespace logsmall.Compression {
 			var copyData = 0;
 
 			while (!target.AtEnd) {
-				var term = target.GetBytes(9);
+				var term = target.GetBytes(0x11);
 				var copyOutput = 0;
 				var copyOffset = -1;
 
@@ -86,7 +92,7 @@ namespace logsmall.Compression {
 				}
 
 				if (copyOutput == 0) {
-					if (copyData == 7) {
+					if (copyData == 0xf) {
 						commands.Add((byte)copyData);
 						copyData = 1;
 					} else {
@@ -124,10 +130,16 @@ namespace logsmall.Compression {
 			return output.Buffer;
 		}
 
+		// TODO: I think it's possible to increase the compression by someitmes writing additional values to data
+		// TODO: like you can copy 3 bytes, then write 1, then copy 10 (5 byte command, 1 data, 14 byte out)
+		// TODO: or write 1, then copy 13 (2 byte command, 1 byte data, 14 out)
+		// TODO: certain situations only, so not bothering yet
+		//public static byte[] CompressMax(byte[] target) {
+		//	return CompressMax(new ByteArrayStream(target));
+		//}
 
-
-
-
+		//public static byte[] CompressMax(ByteArrayStream target) {
+		//}
 
 		// TODO: Move to unit test project
 		public static void TestLayout() {
@@ -151,7 +163,7 @@ namespace logsmall.Compression {
 
 
 			var testComp = SimpleTailWindowCompression.Compress(uncompressed);
-			var compPassed = testDecomp.SequenceEqual(compressed);
+			var compPassed = testComp.SequenceEqual(compressed);
 
 			WriteBytesToFile(testComp, Path.Combine(folder, "testComp.txt"));
 			Console.WriteLine($"    Compression: {(compPassed ? "Passed" : "Failed")}");
@@ -173,6 +185,38 @@ namespace logsmall.Compression {
 
 			Console.ReadKey();
 		}
+
+		public static void TestDumpData() {
+			var pointersAddress = 0x0b8735;
+			var rom = FFMQ.Game.Rom;
+			var pointerStream = rom.GetStream(pointersAddress);
+			int pointer;
+			int map = 0;
+
+			while (((pointer = pointerStream.Long()) >= 0x070000) && (pointer <= 0x08ffff)) {
+				var (comp, decomp) = DecompressFull(rom.GetStream(pointer), 0x2000);
+				var recomp = Compress(decomp);
+				var redecomp = Decompress(recomp, 0x2000);
+				WriteBytesToFile(comp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -1- original.txt");
+				WriteBytesToFile(decomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -2- decompressed.txt");
+				WriteBytesToFile(recomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -3- compressed.txt");
+				WriteBytesToFile(redecomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -4- redecompressed.txt");
+
+				Console.WriteLine($"map - {map.ToString("D2")} - ${pointer.ToString("x6")}");
+				Console.WriteLine($"comp: {(comp.SequenceEqual(recomp) ? "Passed" : "Failed")}");
+				Console.WriteLine($"	size 1: 0x{comp.Length.ToString("x4")}");
+				Console.WriteLine($"	size 2: 0x{recomp.Length.ToString("x4")}");
+				Console.WriteLine($"decomp: {(decomp.SequenceEqual(redecomp) ? "Passed" : "Failed")}");
+				Console.WriteLine($"	size 1: 0x{decomp.Length.ToString("x4")}");
+				Console.WriteLine($"	size 2: 0x{redecomp.Length.ToString("x4")}");
+				Console.WriteLine();
+
+				map++;
+			}
+
+			Console.ReadKey();
+		}
+
 
 		public static void WriteBytesToFile(byte[] data, string filename) {
 			var lines = data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2"))));

@@ -257,7 +257,7 @@ namespace logsmall.Compression {
 			var decompPassed = testDecomp.SequenceEqual(uncompressed);
 
 			var testComp = BasicRing400.Compress(uncompressed);
-			var compPassed = testDecomp.SequenceEqual(compressed);
+			var compPassed = testComp.SequenceEqual(compressed);
 
 			var testReDecomp = BasicRing400.Decompress(testComp, 0x2000);
 			var reDecompPassed = testReDecomp.SequenceEqual(uncompressed);

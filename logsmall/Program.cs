@@ -20,7 +20,8 @@ namespace logsmall {
 
 			//OutputHexChunkFFMQ();
 
-			SimpleTailWindowCompression.TestLayout();
+			//SimpleTailWindowCompression.TestLayout();
+			SimpleTailWindowCompression.TestDumpData();
 
 			//LookForABunchOfStrings();
 			//DecodeStringBlocks();
