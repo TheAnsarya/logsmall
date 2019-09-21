@@ -45,15 +45,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AddressingMode.cs" />
+    <Compile Include="Common\HIRom.cs" />
+    <Compile Include="Common\LoRom.cs" />
     <Compile Include="Common\Rom.cs" />
     <Compile Include="Compression\BasicRing400.cs" />
-    <Compile Include="Compression\ReverseWindowReader.cs" />
+    <Compile Include="DataStructures\ReverseReader.cs" />
+    <Compile Include="DataStructures\ReverseWindowReader.cs" />
+    <Compile Include="Compression\SimpleTailWindowCompression.cs" />
     <Compile Include="DataStructures\ByteRingBuffer.cs" />
     <Compile Include="CompressionStuff.cs" />
     <Compile Include="DataStructures\ByteArrayStream.cs" />
     <Compile Include="DataStructures\SNES\BGMapEntry.cs" />
-    <Compile Include="DQ3\DQ3Rom.cs" />
     <Compile Include="DQ3\Game.cs" />
+    <Compile Include="FFMQ\Game.cs" />
     <Compile Include="SourceCode\Line.cs" />
     <Compile Include="SourceCode\LineGroup.cs" />
     <Compile Include="SourceCode\LineInfo.cs" />

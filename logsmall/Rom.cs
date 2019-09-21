@@ -1,4 +1,4 @@
-﻿using logsmall.DataStructures;
+using logsmall.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,36 +44,17 @@ namespace logsmall {
 
 			return segment;
 		}
-
-		/*public static byte Byte(uint address) {
-			var addy = (int)(address - AddressOffset);
-			return ROM[addy];
-		}*/
-
+		
 		public static byte Byte(int address) {
 			var addy = (int)(address - AddressOffset);
 			return ROM[addy];
 		}
-
-		/*public static ushort Word(uint address) {
-			var addy = (int)(address - AddressOffset);
-			return (ushort)((ushort)(ROM[addy + 1] << 8) + ROM[addy]);
-		}*/
 
 		public static ushort Word(int address) {
 			var addy = (int)(address - AddressOffset);
 			return (ushort)((ushort)(ROM[addy + 1] << 8) + ROM[addy]);
 		}
 
-		/*public static uint Long(uint address) {
-			var addy = (int)(address - AddressOffset);
-			return (uint)((ROM[addy + 2] << 16) + (ROM[addy + 1] << 8) + ROM[addy]);
-		}*/
-
-		public static uint Long(int address) {
-			var addy = (int)(address - AddressOffset);
-			return (uint)((ROM[addy + 2] << 16) + (ROM[addy + 1] << 8) + ROM[addy]);
-		}
 
 		public static RomByteArray ByteArray(int address) {
 			return new RomByteArray { Address = address };

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace logsmall.Common {
 	abstract class Rom {
-		abstract public string filename { get; }
+		public string Filename { get; set; }
 
 		abstract public int AddressToPC(int address);
 		abstract public int AddressToSNES(int address);
@@ -17,9 +17,9 @@ namespace logsmall.Common {
 		public byte[] ROM {
 			get {
 				if (_rom == null) {
-					var size = (int)new FileInfo(filename).Length;
+					var size = (int)new FileInfo(Filename).Length;
 					_rom = new byte[size];
-					using (var romstream = File.OpenRead(filename)) {
+					using (var romstream = File.OpenRead(Filename)) {
 						romstream.Read(_rom, 0, size);
 					}
 				}

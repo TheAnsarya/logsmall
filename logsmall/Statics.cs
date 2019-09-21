@@ -1,3 +1,4 @@
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,12 @@ using System.Threading.Tasks;
 namespace logsmall {
 	static class Statics {
 
-		public static string ToHexSring(this byte[] data) {
+		public static string ToHexString(this byte[] data) {
 			return string.Join(" ", data.Select(x => x.ToString("x2")));
+		}
+
+		public static string[] ToHexStrings(this byte[] data) {
+			return data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2")))).ToArray();
 		}
 
 		public static IEnumerable<string> Split(this string str, int chunkSize) {

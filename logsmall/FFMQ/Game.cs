@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace logsmall.DQ3 {
+namespace logsmall.FFMQ {
 	class Game {
-		public Common.Rom Rom = new HiRom() {
-			Filename = @"c:\working\Dragon Quest III - Soshite Densetsu he... (J).smc"
+		public static Common.Rom Rom = new LoRom() {
+			Filename = @"c:\working\Final Fantasy - Mystic Quest (U) (V1.0) [!].smc"
 		};
 	}
 }

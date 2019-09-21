@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace logsmall.DQ3 {
-	class DQ3Rom : Common.Rom {
-		public override string filename => @"c:\working\Dragon Quest III - Soshite Densetsu he... (J).smc";
-
+namespace logsmall.Common {
+	class HiRom : Common.Rom {
 		public const int AddressOffset = 0xc00000;
 
 		public override int AddressToPC(int address) => address - AddressOffset;

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace logsmall.Compression {
+namespace logsmall.DataStructures {
 	class ReverseWindowReader {
 		private byte[] Buffer { get; set; }
 

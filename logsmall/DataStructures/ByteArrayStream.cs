@@ -13,6 +13,8 @@ namespace logsmall.DataStructures {
 
 		public bool HasSpace { get => Address < Size; }
 
+		public bool AtEnd { get => Address >= Size; }
+
 		public ByteArrayStream(int size) : this(size, 0) { }
 
 		public ByteArrayStream(int size, int startAddress) {
@@ -39,6 +41,11 @@ namespace logsmall.DataStructures {
 			byte a = Buffer[Address++];
 			byte b = Buffer[Address++];
 			return (ushort)((b << 8) + a);
+		}
+
+		public void Word(ushort value) {
+			Buffer[Address++] = (byte)(value & 0x00ff);
+			Buffer[Address++] = (byte)((value & 0xff00) >> 8);
 		}
 
 		public ByteArrayStream Branch() => Branch(0);
@@ -69,6 +76,32 @@ namespace logsmall.DataStructures {
 			return found;
 		}
 
+		// clamps to [0, Buffer.Length]
+		// TODO: test & verify
+		public (bool fiund, int address) FindLastInWindow(byte[] searchTerm, int start, int end) {
+			// TODO: check for off by one
+			start = Math.Max(0, start);
+			end = Math.Min(Buffer.Length, end);
+			
+			var lastIndex = end - searchTerm.Length;
+			for (int i = lastIndex; i >= start; i--) {
+				var matches = true;
+
+				for (int j = 0; j < searchTerm.Length; j++) {
+					if (Buffer[i + j] != searchTerm[j]) {
+						matches = false;
+						break;
+					}
+				}
+
+				if (matches) {
+					return (true, i);
+				}
+			}
+
+			return (false, -1);
+		}
+
 		public byte[] GetBytes(int length) => GetBytes(length, Address);
 
 		public byte[] GetBytes(int length, int address) {
@@ -93,6 +126,25 @@ namespace logsmall.DataStructures {
 			}
 
 			return (data.ToArray(), startAddress, startAddress + data.Count - 1);
+		}
+
+		// TODO: Add error checking
+		public void CopyTo(ByteArrayStream destination, int length) {
+			// Array.Copy() is not copying one byte at a time so copying within the same array doesn't update correctly.
+			//Array.Copy(Buffer, Address, destination.Buffer, destination.Address, length);
+			//Address += length;
+			//destination.Address += length;
+
+			for (int i = 0; i < length; i++) {
+				destination.Byte(Byte());
+			}
+		}
+
+		// TODO: Add error checking
+		public void Write(IEnumerable<byte> data) {
+			foreach (var b in data) {
+				Byte(b);
+			}
 		}
 	}
 }

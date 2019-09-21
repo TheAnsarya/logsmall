@@ -4,6 +4,7 @@ using logsmall.DataStructures;
 using logsmall.DQ3.Text;
 using logsmall.DQ3.Text.Data;
 using logsmall.SourceCode;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,6 +17,11 @@ using System.Threading.Tasks;
 namespace logsmall {
 	class Program {
 		static void Main(string[] args) {
+
+			//OutputHexChunkFFMQ();
+
+			SimpleTailWindowCompression.TestLayout();
+
 			//LookForABunchOfStrings();
 			//DecodeStringBlocks();
 
@@ -24,7 +30,7 @@ namespace logsmall {
 
 			//var bytecode = SNES.OpToHex("c01576", "jml", "[$1d9a]");
 			//var t = 0;
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - maybe tilemap2 - no interrupts.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - maybe tilemap2 - no interrupts.txt");
 			//Getc90717Calls();
 			//GetPossibleGoldSpots();
 			//LookForAString();
@@ -727,7 +733,7 @@ namespace logsmall {
 					endAddress += (int)Rom.AddressOffset;
 					var jap = SmallFontTable.Decode(data);
 					var eng = list.ToEnglish(jap);
-					lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexSring()} -- {jap} -- {eng}");
+					lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexString()} -- {jap} -- {eng}");
 				}
 
 				File.WriteAllLines(string.Format(filename, list.TitleTag), lines);
@@ -747,7 +753,7 @@ namespace logsmall {
 				endAddress += (int)Rom.AddressOffset;
 				var jap = SmallFontTable.Decode(data);
 				var eng = MonsterNames.Instance.ToEnglish(jap);
-				lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexSring()} -- {jap} -- {eng}");
+				lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexString()} -- {jap} -- {eng}");
 			}
 
 			File.WriteAllLines(filename, lines);
@@ -779,6 +785,25 @@ namespace logsmall {
 
 			return new List<string> { "ERROR: Couldn't encode string correctly" };
 			//throw new Exception("Couldn't encode string correctly");
+		}
+
+		static void OutputHexChunkFFMQ() {
+			int startAddress = 0x0895ee;
+			int endAddress = 0x089c4e;
+			var filename = @"c:\working\ffmq\~OutputHexChunk.txt";
+
+			int size = endAddress - startAddress + 1;
+
+			var s = FFMQ.Game.Rom.GetStream(startAddress);
+			var data = s.GetBytes(size);
+
+			//WriteBytesToFile(data, filename);
+			File.WriteAllLines(filename, new string[] { data.ToHexString() });
+		}
+
+		public static void WriteBytesToFile(byte[] data, string filename) {
+			var lines = data.ToHexStrings();
+			File.WriteAllLines(filename, lines);
 		}
 	}
 }

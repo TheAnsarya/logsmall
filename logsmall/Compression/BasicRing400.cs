@@ -1,4 +1,4 @@
-﻿using logsmall.DataStructures;
+using logsmall.DataStructures;
 using MoreLinq;
 using System;
 using System.Collections.Generic;
