@@ -3,6 +3,7 @@ using logsmall.Compression;
 using logsmall.DataStructures;
 using logsmall.DQ3.Text;
 using logsmall.DQ3.Text.Data;
+using logsmall.FFMQ;
 using logsmall.SourceCode;
 using MoreLinq;
 using System;
@@ -18,10 +19,13 @@ namespace logsmall {
 	class Program {
 		static void Main(string[] args) {
 
-			//OutputHexChunkFFMQ();
 
+			FFMQGetLongTextLines();
+			//FFMQGetLongTextLookups();
+			//OutputHexChunkFFMQ();
+			//MapData.Go();
 			//SimpleTailWindowCompression.TestLayout();
-			SimpleTailWindowCompression.TestDumpData();
+			//SimpleTailWindowCompression.TestDumpData();
 
 			//LookForABunchOfStrings();
 			//DecodeStringBlocks();
@@ -31,7 +35,7 @@ namespace logsmall {
 
 			//var bytecode = SNES.OpToHex("c01576", "jml", "[$1d9a]");
 			//var t = 0;
-			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - maybe tilemap2 - no interrupts.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - decode boulder text.txt");
 			//Getc90717Calls();
 			//GetPossibleGoldSpots();
 			//LookForAString();
@@ -505,9 +509,10 @@ namespace logsmall {
 
 			var notMesen =
 				rawlines
-					.Where(x => !MesenLine.IsA(x));
+					.Where(x => !string.IsNullOrEmpty(x) && !MesenLine.IsA(x));
 			File.WriteAllLines(Path.Combine(folder, "not-mesen.txt"), notMesen);
 			notMesen = null;
+			rawlines = null;
 
 			// Simple, just code & address ordered
 			var code =
@@ -580,9 +585,11 @@ namespace logsmall {
 			// With missing sections
 			var olines = Line.ToLines(lines);
 			var groups = LineGroup.MakeGroups(olines);
+			olines = null;
 			var missing = SourceProcessing.GetMissingOutput(groups, (x) => x.ToString());
 			File.WriteAllLines(Path.Combine(folder, "with-missing.txt"), missing);
 			missing = null;
+			groups = null;
 
 			// Jump targets
 			Regex targetsRegex = new Regex(@"^(?:jsr|jrl|jmp|jml)$", RegexOptions.Compiled);
@@ -602,6 +609,7 @@ namespace logsmall {
 					.ToList();
 			File.WriteAllLines(Path.Combine(folder, "wrong-bytecode.txt"), wrong);
 			wrong = null;
+			lines = null;
 
 			var f = 8;
 		}
@@ -789,8 +797,10 @@ namespace logsmall {
 		}
 
 		static void OutputHexChunkFFMQ() {
-			int startAddress = 0x0895ee;
-			int endAddress = 0x089c4e;
+			//int startAddress = 0x0895ee;
+			//int endAddress = 0x089c4e;
+			int startAddress = 0x07b013;
+			int endAddress = 0x07b013 + 0x2900;
 			var filename = @"c:\working\ffmq\~OutputHexChunk.txt";
 
 			int size = endAddress - startAddress + 1;
@@ -798,12 +808,29 @@ namespace logsmall {
 			var s = FFMQ.Game.Rom.GetStream(startAddress);
 			var data = s.GetBytes(size);
 
-			//WriteBytesToFile(data, filename);
-			File.WriteAllLines(filename, new string[] { data.ToHexString() });
+			Utilities.WriteBytesToFile(data, filename);
+			//File.WriteAllLines(filename, new string[] { data.ToHexString() });
 		}
 
-		public static void WriteBytesToFile(byte[] data, string filename) {
-			var lines = data.ToHexStrings();
+		static void FFMQGetLongTextLookups() {
+			var filename = @"c:\working\ffmq\longtext.tbl";
+			var lines =
+				FFMQ.LongText.GetTextLookups()
+					.Select(x => $"{x.Key.ToString("X2")}={x.Value}")
+					.OrderBy(x => x)
+					.ToList();
+
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void FFMQGetLongTextLines() {
+			var filename = @"c:\working\ffmq\~long text.txt";
+			var lines =
+				FFMQ.LongText.GetLongStrings()
+					.Select(x => $"{x.Key.ToString("x6")} - {x.Value}")
+					.OrderBy(x => x)
+					.ToList();
+
 			File.WriteAllLines(filename, lines);
 		}
 	}

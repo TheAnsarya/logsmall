@@ -407,9 +407,12 @@ namespace logsmall.Common {
 			new OpLookup{Op = "pea", Byte = "f4", Mode = AddressingMode.Absolute },
 			// pea #$0000
 			new OpLookup{Op = "pea", Byte = "f4", Mode = AddressingMode.Immediate },
-
+			
 			// pei ($00)
 			new OpLookup{Op = "pei", Byte = "d4", Mode = AddressingMode.DPIndirect },
+			// pei $00
+			new OpLookup{Op = "pei", Byte = "d4", Mode = AddressingMode.DirectPage },
+
 			// per $0000
 			new OpLookup{Op = "per", Byte = "62", Mode = AddressingMode.PCRelativeLong },
 			// per $000000

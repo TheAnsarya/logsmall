@@ -49,6 +49,7 @@
     <Compile Include="Common\LoRom.cs" />
     <Compile Include="Common\Rom.cs" />
     <Compile Include="Compression\BasicRing400.cs" />
+    <Compile Include="Compression\ExpandSecondHalfWithZeros.cs" />
     <Compile Include="DataStructures\ReverseReader.cs" />
     <Compile Include="DataStructures\ReverseWindowReader.cs" />
     <Compile Include="Compression\SimpleTailWindowCompression.cs" />
@@ -58,6 +59,9 @@
     <Compile Include="DataStructures\SNES\BGMapEntry.cs" />
     <Compile Include="DQ3\Game.cs" />
     <Compile Include="FFMQ\Game.cs" />
+    <Compile Include="FFMQ\LongText.cs" />
+    <Compile Include="FFMQ\MapData.cs" />
+    <Compile Include="FFMQ\Text\BasicTable.cs" />
     <Compile Include="SourceCode\Line.cs" />
     <Compile Include="SourceCode\LineGroup.cs" />
     <Compile Include="SourceCode\LineInfo.cs" />
@@ -101,6 +105,7 @@
     <Compile Include="DQ3\Text\Data\MonsterNames.cs" />
     <Compile Include="DQ3\Text\TextList.cs" />
     <Compile Include="DQ3\Text\SmallFontTable.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

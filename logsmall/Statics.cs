@@ -16,6 +16,13 @@ namespace logsmall {
 			return data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2")))).ToArray();
 		}
 
+		// Reverse the bits of a byte
+		// Seems overly complicated but it works and is fast
+		// https://stackoverflow.com/a/3590938/3325644
+		private static byte ReverseBits(this byte b) {
+			return (byte)(((b * 0x80200802ul) & 0x0884422110ul) * 0x0101010101ul >> 32);
+		}
+
 		public static IEnumerable<string> Split(this string str, int chunkSize) {
 			return Enumerable.Range(0, str.Length / chunkSize)
 				.Select(x => str.Substring(x * chunkSize, chunkSize));

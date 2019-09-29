@@ -48,6 +48,12 @@ namespace logsmall.DataStructures {
 			Buffer[Address++] = (byte)((value & 0xff00) >> 8);
 		}
 
+		public ushort WordAt(int offset) {
+			byte a = Buffer[Address + offset];
+			byte b = Buffer[Address + offset + 1];
+			return (ushort)((b << 8) + a);
+		}
+
 		public int Long() {
 			byte a = Buffer[Address++];
 			byte b = Buffer[Address++];
@@ -60,6 +66,15 @@ namespace logsmall.DataStructures {
 			Buffer[Address++] = (byte)((value & 0x00ff00) >> 8);
 			Buffer[Address++] = (byte)((value & 0xff0000) >> 16);
 		}
+
+		public int LongAt(int offset) {
+			byte a = Buffer[Address + offset];
+			byte b = Buffer[Address + offset + 1];
+			byte c = Buffer[Address + offset + 2];
+			return (c << 16) + (b << 8) + a;
+		}
+
+		public void Skip(int length) => Address += length;
 
 		public ByteArrayStream Branch() => Branch(0);
 
@@ -91,7 +106,7 @@ namespace logsmall.DataStructures {
 
 		// clamps to [0, Buffer.Length]
 		// TODO: test & verify
-		public (bool fiund, int address) FindLastInWindow(byte[] searchTerm, int start, int end) {
+		public (bool found, int address) FindLastInWindow(byte[] searchTerm, int start, int end) {
 			// TODO: check for off by one
 			start = Math.Max(0, start);
 			end = Math.Min(Buffer.Length, end);
@@ -124,6 +139,18 @@ namespace logsmall.DataStructures {
 
 			var output = new byte[length];
 			Array.Copy(Buffer, address, output, 0, length);
+
+			return output;
+		}
+
+		public byte[] GetBytesAt(int length, int offset) {
+			var from = Address + offset;
+			if ((from + length) > Buffer.Length) {
+				length = Buffer.Length - from;
+			}
+
+			var output = new byte[length];
+			Array.Copy(Buffer, from, output, 0, length);
 
 			return output;
 		}

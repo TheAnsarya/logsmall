@@ -24,6 +24,7 @@ namespace logsmall.Compression {
 	 */
 	class SimpleTailWindowCompression {
 
+		// TODO: Need to get rid of outputSize as this compression has an ending command so no need
 		public static byte[] Decompress(byte[] source, int outputSize) {
 			return Decompress(new ByteArrayStream(source), outputSize);
 		}
@@ -187,6 +188,7 @@ namespace logsmall.Compression {
 		}
 
 		public static void TestDumpData() {
+			// pointers: $0b8735 - $0b87b8
 			var pointersAddress = 0x0b8735;
 			var rom = FFMQ.Game.Rom;
 			var pointerStream = rom.GetStream(pointersAddress);
@@ -197,12 +199,12 @@ namespace logsmall.Compression {
 				var (comp, decomp) = DecompressFull(rom.GetStream(pointer), 0x2000);
 				var recomp = Compress(decomp);
 				var redecomp = Decompress(recomp, 0x2000);
-				WriteBytesToFile(comp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -1- original.txt");
-				WriteBytesToFile(decomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -2- decompressed.txt");
-				WriteBytesToFile(recomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -3- compressed.txt");
-				WriteBytesToFile(redecomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} -4- redecompressed.txt");
+				WriteBytesToFile(comp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -1- original.txt");
+				WriteBytesToFile(decomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -2- decompressed.txt");
+				WriteBytesToFile(recomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -3- compressed.txt");
+				WriteBytesToFile(redecomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -4- redecompressed.txt");
 
-				Console.WriteLine($"map - {map.ToString("D2")} - ${pointer.ToString("x6")}");
+				Console.WriteLine($"map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")}");
 				Console.WriteLine($"comp: {(comp.SequenceEqual(recomp) ? "Passed" : "Failed")}");
 				Console.WriteLine($"	size 1: 0x{comp.Length.ToString("x4")}");
 				Console.WriteLine($"	size 2: 0x{recomp.Length.ToString("x4")}");
@@ -214,6 +216,9 @@ namespace logsmall.Compression {
 				map++;
 			}
 
+				Console.WriteLine();
+				Console.WriteLine($"pointers at: ${pointersAddress.ToString("x6")} - ${rom.AddressToSNES(pointerStream.Address - 4).ToString("x6")}");
+				Console.WriteLine();
 			Console.ReadKey();
 		}
 
