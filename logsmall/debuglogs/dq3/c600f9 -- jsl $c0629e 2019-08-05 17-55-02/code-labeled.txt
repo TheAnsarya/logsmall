@@ -1,0 +1,22 @@
+c0629e php
+c0629f rep #$30
+c062a1 pha
+c062a2 phx
+c062a3 phy
+c062a4 phb
+c062a5 pea #$7f7f
+c062a8 plb
+c062a9 plb
+c062aa lda #$0020
+c062ad sta $b74c
+c062b0 lda #$0032
+c062b3 sta $b74e
+c062b6 plb
+c062b7 rep #$30
+c062b9 ply
+c062ba plx
+c062bb pla
+c062bc plp
+c062bd rtl
+c600fd jsl Routine_c907cc
+

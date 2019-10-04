@@ -1,0 +1,2100 @@
+00ffa0 jmp $c005e0
+
+; Missing 00ffa4 - 7eeaec (8252233 bytes)
+
+7eeaed jmp $c0c9ff
+7eeaf1 jmp $c0ca2c
+7eeaf5 jmp $c0ca47
+7eeaf9 jmp $c0ca68
+7eeafd jmp $c0ca99
+7eeb01 jmp $c0caa4
+7eeb05 jmp $c0caee
+
+; Missing 7eeb09 - c005df (4266711 bytes)
+
+c005e0 rep #$30
+c005e2 phb
+c005e3 phd
+c005e4 pha
+c005e5 phx
+c005e6 phy
+c005e7 lda #$0000
+c005ea tcd
+c005eb sep #$20
+c005ed lda #$7e
+c005ef pha
+c005f0 plb
+c005f1 lda $004210
+c005f5 lda $7fe4
+c005f8 beq $c00607
+c005fa lda $7fde
+c005fd beq $c00607
+c005ff stz $7fde
+c00602 lda $7fe0
+c00605 bne $c0061d
+
+; Missing c00607 - c0061c (22 bytes)
+
+c0061d lda #$80
+c0061f sta $002100
+c00623 lda #$00
+c00625 sta $00420c
+c00629 jsr $0e4c
+c0062c jsr $0c46
+c0062f jsr $0d2e
+c00632 jsr $0c94
+c00635 jsr $0ce0
+c00638 jsr $0d7d
+c0063b jsr $0dcc
+c0063e jsr $0e0c
+c00641 jsr $0858
+c00644 jsr $0704
+c00647 jsr $0733
+c0064a jsr $0b16
+c0064d jsr $0766
+c00650 jsr $0f2a
+c00653 lda $7f82
+c00656 and $7f84
+c00659 sta $00420c
+c0065d ldx #$0000
+c00660 stx $7fde
+c00663 stx $7fe0
+c00666 stx $7fe2
+c00669 stx $7fe8
+c0066c stx $7fee
+c0066f stx $7ff4
+c00672 stx $7c40
+c00675 lda $7f88
+c00678 sta $002100
+c0067c inc $7ffc
+c0067f inc $2a6c
+c00682 lda $7f74
+c00685 beq $c0068a
+
+; Missing c00687 - c00689 (3 bytes)
+
+c0068a jsr $06e1
+c0068d jsr $06a1
+c00690 lda $7ff6
+c00693 beq $c00695
+c00695 rep #$30
+c00697 jsl $c0c7f7
+c0069b ply
+c0069c plx
+c0069d pla
+c0069e pld
+c0069f plb
+c006a0 rti
+c006a1 lda $7f7e
+c006a4 bne $c006dd
+c006a6 rep #$20
+c006a8 lda $7f7a
+c006ab asl
+c006ac asl
+c006ad eor $7f7c
+c006b0 asl
+c006b1 and #$ff00
+c006b4 xba
+c006b5 sep #$20
+c006b7 pha
+c006b8 lda $7f7c
+c006bb sta $7f7d
+c006be lda $7f7b
+c006c1 sta $7f7c
+c006c4 lda $7f7a
+c006c7 sta $7f7b
+c006ca pla
+c006cb sta $7f7a
+c006ce lda $7f7a
+c006d1 ora $7f7b
+c006d4 ora $7f7c
+c006d7 ora $7f7d
+c006da beq $c006df
+c006dc rts
+
+; Missing c006dd - c006e0 (4 bytes)
+
+c006e1 lda $004212
+c006e5 lsr
+c006e6 bcs $c006e1
+c006e8 lda $004218
+c006ec sta $7ff8
+c006ef lda $004219
+c006f3 sta $7ff9
+c006f6 lda $004016
+c006fa lsr
+c006fb bcs $c00703
+
+; Missing c006fd - c00702 (6 bytes)
+
+c00703 rts
+c00704 rep #$20
+c00706 lda #$0200
+c00709 sta $004305
+c0070d lda #$7ffe
+c00710 sta $004302
+c00714 sep #$20
+c00716 lda #$00
+c00718 sta $002121
+c0071c sta $004300
+c00720 lda #$22
+c00722 sta $004301
+c00726 lda #$7e
+c00728 sta $004304
+c0072c lda #$01
+c0072e sta $00420b
+c00732 rts
+c00733 rep #$20
+c00735 lda #$db1f
+c00738 sta $004302
+c0073c lda #$0220
+c0073f sta $004305
+c00743 sep #$20
+c00745 lda #$7e
+c00747 sta $004304
+c0074b lda #$00
+c0074d sta $002102
+c00751 sta $002103
+c00755 sta $004300
+c00759 lda #$04
+c0075b sta $004301
+c0075f lda #$01
+c00761 sta $00420b
+c00765 rts
+c00766 lda $7ff4
+c00769 bne $c0076c
+c0076b rts
+
+; Missing c0076c - c00857 (236 bytes)
+
+c00858 lda $7fe2
+c0085b bne $c0085e
+c0085d rts
+
+; Missing c0085e - c00b15 (696 bytes)
+
+c00b16 lda $99d9
+c00b19 cmp #$0a
+c00b1b bne $c00b72
+
+; Missing c00b1d - c00b71 (85 bytes)
+
+c00b72 lda #$01
+c00b74 sta $004300
+c00b78 lda #$18
+c00b7a sta $004301
+c00b7e lda #$7f
+c00b80 sta $004304
+c00b84 lda #$80
+c00b86 sta $002115
+c00b8a lda $7ff0
+c00b8d beq $c00bc3
+
+; Missing c00b8f - c00bc2 (52 bytes)
+
+c00bc3 lda $7ff1
+c00bc6 beq $c00bfc
+
+; Missing c00bc8 - c00bfb (52 bytes)
+
+c00bfc lda $7ff2
+c00bff beq $c00c35
+
+; Missing c00c01 - c00c34 (52 bytes)
+
+c00c35 rts
+
+; Missing c00c36 - c00c45 (16 bytes)
+
+c00c46 ldy $93ae
+c00c49 beq $c00c93
+
+; Missing c00c4b - c00c92 (72 bytes)
+
+c00c93 rts
+c00c94 ldy $95b2
+c00c97 beq $c00cdf
+
+; Missing c00c99 - c00cde (70 bytes)
+
+c00cdf rts
+c00ce0 ldy $94b0
+c00ce3 beq $c00d2d
+
+; Missing c00ce5 - c00d2c (72 bytes)
+
+c00d2d rts
+c00d2e ldy $95cc
+c00d31 beq $c00d7c
+
+; Missing c00d33 - c00d7b (73 bytes)
+
+c00d7c rts
+c00d7d ldy $966e
+c00d80 beq $c00dcb
+
+; Missing c00d82 - c00dca (73 bytes)
+
+c00dcb rts
+c00dcc lda $7fea
+c00dcf beq $c00e0b
+c00dd1 lda #$7e
+c00dd3 sta $004304
+c00dd7 lda #$18
+c00dd9 sta $004301
+c00ddd lda #$00
+c00ddf sta $004300
+c00de3 lda #$04
+c00de5 sta $002115
+c00de9 rep #$20
+c00deb lda #$b6df
+c00dee sta $004302
+c00df2 lda $99ef
+c00df5 sta $002116
+c00df9 lda #$0700
+c00dfc sta $004305
+c00e00 stz $7fea
+c00e03 sep #$20
+c00e05 lda #$01
+c00e07 sta $00420b
+c00e0b rts
+c00e0c lda $7fec
+c00e0f beq $c00e4b
+
+; Missing c00e11 - c00e4a (58 bytes)
+
+c00e4b rts
+c00e4c lda $7f8c
+c00e4f sta $002105
+c00e53 lda $7f8e
+c00e56 sta $002106
+c00e5a lda $7fc8
+c00e5d sta $00212c
+c00e61 lda $7fca
+c00e64 sta $00212d
+c00e68 lda $7fcc
+c00e6b sta $00212e
+c00e6f lda $7fce
+c00e72 sta $00212f
+c00e76 lda $7fd0
+c00e79 sta $002130
+c00e7d lda $7fd2
+c00e80 sta $002131
+c00e84 lda $7fba
+c00e87 sta $002123
+c00e8b lda $7fbc
+c00e8e sta $002124
+c00e92 lda $7fc0
+c00e95 sta $002126
+c00e99 lda $7fc1
+c00e9c sta $002127
+c00ea0 lda $7fc2
+c00ea3 sta $002128
+c00ea7 lda $7fc3
+c00eaa sta $002129
+c00eae lda $7fbe
+c00eb1 sta $002125
+c00eb5 lda $7fc4
+c00eb8 sta $00212a
+c00ebc lda $7fc6
+c00ebf sta $00212b
+c00ec3 lda $7fd4
+c00ec6 and #$1f
+c00ec8 ora #$20
+c00eca sta $002132
+c00ece rep #$20
+c00ed0 lda $7fd4
+c00ed3 and #$03e0
+c00ed6 lsr
+c00ed7 lsr
+c00ed8 lsr
+c00ed9 lsr
+c00eda lsr
+c00edb ora #$0040
+c00ede sep #$20
+c00ee0 sta $002132
+c00ee4 lda $7fd5
+c00ee7 and #$7c
+c00ee9 lsr
+c00eea lsr
+c00eeb ora #$80
+c00eed sta $002132
+c00ef1 lda $7f8a
+c00ef4 sta $002101
+c00ef8 lda $7f90
+c00efb sta $002107
+c00eff lda $7f92
+c00f02 sta $002108
+c00f06 lda $7f94
+c00f09 sta $002109
+c00f0d lda $7f96
+c00f10 sta $00210a
+c00f14 lda $7f98
+c00f17 sta $00210b
+c00f1b lda $7f9a
+c00f1e sta $00210c
+c00f22 lda $7fda
+c00f25 sta $002133
+c00f29 rts
+c00f2a lda $7f9c
+c00f2d sta $00210d
+c00f31 lda $7f9d
+c00f34 sta $00210d
+c00f38 lda $7fa4
+c00f3b sta $00210e
+c00f3f lda $7fa5
+c00f42 sta $00210e
+c00f46 lda $7f9e
+c00f49 sta $00210f
+c00f4d lda $7f9f
+c00f50 sta $00210f
+c00f54 lda $7fa6
+c00f57 sta $002110
+c00f5b lda $7fa7
+c00f5e sta $002110
+c00f62 lda $7fa0
+c00f65 sta $002111
+c00f69 lda $7fa1
+c00f6c sta $002111
+c00f70 lda $7fa8
+c00f73 sta $002112
+c00f77 lda $7fa9
+c00f7a sta $002112
+c00f7e lda $7f8c
+c00f81 and #$07
+c00f83 cmp #$07
+c00f85 bne $c00fe2
+
+; Missing c00f87 - c00fe1 (91 bytes)
+
+c00fe2 rts
+
+; Missing c00fe3 - c01097 (181 bytes)
+
+c01098 php
+c01099 sei
+c0109a sep #$20
+c0109c sta $004202
+c010a0 xba
+c010a1 sta $004203
+c010a5 nop
+c010a6 nop
+c010a7 nop
+c010a8 nop
+c010a9 lda $004217
+c010ad xba
+c010ae lda $004216
+c010b2 plp
+c010b3 rtl
+
+; Missing c010b4 - c010c1 (14 bytes)
+
+c010c2 php
+c010c3 rep #$20
+c010c5 pha
+c010c6 sep #$20
+c010c8 xba
+c010c9 lda $00,x
+c010cb jsl $c01098
+c010cf rep #$20
+c010d1 sta $00,x
+c010d3 pla
+c010d4 plp
+c010d5 rtl
+
+; Missing c010d6 - c01145 (112 bytes)
+
+c01146 php
+c01147 sep #$20
+c01149 pha
+c0114a xba
+c0114b pha
+c0114c lda $01,x
+c0114e pha
+c0114f lda $03,s
+c01151 xba
+c01152 lda $00,x
+c01154 pha
+c01155 sta $004202
+c01159 xba
+c0115a sta $004203
+c0115e nop
+c0115f nop
+c01160 nop
+c01161 nop
+c01162 lda $004216
+c01166 sta $00,x
+c01168 lda $004217
+c0116c sta $01,x
+c0116e pla
+c0116f xba
+c01170 lda $02,s
+c01172 sta $004202
+c01176 xba
+c01177 sta $004203
+c0117b nop
+c0117c nop
+c0117d nop
+c0117e nop
+c0117f lda $004216
+c01183 clc
+c01184 adc $01,x
+c01186 sta $01,x
+c01188 lda $004217
+c0118c adc #$00
+c0118e sta $02,x
+c01190 lda $01,s
+c01192 xba
+c01193 lda $03,s
+c01195 sta $004202
+c01199 xba
+c0119a sta $004203
+c0119e nop
+c0119f nop
+c011a0 nop
+c011a1 nop
+c011a2 lda $004216
+c011a6 clc
+c011a7 adc $01,x
+c011a9 sta $01,x
+c011ab lda $004217
+c011af adc $02,x
+c011b1 sta $02,x
+c011b3 lda #$00
+c011b5 rol
+c011b6 sta $03,x
+c011b8 lda $01,s
+c011ba xba
+c011bb lda $02,s
+c011bd sta $004202
+c011c1 xba
+c011c2 sta $004203
+c011c6 nop
+c011c7 nop
+c011c8 nop
+c011c9 nop
+c011ca lda $004216
+c011ce clc
+c011cf adc $02,x
+c011d1 sta $02,x
+c011d3 lda $004217
+c011d7 adc $03,x
+c011d9 sta $03,x
+c011db pla
+c011dc pla
+c011dd xba
+c011de pla
+c011df plp
+c011e0 rtl
+
+; Missing c011e1 - c02751 (5489 bytes)
+
+c02752 rep #$30
+c02754 lda #$0000
+c02757 sta $7e7de0
+c0275b rep #$30
+c0275d lda $7e7de0
+c02761 tax
+c02762 lda $7e7dd0,x
+c02766 bne $c02774
+c02768 lda $7e7dd8,x
+c0276c tcs
+c0276d pld
+c0276e plb
+c0276f ply
+c02770 plx
+c02771 pla
+c02772 plp
+c02773 rtl
+c02774 rep #$30
+c02776 lda $7e7de0
+c0277a inc
+c0277b inc
+c0277c sta $7e7de0
+c02780 cmp #$0008
+c02783 bcc $c0275d
+c02785 lda $7e7fe4
+c02789 beq $c02752
+c0278b sep #$20
+c0278d lda #$01
+c0278f sta $7e7fde
+c02793 rep #$20
+c02795 lda $c1fffe
+c02799 bpl $c027a4
+
+; Missing c0279b - c027a3 (9 bytes)
+
+c027a4 lda $7e7fde
+c027a8 beq $c02752
+c027aa bra $c02795
+
+; Missing c027ac - c028b3 (264 bytes)
+
+c028b4 php
+c028b5 rep #$30
+c028b7 pha
+c028b8 phx
+c028b9 phy
+c028ba phb
+c028bb phd
+c028bc lda $7e7f6e
+c028c0 bne $c028d9
+c028c2 tsc
+c028c3 cmp #$0500
+c028c6 bcc $c028d9
+c028c8 cmp #$165a
+c028cb bcc $c028ee
+
+; Missing c028cd - c028d8 (12 bytes)
+
+c028d9 lda #$0001
+c028dc sta $7e7fe0
+c028e0 lda $7e7de0
+c028e4 tax
+c028e5 tsc
+c028e6 sta $7e7dd8,x
+c028ea jmp $c02774
+c028ee lda #$0001
+c028f1 sta $7e7f2e
+c028f5 lda $7e7f2a
+c028f9 tax
+c028fa tsc
+c028fb sta $7e7e28,x
+c028ff jmp $c0297c
+
+; Missing c02903 - c02945 (67 bytes)
+
+c02946 rep #$30
+c02948 pea #$7e7e
+c0294b plb
+c0294c plb
+c0294d tsc
+c0294e sta $7f2c
+c02951 lda #$0000
+c02954 sta $7f28
+c02957 sta $7f2e
+c0295a ldx $7f28
+c0295d lda $7e68,x
+c02960 sta $7f2a
+c02963 tax
+c02964 lda $7de8,x
+c02967 bne $c0297c
+c02969 lda $7ea8,x
+c0296c ora $7ee8,x
+c0296f beq $c0297c
+c02971 lda $7e28,x
+c02974 tcs
+c02975 pld
+c02976 plb
+c02977 ply
+c02978 plx
+c02979 pla
+c0297a plp
+c0297b rtl
+c0297c rep #$30
+c0297e lda $7f28
+c02981 inc
+c02982 inc
+c02983 sta $7f28
+c02986 cmp #$0040
+c02989 bcc $c0295a
+c0298b lda $7f2c
+c0298e tcs
+c0298f rtl
+
+; Missing c02990 - c02e0e (1151 bytes)
+
+c02e0f jsl $c02946
+c02e13 lda $7e7f2e
+c02e17 beq $c02e23
+c02e19 jsl $c09307
+c02e1d jsl $c028b4
+c02e21 bra $c02e0f
+
+; Missing c02e23 - c02e34 (18 bytes)
+
+c02e35 jsl $c16995
+c02e39 jsl $c0936f
+c02e3d jsl $c679a7
+c02e41 jsl $c04376
+c02e45 jsl $c048f7
+c02e49 jsl $c05030
+c02e4d jsl $c028b4
+c02e51 bra $c02e35
+
+; Missing c02e53 - c04375 (5411 bytes)
+
+c04376 php
+c04377 rep #$30
+c04379 phb
+c0437a pea #$7e7e
+c0437d plb
+c0437e plb
+c0437f ldx #$0000
+c04382 lda $8b42,x
+c04385 cmp #$ffff
+c04388 bne $c04394
+c0438a inx
+c0438b inx
+c0438c cpx #$0010
+c0438f bcc $c04382
+c04391 plb
+c04392 plp
+c04393 rtl
+
+; Missing c04394 - c048f6 (1379 bytes)
+
+c048f7 rep #$30
+c048f9 pea #$7e7e
+c048fc plb
+c048fd plb
+c048fe lda $7f8e
+c04901 and #$00f0
+c04904 beq $c04910
+
+; Missing c04906 - c0490f (10 bytes)
+
+c04910 rtl
+
+; Missing c04911 - c0502f (1823 bytes)
+
+c05030 php
+c05031 rep #$20
+c05033 phb
+c05034 pea #$7f7f
+c05037 plb
+c05038 plb
+c05039 stz $e39e
+c0503c stz $e3a0
+c0503f stz $e3a2
+c05042 stz $e3a4
+c05045 stz $e3a6
+c05048 stz $e3a8
+c0504b stz $e3aa
+c0504e stz $e3ac
+c05051 stz $e3ae
+c05054 stz $e3b0
+c05057 plb
+c05058 plp
+c05059 rtl
+
+; Missing c0505a - c09306 (17069 bytes)
+
+c09307 rep #$30
+c09309 pea #$7e7e
+c0930c plb
+c0930d plb
+c0930e lda $dd41
+c09311 bne $c09314
+
+; Missing c09313 - c09313 (1 bytes)
+
+c09314 lda #$ffff
+c09317 sta $18
+c09319 stz $1c
+c0931b ldx #$0000
+c0931e lda $dd49,x
+c09321 bmi $c09361
+c09323 bit $dd49,x
+c09326 bvs $c0933c
+c09328 tay
+c09329 lda $c625,y
+c0932c sta $1a
+c0932e lda $c7e5,y
+c09331 phy
+c09332 tay
+c09333 lda $98a7,y
+c09336 clc
+c09337 adc $1a
+c09339 ply
+c0933a bra $c09343
+
+; Missing c0933c - c09342 (7 bytes)
+
+c09343 cmp $18
+c09345 bcc $c0935d
+c09347 beq $c09369
+
+; Missing c09349 - c0935c (20 bytes)
+
+c0935d sta $18
+c0935f sty $1c
+c09361 inx
+c09362 inx
+c09363 cpx #$0040
+c09366 bcc $c0931e
+c09368 rtl
+c09369 cpy $1c
+c0936b bcs $c0935d
+
+; Missing c0936d - c0936e (2 bytes)
+
+c0936f php
+c09370 pea #$7e7e
+c09373 plb
+c09374 plb
+c09375 sep #$20
+c09377 lda $dd47
+c0937a bne $c09381
+c0937c lda $dd45
+c0937f beq $c09386
+
+; Missing c09381 - c09385 (5 bytes)
+
+c09386 lda #$e8
+c09388 sta $db20
+c0938b sta $db24
+c0938e sta $db28
+c09391 sta $db2c
+c09394 sta $db30
+c09397 sta $db34
+c0939a sta $db38
+c0939d sta $db3c
+c093a0 sta $db40
+c093a3 sta $db44
+c093a6 sta $db48
+c093a9 sta $db4c
+c093ac sta $db50
+c093af sta $db54
+c093b2 sta $db58
+c093b5 sta $db5c
+c093b8 sta $db60
+c093bb sta $db64
+c093be sta $db68
+c093c1 sta $db6c
+c093c4 sta $db70
+c093c7 sta $db74
+c093ca sta $db78
+c093cd sta $db7c
+c093d0 sta $db80
+c093d3 sta $db84
+c093d6 sta $db88
+c093d9 sta $db8c
+c093dc sta $db90
+c093df sta $db94
+c093e2 sta $db98
+c093e5 sta $db9c
+c093e8 sta $dba0
+c093eb sta $dba4
+c093ee sta $dba8
+c093f1 sta $dbac
+c093f4 sta $dbb0
+c093f7 sta $dbb4
+c093fa sta $dbb8
+c093fd sta $dbbc
+c09400 sta $dbc0
+c09403 sta $dbc4
+c09406 sta $dbc8
+c09409 sta $dbcc
+c0940c sta $dbd0
+c0940f sta $dbd4
+c09412 sta $dbd8
+c09415 sta $dbdc
+c09418 sta $dbe0
+c0941b sta $dbe4
+c0941e sta $dbe8
+c09421 sta $dbec
+c09424 sta $dbf0
+c09427 sta $dbf4
+c0942a sta $dbf8
+c0942d sta $dbfc
+c09430 sta $dc00
+c09433 sta $dc04
+c09436 sta $dc08
+c09439 sta $dc0c
+c0943c sta $dc10
+c0943f sta $dc14
+c09442 sta $dc18
+c09445 sta $dc1c
+c09448 sta $dc20
+c0944b sta $dc24
+c0944e sta $dc28
+c09451 sta $dc2c
+c09454 sta $dc30
+c09457 sta $dc34
+c0945a sta $dc38
+c0945d sta $dc3c
+c09460 sta $dc40
+c09463 sta $dc44
+c09466 sta $dc48
+c09469 sta $dc4c
+c0946c sta $dc50
+c0946f sta $dc54
+c09472 sta $dc58
+c09475 sta $dc5c
+c09478 sta $dc60
+c0947b sta $dc64
+c0947e sta $dc68
+c09481 sta $dc6c
+c09484 sta $dc70
+c09487 sta $dc74
+c0948a sta $dc78
+c0948d sta $dc7c
+c09490 sta $dc80
+c09493 sta $dc84
+c09496 sta $dc88
+c09499 sta $dc8c
+c0949c sta $dc90
+c0949f sta $dc94
+c094a2 sta $dc98
+c094a5 sta $dc9c
+c094a8 sta $dca0
+c094ab sta $dca4
+c094ae sta $dca8
+c094b1 sta $dcac
+c094b4 sta $dcb0
+c094b7 sta $dcb4
+c094ba sta $dcb8
+c094bd sta $dcbc
+c094c0 sta $dcc0
+c094c3 sta $dcc4
+c094c6 sta $dcc8
+c094c9 sta $dccc
+c094cc sta $dcd0
+c094cf sta $dcd4
+c094d2 sta $dcd8
+c094d5 sta $dcdc
+c094d8 sta $dce0
+c094db sta $dce4
+c094de sta $dce8
+c094e1 sta $dcec
+c094e4 sta $dcf0
+c094e7 sta $dcf4
+c094ea sta $dcf8
+c094ed sta $dcfc
+c094f0 sta $dd00
+c094f3 sta $dd04
+c094f6 sta $dd08
+c094f9 sta $dd0c
+c094fc sta $dd10
+c094ff sta $dd14
+c09502 sta $dd18
+c09505 sta $dd1c
+c09508 rep #$30
+c0950a stz $dd1f
+c0950d stz $dd21
+c09510 stz $dd23
+c09513 stz $dd25
+c09516 stz $dd27
+c09519 stz $dd29
+c0951c stz $dd2b
+c0951f stz $dd2d
+c09522 stz $dd2f
+c09525 stz $dd31
+c09528 stz $dd33
+c0952b stz $dd35
+c0952e stz $dd37
+c09531 stz $dd39
+c09534 stz $dd3b
+c09537 stz $dd3d
+c0953a pea #$99c5
+c0953d pea #$0010
+c09540 pea #$7e00
+c09543 jsl $c9029e
+c09547 sta $28
+c09549 stz $dd3f
+c0954c lda $7ffc5a
+c09550 and $7ffc5e
+c09554 sta $dd43
+c09557 lda $7ffc58
+c0955b cmp #$0002
+c0955e beq $c0956d
+c09560 cmp #$0004
+c09563 beq $c09570
+c09565 cmp #$0006
+c09568 beq $c09573
+c0956a jmp $9576
+
+; Missing c0956d - c09575 (9 bytes)
+
+c09576 lda $dd49
+c09579 bmi $c095bd
+c0957b bit $dd49
+c0957e bvs $c095af
+c09580 tay
+c09581 lda $c3a5,y
+c09584 and #$0001
+c09587 beq $c095bd
+c09589 lda $c3a5,y
+c0958c and #$0020
+c0958f bne $c095bd
+c09591 lda $cf25,y
+c09594 bmi $c095bd
+c09596 lda $7e3500
+c0959a and #$0010
+c0959d beq $c095bd
+c0959f lda $dd3f
+c095a2 cmp #$007b
+c095a5 bcs $c095bd
+c095a7 ldx $cfe5,y
+c095aa jsr ($c6c6,x)
+c095ad bra $c095bd
+
+; Missing c095af - c095bc (14 bytes)
+
+c095bd lda $dd4b
+c095c0 bmi $c09604
+c095c2 bit $dd4b
+c095c5 bvs $c095f6
+c095c7 tay
+c095c8 lda $c3a5,y
+c095cb and #$0001
+c095ce beq $c09604
+c095d0 lda $c3a5,y
+c095d3 and #$0020
+c095d6 bne $c09604
+c095d8 lda $cf25,y
+c095db bmi $c09604
+c095dd lda $7e3500
+c095e1 and #$0010
+c095e4 beq $c09604
+c095e6 lda $dd3f
+c095e9 cmp #$007b
+c095ec bcs $c09604
+c095ee ldx $cfe5,y
+c095f1 jsr ($c6c6,x)
+c095f4 bra $c09604
+
+; Missing c095f6 - c09603 (14 bytes)
+
+c09604 lda $dd4d
+c09607 bmi $c0964b
+c09609 bit $dd4d
+c0960c bvs $c0963d
+c0960e tay
+c0960f lda $c3a5,y
+c09612 and #$0001
+c09615 beq $c0964b
+c09617 lda $c3a5,y
+c0961a and #$0020
+c0961d bne $c0964b
+c0961f lda $cf25,y
+c09622 bmi $c0964b
+c09624 lda $7e3500
+c09628 and #$0010
+c0962b beq $c0964b
+c0962d lda $dd3f
+c09630 cmp #$007b
+c09633 bcs $c0964b
+c09635 ldx $cfe5,y
+c09638 jsr ($c6c6,x)
+c0963b bra $c0964b
+
+; Missing c0963d - c0964a (14 bytes)
+
+c0964b lda $dd4f
+c0964e bmi $c09692
+c09650 bit $dd4f
+c09653 bvs $c09684
+c09655 tay
+c09656 lda $c3a5,y
+c09659 and #$0001
+c0965c beq $c09692
+c0965e lda $c3a5,y
+c09661 and #$0020
+c09664 bne $c09692
+c09666 lda $cf25,y
+c09669 bmi $c09692
+c0966b lda $7e3500
+c0966f and #$0010
+c09672 beq $c09692
+c09674 lda $dd3f
+c09677 cmp #$007b
+c0967a bcs $c09692
+c0967c ldx $cfe5,y
+c0967f jsr ($c6c6,x)
+c09682 bra $c09692
+
+; Missing c09684 - c09691 (14 bytes)
+
+c09692 lda $dd51
+c09695 bmi $c096d9
+c09697 bit $dd51
+c0969a bvs $c096cb
+c0969c tay
+c0969d lda $c3a5,y
+c096a0 and #$0001
+c096a3 beq $c096d9
+c096a5 lda $c3a5,y
+c096a8 and #$0020
+c096ab bne $c096d9
+c096ad lda $cf25,y
+c096b0 bmi $c096d9
+c096b2 lda $7e3500
+c096b6 and #$0010
+c096b9 beq $c096d9
+c096bb lda $dd3f
+c096be cmp #$007b
+c096c1 bcs $c096d9
+c096c3 ldx $cfe5,y
+c096c6 jsr ($c6c6,x)
+c096c9 bra $c096d9
+
+; Missing c096cb - c096d8 (14 bytes)
+
+c096d9 lda $dd53
+c096dc bmi $c09720
+c096de bit $dd53
+c096e1 bvs $c09712
+c096e3 tay
+c096e4 lda $c3a5,y
+c096e7 and #$0001
+c096ea beq $c09720
+c096ec lda $c3a5,y
+c096ef and #$0020
+c096f2 bne $c09720
+c096f4 lda $cf25,y
+c096f7 bmi $c09720
+c096f9 lda $7e3500
+c096fd and #$0010
+c09700 beq $c09720
+c09702 lda $dd3f
+c09705 cmp #$007b
+c09708 bcs $c09720
+c0970a ldx $cfe5,y
+c0970d jsr ($c6c6,x)
+c09710 bra $c09720
+
+; Missing c09712 - c0971f (14 bytes)
+
+c09720 lda $dd55
+c09723 bmi $c09767
+c09725 bit $dd55
+c09728 bvs $c09759
+c0972a tay
+c0972b lda $c3a5,y
+c0972e and #$0001
+c09731 beq $c09767
+c09733 lda $c3a5,y
+c09736 and #$0020
+c09739 bne $c09767
+c0973b lda $cf25,y
+c0973e bmi $c09767
+c09740 lda $7e3500
+c09744 and #$0010
+c09747 beq $c09767
+c09749 lda $dd3f
+c0974c cmp #$007b
+c0974f bcs $c09767
+c09751 ldx $cfe5,y
+c09754 jsr ($c6c6,x)
+c09757 bra $c09767
+
+; Missing c09759 - c09766 (14 bytes)
+
+c09767 lda $dd57
+c0976a bmi $c097ae
+c0976c bit $dd57
+c0976f bvs $c097a0
+c09771 tay
+c09772 lda $c3a5,y
+c09775 and #$0001
+c09778 beq $c097ae
+c0977a lda $c3a5,y
+c0977d and #$0020
+c09780 bne $c097ae
+c09782 lda $cf25,y
+c09785 bmi $c097ae
+c09787 lda $7e3500
+c0978b and #$0010
+c0978e beq $c097ae
+c09790 lda $dd3f
+c09793 cmp #$007b
+c09796 bcs $c097ae
+c09798 ldx $cfe5,y
+c0979b jsr ($c6c6,x)
+c0979e bra $c097ae
+
+; Missing c097a0 - c097ad (14 bytes)
+
+c097ae lda $dd59
+c097b1 bmi $c097f5
+c097b3 bit $dd59
+c097b6 bvs $c097e7
+c097b8 tay
+c097b9 lda $c3a5,y
+c097bc and #$0001
+c097bf beq $c097f5
+c097c1 lda $c3a5,y
+c097c4 and #$0020
+c097c7 bne $c097f5
+c097c9 lda $cf25,y
+c097cc bmi $c097f5
+c097ce lda $7e3500
+c097d2 and #$0010
+c097d5 beq $c097f5
+c097d7 lda $dd3f
+c097da cmp #$007b
+c097dd bcs $c097f5
+c097df ldx $cfe5,y
+c097e2 jsr ($c6c6,x)
+c097e5 bra $c097f5
+
+; Missing c097e7 - c097f4 (14 bytes)
+
+c097f5 lda $dd5b
+c097f8 bmi $c0983c
+c097fa bit $dd5b
+c097fd bvs $c0982e
+c097ff tay
+c09800 lda $c3a5,y
+c09803 and #$0001
+c09806 beq $c0983c
+c09808 lda $c3a5,y
+c0980b and #$0020
+c0980e bne $c0983c
+c09810 lda $cf25,y
+c09813 bmi $c0983c
+c09815 lda $7e3500
+c09819 and #$0010
+c0981c beq $c0983c
+c0981e lda $dd3f
+c09821 cmp #$007b
+c09824 bcs $c0983c
+c09826 ldx $cfe5,y
+c09829 jsr ($c6c6,x)
+c0982c bra $c0983c
+
+; Missing c0982e - c0983b (14 bytes)
+
+c0983c lda $dd5d
+c0983f bmi $c09883
+c09841 bit $dd5d
+c09844 bvs $c09875
+c09846 tay
+c09847 lda $c3a5,y
+c0984a and #$0001
+c0984d beq $c09883
+c0984f lda $c3a5,y
+c09852 and #$0020
+c09855 bne $c09883
+c09857 lda $cf25,y
+c0985a bmi $c09883
+c0985c lda $7e3500
+c09860 and #$0010
+c09863 beq $c09883
+c09865 lda $dd3f
+c09868 cmp #$007b
+c0986b bcs $c09883
+c0986d ldx $cfe5,y
+c09870 jsr ($c6c6,x)
+c09873 bra $c09883
+
+; Missing c09875 - c09882 (14 bytes)
+
+c09883 lda $dd5f
+c09886 bmi $c098ca
+c09888 bit $dd5f
+c0988b bvs $c098bc
+c0988d tay
+c0988e lda $c3a5,y
+c09891 and #$0001
+c09894 beq $c098ca
+c09896 lda $c3a5,y
+c09899 and #$0020
+c0989c bne $c098ca
+c0989e lda $cf25,y
+c098a1 bmi $c098ca
+c098a3 lda $7e3500
+c098a7 and #$0010
+c098aa beq $c098ca
+c098ac lda $dd3f
+c098af cmp #$007b
+c098b2 bcs $c098ca
+c098b4 ldx $cfe5,y
+c098b7 jsr ($c6c6,x)
+c098ba bra $c098ca
+
+; Missing c098bc - c098c9 (14 bytes)
+
+c098ca lda $dd61
+c098cd bmi $c09911
+c098cf bit $dd61
+c098d2 bvs $c09903
+c098d4 tay
+c098d5 lda $c3a5,y
+c098d8 and #$0001
+c098db beq $c09911
+c098dd lda $c3a5,y
+c098e0 and #$0020
+c098e3 bne $c09911
+c098e5 lda $cf25,y
+c098e8 bmi $c09911
+c098ea lda $7e3500
+c098ee and #$0010
+c098f1 beq $c09911
+c098f3 lda $dd3f
+c098f6 cmp #$007b
+c098f9 bcs $c09911
+c098fb ldx $cfe5,y
+c098fe jsr ($c6c6,x)
+c09901 bra $c09911
+
+; Missing c09903 - c09910 (14 bytes)
+
+c09911 lda $dd63
+c09914 bmi $c09958
+c09916 bit $dd63
+c09919 bvs $c0994a
+c0991b tay
+c0991c lda $c3a5,y
+c0991f and #$0001
+c09922 beq $c09958
+c09924 lda $c3a5,y
+c09927 and #$0020
+c0992a bne $c09958
+c0992c lda $cf25,y
+c0992f bmi $c09958
+c09931 lda $7e3500
+c09935 and #$0010
+c09938 beq $c09958
+c0993a lda $dd3f
+c0993d cmp #$007b
+c09940 bcs $c09958
+c09942 ldx $cfe5,y
+c09945 jsr ($c6c6,x)
+c09948 bra $c09958
+
+; Missing c0994a - c09957 (14 bytes)
+
+c09958 lda $dd65
+c0995b bmi $c0999f
+c0995d bit $dd65
+c09960 bvs $c09991
+c09962 tay
+c09963 lda $c3a5,y
+c09966 and #$0001
+c09969 beq $c0999f
+c0996b lda $c3a5,y
+c0996e and #$0020
+c09971 bne $c0999f
+c09973 lda $cf25,y
+c09976 bmi $c0999f
+c09978 lda $7e3500
+c0997c and #$0010
+c0997f beq $c0999f
+c09981 lda $dd3f
+c09984 cmp #$007b
+c09987 bcs $c0999f
+c09989 ldx $cfe5,y
+c0998c jsr ($c6c6,x)
+c0998f bra $c0999f
+
+; Missing c09991 - c0999e (14 bytes)
+
+c0999f lda $dd67
+c099a2 bmi $c099e6
+
+; Missing c099a4 - c099e5 (66 bytes)
+
+c099e6 lda $dd69
+c099e9 bmi $c09a2d
+
+; Missing c099eb - c09a2c (66 bytes)
+
+c09a2d lda $dd6b
+c09a30 bmi $c09a74
+
+; Missing c09a32 - c09a73 (66 bytes)
+
+c09a74 lda $dd6d
+c09a77 bmi $c09abb
+
+; Missing c09a79 - c09aba (66 bytes)
+
+c09abb lda $dd6f
+c09abe bmi $c09b02
+
+; Missing c09ac0 - c09b01 (66 bytes)
+
+c09b02 lda $dd71
+c09b05 bmi $c09b49
+
+; Missing c09b07 - c09b48 (66 bytes)
+
+c09b49 lda $dd73
+c09b4c bmi $c09b90
+
+; Missing c09b4e - c09b8f (66 bytes)
+
+c09b90 lda $dd75
+c09b93 bmi $c09bd7
+
+; Missing c09b95 - c09bd6 (66 bytes)
+
+c09bd7 lda $dd77
+c09bda bmi $c09c1e
+
+; Missing c09bdc - c09c1d (66 bytes)
+
+c09c1e lda $dd79
+c09c21 bmi $c09c65
+
+; Missing c09c23 - c09c64 (66 bytes)
+
+c09c65 lda $dd7b
+c09c68 bmi $c09cac
+
+; Missing c09c6a - c09cab (66 bytes)
+
+c09cac lda $dd7d
+c09caf bmi $c09cf3
+
+; Missing c09cb1 - c09cf2 (66 bytes)
+
+c09cf3 lda $dd7f
+c09cf6 bmi $c09d3a
+
+; Missing c09cf8 - c09d39 (66 bytes)
+
+c09d3a lda $dd81
+c09d3d bmi $c09d81
+
+; Missing c09d3f - c09d80 (66 bytes)
+
+c09d81 lda $dd83
+c09d84 bmi $c09dc8
+
+; Missing c09d86 - c09dc7 (66 bytes)
+
+c09dc8 lda $dd85
+c09dcb bmi $c09e0f
+
+; Missing c09dcd - c09e0e (66 bytes)
+
+c09e0f lda $dd87
+c09e12 bmi $c09e56
+
+; Missing c09e14 - c09e55 (66 bytes)
+
+c09e56 plp
+c09e57 rtl
+
+; Missing c09e58 - c0bd7d (7974 bytes)
+
+c0bd7e lda $28
+c0bd80 bne $c0bdb2
+c0bd82 ldx $c665,y
+c0bd85 lda $c5e5,y
+c0bd88 sec
+c0bd89 sbc $7fe36c,x
+c0bd8d sta $18
+c0bd8f clc
+c0bd90 adc #$0008
+c0bd93 bmi $c0bdaf
+c0bd95 cmp #$0100
+c0bd98 bcs $c0bdaf
+c0bd9a lda $c625,y
+c0bd9d sec
+c0bd9e sbc $7fe376,x
+c0bda2 sta $1a
+c0bda4 clc
+c0bda5 adc #$0010
+c0bda8 bmi $c0bdaf
+c0bdaa cmp #$00f0
+c0bdad bcc $c0bdb0
+c0bdaf rts
+c0bdb0 bra $c0bde6
+
+; Missing c0bdb2 - c0bde5 (52 bytes)
+
+c0bde6 lda $c825,y
+c0bde9 sta $1c
+c0bdeb ldx $c6e5,y
+c0bdee sec
+c0bdef sbc $9ae1,x
+c0bdf2 sta $1e
+c0bdf4 sbc $9ae1,x
+c0bdf7 sta $20
+c0bdf9 lda $c3a5,y
+c0bdfc and #$3000
+c0bdff pha
+c0be00 lda $c425,y
+c0be03 and #$0800
+c0be06 ora $01,s
+c0be08 sta $22
+c0be0a pla
+c0be0b jsr $c6d4
+c0be0e lda $dd3f
+c0be11 asl
+c0be12 asl
+c0be13 tax
+c0be14 lda #$0000
+c0be17 sep #$20
+c0be19 lda $18
+c0be1b sta $db1f,x
+c0be1e sta $db23,x
+c0be21 sta $db27,x
+c0be24 clc
+c0be25 adc #$08
+c0be27 sta $db2b,x
+c0be2a sta $db2f,x
+c0be2d sta $db33,x
+c0be30 lda $1a
+c0be32 sta $db20,x
+c0be35 sta $db2c,x
+c0be38 clc
+c0be39 adc #$08
+c0be3b sta $db24,x
+c0be3e sta $db30,x
+c0be41 clc
+c0be42 adc #$08
+c0be44 sta $db28,x
+c0be47 sta $db34,x
+c0be4a rep #$20
+c0be4c lda $28
+c0be4e beq $c0be53
+
+; Missing c0be50 - c0be52 (3 bytes)
+
+c0be53 stx $26
+c0be55 ldy $24
+c0be57 ldx $20
+c0be59 lda $7f0000,x
+c0be5d and #$3000
+c0be60 ora $e2a1,y
+c0be63 ora $22
+c0be65 ldx $26
+c0be67 sta $db21,x
+c0be6a ldx $1e
+c0be6c lda $7f0000,x
+c0be70 and #$3000
+c0be73 ora $e2a3,y
+c0be76 ora $22
+c0be78 ldx $26
+c0be7a sta $db25,x
+c0be7d ldx $1c
+c0be7f lda $7f0000,x
+c0be83 and #$3000
+c0be86 ora $e2a5,y
+c0be89 ora $22
+c0be8b ldx $26
+c0be8d sta $db29,x
+c0be90 ldx $20
+c0be92 lda $7f0002,x
+c0be96 and #$3000
+c0be99 ora $e2a7,y
+c0be9c ora $22
+c0be9e ldx $26
+c0bea0 sta $db2d,x
+c0bea3 ldx $1e
+c0bea5 lda $7f0002,x
+c0bea9 and #$3000
+c0beac ora $e2a9,y
+c0beaf ora $22
+c0beb1 ldx $26
+c0beb3 sta $db31,x
+c0beb6 ldx $1c
+c0beb8 lda $7f0002,x
+c0bebc and #$3000
+c0bebf ora $e2ab,y
+c0bec2 ora $22
+c0bec4 ldx $26
+c0bec6 sta $db35,x
+c0bec9 lda $dd3f
+c0becc clc
+c0becd adc #$0006
+c0bed0 sta $dd3f
+c0bed3 rts
+
+; Missing c0bed4 - c0c6d3 (2048 bytes)
+
+c0c6d4 lda $cf25,y
+c0c6d7 tax
+c0c6d8 lda $cfa5,y
+c0c6db asl
+c0c6dc asl
+c0c6dd sta $24
+c0c6df asl
+c0c6e0 adc $24
+c0c6e2 adc $c0c6ee,x
+c0c6e6 sta $24
+c0c6e8 lda $d025,y
+c0c6eb sta $2a
+c0c6ed rts
+
+; Missing c0c6ee - c0c7f6 (265 bytes)
+
+c0c7f7 jsl $7eeaed
+c0c7fb jsl $7eeaf1
+c0c7ff jsl $7eeaf5
+c0c803 jsl $7eeaf9
+c0c807 jsl $7eeafd
+c0c80b jsl $7eeb01
+c0c80f jsl $7eeb05
+c0c813 rtl
+
+; Missing c0c814 - c0c9fe (491 bytes)
+
+c0c9ff sep #$20
+c0ca01 lda $7fc8
+c0ca04 sta $ee3f
+c0ca07 lda $7fca
+c0ca0a sta $ee40
+c0ca0d lda $7fcc
+c0ca10 sta $ee41
+c0ca13 lda $7fce
+c0ca16 sta $ee42
+c0ca19 rep #$20
+c0ca1b rtl
+
+; Missing c0ca1c - c0ca2b (16 bytes)
+
+c0ca2c sep #$20
+c0ca2e lda $7f94
+c0ca31 sta $ee4f
+c0ca34 rep #$20
+c0ca36 rtl
+
+; Missing c0ca37 - c0ca46 (16 bytes)
+
+c0ca47 sep #$20
+c0ca49 lda $7fd0
+c0ca4c sta $ee55
+c0ca4f lda $7fd2
+c0ca52 sta $ee56
+c0ca55 rep #$20
+c0ca57 rtl
+
+; Missing c0ca58 - c0ca67 (16 bytes)
+
+c0ca68 sep #$20
+c0ca6a lda $7fbc
+c0ca6d sta $ee59
+c0ca70 lda $7fbe
+c0ca73 sta $ee5a
+c0ca76 rep #$20
+c0ca78 rtl
+
+; Missing c0ca79 - c0ca98 (32 bytes)
+
+c0ca99 sep #$20
+c0ca9b lda $7fa0
+c0ca9e sta $ee5d
+c0caa1 rep #$20
+c0caa3 rtl
+c0caa4 sep #$20
+c0caa6 lda $7fa8
+c0caa9 sta $ee5f
+c0caac rep #$20
+c0caae rtl
+
+; Missing c0caaf - c0caed (63 bytes)
+
+c0caee lda $7fe6
+c0caf1 bne $c0caf4
+c0caf3 rtl
+
+; Missing c0caf4 - c16994 (40609 bytes)
+
+c16995 rep #$30
+c16997 pea #$7f7f
+c1699a plb
+c1699b plb
+c1699c lda $e39e
+c1699f ora $e3a0
+c169a2 ora $e3a2
+c169a5 ora $e3a4
+c169a8 ora $e3a6
+c169ab ora $e3a8
+c169ae ora $e3aa
+c169b1 ora $e3ac
+c169b4 ora $e3ae
+c169b7 ora $e3b0
+c169ba bne $c169bd
+c169bc rtl
+
+; Missing c169bd - c1adec (17456 bytes)
+
+c1aded php
+c1adee sep #$20
+c1adf0 lda $be55
+c1adf3 cmp #$01
+c1adf5 beq $c1adfa
+c1adf7 plp
+c1adf8 clc
+c1adf9 rtl
+
+; Missing c1adfa - c1af29 (304 bytes)
+
+c1af2a jsr $b024
+c1af2d jsr $b08c
+c1af30 bcc $c1af2a
+c1af32 jsr $b0e2
+c1af35 jsl $c1b199
+c1af39 jsl $c1aded
+c1af3d bcc $c1af2a
+
+; Missing c1af3f - c1b023 (229 bytes)
+
+c1b024 lda $bdf5
+c1b027 cmp #$0001
+c1b02a bne $c1b03b
+c1b02c ldx $bdfb
+c1b02f lda $bdfd,x
+c1b032 inx
+c1b033 inx
+c1b034 stx $bdfb
+c1b037 jsr $b078
+c1b03a rts
+
+; Missing c1b03b - c1b077 (61 bytes)
+
+c1b078 and #$00ff
+c1b07b cmp #$00ab
+c1b07e bcc $c1b085
+
+; Missing c1b080 - c1b084 (5 bytes)
+
+c1b085 asl
+c1b086 tax
+c1b087 lda $c10cd5,x
+c1b08b rts
+c1b08c pha
+c1b08d lda $be57
+c1b090 beq $c1b09d
+c1b092 lda $be4f
+c1b095 beq $c1b09d
+
+; Missing c1b097 - c1b09c (6 bytes)
+
+c1b09d lda $be4d
+c1b0a0 beq $c1b0da
+c1b0a2 lda $be4f
+c1b0a5 beq $c1b0d7
+
+; Missing c1b0a7 - c1b0d6 (48 bytes)
+
+c1b0d7 pla
+c1b0d8 sec
+c1b0d9 rts
+
+; Missing c1b0da - c1b0e1 (8 bytes)
+
+c1b0e2 sta $bdf9
+c1b0e5 stz $be53
+c1b0e8 cmp #$0200
+c1b0eb bcs $c1b0f3
+
+; Missing c1b0ed - c1b0f2 (6 bytes)
+
+c1b0f3 stz $bde7
+c1b0f6 jsl $c1b29a
+c1b0fa jsl $c1b721
+c1b0fe jsr $b102
+c1b101 rts
+c1b102 lda $bdf9
+c1b105 sec
+c1b106 sbc #$0200
+c1b109 jsl $c1bb1a
+c1b10d lda $bdf1
+c1b110 cmp #$0038
+c1b113 bcc $c1b116
+
+; Missing c1b115 - c1b115 (1 bytes)
+
+c1b116 lda $bdf1
+c1b119 clc
+c1b11a adc #$000e
+c1b11d sec
+c1b11e sbc $c087
+c1b121 asl
+c1b122 asl
+c1b123 asl
+c1b124 asl
+c1b125 asl
+c1b126 pha
+c1b127 lda $bdef
+c1b12a lsr
+c1b12b lsr
+c1b12c lsr
+c1b12d clc
+c1b12e adc $01,s
+c1b130 tax
+c1b131 pla
+c1b132 lda $c087
+c1b135 beq $c1b186
+c1b137 lda $bdef
+c1b13a and #$0007
+c1b13d sta $c07d
+c1b140 ldy #$0000
+c1b143 lda $c089,y
+c1b146 sta $c07b
+c1b149 stz $c079
+c1b14c lda $c07d
+c1b14f beq $c1b15a
+c1b151 lsr $c07b
+c1b154 ror $c079
+c1b157 dec
+c1b158 bne $c1b151
+c1b15a sep #$20
+c1b15c lda $c07c
+c1b15f ora $b6df,x
+c1b162 sta $b6df,x
+c1b165 lda $c07b
+c1b168 ora $b6e0,x
+c1b16b sta $b6e0,x
+c1b16e lda $c07a
+c1b171 ora $b6e1,x
+c1b174 sta $b6e1,x
+c1b177 rep #$20
+c1b179 txa
+c1b17a clc
+c1b17b adc #$0020
+c1b17e tax
+c1b17f iny
+c1b180 iny
+c1b181 dec $c087
+c1b184 bne $c1b143
+c1b186 lda $bdef
+c1b189 clc
+c1b18a adc $c085
+c1b18d inc
+c1b18e inc
+c1b18f sta $bdef
+c1b192 lda #$0001
+c1b195 sta $be53
+c1b198 rts
+c1b199 php
+c1b19a rep #$30
+c1b19c pha
+c1b19d phx
+c1b19e phy
+c1b19f phb
+c1b1a0 pea #$7e7e
+c1b1a3 plb
+c1b1a4 plb
+c1b1a5 lda $be53
+c1b1a8 cmp #$0001
+c1b1ab bne $c1b1c4
+c1b1ad lda $bde3
+c1b1b0 beq $c1b1c0
+
+; Missing c1b1b2 - c1b1bf (14 bytes)
+
+c1b1c0 jsl $c1bcf3
+c1b1c4 plb
+c1b1c5 rep #$30
+c1b1c7 ply
+c1b1c8 plx
+c1b1c9 pla
+c1b1ca plp
+c1b1cb rtl
+
+; Missing c1b1cc - c1b299 (206 bytes)
+
+c1b29a pha
+c1b29b lda $bded
+c1b29e cmp #$0002
+c1b2a1 beq $c1b2b9
+
+; Missing c1b2a3 - c1b2b8 (22 bytes)
+
+c1b2b9 lda $bdf1
+c1b2bc cmp #$0030
+c1b2bf bcc $c1b2ca
+
+; Missing c1b2c1 - c1b2c9 (9 bytes)
+
+c1b2ca pla
+c1b2cb rtl
+
+; Missing c1b2cc - c1b720 (1109 bytes)
+
+c1b721 pha
+c1b722 lda $be4b
+c1b725 cmp #$0000
+c1b728 beq $c1b745
+c1b72a lda $be49
+c1b72d cmp #$0000
+c1b730 beq $c1b73b
+c1b732 cmp $be4b
+c1b735 beq $c1b745
+
+; Missing c1b737 - c1b744 (14 bytes)
+
+c1b745 pla
+c1b746 rtl
+
+; Missing c1b747 - c1bb19 (979 bytes)
+
+c1bb1a php
+c1bb1b rep #$30
+c1bb1d pha
+c1bb1e phx
+c1bb1f phy
+c1bb20 phb
+c1bb21 pea #$7e7e
+c1bb24 plb
+c1bb25 plb
+c1bb26 sta $c083
+c1bb29 lda #$0004
+c1bb2c sta $c085
+c1bb2f lda #$000b
+c1bb32 sta $c087
+c1bb35 jsr $bc65
+c1bb38 lda $c083
+c1bb3b beq $c1bb43
+c1bb3d jsr $bb4b
+c1bb40 jsr $bbea
+c1bb43 plb
+c1bb44 rep #$30
+c1bb46 ply
+c1bb47 plx
+c1bb48 pla
+c1bb49 plp
+c1bb4a rtl
+c1bb4b php
+c1bb4c rep #$30
+c1bb4e lda $c083
+c1bb51 dec
+c1bb52 sta $c07f
+c1bb55 stz $c081
+c1bb58 ldx #$0000
+c1bb5b lda $c081
+c1bb5e pha
+c1bb5f lda $c151aa,x
+c1bb63 and #$0fff
+c1bb66 clc
+c1bb67 adc $c081
+c1bb6a sta $c081
+c1bb6d lda $c07f
+c1bb70 cmp $c081
+c1bb73 pla
+c1bb74 bcc $c1bb7d
+c1bb76 inx
+c1bb77 inx
+c1bb78 inx
+c1bb79 inx
+c1bb7a inx
+c1bb7b bra $c1bb5b
+c1bb7d sta $c081
+c1bb80 lda $c07f
+c1bb83 sec
+c1bb84 sbc $c081
+c1bb87 sta $c07f
+c1bb8a lda $c151aa,x
+c1bb8e xba
+c1bb8f lsr
+c1bb90 lsr
+c1bb91 lsr
+c1bb92 lsr
+c1bb93 and #$000f
+c1bb96 sta $b4
+c1bb98 sta $c085
+c1bb9b lda $c151ae,x
+c1bb9f lsr
+c1bba0 lsr
+c1bba1 and #$000f
+c1bba4 sta $b6
+c1bba6 sta $c087
+c1bba9 phx
+c1bbaa ldx #$00b4
+c1bbad jsl $c010c2
+c1bbb1 rep #$20
+c1bbb3 lda $c07f
+c1bbb6 jsl $c01146
+c1bbba sep #$20
+c1bbbc lda $b4
+c1bbbe and #$07
+c1bbc0 sta $b8
+c1bbc2 lsr $b6
+c1bbc4 ror $b5
+c1bbc6 ror $b4
+c1bbc8 lsr $b6
+c1bbca ror $b5
+c1bbcc ror $b4
+c1bbce lsr $b6
+c1bbd0 ror $b5
+c1bbd2 ror $b4
+c1bbd4 lda #$c1
+c1bbd6 sta $b6
+c1bbd8 plx
+c1bbd9 rep #$20
+c1bbdb lda $c151ac,x
+c1bbdf clc
+c1bbe0 adc $b4
+c1bbe2 sta $b4
+c1bbe4 bne $c1bbe8
+
+; Missing c1bbe6 - c1bbe7 (2 bytes)
+
+c1bbe8 plp
+c1bbe9 rts
+c1bbea php
+c1bbeb phb
+c1bbec sep #$30
+c1bbee pea #$7e7e
+c1bbf1 plb
+c1bbf2 plb
+c1bbf3 lda $c087
+c1bbf6 sta $c07c
+c1bbf9 ldx #$00
+c1bbfb lda $b8
+c1bbfd lsr
+c1bbfe lsr
+c1bbff lsr
+c1bc00 tay
+c1bc01 lda [$b4],y
+c1bc03 sta $c079
+c1bc06 iny
+c1bc07 lda [$b4],y
+c1bc09 sta $c07a
+c1bc0c iny
+c1bc0d lda [$b4],y
+c1bc0f sta $c07b
+c1bc12 lda $b8
+c1bc14 and #$07
+c1bc16 clc
+c1bc17 adc $c085
+c1bc1a sbc #$0f
+c1bc1c beq $c1bc3a
+c1bc1e bmi $c1bc2e
+
+; Missing c1bc20 - c1bc2d (14 bytes)
+
+c1bc2e asl $c079
+c1bc31 rol $c07a
+c1bc34 rol $c07b
+c1bc37 inc
+c1bc38 bmi $c1bc2e
+c1bc3a lda $c085
+c1bc3d pha
+c1bc3e clc
+c1bc3f adc $b8
+c1bc41 sta $b8
+c1bc43 pla
+c1bc44 dec
+c1bc45 asl
+c1bc46 tay
+c1bc47 rep #$20
+c1bc49 phk
+c1bc4a plb
+c1bc4b lda $bc76,y
+c1bc4e pea #$7e7e
+c1bc51 plb
+c1bc52 plb
+c1bc53 and $c079
+c1bc56 sta $c089,x
+c1bc59 inx
+c1bc5a inx
+c1bc5b sep #$20
+c1bc5d dec $c07c
+c1bc60 bne $c1bbfb
+c1bc62 plb
+c1bc63 plp
+c1bc64 rts
+c1bc65 php
+c1bc66 rep #$30
+c1bc68 phx
+c1bc69 ldx #$001e
+c1bc6c stz $c089,x
+c1bc6f dex
+c1bc70 dex
+c1bc71 bpl $c1bc6c
+c1bc73 plx
+c1bc74 plp
+c1bc75 rts
+
+; Missing c1bc76 - c1bcf2 (125 bytes)
+
+c1bcf3 lda #$0001
+c1bcf6 sta $7fea
+c1bcf9 jsl $c028b4
+c1bcfd rtl
+
+; Missing c1bcfe - c679a6 (310441 bytes)
+
+c679a7 rep #$30
+c679a9 pea #$7e7e
+c679ac plb
+c679ad plb
+c679ae lda $7ff0
+c679b1 ora $7ff1
+c679b4 bne $c679d0
+c679b6 lda $7fea
+c679b9 ora $7fec
+c679bc ora $7fee
+c679bf ora $7fe8
+c679c2 and #$00ff
+c679c5 bne $c679d0
+
+; Missing c679c7 - c679cf (9 bytes)
+
+c679d0 rtl
+
+; Missing c679d1 - c79b5c (74124 bytes)
+
+c79b5d jsr $9b6b
+c79b60 bcc $c79b65
+
+; Missing c79b62 - c79b64 (3 bytes)
+
+c79b65 jsl $c028b4
+c79b69 bra $c79b5d
+c79b6b lda $9806
+c79b6e cmp #$0004
+c79b71 bne $c79b94
+c79b73 ldx $9836
+c79b76 cpx #$0000
+c79b79 beq $c79b94
+
+; Missing c79b7b - c79b93 (25 bytes)
+
+c79b94 lda #$0000
+c79b97 sta $9836
+c79b9a clc
+c79b9b rts
+
+; Missing c79b9c - c9029d (91906 bytes)
+
+c9029e php
+c9029f sei
+c902a0 rep #$30
+c902a2 pha
+c902a3 phb
+c902a4 phy
+c902a5 phx
+c902a6 sep #$10
+c902a8 lda $0d,s
+c902aa tax
+c902ab phx
+c902ac plb
+c902ad ldy #$00
+c902af lda $0e,s
+c902b1 and ($10,s),y
+c902b3 sta $40
+c902b5 lda $0e,s
+c902b7 beq $c902cd
+c902b9 lsr
+c902ba bcs $c902cd
+c902bc tax
+c902bd lda $0c,s
+c902bf ldy #$02
+c902c1 and ($10,s),y
+c902c3 lsr
+c902c4 ror $40
+c902c6 tay
+c902c7 txa
+c902c8 lsr
+c902c9 tax
+c902ca tya
+c902cb bcc $c902c3
+c902cd rep #$30
+c902cf plx
+c902d0 ply
+c902d1 plb
+c902d2 lda $05,s
+c902d4 sta $0b,s
+c902d6 lda $03,s
+c902d8 sta $09,s
+c902da lda $40
+c902dc sta $07,s
+c902de tsc
+c902df clc
+c902e0 adc #$0006
+c902e3 tcs
+c902e4 pla
+c902e5 plp
+c902e6 lda $40
+c902e8 rtl

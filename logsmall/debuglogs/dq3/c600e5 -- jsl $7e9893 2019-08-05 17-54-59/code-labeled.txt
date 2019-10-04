@@ -1,0 +1,23 @@
+7e9893 jmp Jump_cad6ce
+
+c600e9 jsl Routine_7e9897
+
+
+Jump_cad6ce:
+cad6ce lda $3545
+cad6d1 and #$0010
+cad6d4 bne .Branch_cad6d9
+
+cad6d6 jmp Jump_cad6dd
+
+
+Jump_cad6dd:
+cad6dd lda $3546
+cad6e0 and #$0020
+cad6e3 bne .Branch_cad6e8
+
+cad6e5 jmp Jump_cad6ec
+
+
+Jump_cad6ec:
+cad6ec rtl

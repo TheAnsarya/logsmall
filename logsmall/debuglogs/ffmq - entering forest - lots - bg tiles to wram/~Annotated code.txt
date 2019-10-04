@@ -1,0 +1,150 @@
+
+; call that starts this routine
+019161 jsr Routine_01fd7b
+
+
+; Missing 019164 - 01e90b (22440 bytes)
+
+
+; ExpandSecondHalfWithZeros
+Routine_01e90c:
+01e90c phd
+01e90d phx
+01e90e pea #$2100
+01e911 pld
+01e912 ldx #$0010
+
+.LoopFirstHalf
+01e915 lda $0000,y
+01e918 iny
+01e919 sta $80
+01e91b dex
+01e91c bne .LoopFirstHalf
+
+01e91e ldx #$0008
+
+.LoopSecondHalf
+01e921 lda $0000,y
+01e924 iny
+01e925 sta $80
+01e927 stz $80
+01e929 dex
+01e92a bne .LoopSecondHalf
+
+01e92c plx
+01e92d pld
+01e92e rts
+
+
+
+; Missing 01e92f - 01fd7a (5196 bytes)
+
+
+; entry point
+Routine_01fd7b:
+; set databank to $05
+01fd7b phb
+01fd7c lda #$05
+01fd7e pha
+01fd7f plb
+
+; set wram destination to $7fd274
+01fd80 ldx #$d274
+01fd83 stx $2181
+01fd86 lda #$7f
+01fd88 sta $2183
+01fd8b ldx #$0000
+
+.TileGraphicsLoop
+; using $191a to $1921 as indexes
+01fd8e lda $191a,x
+01fd91 bpl .Skip
+
+
+; Missing 01fd93 - 01fd9d (11 bytes)
+; TODO: check what this section is
+
+
+.Skip
+; offset = 0x0300 * index
+01fd9e xba
+01fd9f stz $211b
+01fda2 lda #$03
+01fda4 sta $211b
+01fda7 xba
+01fda8 sta $211c
+
+; address = offset + 0x8c80
+01fdab rep #$20
+01fdad lda #$8c80
+01fdb0 clc
+01fdb1 adc $2134
+01fdb4 tay
+
+; x = 0x20
+01fdb5 sep #$20
+01fdb7 phx
+
+; loop 20 times
+01fdb8 ldx #$0020
+
+.CopyATileLoop
+; ExpandSecondHalfWithZeros
+01fdbb jsr Routine_01e90c
+01fdbe dex
+01fdbf bne .CopyATileLoop
+
+01fdc1 plx
+01fdc2 inx
+01fdc3 cpx #$0008
+01fdc6 bne .TileGraphicsLoop
+
+
+
+; set destination to $7ff274 and databank to $05
+01fdc8 lda #$05
+01fdca pha
+01fdcb plb
+01fdcc ldx #$f274
+01fdcf stx $2181
+01fdd2 ldx #$0000
+
+
+
+; don't know what it is
+
+.Branch_01fdd5
+; offset = index * 0x10
+01fdd5 lda $191a,x
+01fdd8 phx
+01fdd9 sta $211b
+01fddc stz $211b
+01fddf lda #$10
+01fde1 sta $211c
+01fde4 ldy $2134
+01fde7 ldx #$0010
+
+.ExpandLoop
+; value at $05f280 + offset
+; expand byte into two, low nibble => low byte, high nibble => high byte (with high bit of nibbles zeroed out)
+01fdea lda $f280,y
+01fded and #$07
+01fdef sta $2180
+01fdf2 lda $f280,y
+01fdf5 and #$70
+01fdf7 lsr
+01fdf8 lsr
+01fdf9 lsr
+01fdfa lsr
+01fdfb sta $2180
+01fdfe iny
+01fdff dex
+01fe00 bne .ExpandLoop
+
+01fe02 plx
+01fe03 inx
+01fe04 cpx #$0008
+01fe07 bne .Branch_01fdd5
+
+01fe09 plb
+01fe0a rts

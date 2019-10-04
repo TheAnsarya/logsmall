@@ -1,0 +1,618 @@
+C16D2B $A2 $08 $00     LDX #$0008                      A:0006 X:0010 Y:020C S:03F9 D:00C0 DB:7F P:NvmxdIzc V:60  H:275
+C16D2E $86 $18         STX $18 [0000D8] = $0200        A:0006 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:60  H:286
+C16D30 $BD $D2 $E2     LDA $E2D2,X [7FE2DA] = $0001    A:0006 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:60  H:294
+C16D33 $F0 $0E         BEQ $C16D43                     A:0001 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:60  H:304
+C16D35 $BD $9E $E3     LDA $E39E,X [7FE3A6] = $0100    A:0001 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:60  H:307
+C16D38 $1D $A8 $E3     ORA $E3A8,X [7FE3B0] = $0000    A:0100 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:60  H:317
+C16D3B $F0 $06         BEQ $C16D43                     A:0100 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:60  H:327
+C16D3D $20 $B6 $6D     JSR $6DB6 [C16DB6] = $9EBD      A:0100 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:60  H:329
+C16DB6 $BD $9E $E3     LDA $E39E,X [7FE3A6] = $0100    A:0100 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:60  H:339
+C16DB9 $F0 $3B         BEQ $C16DF6                     A:0100 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:9  
+C16DBB $30 $18         BMI $C16DD5                     A:0100 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:12 
+C16DBD $BD $32 $E3     LDA $E332,X [7FE33A] = $FF00    A:0100 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:15 
+C16DC0 $29 $FF $00     AND #$00FF                      A:FF00 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:25 
+C16DC3 $18             CLC                             A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:61  H:30 
+C16DC4 $7D $9E $E3     ADC $E39E,X [7FE3A6] = $0100    A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:61  H:33 
+C16DC7 $9D $32 $E3     STA $E332,X [7FE33A] = $FF00    A:0100 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:43 
+C16DCA $EB             XBA                             A:0100 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:53 
+C16DCB $29 $FF $00     AND #$00FF                      A:0001 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:57 
+C16DCE $F0 $26         BEQ $C16DF6                     A:0001 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:62 
+C16DD0 $85 $1C         STA $1C [0000DC] = $0000        A:0001 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:65 
+C16DD2 $4C $9E $6E     JMP $6E9E [C16E9E] = $3EAD      A:0001 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:73 
+C16E9E $AD $3E $E3     LDA $E33E [7FE33E] = $0000      A:0001 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:78 
+C16EA1 $D0 $31         BNE $C16ED4                     A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:61  H:86 
+C16EA3 $BD $6C $E3     LDA $E36C,X [7FE374] = $0C38    A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:61  H:89 
+C16EA6 $18             CLC                             A:0C38 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:99 
+C16EA7 $65 $1C         ADC $1C [0000DC] = $0001        A:0C38 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:102
+C16EA9 $38             SEC                             A:0C39 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:111
+C16EAA $E9 $00 $08     SBC #$0800                      A:0C39 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:61  H:114
+C16EAD $2F $A0 $96 $7E AND $7E96A0                     A:0439 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:61  H:118
+C16EB1 $18             CLC                             A:0439 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:61  H:128
+C16EB2 $69 $00 $08     ADC #$0800                      A:0439 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:131
+C16EB5 $9D $6C $E3     STA $E36C,X [7FE374] = $0C38    A:0C39 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:146
+C16EB8 $18             CLC                             A:0C39 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:156
+C16EB9 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:0C39 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:159
+C16EBC $85 $14         STA $14 [0000D4] = $0C38        A:0D31 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:167
+C16EBE $BD $1E $E3     LDA $E31E,X [7FE326] = $FDE0    A:0D31 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:61  H:176
+C16EC1 $18             CLC                             A:FDE0 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:186
+C16EC2 $65 $1C         ADC $1C [0000DC] = $0001        A:FDE0 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:189
+C16EC4 $9D $1E $E3     STA $E31E,X [7FE326] = $FDE0    A:FDE1 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:197
+C16EC7 $18             CLC                             A:FDE1 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:207
+C16EC8 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:FDE1 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:210
+C16ECB $9D $58 $E3     STA $E358,X [7FE360] = $FDE0    A:FED9 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:219
+C16ECE $20 $DC $8A     JSR $8ADC [C18ADC] = $18A6      A:FED9 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:61  H:229
+C18ADC $A6 $18         LDX $18 [0000D8] = $0008        A:FED9 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:61  H:239
+C18ADE $E0 $08 $00     CPX #$0008                      A:FED9 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:61  H:247
+C18AE1 $D0 $01         BNE $C18AE4                     A:FED9 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:61  H:252
+C18AE3 $60             RTS                             A:FED9 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:61  H:255
+C16ED1 $20 $9F $A6     JSR $A69F [C1A69F] = $18A6      A:FED9 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:61  H:265
+C1A69F $A6 $18         LDX $18 [0000D8] = $0008        A:FED9 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:61  H:275
+C1A6A1 $BD $4E $E3     LDA $E34E,X [7FE356] = $0000    A:FED9 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:61  H:289
+C1A6A4 $F0 $3C         BEQ $C1A6E2                     A:0000 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:61  H:299
+C1A6E2 $60             RTS                             A:0000 X:0008 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:61  H:304
+C16ED4 $60             RTS                             A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:61  H:314
+C16D40 $20 $F7 $6D     JSR $6DF7 [C16DF7] = $A8BD      A:0000 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZC V:61  H:323
+C16DF7 $BD $A8 $E3     LDA $E3A8,X [7FE3B0] = $0000    A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:61  H:333
+C16DFA $F0 $3B         BEQ $C16E37                     A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:62  H:3  
+C16E37 $60             RTS                             A:0000 X:0008 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:62  H:7  
+C16D43 $A6 $18         LDX $18 [0000D8] = $0008        A:0000 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZC V:62  H:17 
+C16D45 $CA             DEX                             A:0000 X:0008 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:26 
+C16D46 $CA             DEX                             A:0000 X:0007 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:29 
+C16D47 $10 $E5         BPL $C16D2E                     A:0000 X:0006 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:32 
+C16D2E $86 $18         STX $18 [0000D8] = $0008        A:0000 X:0006 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:36 
+C16D30 $BD $D2 $E2     LDA $E2D2,X [7FE2D8] = $0000    A:0000 X:0006 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:45 
+C16D33 $F0 $0E         BEQ $C16D43                     A:0000 X:0006 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZC V:62  H:55 
+C16D43 $A6 $18         LDX $18 [0000D8] = $0006        A:0000 X:0006 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZC V:62  H:59 
+C16D45 $CA             DEX                             A:0000 X:0006 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:68 
+C16D46 $CA             DEX                             A:0000 X:0005 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:71 
+C16D47 $10 $E5         BPL $C16D2E                     A:0000 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:74 
+C16D2E $86 $18         STX $18 [0000D8] = $0006        A:0000 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:78 
+C16D30 $BD $D2 $E2     LDA $E2D2,X [7FE2D6] = $0001    A:0000 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:87 
+C16D33 $F0 $0E         BEQ $C16D43                     A:0001 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:97 
+C16D35 $BD $9E $E3     LDA $E39E,X [7FE3A2] = $0100    A:0001 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:100
+C16D38 $1D $A8 $E3     ORA $E3A8,X [7FE3AC] = $0000    A:0100 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:110
+C16D3B $F0 $06         BEQ $C16D43                     A:0100 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:120
+C16D3D $20 $B6 $6D     JSR $6DB6 [C16DB6] = $9EBD      A:0100 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzC V:62  H:123
+C16DB6 $BD $9E $E3     LDA $E39E,X [7FE3A2] = $0100    A:0100 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:62  H:133
+C16DB9 $F0 $3B         BEQ $C16DF6                     A:0100 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:62  H:153
+C16DBB $30 $18         BMI $C16DD5                     A:0100 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:62  H:156
+C16DBD $BD $32 $E3     LDA $E332,X [7FE336] = $FF00    A:0100 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:62  H:159
+C16DC0 $29 $FF $00     AND #$00FF                      A:FF00 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzC V:62  H:169
+C16DC3 $18             CLC                             A:0000 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:62  H:173
+C16DC4 $7D $9E $E3     ADC $E39E,X [7FE3A2] = $0100    A:0000 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:62  H:176
+C16DC7 $9D $32 $E3     STA $E332,X [7FE336] = $FF00    A:0100 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:186
+C16DCA $EB             XBA                             A:0100 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:196
+C16DCB $29 $FF $00     AND #$00FF                      A:0001 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:201
+C16DCE $F0 $26         BEQ $C16DF6                     A:0001 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:205
+C16DD0 $85 $1C         STA $1C [0000DC] = $0001        A:0001 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:208
+C16DD2 $4C $9E $6E     JMP $6E9E [C16E9E] = $3EAD      A:0001 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:217
+C16E9E $AD $3E $E3     LDA $E33E [7FE33E] = $0000      A:0001 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:221
+C16EA1 $D0 $31         BNE $C16ED4                     A:0000 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:62  H:230
+C16EA3 $BD $6C $E3     LDA $E36C,X [7FE370] = $0C38    A:0000 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:62  H:233
+C16EA6 $18             CLC                             A:0C38 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:243
+C16EA7 $65 $1C         ADC $1C [0000DC] = $0001        A:0C38 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:246
+C16EA9 $38             SEC                             A:0C39 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:254
+C16EAA $E9 $00 $08     SBC #$0800                      A:0C39 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:62  H:257
+C16EAD $2F $A0 $96 $7E AND $7E96A0                     A:0439 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:62  H:262
+C16EB1 $18             CLC                             A:0439 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:62  H:272
+C16EB2 $69 $00 $08     ADC #$0800                      A:0439 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:275
+C16EB5 $9D $6C $E3     STA $E36C,X [7FE370] = $0C38    A:0C39 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:287
+C16EB8 $18             CLC                             A:0C39 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:297
+C16EB9 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:0C39 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:300
+C16EBC $85 $14         STA $14 [0000D4] = $0D31        A:0D31 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:308
+C16EBE $BD $1E $E3     LDA $E31E,X [7FE322] = $FDE0    A:0D31 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:62  H:317
+C16EC1 $18             CLC                             A:FDE0 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:62  H:326
+C16EC2 $65 $1C         ADC $1C [0000DC] = $0001        A:FDE0 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:62  H:329
+C16EC4 $9D $1E $E3     STA $E31E,X [7FE322] = $FDE0    A:FDE1 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:62  H:337
+C16EC7 $18             CLC                             A:FDE1 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:63  H:7  
+C16EC8 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:FDE1 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:63  H:10 
+C16ECB $9D $58 $E3     STA $E358,X [7FE35C] = $FDE0    A:FED9 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:63  H:19 
+C16ECE $20 $DC $8A     JSR $8ADC [C18ADC] = $18A6      A:FED9 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:63  H:29 
+C18ADC $A6 $18         LDX $18 [0000D8] = $0004        A:FED9 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:63  H:39 
+C18ADE $E0 $08 $00     CPX #$0008                      A:FED9 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:47 
+C18AE1 $D0 $01         BNE $C18AE4                     A:FED9 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:63  H:52 
+C18AE4 $FE $4E $E3     INC $E34E,X [7FE352] = $0000    A:FED9 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:63  H:56 
+C18AE7 $A5 $14         LDA $14 [0000D4] = $0D31        A:FED9 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:72 
+C18AE9 $4A             LSR                             A:0D31 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:80 
+C18AEA $4A             LSR                             A:0698 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:63  H:83 
+C18AEB $4A             LSR                             A:034C X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:86 
+C18AEC $8D $C4 $E3     STA $E3C4 [7FE3C4] = $0187      A:01A6 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:89 
+C18AEF $BD $76 $E3     LDA $E376,X [7FE37A] = $1488    A:01A6 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:98 
+C18AF2 $4A             LSR                             A:1488 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:108
+C18AF3 $4A             LSR                             A:0A44 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:111
+C18AF4 $4A             LSR                             A:0522 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:114
+C18AF5 $8D $C6 $E3     STA $E3C6 [7FE3C6] = $0291      A:0291 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:117
+C18AF8 $BF $0E $6F $C1 LDA $C16F0E,X [C16F12] = $E252  A:0291 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:125
+C18AFC $8D $C8 $E3     STA $E3C8 [7FE3C8] = $E1D2      A:E252 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:63  H:144
+C18AFF $AD $B4 $E3     LDA $E3B4 [7FE3B4] = $001B      A:E252 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:63  H:153
+C18B02 $1A             INC                             A:001B X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:161
+C18B03 $1A             INC                             A:001C X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:164
+C18B04 $8D $C0 $E5     STA $E5C0 [7FE5C0] = $001D      A:001D X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:167
+C18B07 $A6 $18         LDX $18 [0000D8] = $0004        A:001D X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:176
+C18B09 $AD $E2 $E3     LDA $E3E2 [7FE3E2] = $8000      A:001D X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:184
+C18B0C $10 $13         BPL $C18B21                     A:8000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:63  H:193
+C18B0E $A5 $18         LDA $18 [0000D8] = $0004        A:8000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:63  H:196
+C18B10 $4A             LSR                             A:0004 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:204
+C18B11 $CD $72 $E4     CMP $E472 [7FE472] = $0000      A:0002 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:63  H:207
+C18B14 $D0 $0B         BNE $C18B21                     A:0002 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:63  H:216
+C18B21 $AD $E4 $E3     LDA $E3E4 [7FE3E4] = $0000      A:0002 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:63  H:220
+C18B24 $10 $13         BPL $C18B39                     A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:229
+C18B39 $AD $E6 $E3     LDA $E3E6 [7FE3E6] = $0000      A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:233
+C18B3C $10 $13         BPL $C18B51                     A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:242
+C18B51 $AD $E8 $E3     LDA $E3E8 [7FE3E8] = $0000      A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:246
+C18B54 $10 $13         BPL $C18B69                     A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:255
+C18B69 $AD $EA $E3     LDA $E3EA [7FE3EA] = $0000      A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:259
+C18B6C $10 $13         BPL $C18B81                     A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:268
+C18B81 $AD $EC $E3     LDA $E3EC [7FE3EC] = $0000      A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:272
+C18B84 $10 $13         BPL $C18B99                     A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:291
+C18B99 $AD $EE $E3     LDA $E3EE [7FE3EE] = $0000      A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:295
+C18B9C $10 $13         BPL $C18BB1                     A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:304
+C18BB1 $AD $F0 $E3     LDA $E3F0 [7FE3F0] = $0000      A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:308
+C18BB4 $10 $13         BPL $C18BC9                     A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:317
+C18BC9 $60             RTS                             A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:63  H:321
+C16ED1 $20 $9F $A6     JSR $A69F [C1A69F] = $18A6      A:0000 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:63  H:330
+C1A69F $A6 $18         LDX $18 [0000D8] = $0004        A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:64  H:0  
+C1A6A1 $BD $4E $E3     LDA $E34E,X [7FE352] = $0001    A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:64  H:9  
+C1A6A4 $F0 $3C         BEQ $C1A6E2                     A:0001 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:64  H:19 
+C1A6A6 $BD $28 $E3     LDA $E328,X [7FE32C] = $FF80    A:0001 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:64  H:22 
+C1A6A9 $4A             LSR                             A:FF80 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzC V:64  H:32 
+C1A6AA $4A             LSR                             A:7FC0 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:35 
+C1A6AB $4A             LSR                             A:3FE0 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:38 
+C1A6AC $29 $1F $00     AND #$001F                      A:1FF0 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:41 
+C1A6AF $0A             ASL                             A:0010 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:45 
+C1A6B0 $9D $A4 $E5     STA $E5A4,X [7FE5A8] = $0000    A:0020 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:48 
+C1A6B3 $49 $3E $00     EOR #$003E                      A:0020 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:58 
+C1A6B6 $1A             INC                             A:001E X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:63 
+C1A6B7 $1A             INC                             A:001F X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:66 
+C1A6B8 $9D $8C $E5     STA $E58C,X [7FE590] = $0000    A:0020 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:69 
+C1A6BB $BF $0E $6F $C1 LDA $C16F0E,X [C16F12] = $E252  A:0020 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:79 
+C1A6BF $9D $94 $E5     STA $E594,X [7FE598] = $E252    A:E252 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:64  H:88 
+C1A6C2 $18             CLC                             A:E252 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:64  H:98 
+C1A6C3 $7D $8C $E5     ADC $E58C,X [7FE590] = $0020    A:E252 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:64  H:101
+C1A6C6 $9D $AC $E5     STA $E5AC,X [7FE5B0] = $E272    A:E272 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:64  H:111
+C1A6C9 $BD $28 $E3     LDA $E328,X [7FE32C] = $FF80    A:E272 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:64  H:121
+C1A6CC $20 $E3 $A6     JSR $A6E3 [C1A6E3] = $F829      A:FF80 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:64  H:131
+C1A6E3 $29 $F8 $00     AND #$00F8                      A:FF80 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:64  H:151
+C1A6E6 $0A             ASL                             A:0080 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:155
+C1A6E7 $0A             ASL                             A:0100 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:158
+C1A6E8 $85 $0E         STA $0E [0000CE] = $001C        A:0200 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:161
+C1A6EA $BD $58 $E3     LDA $E358,X [7FE35C] = $FED9    A:0200 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:170
+C1A6ED $4A             LSR                             A:FED9 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:64  H:180
+C1A6EE $4A             LSR                             A:7F6C X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzC V:64  H:183
+C1A6EF $4A             LSR                             A:3FB6 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:186
+C1A6F0 $29 $1F $00     AND #$001F                      A:1FDB X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:189
+C1A6F3 $18             CLC                             A:001B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:193
+C1A6F4 $65 $0E         ADC $0E [0000CE] = $0200        A:001B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:196
+C1A6F6 $85 $0E         STA $0E [0000CE] = $0200        A:021B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:205
+C1A6F8 $BD $58 $E3     LDA $E358,X [7FE35C] = $FED9    A:021B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:213
+C1A6FB $2D $BC $E3     AND $E3BC [7FE3BC] = $0000      A:FED9 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:64  H:223
+C1A6FE $0A             ASL                             A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:232
+C1A6FF $0A             ASL                             A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:235
+C1A700 $45 $0E         EOR $0E [0000CE] = $021B        A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:238
+C1A702 $60             RTS                             A:021B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:246
+C1A6CF $9D $84 $E5     STA $E584,X [7FE588] = $021C    A:021B X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:256
+C1A6D2 $A9 $00 $00     LDA #$0000                      A:021B X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:64  H:266
+C1A6D5 $20 $E3 $A6     JSR $A6E3 [C1A6E3] = $F829      A:0000 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZc V:64  H:271
+C1A6E3 $29 $F8 $00     AND #$00F8                      A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:295
+C1A6E6 $0A             ASL                             A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:299
+C1A6E7 $0A             ASL                             A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:302
+C1A6E8 $85 $0E         STA $0E [0000CE] = $021B        A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:305
+C1A6EA $BD $58 $E3     LDA $E358,X [7FE35C] = $FED9    A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:64  H:314
+C1A6ED $4A             LSR                             A:FED9 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:64  H:323
+C1A6EE $4A             LSR                             A:7F6C X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzC V:64  H:326
+C1A6EF $4A             LSR                             A:3FB6 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:329
+C1A6F0 $29 $1F $00     AND #$001F                      A:1FDB X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:332
+C1A6F3 $18             CLC                             A:001B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:336
+C1A6F4 $65 $0E         ADC $0E [0000CE] = $0000        A:001B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:64  H:339
+C1A6F6 $85 $0E         STA $0E [0000CE] = $0000        A:001B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:65  H:8  
+C1A6F8 $BD $58 $E3     LDA $E358,X [7FE35C] = $FED9    A:001B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:65  H:16 
+C1A6FB $2D $BC $E3     AND $E3BC [7FE3BC] = $0000      A:FED9 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:65  H:26 
+C1A6FE $0A             ASL                             A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:65  H:35 
+C1A6FF $0A             ASL                             A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:65  H:38 
+C1A700 $45 $0E         EOR $0E [0000CE] = $001B        A:0000 X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:65  H:41 
+C1A702 $60             RTS                             A:001B X:0004 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:65  H:49 
+C1A6D8 $9D $9C $E5     STA $E59C,X [7FE5A0] = $001C    A:001B X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:65  H:59 
+C1A6DB $A9 $01 $00     LDA #$0001                      A:001B X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:65  H:69 
+C1A6DE $8F $E2 $7F $7E STA $7E7FE2                     A:0001 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:65  H:74 
+C1A6E2 $60             RTS                             A:0001 X:0004 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:65  H:84 
+C16ED4 $60             RTS                             A:0001 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:94 
+C16D40 $20 $F7 $6D     JSR $6DF7 [C16DF7] = $A8BD      A:0001 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:104
+C16DF7 $BD $A8 $E3     LDA $E3A8,X [7FE3AC] = $0000    A:0001 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:114
+C16DFA $F0 $3B         BEQ $C16E37                     A:0000 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:65  H:124
+C16E37 $60             RTS                             A:0000 X:0004 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:65  H:128
+C16D43 $A6 $18         LDX $18 [0000D8] = $0004        A:0000 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZc V:65  H:148
+C16D45 $CA             DEX                             A:0000 X:0004 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:157
+C16D46 $CA             DEX                             A:0000 X:0003 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:160
+C16D47 $10 $E5         BPL $C16D2E                     A:0000 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:163
+C16D2E $86 $18         STX $18 [0000D8] = $0004        A:0000 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:167
+C16D30 $BD $D2 $E2     LDA $E2D2,X [7FE2D4] = $0001    A:0000 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:176
+C16D33 $F0 $0E         BEQ $C16D43                     A:0001 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:186
+C16D35 $BD $9E $E3     LDA $E39E,X [7FE3A0] = $0100    A:0001 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:189
+C16D38 $1D $A8 $E3     ORA $E3A8,X [7FE3AA] = $0000    A:0100 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:199
+C16D3B $F0 $06         BEQ $C16D43                     A:0100 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:209
+C16D3D $20 $B6 $6D     JSR $6DB6 [C16DB6] = $9EBD      A:0100 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:65  H:212
+C16DB6 $BD $9E $E3     LDA $E39E,X [7FE3A0] = $0100    A:0100 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:222
+C16DB9 $F0 $3B         BEQ $C16DF6                     A:0100 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:232
+C16DBB $30 $18         BMI $C16DD5                     A:0100 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:235
+C16DBD $BD $32 $E3     LDA $E332,X [7FE334] = $FF00    A:0100 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:238
+C16DC0 $29 $FF $00     AND #$00FF                      A:FF00 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:65  H:248
+C16DC3 $18             CLC                             A:0000 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:65  H:252
+C16DC4 $7D $9E $E3     ADC $E39E,X [7FE3A0] = $0100    A:0000 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:65  H:255
+C16DC7 $9D $32 $E3     STA $E332,X [7FE334] = $FF00    A:0100 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:265
+C16DCA $EB             XBA                             A:0100 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:275
+C16DCB $29 $FF $00     AND #$00FF                      A:0001 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:286
+C16DCE $F0 $26         BEQ $C16DF6                     A:0001 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:290
+C16DD0 $85 $1C         STA $1C [0000DC] = $0001        A:0001 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:293
+C16DD2 $4C $9E $6E     JMP $6E9E [C16E9E] = $3EAD      A:0001 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:302
+C16E9E $AD $3E $E3     LDA $E33E [7FE33E] = $0000      A:0001 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:306
+C16EA1 $D0 $31         BNE $C16ED4                     A:0000 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:65  H:315
+C16EA3 $BD $6C $E3     LDA $E36C,X [7FE36E] = $0C38    A:0000 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:65  H:318
+C16EA6 $18             CLC                             A:0C38 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:327
+C16EA7 $65 $1C         ADC $1C [0000DC] = $0001        A:0C38 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:330
+C16EA9 $38             SEC                             A:0C39 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:65  H:338
+C16EAA $E9 $00 $08     SBC #$0800                      A:0C39 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:66  H:1  
+C16EAD $2F $A0 $96 $7E AND $7E96A0                     A:0439 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:66  H:6  
+C16EB1 $18             CLC                             A:0439 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:66  H:16 
+C16EB2 $69 $00 $08     ADC #$0800                      A:0439 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:66  H:19 
+C16EB5 $9D $6C $E3     STA $E36C,X [7FE36E] = $0C38    A:0C39 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:66  H:23 
+C16EB8 $18             CLC                             A:0C39 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:66  H:33 
+C16EB9 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:0C39 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:66  H:36 
+C16EBC $85 $14         STA $14 [0000D4] = $0D31        A:0D31 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:66  H:45 
+C16EBE $BD $1E $E3     LDA $E31E,X [7FE320] = $FDE0    A:0D31 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:66  H:53 
+C16EC1 $18             CLC                             A:FDE0 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:66  H:63 
+C16EC2 $65 $1C         ADC $1C [0000DC] = $0001        A:FDE0 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:66  H:66 
+C16EC4 $9D $1E $E3     STA $E31E,X [7FE320] = $FDE0    A:FDE1 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:66  H:75 
+C16EC7 $18             CLC                             A:FDE1 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:66  H:85 
+C16EC8 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:FDE1 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:66  H:88 
+C16ECB $9D $58 $E3     STA $E358,X [7FE35A] = $FDE0    A:FED9 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:66  H:96 
+C16ECE $20 $DC $8A     JSR $8ADC [C18ADC] = $18A6      A:FED9 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:66  H:106
+C18ADC $A6 $18         LDX $18 [0000D8] = $0002        A:FED9 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:66  H:116
+C18ADE $E0 $08 $00     CPX #$0008                      A:FED9 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:125
+C18AE1 $D0 $01         BNE $C18AE4                     A:FED9 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:66  H:129
+C18AE4 $FE $4E $E3     INC $E34E,X [7FE350] = $0000    A:FED9 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:66  H:134
+C18AE7 $A5 $14         LDA $14 [0000D4] = $0D31        A:FED9 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:159
+C18AE9 $4A             LSR                             A:0D31 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:168
+C18AEA $4A             LSR                             A:0698 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:66  H:171
+C18AEB $4A             LSR                             A:034C X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:174
+C18AEC $8D $C4 $E3     STA $E3C4 [7FE3C4] = $01A6      A:01A6 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:177
+C18AEF $BD $76 $E3     LDA $E376,X [7FE378] = $1488    A:01A6 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:185
+C18AF2 $4A             LSR                             A:1488 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:195
+C18AF3 $4A             LSR                             A:0A44 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:198
+C18AF4 $4A             LSR                             A:0522 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:201
+C18AF5 $8D $C6 $E3     STA $E3C6 [7FE3C6] = $0291      A:0291 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:204
+C18AF8 $BF $0E $6F $C1 LDA $C16F0E,X [C16F10] = $E212  A:0291 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:213
+C18AFC $8D $C8 $E3     STA $E3C8 [7FE3C8] = $E252      A:E212 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:66  H:222
+C18AFF $AD $B4 $E3     LDA $E3B4 [7FE3B4] = $001B      A:E212 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:66  H:230
+C18B02 $1A             INC                             A:001B X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:239
+C18B03 $1A             INC                             A:001C X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:242
+C18B04 $8D $C0 $E5     STA $E5C0 [7FE5C0] = $001D      A:001D X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:245
+C18B07 $A6 $18         LDX $18 [0000D8] = $0002        A:001D X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:253
+C18B09 $AD $E2 $E3     LDA $E3E2 [7FE3E2] = $8000      A:001D X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:262
+C18B0C $10 $13         BPL $C18B21                     A:8000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:66  H:270
+C18B0E $A5 $18         LDA $18 [0000D8] = $0002        A:8000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:66  H:273
+C18B10 $4A             LSR                             A:0002 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:289
+C18B11 $CD $72 $E4     CMP $E472 [7FE472] = $0000      A:0001 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:66  H:292
+C18B14 $D0 $0B         BNE $C18B21                     A:0001 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:66  H:301
+C18B21 $AD $E4 $E3     LDA $E3E4 [7FE3E4] = $0000      A:0001 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:66  H:305
+C18B24 $10 $13         BPL $C18B39                     A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:66  H:314
+C18B39 $AD $E6 $E3     LDA $E3E6 [7FE3E6] = $0000      A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:66  H:318
+C18B3C $10 $13         BPL $C18B51                     A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:66  H:326
+C18B51 $AD $E8 $E3     LDA $E3E8 [7FE3E8] = $0000      A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:66  H:330
+C18B54 $10 $13         BPL $C18B69                     A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:66  H:339
+C18B69 $AD $EA $E3     LDA $E3EA [7FE3EA] = $0000      A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:3  
+C18B6C $10 $13         BPL $C18B81                     A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:12 
+C18B81 $AD $EC $E3     LDA $E3EC [7FE3EC] = $0000      A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:16 
+C18B84 $10 $13         BPL $C18B99                     A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:25 
+C18B99 $AD $EE $E3     LDA $E3EE [7FE3EE] = $0000      A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:29 
+C18B9C $10 $13         BPL $C18BB1                     A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:38 
+C18BB1 $AD $F0 $E3     LDA $E3F0 [7FE3F0] = $0000      A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:42 
+C18BB4 $10 $13         BPL $C18BC9                     A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:51 
+C18BC9 $60             RTS                             A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:55 
+C16ED1 $20 $9F $A6     JSR $A69F [C1A69F] = $18A6      A:0000 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZC V:67  H:65 
+C1A69F $A6 $18         LDX $18 [0000D8] = $0002        A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:67  H:75 
+C1A6A1 $BD $4E $E3     LDA $E34E,X [7FE350] = $0001    A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:67  H:84 
+C1A6A4 $F0 $3C         BEQ $C1A6E2                     A:0001 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:67  H:94 
+C1A6A6 $BD $28 $E3     LDA $E328,X [7FE32A] = $FF80    A:0001 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:67  H:97 
+C1A6A9 $4A             LSR                             A:FF80 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzC V:67  H:107
+C1A6AA $4A             LSR                             A:7FC0 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:110
+C1A6AB $4A             LSR                             A:3FE0 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:113
+C1A6AC $29 $1F $00     AND #$001F                      A:1FF0 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:116
+C1A6AF $0A             ASL                             A:0010 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:120
+C1A6B0 $9D $A4 $E5     STA $E5A4,X [7FE5A6] = $0000    A:0020 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:123
+C1A6B3 $49 $3E $00     EOR #$003E                      A:0020 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:143
+C1A6B6 $1A             INC                             A:001E X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:148
+C1A6B7 $1A             INC                             A:001F X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:151
+C1A6B8 $9D $8C $E5     STA $E58C,X [7FE58E] = $0000    A:0020 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:154
+C1A6BB $BF $0E $6F $C1 LDA $C16F0E,X [C16F10] = $E212  A:0020 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:164
+C1A6BF $9D $94 $E5     STA $E594,X [7FE596] = $E212    A:E212 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:67  H:173
+C1A6C2 $18             CLC                             A:E212 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:67  H:183
+C1A6C3 $7D $8C $E5     ADC $E58C,X [7FE58E] = $0020    A:E212 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:67  H:186
+C1A6C6 $9D $AC $E5     STA $E5AC,X [7FE5AE] = $E232    A:E232 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:67  H:196
+C1A6C9 $BD $28 $E3     LDA $E328,X [7FE32A] = $FF80    A:E232 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:67  H:206
+C1A6CC $20 $E3 $A6     JSR $A6E3 [C1A6E3] = $F829      A:FF80 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:67  H:216
+C1A6E3 $29 $F8 $00     AND #$00F8                      A:FF80 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:67  H:226
+C1A6E6 $0A             ASL                             A:0080 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:230
+C1A6E7 $0A             ASL                             A:0100 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:233
+C1A6E8 $85 $0E         STA $0E [0000CE] = $001B        A:0200 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:236
+C1A6EA $BD $58 $E3     LDA $E358,X [7FE35A] = $FED9    A:0200 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:245
+C1A6ED $4A             LSR                             A:FED9 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:67  H:255
+C1A6EE $4A             LSR                             A:7F6C X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzC V:67  H:258
+C1A6EF $4A             LSR                             A:3FB6 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:261
+C1A6F0 $29 $1F $00     AND #$001F                      A:1FDB X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:264
+C1A6F3 $18             CLC                             A:001B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:268
+C1A6F4 $65 $0E         ADC $0E [0000CE] = $0200        A:001B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:271
+C1A6F6 $85 $0E         STA $0E [0000CE] = $0200        A:021B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:286
+C1A6F8 $BD $58 $E3     LDA $E358,X [7FE35A] = $FED9    A:021B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:294
+C1A6FB $2D $BC $E3     AND $E3BC [7FE3BC] = $0000      A:FED9 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:67  H:304
+C1A6FE $0A             ASL                             A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:67  H:313
+C1A6FF $0A             ASL                             A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:67  H:316
+C1A700 $45 $0E         EOR $0E [0000CE] = $021B        A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:67  H:319
+C1A702 $60             RTS                             A:021B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:67  H:327
+C1A6CF $9D $84 $E5     STA $E584,X [7FE586] = $021C    A:021B X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:67  H:336
+C1A6D2 $A9 $00 $00     LDA #$0000                      A:021B X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:68  H:6  
+C1A6D5 $20 $E3 $A6     JSR $A6E3 [C1A6E3] = $F829      A:0000 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZc V:68  H:11 
+C1A6E3 $29 $F8 $00     AND #$00F8                      A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:21 
+C1A6E6 $0A             ASL                             A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:25 
+C1A6E7 $0A             ASL                             A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:28 
+C1A6E8 $85 $0E         STA $0E [0000CE] = $021B        A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:31 
+C1A6EA $BD $58 $E3     LDA $E358,X [7FE35A] = $FED9    A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:40 
+C1A6ED $4A             LSR                             A:FED9 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:68  H:50 
+C1A6EE $4A             LSR                             A:7F6C X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzC V:68  H:53 
+C1A6EF $4A             LSR                             A:3FB6 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:68  H:56 
+C1A6F0 $29 $1F $00     AND #$001F                      A:1FDB X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:68  H:59 
+C1A6F3 $18             CLC                             A:001B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:68  H:63 
+C1A6F4 $65 $0E         ADC $0E [0000CE] = $0000        A:001B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:68  H:66 
+C1A6F6 $85 $0E         STA $0E [0000CE] = $0000        A:001B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:68  H:75 
+C1A6F8 $BD $58 $E3     LDA $E358,X [7FE35A] = $FED9    A:001B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:68  H:83 
+C1A6FB $2D $BC $E3     AND $E3BC [7FE3BC] = $0000      A:FED9 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:NvmxdIzc V:68  H:93 
+C1A6FE $0A             ASL                             A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:102
+C1A6FF $0A             ASL                             A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:105
+C1A700 $45 $0E         EOR $0E [0000CE] = $001B        A:0000 X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIZc V:68  H:108
+C1A702 $60             RTS                             A:001B X:0002 Y:020C S:03F3 D:00C0 DB:7F P:nvmxdIzc V:68  H:116
+C1A6D8 $9D $9C $E5     STA $E59C,X [7FE59E] = $001C    A:001B X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:68  H:126
+C1A6DB $A9 $01 $00     LDA #$0001                      A:001B X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:68  H:146
+C1A6DE $8F $E2 $7F $7E STA $7E7FE2                     A:0001 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:68  H:151
+C1A6E2 $60             RTS                             A:0001 X:0002 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:68  H:161
+C16ED4 $60             RTS                             A:0001 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:68  H:171
+C16D40 $20 $F7 $6D     JSR $6DF7 [C16DF7] = $A8BD      A:0001 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:181
+C16DF7 $BD $A8 $E3     LDA $E3A8,X [7FE3AA] = $0000    A:0001 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:68  H:191
+C16DFA $F0 $3B         BEQ $C16E37                     A:0000 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:68  H:201
+C16E37 $60             RTS                             A:0000 X:0002 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:68  H:205
+C16D43 $A6 $18         LDX $18 [0000D8] = $0002        A:0000 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZc V:68  H:215
+C16D45 $CA             DEX                             A:0000 X:0002 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:224
+C16D46 $CA             DEX                             A:0000 X:0001 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:227
+C16D47 $10 $E5         BPL $C16D2E                     A:0000 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZc V:68  H:230
+C16D2E $86 $18         STX $18 [0000D8] = $0002        A:0000 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZc V:68  H:234
+C16D30 $BD $D2 $E2     LDA $E2D2,X [7FE2D2] = $0001    A:0000 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIZc V:68  H:243
+C16D33 $F0 $0E         BEQ $C16D43                     A:0001 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:253
+C16D35 $BD $9E $E3     LDA $E39E,X [7FE39E] = $0100    A:0001 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:256
+C16D38 $1D $A8 $E3     ORA $E3A8,X [7FE3A8] = $0000    A:0100 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:266
+C16D3B $F0 $06         BEQ $C16D43                     A:0100 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:276
+C16D3D $20 $B6 $6D     JSR $6DB6 [C16DB6] = $9EBD      A:0100 X:0000 Y:020C S:03F9 D:00C0 DB:7F P:nvmxdIzc V:68  H:285
+C16DB6 $BD $9E $E3     LDA $E39E,X [7FE39E] = $0100    A:0100 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:68  H:295
+C16DB9 $F0 $3B         BEQ $C16DF6                     A:0100 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:68  H:305
+C16DBB $30 $18         BMI $C16DD5                     A:0100 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:68  H:308
+C16DBD $BD $32 $E3     LDA $E332,X [7FE332] = $FF00    A:0100 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:68  H:311
+C16DC0 $29 $FF $00     AND #$00FF                      A:FF00 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:68  H:321
+C16DC3 $18             CLC                             A:0000 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:68  H:325
+C16DC4 $7D $9E $E3     ADC $E39E,X [7FE39E] = $0100    A:0000 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:68  H:327
+C16DC7 $9D $32 $E3     STA $E332,X [7FE332] = $FF00    A:0100 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:68  H:337
+C16DCA $EB             XBA                             A:0100 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:7  
+C16DCB $29 $FF $00     AND #$00FF                      A:0001 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:12 
+C16DCE $F0 $26         BEQ $C16DF6                     A:0001 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:16 
+C16DD0 $85 $1C         STA $1C [0000DC] = $0001        A:0001 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:19 
+C16DD2 $4C $9E $6E     JMP $6E9E [C16E9E] = $3EAD      A:0001 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:28 
+C16E9E $AD $3E $E3     LDA $E33E [7FE33E] = $0000      A:0001 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:32 
+C16EA1 $D0 $31         BNE $C16ED4                     A:0000 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:69  H:41 
+C16EA3 $BD $6C $E3     LDA $E36C,X [7FE36C] = $0C38    A:0000 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIZc V:69  H:44 
+C16EA6 $18             CLC                             A:0C38 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:54 
+C16EA7 $65 $1C         ADC $1C [0000DC] = $0001        A:0C38 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:57 
+C16EA9 $38             SEC                             A:0C39 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:65 
+C16EAA $E9 $00 $08     SBC #$0800                      A:0C39 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:69  H:68 
+C16EAD $2F $A0 $96 $7E AND $7E96A0                     A:0439 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:69  H:73 
+C16EB1 $18             CLC                             A:0439 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzC V:69  H:83 
+C16EB2 $69 $00 $08     ADC #$0800                      A:0439 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:86 
+C16EB5 $9D $6C $E3     STA $E36C,X [7FE36C] = $0C38    A:0C39 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:90 
+C16EB8 $18             CLC                             A:0C39 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:100
+C16EB9 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:0C39 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:103
+C16EBC $85 $14         STA $14 [0000D4] = $0D31        A:0D31 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:112
+C16EBE $BD $1E $E3     LDA $E31E,X [7FE31E] = $FDE0    A:0D31 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:nvmxdIzc V:69  H:120
+C16EC1 $18             CLC                             A:FDE0 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:69  H:130
+C16EC2 $65 $1C         ADC $1C [0000DC] = $0001        A:FDE0 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:69  H:143
+C16EC4 $9D $1E $E3     STA $E31E,X [7FE31E] = $FDE0    A:FDE1 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:69  H:152
+C16EC7 $18             CLC                             A:FDE1 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:69  H:162
+C16EC8 $6D $B6 $E3     ADC $E3B6 [7FE3B6] = $00F8      A:FDE1 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:69  H:165
+C16ECB $9D $58 $E3     STA $E358,X [7FE358] = $FDE0    A:FED9 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:69  H:173
+C16ECE $20 $DC $8A     JSR $8ADC [C18ADC] = $18A6      A:FED9 X:0000 Y:020C S:03F7 D:00C0 DB:7F P:NvmxdIzc V:69  H:183
+C18ADC $A6 $18         LDX $18 [0000D8] = $0000        A:FED9 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:69  H:193
+C18ADE $E0 $08 $00     CPX #$0008                      A:FED9 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZc V:69  H:202
+C18AE1 $D0 $01         BNE $C18AE4                     A:FED9 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:69  H:206
+C18AE4 $FE $4E $E3     INC $E34E,X [7FE34E] = $0000    A:FED9 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:69  H:211
+C18AE7 $A5 $14         LDA $14 [0000D4] = $0D31        A:FED9 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:226
+C18AE9 $4A             LSR                             A:0D31 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:235
+C18AEA $4A             LSR                             A:0698 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzC V:69  H:238
+C18AEB $4A             LSR                             A:034C X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:241
+C18AEC $8D $C4 $E3     STA $E3C4 [7FE3C4] = $01A6      A:01A6 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:244
+C18AEF $BD $76 $E3     LDA $E376,X [7FE376] = $1488    A:01A6 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:252
+C18AF2 $4A             LSR                             A:1488 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:262
+C18AF3 $4A             LSR                             A:0A44 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:265
+C18AF4 $4A             LSR                             A:0522 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:268
+C18AF5 $8D $C6 $E3     STA $E3C6 [7FE3C6] = $0291      A:0291 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:271
+C18AF8 $BF $0E $6F $C1 LDA $C16F0E,X [C16F0E] = $E1D2  A:0291 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:286
+C18AFC $8D $C8 $E3     STA $E3C8 [7FE3C8] = $E212      A:E1D2 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:69  H:295
+C18AFF $AD $B4 $E3     LDA $E3B4 [7FE3B4] = $001B      A:E1D2 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:69  H:303
+C18B02 $1A             INC                             A:001B X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:312
+C18B03 $1A             INC                             A:001C X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:315
+C18B04 $8D $C0 $E5     STA $E5C0 [7FE5C0] = $001D      A:001D X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:318
+C18B07 $A6 $18         LDX $18 [0000D8] = $0000        A:001D X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIzc V:69  H:326
+C18B09 $AD $E2 $E3     LDA $E3E2 [7FE3E2] = $8000      A:001D X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZc V:69  H:334
+C18B0C $10 $13         BPL $C18B21                     A:8000 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:70  H:2  
+C18B0E $A5 $18         LDA $18 [0000D8] = $0000        A:8000 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzc V:70  H:5  
+C18B10 $4A             LSR                             A:0000 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:14 
+C18B11 $CD $72 $E4     CMP $E472 [7FE472] = $0000      A:0000 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:17 
+C18B14 $D0 $0B         BNE $C18B21                     A:0000 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:70  H:25 
+C18B16 $AD $B2 $E4     LDA $E4B2 [7FE4B2] = $FFFF      A:0000 X:0000 Y:020C S:03F5 D:00C0 DB:7F P:nvmxdIZC V:70  H:28 
+C18B19 $F0 $06         BEQ $C18B21                     A:FFFF X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzC V:70  H:37 
+C18B1B $A0 $00 $00     LDY #$0000                      A:FFFF X:0000 Y:020C S:03F5 D:00C0 DB:7F P:NvmxdIzC V:70  H:40 
+C18B1E $4C $CA $8B     JMP $8BCA [C18BCA] = $0A8A      A:FFFF X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZC V:70  H:44 
+C18BCA $8A             TXA                             A:FFFF X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZC V:70  H:49 
+C18BCB $0A             ASL                             A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZC V:70  H:52 
+C18BCC $0A             ASL                             A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:55 
+C18BCD $0A             ASL                             A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:58 
+C18BCE $0A             ASL                             A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:61 
+C18BCF $0A             ASL                             A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:64 
+C18BD0 $69 $62 $FC     ADC #$FC62                      A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:67 
+C18BD3 $85 $08         STA $08 [0000C8] = $FC62        A:FC62 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:NvmxdIzc V:70  H:71 
+C18BD5 $AD $C4 $E3     LDA $E3C4 [7FE3C4] = $01A6      A:FC62 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:NvmxdIzc V:70  H:80 
+C18BD8 $85 $0A         STA $0A [0000CA] = $0187        A:01A6 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:70  H:88 
+C18BDA $AD $C6 $E3     LDA $E3C6 [7FE3C6] = $0291      A:01A6 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:70  H:97 
+C18BDD $85 $0C         STA $0C [0000CC] = $0291        A:0291 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:70  H:105
+C18BDF $AD $C8 $E3     LDA $E3C8 [7FE3C8] = $E1D2      A:0291 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:70  H:114
+C18BE2 $85 $04         STA $04 [0000C4] = $E1D2        A:E1D2 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:NvmxdIzc V:70  H:122
+C18BE4 $B9 $12 $E4     LDA $E412,Y [7FE412] = $0000    A:E1D2 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:NvmxdIzc V:70  H:131
+C18BE7 $85 $00         STA $00 [0000C0] = $0020        A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:151
+C18BE9 $B9 $22 $E4     LDA $E422,Y [7FE422] = $007F    A:0000 X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIZc V:70  H:159
+C18BEC $29 $FF $00     AND #$00FF                      A:007F X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:70  H:169
+C18BEF $85 $02         STA $02 [0000C2] = $007F        A:007F X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:70  H:174
+C18BF1 $20 $03 $A7     JSR $A703 [C1A703] = $42B9      A:007F X:0000 Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:70  H:182
+C1A703 $B9 $42 $E4     LDA $E442,Y [7FE442] = $02FF    A:007F X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzc V:70  H:192
+C1A706 $38             SEC                             A:02FF X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzc V:70  H:202
+C1A707 $F9 $32 $E4     SBC $E432,Y [7FE432] = $0100    A:02FF X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:205
+C1A70A $1A             INC                             A:01FF X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:215
+C1A70B $8D $B4 $E5     STA $E5B4 [7FE5B4] = $0040      A:0200 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:218
+C1A70E $8D $B8 $E5     STA $E5B8 [7FE5B8] = $0200      A:0200 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:227
+C1A711 $B9 $62 $E4     LDA $E462,Y [7FE462] = $02FF    A:0200 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:235
+C1A714 $38             SEC                             A:02FF X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:245
+C1A715 $F9 $52 $E4     SBC $E452,Y [7FE452] = $0100    A:02FF X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:248
+C1A718 $1A             INC                             A:01FF X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:258
+C1A719 $8D $B6 $E5     STA $E5B6 [7FE5B6] = $0040      A:0200 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:261
+C1A71C $8D $BA $E5     STA $E5BA [7FE5BA] = $0200      A:0200 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:270
+C1A71F $A5 $0A         LDA $0A [0000CA] = $01A6        A:0200 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:286
+C1A721 $38             SEC                             A:01A6 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:295
+C1A722 $F9 $32 $E4     SBC $E432,Y [7FE432] = $0100    A:01A6 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:298
+C1A725 $8D $BC $E5     STA $E5BC [7FE5BC] = $0010      A:00A6 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:308
+C1A728 $A5 $0C         LDA $0C [0000CC] = $0291        A:00A6 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:316
+C1A72A $38             SEC                             A:0291 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:324
+C1A72B $F9 $52 $E4     SBC $E452,Y [7FE452] = $0100    A:0291 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:327
+C1A72E $8D $BE $E5     STA $E5BE [7FE5BE] = $0032      A:0191 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:70  H:337
+C1A731 $B9 $F2 $E3     LDA $E3F2,Y [7FE3F2] = $000E    A:0191 X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:71  H:5  
+C1A734 $AA             TAX                             A:000E X:0000 Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:71  H:15 
+C1A735 $BF $55 $A8 $C1 LDA $C1A855,X [C1A863] = $0003  A:000E X:000E Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:71  H:18 
+C1A739 $85 $1E         STA $1E [0000DE] = $8986        A:0003 X:000E Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:71  H:27 
+C1A73B $FC $3F $A7     JSR ($A73F,X) [C1A751] = $B44E  A:0003 X:000E Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:71  H:36 
+C1A751 $4E $B4 $E5     LSR $E5B4 [7FE5B4] = $0200      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:71  H:49 
+C1A754 $4E $B4 $E5     LSR $E5B4 [7FE5B4] = $0100      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:63 
+C1A757 $4E $B6 $E5     LSR $E5B6 [7FE5B6] = $0200      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:77 
+C1A75A $4E $B6 $E5     LSR $E5B6 [7FE5B6] = $0100      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:91 
+C1A75D $4E $BC $E5     LSR $E5BC [7FE5BC] = $00A6      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:105
+C1A760 $4E $BC $E5     LSR $E5BC [7FE5BC] = $0053      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:119
+C1A763 $4E $BE $E5     LSR $E5BE [7FE5BE] = $0191      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:71  H:133
+C1A766 $4E $BE $E5     LSR $E5BE [7FE5BE] = $00C8      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:71  H:157
+C1A769 $4E $B4 $E5     LSR $E5B4 [7FE5B4] = $0080      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:171
+C1A76C $4E $B6 $E5     LSR $E5B6 [7FE5B6] = $0080      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:185
+C1A76F $4E $BC $E5     LSR $E5BC [7FE5BC] = $0029      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:199
+C1A772 $4E $BE $E5     LSR $E5BE [7FE5BE] = $0064      A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:71  H:213
+C1A775 $60             RTS                             A:0003 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:71  H:227
+C1A73E $60             RTS                             A:0003 X:000E Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzc V:71  H:237
+C18BF4 $B9 $02 $E4     LDA $E402,Y [7FE402] = $0001    A:0003 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:247
+C18BF7 $29 $01 $00     AND #$0001                      A:0001 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:257
+C18BFA $D0 $03         BNE $C18BFF                     A:0001 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:261
+C18BFF $AD $B8 $E5     LDA $E5B8 [7FE5B8] = $0200      A:0001 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:266
+C18C02 $3A             DEC                             A:0200 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:274
+C18C03 $85 $26         STA $26 [0000E6] = $0000        A:01FF X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:288
+C18C05 $AD $BA $E5     LDA $E5BA [7FE5BA] = $0200      A:01FF X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:296
+C18C08 $3A             DEC                             A:0200 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:305
+C18C09 $85 $28         STA $28 [0000E8] = $0001        A:01FF X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:308
+C18C0B $A5 $0A         LDA $0A [0000CA] = $01A6        A:01FF X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:316
+C18C0D $38             SEC                             A:01A6 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:71  H:324
+C18C0E $F9 $32 $E4     SBC $E432,Y [7FE432] = $0100    A:01A6 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:71  H:327
+C18C11 $25 $26         AND $26 [0000E6] = $01FF        A:00A6 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:71  H:337
+C18C13 $18             CLC                             A:00A6 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:5  
+C18C14 $79 $32 $E4     ADC $E432,Y [7FE432] = $0100    A:00A6 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:72  H:8  
+C18C17 $85 $0A         STA $0A [0000CA] = $01A6        A:01A6 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:72  H:18 
+C18C19 $A5 $0C         LDA $0C [0000CC] = $0291        A:01A6 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:72  H:27 
+C18C1B $38             SEC                             A:0291 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzc V:72  H:35 
+C18C1C $F9 $52 $E4     SBC $E452,Y [7FE452] = $0100    A:0291 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:38 
+C18C1F $25 $28         AND $28 [0000E8] = $01FF        A:0191 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:48 
+C18C21 $8D $D0 $E3     STA $E3D0 [7FE3D0] = $0191      A:0191 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:57 
+C18C24 $AD $C0 $E5     LDA $E5C0 [7FE5C0] = $001D      A:0191 X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:65 
+C18C27 $85 $24         STA $24 [0000E4] = $0054        A:001D X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:74 
+C18C29 $B9 $F2 $E3     LDA $E3F2,Y [7FE3F2] = $000E    A:001D X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:82 
+C18C2C $AA             TAX                             A:000E X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:92 
+C18C2D $5A             PHY                             A:000E X:000E Y:0000 S:03F5 D:00C0 DB:7F P:nvmxdIzC V:72  H:95 
+C18C2E $FC $43 $A8     JSR ($A843,X) [C199CA] = $C2B9  A:000E X:000E Y:0000 S:03F3 D:00C0 DB:7F P:nvmxdIzC V:72  H:102
+C199CA $B9 $C2 $E4     LDA $E4C2,Y [7FE4C2] = $0000    A:000E X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:115
+C199CD $85 $2A         STA $2A [0000EA] = $3000        A:0000 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIZC V:72  H:125
+C199CF $A5 $0A         LDA $0A [0000CA] = $01A6        A:0000 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIZC V:72  H:134
+C199D1 $38             SEC                             A:01A6 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:152
+C199D2 $F9 $32 $E4     SBC $E432,Y [7FE432] = $0100    A:01A6 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:155
+C199D5 $4A             LSR                             A:00A6 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:165
+C199D6 $4A             LSR                             A:0053 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:168
+C199D7 $4A             LSR                             A:0029 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:171
+C199D8 $0A             ASL                             A:0014 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:174
+C199D9 $65 $00         ADC $00 [0000C0] = $0000        A:0028 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:177
+C199DB $85 $00         STA $00 [0000C0] = $0000        A:0028 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:186
+C199DD $90 $02         BCC $C199E1                     A:0028 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:194
+C199E1 $AD $B4 $E5     LDA $E5B4 [7FE5B4] = $0040      A:0028 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:199
+C199E4 $85 $0E         STA $0E [0000CE] = $001B        A:0040 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:207
+C199E6 $A5 $28         LDA $28 [0000E8] = $01FF        A:0040 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:216
+C199E8 $4A             LSR                             A:01FF X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:224
+C199E9 $4A             LSR                             A:00FF X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:227
+C199EA $4A             LSR                             A:007F X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:230
+C199EB $0A             ASL                             A:003F X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:233
+C199EC $85 $28         STA $28 [0000E8] = $01FF        A:007E X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:236
+C199EE $A5 $0A         LDA $0A [0000CA] = $01A6        A:007E X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:245
+C199F0 $38             SEC                             A:01A6 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:253
+C199F1 $F9 $32 $E4     SBC $E432,Y [7FE432] = $0100    A:01A6 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:256
+C199F4 $29 $07 $00     AND #$0007                      A:00A6 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:266
+C199F7 $0A             ASL                             A:0006 X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzC V:72  H:271
+C199F8 $AA             TAX                             A:000C X:000E Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:274
+C199F9 $FC $FD $99     JSR ($99FD,X) [C1A32B] = $D0AD  A:000C X:000C Y:0000 S:03F1 D:00C0 DB:7F P:nvmxdIzc V:72  H:292
+C1A32B $AD $D0 $E3     LDA $E3D0 [7FE3D0] = $0191      A:000C X:000C Y:0000 S:03EF D:00C0 DB:7F P:nvmxdIzc V:72  H:305
+C1A32E $48             PHA                             A:0191 X:000C Y:0000 S:03EF D:00C0 DB:7F P:nvmxdIzc V:72  H:313
+C1A32F $4A             LSR                             A:0191 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:72  H:320
+C1A330 $4A             LSR                             A:00C8 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzC V:72  H:323
+C1A331 $4A             LSR                             A:0064 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:72  H:326
+C1A332 $0A             ASL                             A:0032 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:72  H:328
+C1A333 $25 $28         AND $28 [0000E8] = $007E        A:0064 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:72  H:331
+C1A335 $85 $10         STA $10 [0000D0] = $006A        A:0064 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:0  
+C1A337 $E2 $20         SEP #$20                        A:0064 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:8  
+C1A339 $8F $02 $42 $00 STA $004202                     A:0064 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:13 
+C1A33D $A5 $0E         LDA $0E [0000CE] = $40          A:0064 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:20 
+C1A33F $8F $03 $42 $00 STA $004203                     A:0040 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:27 
+C1A343 $C2 $20         REP #$20                        A:0040 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:34 
+C1A345 $EA             NOP                             A:0040 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:39 
+C1A346 $EA             NOP                             A:0040 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:42 
+C1A347 $EA             NOP                             A:0040 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:45 
+C1A348 $AF $16 $42 $00 LDA $004216                     A:0040 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:48 
+C1A34C $A8             TAY                             A:1900 X:000C Y:0000 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:57 
+C1A34D $B7 $00         LDA [$00],Y [7F1928] = $0001    A:1900 X:000C Y:1900 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:60 
+C1A34F $AA             TAX                             A:0001 X:000C Y:1900 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:74 
+C1A350 $E2 $20         SEP #$20                        A:0001 X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:77 
+C1A352 $9C $4F $FC     STZ $FC4F [7FFC4F] = $00        A:0001 X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:82 
+C1A355 $9C $51 $FC     STZ $FC51 [7FFC51] = $00        A:0001 X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:88 
+C1A358 $9C $53 $FC     STZ $FC53 [7FFC53] = $00        A:0001 X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:95 
+C1A35B $9C $55 $FC     STZ $FC55 [7FFC55] = $00        A:0001 X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:101
+C1A35E $BF $53 $C3 $ED LDA $EDC353,X [EDC354] = $4B    A:0001 X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:108
+C1A362 $8D $4E $FC     STA $FC4E [7FFC4E] = $4B        A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:115
+C1A365 $BF $47 $EC $ED LDA $EDEC47,X [EDEC48] = $4B    A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:122
+C1A369 $8D $50 $FC     STA $FC50 [7FFC50] = $4B        A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:129
+C1A36C $BF $3B $15 $EE LDA $EE153B,X [EE153C] = $4B    A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:146
+C1A370 $8D $52 $FC     STA $FC52 [7FFC52] = $4B        A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:153
+C1A373 $BF $2F $3E $EE LDA $EE3E2F,X [EE3E30] = $4B    A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:160
+C1A377 $8D $54 $FC     STA $FC54 [7FFC54] = $4B        A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:167
+C1A37A $C2 $20         REP #$20                        A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvMxdIzc V:73  H:174
+C1A37C $68             PLA                             A:004B X:0001 Y:1900 S:03ED D:00C0 DB:7F P:nvmxdIzc V:73  H:178
+C1A37D $29 $07 $00     AND #$0007                      A:0191 X:0001 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:187
+C1A380 $0A             ASL                             A:0001 X:0001 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:191
+C1A381 $AA             TAX                             A:0002 X:0001 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:194
+C1A382 $7C $85 $A3     JMP ($A385,X) [C1A39A] = $04A6  A:0002 X:0002 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:197
+C1A39A $A6 $04         LDX $04 [0000C4] = $E1D2        A:0002 X:0002 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:206
+C1A39C $AD $4E $FC     LDA $FC4E [7FFC4E] = $004B      A:0002 X:E1D2 Y:1900 S:03EF D:00C0 DB:7F P:NvmxdIzc V:73  H:215
+C1A39F $18             CLC                             A:004B X:E1D2 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:223
+C1A3A0 $65 $2A         ADC $2A [0000EA] = $0000        A:004B X:E1D2 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:226
+C1A3A2 $0A             ASL                             A:004B X:E1D2 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:235
+C1A3A3 $A8             TAY                             A:0096 X:E1D2 Y:1900 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:238
+C1A3A4 $4C $3C $A4     JMP $A43C [C1A43C] = $86B9      A:0096 X:E1D2 Y:0096 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:241
+C1A43C $B9 $86 $D0     LDA $D086,Y [7FD11C] = $0C15    A:0096 X:E1D2 Y:0096 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:245
+C1A43F $9D $00 $00     STA $0000,X [7FE1D2] = $0000    A:0C15 X:E1D2 Y:0096 S:03EF D:00C0 DB:7F P:nvmxdIzc V:73  H:255

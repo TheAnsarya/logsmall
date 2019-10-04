@@ -62,6 +62,9 @@
     <Compile Include="FFMQ\LongText.cs" />
     <Compile Include="FFMQ\MapData.cs" />
     <Compile Include="FFMQ\Text\BasicTable.cs" />
+    <Compile Include="FFMQ\Text\Data\CharacterNames.cs" />
+    <Compile Include="FFMQ\Text\Data\ItemNames.cs" />
+    <Compile Include="FFMQ\Text\Data\LocationNames.cs" />
     <Compile Include="SourceCode\Line.cs" />
     <Compile Include="SourceCode\LineGroup.cs" />
     <Compile Include="SourceCode\LineInfo.cs" />
@@ -121,6 +124,9 @@
     <Content Include="DQ3\notes\debug logs\trying to find water 02\with-missing.txt" />
     <Content Include="DQ3\notes\debug logs\trying to find water 02\wrong-bytecode.txt" />
     <Content Include="DQ3\notes\c01146 - multiply routine.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="debuglogs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

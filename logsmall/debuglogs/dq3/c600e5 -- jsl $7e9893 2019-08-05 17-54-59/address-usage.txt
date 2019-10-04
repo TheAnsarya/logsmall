@@ -1,0 +1,4 @@
+7e3545 lda 1
+7e3546 lda 1
+cad6dd jmp 1
+cad6ec jmp 1

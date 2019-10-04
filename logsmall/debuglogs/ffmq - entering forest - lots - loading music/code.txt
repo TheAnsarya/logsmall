@@ -1,0 +1,435 @@
+009297 jsl $0d8004
+0d8004 jmp $8147
+0d8147 phb
+0d8148 phd
+0d8149 php
+0d814a rep #$20
+0d814c rep #$10
+0d814e pha
+0d814f phx
+0d8150 phy
+0d8151 sep #$20
+0d8153 lda #$00
+0d8155 pha
+0d8156 plb
+0d8157 ldx #$0600
+0d815a phx
+0d815b pld
+0d815c sep #$20
+0d815e lda $00
+0d8160 stz $00
+0d8162 beq $0d8178
+0d8164 bmi $0d8172
+0d8166 cmp #$01
+0d8168 beq $0d8183
+0d8178 rep #$20
+0d817a rep #$10
+0d817c ply
+0d817d plx
+0d817e pla
+0d817f plp
+0d8180 pld
+0d8181 plb
+0d8182 rtl
+0d8183 sep #$20
+0d8185 xba
+0d8186 lda $01
+0d8188 cmp $05
+0d818a bne $0d81ed
+0d81ed jsr $8625
+0d81f0 lda $05
+0d81f2 bmi $0d81fa
+0d81f4 sta $09
+0d81f6 ldx $06
+0d81f8 stx $0a
+0d81fa lda $01
+0d81fc sta $2141
+0d81ff sta $05
+0d8201 sta $4202
+0d8204 lda #$03
+0d8206 sta $4203
+0d8209 ldx $02
+0d820b stx $2142
+0d820e stx $06
+0d8210 xba
+0d8211 cmp $2140
+0d8214 beq $0d8211
+0d8216 sta $2140
+0d8219 cmp $2140
+0d821c bne $0d8219
+0d821e lda #$02
+0d8220 sta $2141
+0d8223 ldx #$1c00
+0d8226 stx $2142
+0d8229 sta $2140
+0d822c cmp $2140
+0d822f bne $0d822c
+0d8231 ldx $4216
+0d8234 lda $0dbdae,x
+0d8238 sta $14
+0d823a lda $0dbdaf,x
+0d823e sta $15
+0d8240 lda $0dbdb0,x
+0d8244 sta $16
+0d8246 jsr $85fa
+0d8249 ldy $14
+0d824b stz $14
+0d824d stz $15
+0d824f lda [$14],y
+0d8251 xba
+0d8252 iny
+0d8253 bne $0d825a
+0d825a lda [$14],y
+0d825c pha
+0d825d iny
+0d825e bne $0d8265
+0d8265 xba
+0d8266 pha
+0d8267 plx
+0d8268 lda #$05
+0d826a xba
+0d826b lda [$14],y
+0d826d sta $2142
+0d8270 iny
+0d8271 bne $0d8278
+0d8278 lda [$14],y
+0d827a sta $2143
+0d827d iny
+0d827e bne $0d8285
+0d8285 xba
+0d8286 sta $2140
+0d8289 cmp $2140
+0d828c bne $0d8289
+0d828e inc
+0d828f bne $0d8292
+0d8291 inc
+0d8292 xba
+0d8293 dex
+0d8294 dex
+0d8295 bpl $0d826b
+0d8297 lda #$20
+0d8299 sta $4203
+0d829c rep #$20
+0d829e ldx #$0000
+0d82a1 stz $88,x
+0d82a3 stz $c8,x
+0d82a5 inx
+0d82a6 inx
+0d82a7 cpx #$0020
+0d82aa bne $0d82a1
+0d82ac lda $4216
+0d82af tax
+0d82b0 clc
+0d82b1 adc #$0020
+0d82b4 sta $12
+0d82b6 lda #$06a8
+0d82b9 sta $14
+0d82bb lda #$06c8
+0d82be sta $16
+0d82c0 lda $0dbea1,x
+0d82c4 sta ($14)
+0d82c6 inc $14
+0d82c8 inc $14
+0d82ca ldy #$0000
+0d82cd cmp $0628,y
+0d82d0 beq $0d82e1
+0d82d2 iny
+0d82d3 iny
+0d82d4 cpy #$0020
+0d82d7 bne $0d82cd
+0d82d9 sta ($16)
+0d82db inc $16
+0d82dd inc $16
+0d82df bra $0d82e4
+0d82e1 sta $0688,y
+0d82e4 inx
+0d82e5 inx
+0d82e6 cpx $12
+0d82e8 bne $0d82c0
+0d82ea lda $c8
+0d82ec bne $0d82f1
+0d82f1 stz $17
+0d82f3 sep #$20
+0d82f5 lda #$03
+0d82f7 sta $4202
+0d82fa ldx #$0000
+0d82fd lda $c8,x
+0d82ff beq $0d8340
+0d8301 dec
+0d8302 sta $4203
+0d8305 nop
+0d8306 nop
+0d8307 phx
+0d8308 ldx $4216
+0d830b lda $0dbdff,x
+0d830f sta $14
+0d8311 lda $0dbe00,x
+0d8315 sta $15
+0d8317 lda $0dbe01,x
+0d831b sta $16
+0d831d jsr $85fa
+0d8320 ldy $14
+0d8322 stz $14
+0d8324 stz $15
+0d8326 lda [$14],y
+0d8328 clc
+0d8329 adc $17
+0d832b sta $17
+0d832d iny
+0d832e bne $0d8335
+0d8335 lda [$14],y
+0d8337 adc $18
+0d8339 sta $18
+0d833b plx
+0d833c inx
+0d833d inx
+0d833e bra $0d82fd
+0d8340 ldx #$0000
+0d8343 rep #$20
+0d8345 lda $28,x
+0d8347 beq $0d834d
+0d8349 inx
+0d834a inx
+0d834b bra $0d8345
+0d834d lda $48,x
+0d834f clc
+0d8350 adc $17
+0d8352 bcs $0d835c
+0d8354 cmp #$d200
+0d8357 bcs $0d835c
+0d835c ldx #$001e
+0d835f lda $86,x
+0d8361 bne $0d8367
+0d8363 dex
+0d8364 dex
+0d8365 bne $0d835f
+0d8367 stx $24
+0d8369 ldx #$0000
+0d836c lda $88,x
+0d836e beq $0d8377
+0d8370 inx
+0d8371 inx
+0d8372 cpx #$0020
+0d8375 bne $0d836c
+0d8377 cpx $24
+0d8379 bne $0d8387
+0d837b stz $28,x
+0d837d inx
+0d837e inx
+0d837f cpx #$0020
+0d8382 bne $0d837b
+0d8384 jmp $840e
+0d840e sep #$20
+0d8410 lda #$03
+0d8412 sta $4202
+0d8415 sta $2141
+0d8418 ldx #$0000
+0d841b lda $28,x
+0d841d beq $0d8423
+0d841f inx
+0d8420 inx
+0d8421 bra $0d841b
+0d8423 stx $24
+0d8425 lda $48,x
+0d8427 sta $2142
+0d842a lda $49,x
+0d842c sta $2143
+0d842f lda #$00
+0d8431 sta $2140
+0d8434 cmp $2140
+0d8437 bne $0d8434
+0d8439 inc
+0d843a sta $10
+0d843c ldx #$0000
+0d843f sep #$20
+0d8441 lda $c8,x
+0d8443 bne $0d8448
+0d8445 jmp $84dd
+0d8448 ldy $24
+0d844a sta $0628,y
+0d844d dec
+0d844e sta $4203
+0d8451 nop
+0d8452 nop
+0d8453 phx
+0d8454 ldx $4216
+0d8457 lda $0dbdff,x
+0d845b sta $14
+0d845d lda $0dbe00,x
+0d8461 sta $15
+0d8463 lda $0dbe01,x
+0d8467 sta $16
+0d8469 jsr $85fa
+0d846c ldy $14
+0d846e stz $14
+0d8470 stz $15
+0d8472 lda [$14],y
+0d8474 xba
+0d8475 iny
+0d8476 bne $0d847d
+0d847d lda [$14],y
+0d847f iny
+0d8480 bne $0d8487
+0d8487 xba
+0d8488 rep #$20
+0d848a pha
+0d848b ldx $24
+0d848d sta $68,x
+0d848f clc
+0d8490 adc $48,x
+0d8492 sta $4a,x
+0d8494 inx
+0d8495 inx
+0d8496 stx $24
+0d8498 plx
+0d8499 sep #$20
+0d849b lda [$14],y
+0d849d sta $2141
+0d84a0 iny
+0d84a1 bne $0d84a8
+0d84a8 lda [$14],y
+0d84aa sta $2142
+0d84ad iny
+0d84ae bne $0d84b5
+0d84b5 lda [$14],y
+0d84b7 sta $2143
+0d84ba iny
+0d84bb bne $0d84c2
+0d84c2 lda $10
+0d84c4 sta $2140
+0d84c7 cmp $2140
+0d84ca bne $0d84c7
+0d84cc inc $10
+0d84ce bne $0d84d2
+0d84d0 inc $10
+0d84d2 dex
+0d84d3 dex
+0d84d4 dex
+0d84d5 bne $0d849b
+0d84d7 plx
+0d84d8 inx
+0d84d9 inx
+0d84da brl $0d843f
+0d84dd rep #$20
+0d84df lda $a8
+0d84e1 bne $0d84e6
+0d84e6 lda #$06a8
+0d84e9 sta $14
+0d84eb lda #$0700
+0d84ee sta $16
+0d84f0 lda #$0740
+0d84f3 sta $18
+0d84f5 lda #$07c0
+0d84f8 sta $1a
+0d84fa lda ($14)
+0d84fc beq $0d853b
+0d84fe inc $14
+0d8500 inc $14
+0d8502 ldy #$0000
+0d8505 cmp $0628,y
+0d8508 beq $0d850e
+0d850a iny
+0d850b iny
+0d850c bra $0d8505
+0d850e dec
+0d850f asl
+0d8510 tax
+0d8511 lda $0dbe59,x
+0d8515 sta ($16)
+0d8517 inc $16
+0d8519 inc $16
+0d851b lda $0648,y
+0d851e sta ($18)
+0d8520 inc $18
+0d8522 inc $18
+0d8524 clc
+0d8525 adc $0dbe35,x
+0d8529 sta ($18)
+0d852b inc $18
+0d852d inc $18
+0d852f lda $0dbe7d,x
+0d8533 sta ($1a)
+0d8535 inc $1a
+0d8537 inc $1a
+0d8539 bra $0d84fa
+0d853b sep #$20
+0d853d lda #$02
+0d853f sta $2141
+0d8542 ldx #$0700
+0d8545 phx
+0d8546 pld
+0d8547 ldx #$1a40
+0d854a stx $2142
+0d854d lda #$00
+0d854f ldx #$fffe
+0d8552 bra $0d8559
+0d8554 ldy $00,x
+0d8556 sty $2142
+0d8559 sta $2140
+0d855c cmp $2140
+0d855f bne $0d855c
+0d8561 inc
+0d8562 inx
+0d8563 inx
+0d8564 cpx #$0040
+0d8567 bne $0d8554
+0d8569 ldx #$1b80
+0d856c stx $2142
+0d856f lda #$00
+0d8571 ldx #$fffe
+0d8574 bra $0d857b
+0d8576 ldy $40,x
+0d8578 sty $2142
+0d857b sta $2140
+0d857e cmp $2140
+0d8581 bne $0d857e
+0d8583 inc
+0d8584 inx
+0d8585 inx
+0d8586 cpx #$0080
+0d8589 bne $0d8576
+0d858b ldx #$1ac0
+0d858e stx $2142
+0d8591 lda #$00
+0d8593 ldx #$fffe
+0d8596 bra $0d859d
+0d8598 ldy $c0,x
+0d859a sty $2142
+0d859d sta $2140
+0d85a0 cmp $2140
+0d85a3 bne $0d85a0
+0d85a5 inc
+0d85a6 inx
+0d85a7 inx
+0d85a8 cpx #$0040
+0d85ab bne $0d8598
+0d85ad sep #$20
+0d85af lda #$00
+0d85b1 sta $2141
+0d85b4 sta $2140
+0d85b7 jmp $8178
+0d85fa php
+0d85fb rep #$20
+0d85fd pha
+0d85fe lda $15
+0d8600 and #$ff80
+0d8603 sec
+0d8604 sbc $fa
+0d8606 clc
+0d8607 adc $15
+0d8609 sta $15
+0d860b pla
+0d860c plp
+0d860d rts
+0d8625 php
+0d8626 sep #$20
+0d8628 xba
+0d8629 cmp #$03
+0d862b beq $0d8643
+0d862d ldx #$0000
+0d8630 lda $0d8686,x
+0d8634 bmi $0d8641
+0d8641 lda #$01
+0d8643 xba
+0d8644 plp
+0d8645 rts

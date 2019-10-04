@@ -1,0 +1,11 @@
+7e9893 jmp $cad6ce
+c600e9 jsl $7e9897
+cad6ce lda $3545
+cad6d1 and #$0010
+cad6d4 bne $cad6d9
+cad6d6 jmp $d6dd
+cad6dd lda $3546
+cad6e0 and #$0020
+cad6e3 bne $cad6e8
+cad6e5 jmp $d6ec
+cad6ec rtl

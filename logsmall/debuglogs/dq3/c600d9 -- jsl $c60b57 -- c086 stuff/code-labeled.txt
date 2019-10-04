@@ -1,0 +1,3635 @@
+00ffa0 jmp Jump_c005e0
+
+
+Routine_7eeaed:
+7eeaed jmp Jump_c0c9ff
+
+
+Routine_7eeaf1:
+7eeaf1 jmp Jump_c0c92e
+
+
+Routine_7eeaf5:
+7eeaf5 jmp Jump_c0c92e
+
+
+Routine_7eeaf9:
+7eeaf9 jmp Jump_c0c92e
+
+
+Routine_7eeafd:
+7eeafd jmp Jump_c0c92e
+
+
+Routine_7eeb01:
+7eeb01 jmp Jump_c0c92e
+
+
+Routine_7eeb05:
+7eeb05 jmp Jump_c0c92e
+
+
+Jump_c005e0:
+c005e0 rep #$30
+c005e2 phb
+c005e3 phd
+c005e4 pha
+c005e5 phx
+c005e6 phy
+c005e7 lda #$0000
+c005ea tcd
+c005eb sep #$20
+c005ed lda #$7e
+c005ef pha
+c005f0 plb
+c005f1 lda $004210
+c005f5 lda $7fe4
+c005f8 beq .Branch_c00607
+
+c005fa lda $7fde
+c005fd beq .Branch_c00607
+
+c005ff stz $7fde
+c00602 lda $7fe0
+c00605 bne .Branch_c0061d
+
+
+.Branch_c00607
+c00607 jsr Routine_c006e1
+
+c0060a jsr Routine_c006a1
+
+c0060d lda $7ff6
+c00610 beq .Branch_c00615
+
+
+.Branch_c00615
+c00615 rep #$30
+c00617 ply
+c00618 plx
+c00619 pla
+c0061a pld
+c0061b plb
+c0061c rti
+
+.Branch_c0061d
+c0061d lda #$80
+c0061f sta $002100
+c00623 lda #$00
+c00625 sta $00420c
+c00629 jsr Routine_c00e4c
+
+c0062c jsr Routine_c00c46
+
+c0062f jsr Routine_c00d2e
+
+c00632 jsr Routine_c00c94
+
+c00635 jsr Routine_c00ce0
+
+c00638 jsr Routine_c00d7d
+
+c0063b jsr Routine_c00dcc
+
+c0063e jsr Routine_c00e0c
+
+c00641 jsr Routine_c00858
+
+c00644 jsr Routine_c00704
+
+c00647 jsr Routine_c00733
+
+c0064a jsr Routine_c00b16
+
+c0064d jsr Routine_c00766
+
+c00650 jsr Routine_c00f2a
+
+c00653 lda $7f82
+c00656 and $7f84
+c00659 sta $00420c
+c0065d ldx #$0000
+c00660 stx $7fde
+c00663 stx $7fe0
+c00666 stx $7fe2
+c00669 stx $7fe8
+c0066c stx $7fee
+c0066f stx $7ff4
+c00672 stx $7c40
+c00675 lda $7f88
+c00678 sta $002100
+c0067c inc $7ffc
+c0067f inc $2a6c
+c00682 lda $7f74
+c00685 beq .Branch_c0068a
+
+
+.Branch_c0068a
+c0068a jsr Routine_c006e1
+
+c0068d jsr Routine_c006a1
+
+c00690 lda $7ff6
+c00693 beq .Branch_c00695
+
+
+.Branch_c00695
+c00695 rep #$30
+c00697 jsl Routine_c0c7f7
+
+c0069b ply
+c0069c plx
+c0069d pla
+c0069e pld
+c0069f plb
+c006a0 rti
+
+Routine_c006a1:
+c006a1 lda $7f7e
+c006a4 bne .Branch_c006dd
+
+c006a6 rep #$20
+c006a8 lda $7f7a
+c006ab asl
+c006ac asl
+c006ad eor $7f7c
+c006b0 asl
+c006b1 and #$ff00
+c006b4 xba
+c006b5 sep #$20
+c006b7 pha
+c006b8 lda $7f7c
+c006bb sta $7f7d
+c006be lda $7f7b
+c006c1 sta $7f7c
+c006c4 lda $7f7a
+c006c7 sta $7f7b
+c006ca pla
+c006cb sta $7f7a
+c006ce lda $7f7a
+c006d1 ora $7f7b
+c006d4 ora $7f7c
+c006d7 ora $7f7d
+c006da beq .Branch_c006df
+
+c006dc rts
+
+.Branch_c006e1
+Routine_c006e1:
+c006e1 lda $004212
+c006e5 lsr
+c006e6 bcs .Branch_c006e1
+
+c006e8 lda $004218
+c006ec sta $7ff8
+c006ef lda $004219
+c006f3 sta $7ff9
+c006f6 lda $004016
+c006fa lsr
+c006fb bcs .Branch_c00703
+
+
+.Branch_c00703
+c00703 rts
+
+Routine_c00704:
+c00704 rep #$20
+c00706 lda #$0200
+c00709 sta $004305
+c0070d lda #$7ffe
+c00710 sta $004302
+c00714 sep #$20
+c00716 lda #$00
+c00718 sta $002121
+c0071c sta $004300
+c00720 lda #$22
+c00722 sta $004301
+c00726 lda #$7e
+c00728 sta $004304
+c0072c lda #$01
+c0072e sta $00420b
+c00732 rts
+
+Routine_c00733:
+c00733 rep #$20
+c00735 lda #$db1f
+c00738 sta $004302
+c0073c lda #$0220
+c0073f sta $004305
+c00743 sep #$20
+c00745 lda #$7e
+c00747 sta $004304
+c0074b lda #$00
+c0074d sta $002102
+c00751 sta $002103
+c00755 sta $004300
+c00759 lda #$04
+c0075b sta $004301
+c0075f lda #$01
+c00761 sta $00420b
+c00765 rts
+
+Routine_c00766:
+c00766 lda $7ff4
+c00769 bne .Branch_c0076c
+
+c0076b rts
+
+Routine_c00858:
+c00858 lda $7fe2
+c0085b bne .Branch_c0085e
+
+c0085d rts
+
+Routine_c00b16:
+c00b16 lda $99d9
+c00b19 cmp #$0a
+c00b1b bne .Branch_c00b72
+
+
+.Branch_c00b72
+c00b72 lda #$01
+c00b74 sta $004300
+c00b78 lda #$18
+c00b7a sta $004301
+c00b7e lda #$7f
+c00b80 sta $004304
+c00b84 lda #$80
+c00b86 sta $002115
+c00b8a lda $7ff0
+c00b8d beq .Branch_c00bc3
+
+
+.Branch_c00bc3
+c00bc3 lda $7ff1
+c00bc6 beq .Branch_c00bfc
+
+
+.Branch_c00bfc
+c00bfc lda $7ff2
+c00bff beq .Branch_c00c35
+
+
+.Branch_c00c35
+c00c35 rts
+
+Routine_c00c46:
+c00c46 ldy $93ae
+c00c49 beq .Branch_c00c93
+
+c00c4b lda #$80
+c00c4d sta $002115
+c00c51 lda #$01
+c00c53 sta $004300
+c00c57 lda #$18
+c00c59 sta $004301
+c00c5d ldy #$0000
+
+.Branch_c00c60
+c00c60 rep #$20
+c00c62 lda $8bae,y
+c00c65 sta $004302
+c00c69 lda $8fae,y
+c00c6c sta $002116
+c00c70 lda $91ae,y
+c00c73 sta $004305
+c00c77 sep #$20
+c00c79 lda $8dae,y
+c00c7c sta $004304
+c00c80 lda #$01
+c00c82 sta $00420b
+c00c86 iny
+c00c87 iny
+c00c88 cpy $93ae
+c00c8b bcc .Branch_c00c60
+
+c00c8d ldy #$0000
+c00c90 sty $93ae
+
+.Branch_c00c93
+c00c93 rts
+
+Routine_c00c94:
+c00c94 ldy $95b2
+c00c97 beq .Branch_c00cdf
+
+
+.Branch_c00cdf
+c00cdf rts
+
+Routine_c00ce0:
+c00ce0 ldy $94b0
+c00ce3 beq .Branch_c00d2d
+
+
+.Branch_c00d2d
+c00d2d rts
+
+Routine_c00d2e:
+c00d2e ldy $95cc
+c00d31 beq .Branch_c00d7c
+
+
+.Branch_c00d7c
+c00d7c rts
+
+Routine_c00d7d:
+c00d7d ldy $966e
+c00d80 beq .Branch_c00dcb
+
+
+.Branch_c00dcb
+c00dcb rts
+
+Routine_c00dcc:
+c00dcc lda $7fea
+c00dcf beq .Branch_c00e0b
+
+
+.Branch_c00e0b
+c00e0b rts
+
+Routine_c00e0c:
+c00e0c lda $7fec
+c00e0f beq .Branch_c00e4b
+
+
+.Branch_c00e4b
+c00e4b rts
+
+Routine_c00e4c:
+c00e4c lda $7f8c
+c00e4f sta $002105
+c00e53 lda $7f8e
+c00e56 sta $002106
+c00e5a lda $7fc8
+c00e5d sta $00212c
+c00e61 lda $7fca
+c00e64 sta $00212d
+c00e68 lda $7fcc
+c00e6b sta $00212e
+c00e6f lda $7fce
+c00e72 sta $00212f
+c00e76 lda $7fd0
+c00e79 sta $002130
+c00e7d lda $7fd2
+c00e80 sta $002131
+c00e84 lda $7fba
+c00e87 sta $002123
+c00e8b lda $7fbc
+c00e8e sta $002124
+c00e92 lda $7fc0
+c00e95 sta $002126
+c00e99 lda $7fc1
+c00e9c sta $002127
+c00ea0 lda $7fc2
+c00ea3 sta $002128
+c00ea7 lda $7fc3
+c00eaa sta $002129
+c00eae lda $7fbe
+c00eb1 sta $002125
+c00eb5 lda $7fc4
+c00eb8 sta $00212a
+c00ebc lda $7fc6
+c00ebf sta $00212b
+c00ec3 lda $7fd4
+c00ec6 and #$1f
+c00ec8 ora #$20
+c00eca sta $002132
+c00ece rep #$20
+c00ed0 lda $7fd4
+c00ed3 and #$03e0
+c00ed6 lsr
+c00ed7 lsr
+c00ed8 lsr
+c00ed9 lsr
+c00eda lsr
+c00edb ora #$0040
+c00ede sep #$20
+c00ee0 sta $002132
+c00ee4 lda $7fd5
+c00ee7 and #$7c
+c00ee9 lsr
+c00eea lsr
+c00eeb ora #$80
+c00eed sta $002132
+c00ef1 lda $7f8a
+c00ef4 sta $002101
+c00ef8 lda $7f90
+c00efb sta $002107
+c00eff lda $7f92
+c00f02 sta $002108
+c00f06 lda $7f94
+c00f09 sta $002109
+c00f0d lda $7f96
+c00f10 sta $00210a
+c00f14 lda $7f98
+c00f17 sta $00210b
+c00f1b lda $7f9a
+c00f1e sta $00210c
+c00f22 lda $7fda
+c00f25 sta $002133
+c00f29 rts
+
+Routine_c00f2a:
+c00f2a lda $7f9c
+c00f2d sta $00210d
+c00f31 lda $7f9d
+c00f34 sta $00210d
+c00f38 lda $7fa4
+c00f3b sta $00210e
+c00f3f lda $7fa5
+c00f42 sta $00210e
+c00f46 lda $7f9e
+c00f49 sta $00210f
+c00f4d lda $7f9f
+c00f50 sta $00210f
+c00f54 lda $7fa6
+c00f57 sta $002110
+c00f5b lda $7fa7
+c00f5e sta $002110
+c00f62 lda $7fa0
+c00f65 sta $002111
+c00f69 lda $7fa1
+c00f6c sta $002111
+c00f70 lda $7fa8
+c00f73 sta $002112
+c00f77 lda $7fa9
+c00f7a sta $002112
+c00f7e lda $7f8c
+c00f81 and #$07
+c00f83 cmp #$07
+c00f85 bne .Branch_c00fe2
+
+
+.Branch_c00fe2
+c00fe2 rts
+
+Routine_c01098:
+c01098 php
+c01099 sei
+c0109a sep #$20
+c0109c sta $004202
+c010a0 xba
+c010a1 sta $004203
+c010a5 nop
+c010a6 nop
+c010a7 nop
+c010a8 nop
+c010a9 lda $004217
+c010ad xba
+c010ae lda $004216
+c010b2 plp
+c010b3 rtl
+
+Routine_c01146:
+c01146 php
+c01147 sep #$20
+c01149 pha
+c0114a xba
+c0114b pha
+c0114c lda $01,x
+c0114e pha
+c0114f lda $03,s
+c01151 xba
+c01152 lda $00,x
+c01154 pha
+c01155 sta $004202
+c01159 xba
+c0115a sta $004203
+c0115e nop
+c0115f nop
+c01160 nop
+c01161 nop
+c01162 lda $004216
+c01166 sta $00,x
+c01168 lda $004217
+c0116c sta $01,x
+c0116e pla
+c0116f xba
+c01170 lda $02,s
+c01172 sta $004202
+c01176 xba
+c01177 sta $004203
+c0117b nop
+c0117c nop
+c0117d nop
+c0117e nop
+c0117f lda $004216
+c01183 clc
+c01184 adc $01,x
+c01186 sta $01,x
+c01188 lda $004217
+c0118c adc #$00
+c0118e sta $02,x
+c01190 lda $01,s
+c01192 xba
+c01193 lda $03,s
+c01195 sta $004202
+c01199 xba
+c0119a sta $004203
+c0119e nop
+c0119f nop
+c011a0 nop
+c011a1 nop
+c011a2 lda $004216
+c011a6 clc
+c011a7 adc $01,x
+c011a9 sta $01,x
+c011ab lda $004217
+c011af adc $02,x
+c011b1 sta $02,x
+c011b3 lda #$00
+c011b5 rol
+c011b6 sta $03,x
+c011b8 lda $01,s
+c011ba xba
+c011bb lda $02,s
+c011bd sta $004202
+c011c1 xba
+c011c2 sta $004203
+c011c6 nop
+c011c7 nop
+c011c8 nop
+c011c9 nop
+c011ca lda $004216
+c011ce clc
+c011cf adc $02,x
+c011d1 sta $02,x
+c011d3 lda $004217
+c011d7 adc $03,x
+c011d9 sta $03,x
+c011db pla
+c011dc pla
+c011dd xba
+c011de pla
+c011df plp
+c011e0 rtl
+
+.Branch_c02752
+c02752 rep #$30
+c02754 lda #$0000
+c02757 sta $7e7de0
+c0275b rep #$30
+
+.Branch_c0275d
+c0275d lda $7e7de0
+c02761 tax
+c02762 lda $7e7dd0,x
+c02766 bne .Branch_c02774
+
+c02768 lda $7e7dd8,x
+c0276c tcs
+c0276d pld
+c0276e plb
+c0276f ply
+c02770 plx
+c02771 pla
+c02772 plp
+c02773 rtl
+
+.Branch_c02774
+Jump_c02774:
+c02774 rep #$30
+c02776 lda $7e7de0
+c0277a inc
+c0277b inc
+c0277c sta $7e7de0
+c02780 cmp #$0008
+c02783 bcc .Branch_c0275d
+
+c02785 lda $7e7fe4
+c02789 beq .Branch_c02752
+
+c0278b sep #$20
+c0278d lda #$01
+c0278f sta $7e7fde
+c02793 rep #$20
+
+.Branch_c02795
+c02795 lda $c1fffe
+c02799 bpl .Branch_c027a4
+
+
+.Branch_c027a4
+c027a4 lda $7e7fde
+c027a8 beq .Branch_c02752
+
+c027aa bra .Branch_c02795
+
+
+Routine_c02892:
+c02892 php
+c02893 sep #$20
+c02895 pha
+c02896 lda #$01
+c02898 sta $7e7fe0
+c0289c pla
+c0289d plp
+c0289e php
+c0289f rep #$30
+c028a1 pha
+c028a2 phx
+c028a3 phy
+c028a4 phb
+c028a5 phd
+c028a6 lda $7e7de0
+c028aa tax
+c028ab tsc
+c028ac sta $7e7dd8,x
+c028b0 jmp Jump_c02774
+
+
+Routine_c028b4:
+c028b4 php
+c028b5 rep #$30
+c028b7 pha
+c028b8 phx
+c028b9 phy
+c028ba phb
+c028bb phd
+c028bc lda $7e7f6e
+c028c0 bne .Branch_c028d9
+
+c028c2 tsc
+c028c3 cmp #$0500
+c028c6 bcc .Branch_c028d9
+
+
+.Branch_c028d9
+c028d9 lda #$0001
+c028dc sta $7e7fe0
+c028e0 lda $7e7de0
+c028e4 tax
+c028e5 tsc
+c028e6 sta $7e7dd8,x
+c028ea jmp Jump_c02774
+
+
+.Branch_c02e35
+c02e35 jsl Routine_c16995
+
+c02e39 jsl Routine_c0936f
+
+c02e3d jsl Routine_c679a7
+
+c02e41 jsl Routine_c04376
+
+c02e45 jsl Routine_c048f7
+
+c02e49 jsl Routine_c05030
+
+c02e4d jsl Routine_c028b4
+
+c02e51 bra .Branch_c02e35
+
+
+Routine_c03086:
+c03086 php
+c03087 rep #$30
+c03089 phb
+c0308a pea #$7e7e
+c0308d plb
+c0308e plb
+c0308f phx
+c03090 phy
+c03091 sta $8a86
+c03094 lda #$0002
+c03097 sta $8a8a
+c0309a jsr Routine_c0323b
+
+c0309d bcc .Branch_c030a6
+
+c0309f tya
+c030a0 ply
+c030a1 plx
+c030a2 plb
+c030a3 plp
+c030a4 sec
+c030a5 rtl
+
+Routine_c030ac:
+c030ac php
+c030ad rep #$30
+c030af phb
+c030b0 pea #$7e7e
+c030b3 plb
+c030b4 plb
+c030b5 phx
+c030b6 phy
+c030b7 sta $8a86
+c030ba lda #$0003
+c030bd sta $8a8a
+c030c0 jsr Routine_c0323b
+
+c030c3 bcc .Branch_c030cc
+
+c030c5 tya
+c030c6 ply
+c030c7 plx
+c030c8 plb
+c030c9 plp
+c030ca sec
+c030cb rtl
+
+Routine_c030d2:
+c030d2 php
+c030d3 rep #$30
+c030d5 phb
+c030d6 pea #$7e7e
+c030d9 plb
+c030da plb
+c030db phx
+c030dc phy
+c030dd sta $8a86
+c030e0 lda #$0008
+c030e3 sta $8a8a
+c030e6 jsr Routine_c0323b
+
+c030e9 bcc .Branch_c030f2
+
+c030eb tya
+c030ec ply
+c030ed plx
+c030ee plb
+c030ef plp
+c030f0 sec
+c030f1 rtl
+
+Routine_c0323b:
+c0323b jsr Routine_c033e1
+
+c0323e bcs .Branch_c03241
+
+
+.Branch_c03241
+c03241 lda $8a8a
+c03244 sta $8966,y
+c03247 sta $8908
+c0324a lda $8a86
+c0324d sta $8946,y
+c03250 asl
+c03251 asl
+c03252 asl
+c03253 asl
+c03254 tax
+c03255 tya
+c03256 asl
+c03257 asl
+c03258 asl
+c03259 tay
+c0325a stz $8a8e
+c0325d lda $f5eb45,x
+c03261 jsl Routine_c03319
+
+c03265 bcc .Branch_c03240
+
+c03267 jsl Routine_c033b1
+
+c0326b sta $8986,y
+c0326e lda #$0002
+c03271 sta $8a8e
+c03274 lda $f5eb47,x
+c03278 jsl Routine_c03319
+
+c0327c bcc .Branch_c03240
+
+c0327e jsl Routine_c033b1
+
+c03282 sta $8988,y
+c03285 lda #$0004
+c03288 sta $8a8e
+c0328b lda $f5eb49,x
+c0328f jsl Routine_c03319
+
+c03293 bcc .Branch_c03240
+
+c03295 jsl Routine_c033b1
+
+c03299 sta $898a,y
+c0329c lda #$0006
+c0329f sta $8a8e
+c032a2 lda $f5eb4b,x
+c032a6 jsl Routine_c03319
+
+c032aa bcs .Branch_c032ad
+
+
+.Branch_c032ad
+c032ad jsl Routine_c033b1
+
+c032b1 sta $898c,y
+c032b4 lda #$0008
+c032b7 sta $8a8e
+c032ba lda $f5eb4d,x
+c032be jsl Routine_c03319
+
+c032c2 bcc .Branch_c03317
+
+c032c4 jsl Routine_c033b1
+
+c032c8 sta $898e,y
+c032cb lda #$000a
+c032ce sta $8a8e
+c032d1 lda $f5eb4f,x
+c032d5 jsl Routine_c03319
+
+c032d9 bcc .Branch_c03317
+
+c032db jsl Routine_c033b1
+
+c032df sta $8990,y
+c032e2 lda #$000c
+c032e5 sta $8a8e
+c032e8 lda $f5eb51,x
+c032ec jsl Routine_c03319
+
+c032f0 bcc .Branch_c03317
+
+c032f2 jsl Routine_c033b1
+
+c032f6 sta $8992,y
+c032f9 lda #$000e
+c032fc sta $8a8e
+c032ff lda $f5eb53,x
+c03303 jsl Routine_c03319
+
+c03307 bcc .Branch_c03317
+
+c03309 jsl Routine_c033b1
+
+c0330d sta $8994,y
+c03310 tya
+c03311 lsr
+c03312 lsr
+c03313 lsr
+c03314 tay
+c03315 sec
+c03316 rts
+
+Routine_c03319:
+c03319 phx
+c0331a phy
+c0331b sta $8902
+c0331e cmp #$0000
+c03321 bne .Branch_c0332a
+
+c03323 lda #$ffff
+c03326 ply
+c03327 plx
+c03328 sec
+c03329 rtl
+
+.Branch_c0332a
+c0332a lda $8908
+c0332d and #$0007
+c03330 beq .Branch_c0337f
+
+c03332 asl
+c03333 tax
+c03334 lda $c03391,x
+c03338 sta $8904
+c0333b lda $c033a1,x
+c0333f sta $8906
+c03342 lda $8908
+c03345 and #$0008
+c03348 beq .Branch_c03361
+
+
+.Branch_c03361
+c03361 ldy $8904
+
+.Branch_c03364
+c03364 lda $883e,y
+c03367 beq .Branch_c03375
+
+c03369 iny
+c0336a iny
+c0336b cpy $8906
+c0336e bcc .Branch_c03364
+
+
+.Branch_c03375
+c03375 tya
+c03376 ora #$8000
+c03379 tay
+c0337a tya
+c0337b ply
+c0337c plx
+c0337d sec
+c0337e rtl
+
+.Branch_c0337f
+c0337f ldy $8a8e
+c03382 lda $883e,y
+c03385 beq .Branch_c03375
+
+
+Routine_c033b1:
+c033b1 phy
+c033b2 tay
+c033b3 cmp #$ffff
+c033b6 beq .Branch_c033de
+
+c033b8 tay
+c033b9 bpl .Branch_c033d7
+
+c033bb and #$7fff
+c033be tay
+c033bf phx
+c033c0 phy
+c033c1 lda $8902
+c033c4 sta $87fe,y
+c033c7 tax
+c033c8 tya
+c033c9 lsr
+c033ca asl
+c033cb asl
+c033cc asl
+c033cd asl
+c033ce ldy #$7ffe
+c033d1 jsl Routine_c041c3
+
+c033d5 ply
+c033d6 plx
+
+.Branch_c033d7
+c033d7 lda $883e,y
+c033da inc
+c033db sta $883e,y
+
+.Branch_c033de
+c033de tya
+c033df ply
+c033e0 rtl
+
+Routine_c033e1:
+c033e1 lda $8a8a
+c033e4 and #$0008
+c033e7 beq .Branch_c03408
+
+c033e9 ldy #$0000
+
+.Branch_c033ec
+c033ec lda $8926,y
+c033ef beq .Branch_c03401
+
+c033f1 lda $8966,y
+c033f4 cmp $8a8a
+c033f7 bne .Branch_c03401
+
+c033f9 lda $8946,y
+c033fc cmp $8a86
+c033ff beq .Branch_c03419
+
+
+.Branch_c03401
+c03401 iny
+c03402 iny
+c03403 cpy #$0020
+c03406 bcc .Branch_c033ec
+
+
+.Branch_c03408
+c03408 ldy #$0000
+
+.Branch_c0340b
+c0340b lda $8926,y
+c0340e beq .Branch_c03419
+
+c03410 iny
+c03411 iny
+c03412 cpy #$0020
+c03415 bcc .Branch_c0340b
+
+
+.Branch_c03419
+c03419 lda $8926,y
+c0341c inc
+c0341d sta $8926,y
+c03420 sec
+c03421 rts
+
+Routine_c041c3:
+c041c3 cpy #$83fe
+c041c6 bcs .Branch_c041d0
+
+c041c8 pha
+c041c9 tya
+c041ca clc
+c041cb adc $88fe
+c041ce tay
+c041cf pla
+
+.Branch_c041d0
+c041d0 phy
+c041d1 and #$00f0
+c041d4 asl
+c041d5 clc
+c041d6 adc $01,s
+c041d8 tay
+c041d9 txa
+c041da jsl Routine_c041e0
+
+c041de ply
+c041df rtl
+
+Routine_c041e0:
+c041e0 cmp #$0800
+c041e3 bcs .Branch_c0425c
+
+c041e5 asl
+c041e6 asl
+c041e7 asl
+c041e8 asl
+c041e9 asl
+c041ea tax
+c041eb lda $f6602c,x
+c041ef sta $0000,y
+c041f2 lda $f6602e,x
+c041f6 sta $0002,y
+c041f9 lda $f66030,x
+c041fd sta $0004,y
+c04200 lda $f66032,x
+c04204 sta $0006,y
+c04207 lda $f66034,x
+c0420b sta $0008,y
+c0420e lda $f66036,x
+c04212 sta $000a,y
+c04215 lda $f66038,x
+c04219 sta $000c,y
+c0421c lda $f6603a,x
+c04220 sta $000e,y
+c04223 lda $f6603c,x
+c04227 sta $0010,y
+c0422a lda $f6603e,x
+c0422e sta $0012,y
+c04231 lda $f66040,x
+c04235 sta $0014,y
+c04238 lda $f66042,x
+c0423c sta $0016,y
+c0423f lda $f66044,x
+c04243 sta $0018,y
+c04246 lda $f66046,x
+c0424a sta $001a,y
+c0424d lda $f66048,x
+c04251 sta $001c,y
+c04254 lda $f6604a,x
+c04258 sta $001e,y
+c0425b rtl
+
+Routine_c04376:
+c04376 php
+c04377 rep #$30
+c04379 phb
+c0437a pea #$7e7e
+c0437d plb
+c0437e plb
+c0437f ldx #$0000
+
+.Branch_c04382
+c04382 lda $8b42,x
+c04385 cmp #$ffff
+c04388 bne .Branch_c04394
+
+c0438a inx
+c0438b inx
+c0438c cpx #$0010
+c0438f bcc .Branch_c04382
+
+c04391 plb
+c04392 plp
+c04393 rtl
+
+Routine_c048f7:
+c048f7 rep #$30
+c048f9 pea #$7e7e
+c048fc plb
+c048fd plb
+c048fe lda $7f8e
+c04901 and #$00f0
+c04904 beq .Branch_c04910
+
+
+.Branch_c04910
+c04910 rtl
+
+Routine_c04923:
+c04923 php
+c04924 rep #$30
+c04926 pha
+c04927 phx
+c04928 phy
+c04929 sta $1c
+c0492b stx $20
+c0492d stz $18
+c0492f stz $1a
+c04931 lda #$03be
+c04934 sta $1e
+c04936 stz $22
+c04938 ldx #$0000
+
+.Branch_c0493b
+c0493b stz $f3c6,x
+c0493e inx
+c0493f inx
+c04940 cpx #$0400
+c04943 bcc .Branch_c0493b
+
+c04945 ldy #$0000
+c04948 tya
+c04949 sep #$20
+
+.Branch_c0494b
+Jump_c0494b:
+c0494b lsr $19
+c0494d ror $18
+c0494f lda $19
+c04951 lsr
+c04952 bcs .Branch_c0495b
+
+c04954 lda [$00],y
+c04956 iny
+c04957 sta $18
+c04959 dec $19
+
+.Branch_c0495b
+c0495b lda $18
+c0495d lsr
+c0495e bcc .Branch_c049b4
+
+c04960 lda $22
+c04962 lsr
+c04963 bcs .Branch_c0497e
+
+c04965 lda [$00],y
+c04967 iny
+c04968 sta $24
+c0496a ldx $1e
+c0496c sta $f3c6,x
+c0496f inc $1e
+c04971 bne .Branch_c0497a
+
+
+.Branch_c0497a
+c0497a inc $22
+c0497c bra .Branch_c0494b
+
+
+.Branch_c0497e
+c0497e lda [$00],y
+c04980 iny
+c04981 sta $25
+c04983 ldx $1e
+c04985 sta $f3c6,x
+c04988 inc $1e
+c0498a bne .Branch_c04993
+
+c0498c lda $1f
+c0498e inc
+c0498f and #$03
+c04991 sta $1f
+
+.Branch_c04993
+c04993 inc $22
+c04995 rep #$20
+c04997 ldx $20
+c04999 lda $24
+c0499b sta $0000,x
+c0499e inx
+c0499f inx
+c049a0 stx $20
+c049a2 dec $1c
+c049a4 beq .Branch_c049ad
+
+c049a6 lda #$0000
+c049a9 sep #$20
+c049ab bra .Branch_c0494b
+
+
+.Branch_c049b4
+c049b4 lda [$00],y
+c049b6 iny
+c049b7 sta $1a
+c049b9 lda [$00],y
+c049bb rol
+c049bc rol
+c049bd rol
+c049be and #$03
+c049c0 sta $1b
+c049c2 lda [$00],y
+c049c4 iny
+c049c5 and #$3f
+c049c7 clc
+c049c8 adc #$03
+c049ca phy
+c049cb tay
+
+.Branch_c049cc
+c049cc dey
+c049cd bmi .Branch_c04a3a
+
+c049cf lda $22
+c049d1 lsr
+c049d2 bcs .Branch_c049fc
+
+c049d4 ldx $1a
+c049d6 lda $f3c6,x
+c049d9 sta $24
+c049db inc $1a
+c049dd bne .Branch_c049e8
+
+
+.Branch_c049e8
+c049e8 ldx $1e
+c049ea sta $f3c6,x
+c049ed inc $1e
+c049ef bne .Branch_c049f8
+
+
+.Branch_c049f8
+c049f8 inc $22
+c049fa bra .Branch_c049cc
+
+
+.Branch_c049fc
+c049fc ldx $1a
+c049fe lda $f3c6,x
+c04a01 sta $25
+c04a03 inc $1a
+c04a05 bne .Branch_c04a10
+
+c04a07 lda $1b
+c04a09 inc
+c04a0a and #$03
+c04a0c sta $1b
+c04a0e lda $25
+
+.Branch_c04a10
+c04a10 ldx $1e
+c04a12 sta $f3c6,x
+c04a15 inc $1e
+c04a17 bne .Branch_c04a20
+
+c04a19 lda $1f
+c04a1b inc
+c04a1c and #$03
+c04a1e sta $1f
+
+.Branch_c04a20
+c04a20 inc $22
+c04a22 rep #$20
+c04a24 ldx $20
+c04a26 lda $24
+c04a28 sta $0000,x
+c04a2b inx
+c04a2c inx
+c04a2d stx $20
+c04a2f dec $1c
+c04a31 beq .Branch_c04a3e
+
+c04a33 lda #$0000
+c04a36 sep #$20
+c04a38 bra .Branch_c049cc
+
+
+.Branch_c04a3a
+c04a3a ply
+c04a3b jmp Jump_c0494b
+
+
+.Branch_c04a3e
+c04a3e ply
+c04a3f ply
+c04a40 plx
+c04a41 pla
+c04a42 plp
+c04a43 rtl
+
+Routine_c05030:
+c05030 php
+c05031 rep #$20
+c05033 phb
+c05034 pea #$7f7f
+c05037 plb
+c05038 plb
+c05039 stz $e39e
+c0503c stz $e3a0
+c0503f stz $e3a2
+c05042 stz $e3a4
+c05045 stz $e3a6
+c05048 stz $e3a8
+c0504b stz $e3aa
+c0504e stz $e3ac
+c05051 stz $e3ae
+c05054 stz $e3b0
+c05057 plb
+c05058 plp
+c05059 rtl
+
+Routine_c05a71:
+c05a71 php
+c05a72 rep #$30
+c05a74 phb
+c05a75 pha
+c05a76 pea #$7f7f
+c05a79 plb
+c05a7a plb
+c05a7b ldy #$0000
+c05a7e lda $e3e2,y
+c05a81 bpl .Branch_c05a8f
+
+
+.Branch_c05a8f
+c05a8f pla
+c05a90 plb
+c05a91 plp
+c05a92 sec
+c05a93 rtl
+
+Routine_c05da1:
+c05da1 php
+c05da2 rep #$30
+c05da4 pha
+c05da5 phx
+c05da6 phy
+c05da7 phb
+c05da8 pea #$7f7f
+c05dab plb
+c05dac plb
+c05dad stx $aeaa
+c05db0 jsl Routine_c90572
+
+c05dbf sta $aea4
+c05dc2 ldy #$0000
+
+.Branch_c05dc5
+c05dc5 lda $b0f2,y
+c05dc8 beq .Branch_c05dd5
+
+
+.Branch_c05dd5
+c05dd5 iny
+c05dd6 iny
+c05dd7 cpy #$000c
+c05dda bcc .Branch_c05dc5
+
+c05ddc ldx #$0000
+c05ddf lda $b122,x
+c05de2 bpl .Branch_c05df1
+
+c05de4 lda $b13e,x
+c05de7 sec
+c05de8 sbc $b130,x
+c05deb inc
+c05dec cmp $aea4
+c05def bcs .Branch_c05dfb
+
+
+.Branch_c05dfb
+c05dfb ldy #$0000
+c05dfe lda $b0f2,y
+c05e01 beq .Branch_c05e0d
+
+
+.Branch_c05e0d
+c05e0d lda $b130,x
+c05e10 sta $b0fe,y
+c05e13 clc
+c05e14 adc $aea4
+c05e17 dec
+c05e18 sta $b10a,y
+c05e1b inc
+c05e1c sta $b130,x
+c05e1f cmp $b13e,x
+c05e22 bcc .Branch_c05e27
+
+
+.Branch_c05e27
+c05e27 lda #$0000
+c05e2a sta $b0f2,y
+c05e2d lda $b0fe,y
+c05e30 sta $aea6
+c05e33 jsr Routine_c061e6
+
+c05e36 lda $aeaa
+c05e39 sta $b116,y
+c05e3c lda $b0f2,y
+c05e3f inc
+c05e40 bne .Branch_c05e43
+
+
+.Branch_c05e43
+c05e43 sta $b0f2,y
+c05e46 sty $aea2
+c05e49 lda $b0fe,y
+c05e4c sta $aea6
+c05e4f plb
+c05e50 rep #$30
+c05e52 ply
+c05e53 plx
+c05e54 pla
+c05e55 plp
+c05e56 sec
+c05e57 rtl
+
+Routine_c061e6:
+c061e6 phx
+c061e7 phy
+c061e8 lda $aea4
+c061eb beq .Branch_c0622f
+
+c061ed stz $16
+c061ef ldx $aeaa
+c061f2 jsl Routine_c90572
+
+c06201 asl
+c06202 rol $16
+c06204 clc
+c06205 adc #$06ce
+c06208 sta $14
+c0620a lda $16
+c0620c adc #$00e4
+c0620f sta $16
+c06211 lda $aea4
+c06214 sta $2e
+c06216 lda $b0fe,y
+c06219 asl
+c0621a tax
+c0621b ldy #$0000
+
+.Branch_c0621e
+c0621e lda [$14],y
+c06220 sta $b14c,x
+c06223 iny
+c06224 iny
+c06225 inx
+c06226 inx
+c06227 dec $2e
+c06229 bne .Branch_c0621e
+
+c0622b jsl Routine_c0633c
+
+
+.Branch_c0622f
+c0622f ply
+c06230 plx
+c06231 rts
+
+Routine_c0633c:
+c0633c php
+c0633d rep #$30
+c0633f pha
+c06340 phx
+c06341 phy
+c06342 phb
+c06343 pea #$7e7e
+c06346 plb
+c06347 plb
+c06348 lda $7faea4
+c0634c sta $967a
+c0634f lda $7faea6
+c06353 asl
+c06354 tax
+c06355 stz $2a
+
+.Branch_c06357
+c06357 lda $2a
+c06359 cmp $7fb74c
+c0635d bcs .Branch_c06367
+
+c0635f ldy $93ae
+c06362 cpy #$0200
+c06365 bcc .Branch_c0636d
+
+
+.Branch_c06367
+c06367 jsl Routine_c02892
+
+c0636b stz $2a
+
+.Branch_c0636d
+c0636d ldy $93ae
+c06370 stz $2e
+c06372 lda $7fb14c,x
+c06376 asl
+c06377 rol $2e
+c06379 asl
+c0637a rol $2e
+c0637c asl
+c0637d rol $2e
+c0637f asl
+c06380 rol $2e
+c06382 asl
+c06383 rol $2e
+c06385 clc
+c06386 adc #$0080
+c06389 sta $8bae,y
+c0638c lda $2e
+c0638e adc #$00ce
+c06391 sta $8dae,y
+c06394 lda #$0020
+c06397 sta $91ae,y
+c0639a txa
+c0639b asl
+c0639c asl
+c0639d asl
+c0639e clc
+c0639f adc $99db
+c063a2 sta $8fae,y
+c063a5 inc $93ae
+c063a8 inc $93ae
+c063ab inx
+c063ac inx
+c063ad inc $2a
+c063af dec $967a
+c063b2 bne .Branch_c06357
+
+c063b4 jsl Routine_c02892
+
+c063b8 plb
+c063b9 rep #$30
+c063bb ply
+c063bc plx
+c063bd pla
+c063be plp
+c063bf rtl
+
+Routine_c067fd:
+c067fd php
+c067fe rep #$30
+c06800 pha
+c06801 phx
+c06802 phy
+c06803 phb
+c06804 pea #$7f7f
+c06807 plb
+c06808 plb
+c06809 phx
+c0680a jsl Routine_c90572
+
+c06819 tax
+c0681a jsl Routine_c05da1
+
+c0681e plx
+c0681f bcs .Branch_c06824
+
+
+.Branch_c06824
+c06824 lda $aea2
+c06827 sta $b75c
+c0682a lda #$0001
+c0682d sta $b75a
+c06830 jsl Routine_c90572
+
+c0683f sta $b752
+c06842 jsl Routine_c06c4a
+
+c06846 bcc .Branch_c0688e
+
+c06848 bvs .Branch_c06885
+
+c0684a jsl Routine_c90572
+
+c06859 stz $16
+c0685b asl
+c0685c rol $16
+c0685e asl
+c0685f rol $16
+c06861 asl
+c06862 rol $16
+c06864 clc
+c06865 adc #$43a0
+c06868 sta $14
+c0686a lda $16
+c0686c adc #$00e5
+c0686f sta $16
+c06871 jsr Routine_c06bc7
+
+c06874 jsl Routine_c9050d
+
+c0687f ldy #$0005
+c06882 jsr Routine_c06c0d
+
+
+.Branch_c06885
+c06885 plb
+c06886 rep #$30
+c06888 ply
+c06889 plx
+c0688a pla
+c0688b plp
+c0688c sec
+c0688d rtl
+
+Routine_c06bc7:
+c06bc7 phx
+c06bc8 lda $b752
+c06bcb sta $2a
+c06bcd lda $aea6
+c06bd0 sta $2c
+c06bd2 ldx $b750
+c06bd5 lda $b780,x
+c06bd8 asl
+c06bd9 tax
+c06bda ldy #$0000
+
+.Branch_c06bdd
+c06bdd lda [$14],y
+c06bdf clc
+c06be0 adc $2c
+c06be2 sta $c086,x
+c06be5 iny
+c06be6 iny
+c06be7 lda [$14],y
+c06be9 clc
+c06bea adc $2c
+c06bec sta $b886,x
+c06bef iny
+c06bf0 iny
+c06bf1 lda [$14],y
+c06bf3 clc
+c06bf4 adc $2c
+c06bf6 sta $d086,x
+c06bf9 iny
+c06bfa iny
+c06bfb lda [$14],y
+c06bfd clc
+c06bfe adc $2c
+c06c00 sta $c886,x
+c06c03 inx
+c06c04 inx
+c06c05 iny
+c06c06 iny
+c06c07 dec $2a
+c06c09 bne .Branch_c06bdd
+
+c06c0b plx
+c06c0c rts
+
+Routine_c06c0d:
+c06c0d lda $b752
+c06c10 sta $2a
+c06c12 ldx $b750
+c06c15 lda $b780,x
+c06c18 asl
+c06c19 tax
+c06c1a lda [$14],y
+c06c1c pha
+c06c1d iny
+c06c1e iny
+c06c1f lda [$14],y
+c06c21 and #$00ff
+c06c24 sta $16
+c06c26 pla
+c06c27 sta $14
+c06c29 ora $16
+c06c2b beq .Branch_c06c40
+
+c06c2d ldy #$0000
+
+.Branch_c06c30
+c06c30 lda [$14],y
+c06c32 and #$00ff
+c06c35 sta $d886,x
+c06c38 iny
+c06c39 inx
+c06c3a inx
+c06c3b dec $2a
+c06c3d bne .Branch_c06c30
+
+c06c3f rts
+
+Routine_c06c4a:
+c06c4a phx
+c06c4b stx $b758
+c06c4e ldy #$0000
+
+.Branch_c06c51
+c06c51 lda $b760,y
+c06c54 beq .Branch_c06c69
+
+
+.Branch_c06c69
+c06c69 iny
+c06c6a iny
+c06c6b cpy #$0020
+c06c6e bcc .Branch_c06c51
+
+c06c70 ldx #$0000
+c06c73 lda $b820,x
+c06c76 bpl .Branch_c06c85
+
+c06c78 lda $b864,x
+c06c7b sec
+c06c7c sbc $b842,x
+c06c7f inc
+c06c80 cmp $b752
+c06c83 bcs .Branch_c06c8f
+
+
+.Branch_c06c8f
+c06c8f ldy #$0000
+c06c92 lda $b760,y
+c06c95 beq .Branch_c06ca1
+
+
+.Branch_c06ca1
+c06ca1 lda $b842,x
+c06ca4 sta $b780,y
+c06ca7 clc
+c06ca8 adc $b752
+c06cab dec
+c06cac sta $b7a0,y
+c06caf inc
+c06cb0 sta $b842,x
+c06cb3 cmp $b864,x
+c06cb6 bcc .Branch_c06cbb
+
+
+.Branch_c06cbb
+c06cbb lda #$0000
+c06cbe sta $b760,y
+c06cc1 jsr Routine_c06d59
+
+c06cc4 plx
+c06cc5 sec
+c06cc6 clv
+c06cc7 rtl
+
+Routine_c06d59:
+c06d59 lda $b758
+c06d5c sta $b7c0,y
+c06d5f lda $b760,y
+c06d62 inc
+c06d63 bne .Branch_c06d66
+
+
+.Branch_c06d66
+c06d66 sta $b760,y
+c06d69 sty $b750
+c06d6c lda $b75a
+c06d6f sta $b7e0,y
+c06d72 lda $b75c
+c06d75 sta $b800,y
+c06d78 lda $b780,y
+c06d7b sta $b754
+c06d7e rts
+
+Routine_c07f7d:
+c07f7d php
+c07f7e rep #$30
+c07f80 pha
+c07f81 phx
+c07f82 phy
+c07f83 phb
+c07f84 pea #$7f7f
+c07f87 plb
+c07f88 plb
+c07f89 tax
+c07f8a jsl Routine_c90572
+
+c07f99 sta $e0b2
+c07f9c jsl Routine_c90572
+
+c07fab sta $e0b4
+c07fae ora $e0b2
+c07fb1 bne .Branch_c07fb6
+
+
+.Branch_c07fb6
+c07fb6 sep #$20
+c07fb8 lda $e0b2
+c07fbb xba
+c07fbc lda $e0b4
+c07fbf jsl Routine_c01098
+
+c07fc3 rep #$20
+c07fc5 sta $e0b6
+c07fc8 asl
+c07fc9 jsl Routine_c08fd7
+
+c07fcd bcs .Branch_c07fd2
+
+
+.Branch_c07fd2
+c07fd2 jsl Routine_c90572
+
+c07fe1 asl
+c07fe2 adc $fc46
+c07fe5 sta $fc46
+c07fe8 jsl Routine_c90572
+
+c07ff7 asl
+c07ff8 adc $fc48
+c07ffb sta $fc48
+c07ffe jsl Routine_c90572
+
+c0800d phx
+c0800e tax
+c0800f jsl Routine_c90572
+
+c0801e sta $e0b8
+c08021 jsl Routine_c90572
+
+c08030 tax
+c08031 jsl Routine_c067fd
+
+c08035 plx
+c08036 bcc .Branch_c08066
+
+c08038 jsl Routine_c903ee
+
+c08044 sta $00
+c08046 jsl Routine_c903ee
+
+c08052 and #$00ff
+c08055 sta $02
+c08057 lda #$000e
+c0805a jsr Routine_c0847a
+
+c0805d plb
+c0805e rep #$30
+c08060 ply
+c08061 plx
+c08062 pla
+c08063 plp
+c08064 sec
+c08065 rtl
+
+Routine_c0847a:
+c0847a jsl Routine_c05a71
+
+c0847e bcc .Branch_c084a3
+
+c08480 jsr Routine_c084a4
+
+c08483 lda $e412,y
+c08486 tax
+c08487 lda $e0b6
+c0848a jsl Routine_c04923
+
+c0848e tay
+c0848f lda $e0b8
+c08492 sta $18
+
+.Branch_c08494
+c08494 lda $0000,x
+c08497 clc
+c08498 adc $18
+c0849a sta $0000,x
+c0849d inx
+c0849e inx
+c0849f dey
+c084a0 bne .Branch_c08494
+
+c084a2 sec
+
+.Branch_c084a3
+c084a3 rts
+
+Routine_c084a4:
+c084a4 sta $e3f2,y
+c084a7 lda $fc4c
+c084aa sta $e472,y
+c084ad lda $fc4a
+c084b0 sta $e4b2,y
+c084b3 ldx $ae9a
+c084b6 txa
+c084b7 sta $e4a2,y
+c084ba lda $adf4,x
+c084bd sta $e412,y
+c084c0 lda #$007f
+c084c3 sta $e422,y
+c084c6 lda $b750
+c084c9 sta $e482,y
+c084cc lda $aea2
+c084cf sta $e492,y
+c084d2 lda $b754
+c084d5 sta $e4c2,y
+c084d8 lda #$8000
+c084db sta $e3e2,y
+c084de tya
+c084df sta $e552
+c084e2 lda #$0000
+c084e5 sta $e4d2,y
+c084e8 sta $e4e2,y
+c084eb sta $e4f2,y
+c084ee sta $e502,y
+c084f1 sta $e512,y
+c084f4 sta $e522,y
+c084f7 sta $e532,y
+c084fa sta $e542,y
+c084fd lda #$0001
+c08500 sta $e402,y
+c08503 lda $e0b2
+c08506 asl
+c08507 asl
+c08508 asl
+c08509 pha
+c0850a lda $fc46
+c0850d sta $e432,y
+c08510 clc
+c08511 adc $01,s
+c08513 dec
+c08514 sta $e442,y
+c08517 pla
+c08518 lda $e0b4
+c0851b asl
+c0851c asl
+c0851d asl
+c0851e pha
+c0851f lda $fc48
+c08522 sta $e452,y
+c08525 clc
+c08526 adc $01,s
+c08528 dec
+c08529 sta $e462,y
+c0852c pla
+c0852d rts
+
+Routine_c08fd7:
+c08fd7 php
+c08fd8 rep #$30
+c08fda pha
+c08fdb phx
+c08fdc phy
+c08fdd phb
+c08fde pea #$7f7f
+c08fe1 plb
+c08fe2 plb
+c08fe3 sta $ae9c
+c08fe6 ldx #$0000
+c08fe9 lda $ae34,x
+c08fec bpl .Branch_c08ffb
+
+c08fee lda $ae78,x
+c08ff1 sec
+c08ff2 sbc $ae56,x
+c08ff5 inc
+c08ff6 cmp $ae9c
+c08ff9 bcs .Branch_c09005
+
+
+.Branch_c09005
+c09005 ldy #$0000
+
+.Branch_c09008
+c09008 lda $add4,y
+c0900b bpl .Branch_c09017
+
+c0900d iny
+c0900e iny
+c0900f cpy #$0020
+c09012 bcc .Branch_c09008
+
+
+.Branch_c09017
+c09017 lda $ae56,x
+c0901a sta $adf4,y
+c0901d clc
+c0901e adc $ae9c
+c09021 dec
+c09022 sta $ae14,y
+c09025 inc
+c09026 sta $ae56,x
+c09029 cmp $ae78,x
+c0902c bcc .Branch_c09031
+
+
+.Branch_c09031
+c09031 lda #$8000
+c09034 sta $add4,y
+c09037 sty $ae9a
+c0903a lda $adf4,y
+c0903d sta $ae9e
+c09040 plb
+c09041 rep #$30
+c09043 ply
+c09044 plx
+c09045 pla
+c09046 plp
+c09047 sec
+c09048 rtl
+
+Routine_c0936f:
+c0936f php
+c09370 pea #$7e7e
+c09373 plb
+c09374 plb
+c09375 sep #$20
+c09377 lda $dd47
+c0937a bne .Branch_c09381
+
+c0937c lda $dd45
+c0937f beq .Branch_c09386
+
+
+.Branch_c09386
+c09386 lda #$e8
+c09388 sta $db20
+c0938b sta $db24
+c0938e sta $db28
+c09391 sta $db2c
+c09394 sta $db30
+c09397 sta $db34
+c0939a sta $db38
+c0939d sta $db3c
+c093a0 sta $db40
+c093a3 sta $db44
+c093a6 sta $db48
+c093a9 sta $db4c
+c093ac sta $db50
+c093af sta $db54
+c093b2 sta $db58
+c093b5 sta $db5c
+c093b8 sta $db60
+c093bb sta $db64
+c093be sta $db68
+c093c1 sta $db6c
+c093c4 sta $db70
+c093c7 sta $db74
+c093ca sta $db78
+c093cd sta $db7c
+c093d0 sta $db80
+c093d3 sta $db84
+c093d6 sta $db88
+c093d9 sta $db8c
+c093dc sta $db90
+c093df sta $db94
+c093e2 sta $db98
+c093e5 sta $db9c
+c093e8 sta $dba0
+c093eb sta $dba4
+c093ee sta $dba8
+c093f1 sta $dbac
+c093f4 sta $dbb0
+c093f7 sta $dbb4
+c093fa sta $dbb8
+c093fd sta $dbbc
+c09400 sta $dbc0
+c09403 sta $dbc4
+c09406 sta $dbc8
+c09409 sta $dbcc
+c0940c sta $dbd0
+c0940f sta $dbd4
+c09412 sta $dbd8
+c09415 sta $dbdc
+c09418 sta $dbe0
+c0941b sta $dbe4
+c0941e sta $dbe8
+c09421 sta $dbec
+c09424 sta $dbf0
+c09427 sta $dbf4
+c0942a sta $dbf8
+c0942d sta $dbfc
+c09430 sta $dc00
+c09433 sta $dc04
+c09436 sta $dc08
+c09439 sta $dc0c
+c0943c sta $dc10
+c0943f sta $dc14
+c09442 sta $dc18
+c09445 sta $dc1c
+c09448 sta $dc20
+c0944b sta $dc24
+c0944e sta $dc28
+c09451 sta $dc2c
+c09454 sta $dc30
+c09457 sta $dc34
+c0945a sta $dc38
+c0945d sta $dc3c
+c09460 sta $dc40
+c09463 sta $dc44
+c09466 sta $dc48
+c09469 sta $dc4c
+c0946c sta $dc50
+c0946f sta $dc54
+c09472 sta $dc58
+c09475 sta $dc5c
+c09478 sta $dc60
+c0947b sta $dc64
+c0947e sta $dc68
+c09481 sta $dc6c
+c09484 sta $dc70
+c09487 sta $dc74
+c0948a sta $dc78
+c0948d sta $dc7c
+c09490 sta $dc80
+c09493 sta $dc84
+c09496 sta $dc88
+c09499 sta $dc8c
+c0949c sta $dc90
+c0949f sta $dc94
+c094a2 sta $dc98
+c094a5 sta $dc9c
+c094a8 sta $dca0
+c094ab sta $dca4
+c094ae sta $dca8
+c094b1 sta $dcac
+c094b4 sta $dcb0
+c094b7 sta $dcb4
+c094ba sta $dcb8
+c094bd sta $dcbc
+c094c0 sta $dcc0
+c094c3 sta $dcc4
+c094c6 sta $dcc8
+c094c9 sta $dccc
+c094cc sta $dcd0
+c094cf sta $dcd4
+c094d2 sta $dcd8
+c094d5 sta $dcdc
+c094d8 sta $dce0
+c094db sta $dce4
+c094de sta $dce8
+c094e1 sta $dcec
+c094e4 sta $dcf0
+c094e7 sta $dcf4
+c094ea sta $dcf8
+c094ed sta $dcfc
+c094f0 sta $dd00
+c094f3 sta $dd04
+c094f6 sta $dd08
+c094f9 sta $dd0c
+c094fc sta $dd10
+c094ff sta $dd14
+c09502 sta $dd18
+c09505 sta $dd1c
+c09508 rep #$30
+c0950a stz $dd1f
+c0950d stz $dd21
+c09510 stz $dd23
+c09513 stz $dd25
+c09516 stz $dd27
+c09519 stz $dd29
+c0951c stz $dd2b
+c0951f stz $dd2d
+c09522 stz $dd2f
+c09525 stz $dd31
+c09528 stz $dd33
+c0952b stz $dd35
+c0952e stz $dd37
+c09531 stz $dd39
+c09534 stz $dd3b
+c09537 stz $dd3d
+c0953a pea #$99c5
+c0953d pea #$0010
+c09540 pea #$7e00
+c09543 jsl Routine_c9029e
+
+c09547 sta $28
+c09549 stz $dd3f
+c0954c lda $7ffc5a
+c09550 and $7ffc5e
+c09554 sta $dd43
+c09557 lda $7ffc58
+c0955b cmp #$0002
+c0955e beq .Branch_c0956d
+
+c09560 cmp #$0004
+c09563 beq .Branch_c09570
+
+c09565 cmp #$0006
+c09568 beq .Branch_c09573
+
+c0956a jmp Jump_c09576
+
+
+Jump_c09576:
+c09576 lda $dd49
+c09579 bmi .Branch_c095bd
+
+c0957b bit $dd49
+c0957e bvs .Branch_c095af
+
+c09580 tay
+c09581 lda $c3a5,y
+c09584 and #$0001
+c09587 beq .Branch_c095bd
+
+c09589 lda $c3a5,y
+c0958c and #$0020
+c0958f bne .Branch_c095bd
+
+c09591 lda $cf25,y
+c09594 bmi .Branch_c095bd
+
+c09596 lda $7e3500
+c0959a and #$0010
+c0959d beq .Branch_c095bd
+
+c0959f lda $dd3f
+c095a2 cmp #$007b
+c095a5 bcs .Branch_c095bd
+
+c095a7 ldx $cfe5,y
+c095aa jsr ($c6c6,x)
+c095ad bra .Branch_c095bd
+
+
+.Branch_c095bd
+c095bd lda $dd4b
+c095c0 bmi .Branch_c09604
+
+c095c2 bit $dd4b
+c095c5 bvs .Branch_c095f6
+
+c095c7 tay
+c095c8 lda $c3a5,y
+c095cb and #$0001
+c095ce beq .Branch_c09604
+
+c095d0 lda $c3a5,y
+c095d3 and #$0020
+c095d6 bne .Branch_c09604
+
+c095d8 lda $cf25,y
+c095db bmi .Branch_c09604
+
+c095dd lda $7e3500
+c095e1 and #$0010
+c095e4 beq .Branch_c09604
+
+c095e6 lda $dd3f
+c095e9 cmp #$007b
+c095ec bcs .Branch_c09604
+
+c095ee ldx $cfe5,y
+c095f1 jsr ($c6c6,x)
+c095f4 bra .Branch_c09604
+
+
+.Branch_c09604
+c09604 lda $dd4d
+c09607 bmi .Branch_c0964b
+
+c09609 bit $dd4d
+c0960c bvs .Branch_c0963d
+
+c0960e tay
+c0960f lda $c3a5,y
+c09612 and #$0001
+c09615 beq .Branch_c0964b
+
+c09617 lda $c3a5,y
+c0961a and #$0020
+c0961d bne .Branch_c0964b
+
+c0961f lda $cf25,y
+c09622 bmi .Branch_c0964b
+
+c09624 lda $7e3500
+c09628 and #$0010
+c0962b beq .Branch_c0964b
+
+c0962d lda $dd3f
+c09630 cmp #$007b
+c09633 bcs .Branch_c0964b
+
+c09635 ldx $cfe5,y
+c09638 jsr ($c6c6,x)
+c0963b bra .Branch_c0964b
+
+
+.Branch_c0964b
+c0964b lda $dd4f
+c0964e bmi .Branch_c09692
+
+c09650 bit $dd4f
+c09653 bvs .Branch_c09684
+
+c09655 tay
+c09656 lda $c3a5,y
+c09659 and #$0001
+c0965c beq .Branch_c09692
+
+c0965e lda $c3a5,y
+c09661 and #$0020
+c09664 bne .Branch_c09692
+
+c09666 lda $cf25,y
+c09669 bmi .Branch_c09692
+
+c0966b lda $7e3500
+c0966f and #$0010
+c09672 beq .Branch_c09692
+
+c09674 lda $dd3f
+c09677 cmp #$007b
+c0967a bcs .Branch_c09692
+
+c0967c ldx $cfe5,y
+c0967f jsr ($c6c6,x)
+c09682 bra .Branch_c09692
+
+
+.Branch_c09692
+c09692 lda $dd51
+c09695 bmi .Branch_c096d9
+
+c09697 bit $dd51
+c0969a bvs .Branch_c096cb
+
+c0969c tay
+c0969d lda $c3a5,y
+c096a0 and #$0001
+c096a3 beq .Branch_c096d9
+
+c096a5 lda $c3a5,y
+c096a8 and #$0020
+c096ab bne .Branch_c096d9
+
+c096ad lda $cf25,y
+c096b0 bmi .Branch_c096d9
+
+c096b2 lda $7e3500
+c096b6 and #$0010
+c096b9 beq .Branch_c096d9
+
+c096bb lda $dd3f
+c096be cmp #$007b
+c096c1 bcs .Branch_c096d9
+
+c096c3 ldx $cfe5,y
+c096c6 jsr ($c6c6,x)
+c096c9 bra .Branch_c096d9
+
+
+.Branch_c096d9
+c096d9 lda $dd53
+c096dc bmi .Branch_c09720
+
+c096de bit $dd53
+c096e1 bvs .Branch_c09712
+
+c096e3 tay
+c096e4 lda $c3a5,y
+c096e7 and #$0001
+c096ea beq .Branch_c09720
+
+c096ec lda $c3a5,y
+c096ef and #$0020
+c096f2 bne .Branch_c09720
+
+c096f4 lda $cf25,y
+c096f7 bmi .Branch_c09720
+
+c096f9 lda $7e3500
+c096fd and #$0010
+c09700 beq .Branch_c09720
+
+c09702 lda $dd3f
+c09705 cmp #$007b
+c09708 bcs .Branch_c09720
+
+c0970a ldx $cfe5,y
+c0970d jsr ($c6c6,x)
+c09710 bra .Branch_c09720
+
+
+.Branch_c09720
+c09720 lda $dd55
+c09723 bmi .Branch_c09767
+
+c09725 bit $dd55
+c09728 bvs .Branch_c09759
+
+c0972a tay
+c0972b lda $c3a5,y
+c0972e and #$0001
+c09731 beq .Branch_c09767
+
+c09733 lda $c3a5,y
+c09736 and #$0020
+c09739 bne .Branch_c09767
+
+c0973b lda $cf25,y
+c0973e bmi .Branch_c09767
+
+c09740 lda $7e3500
+c09744 and #$0010
+c09747 beq .Branch_c09767
+
+c09749 lda $dd3f
+c0974c cmp #$007b
+c0974f bcs .Branch_c09767
+
+c09751 ldx $cfe5,y
+c09754 jsr ($c6c6,x)
+c09757 bra .Branch_c09767
+
+
+.Branch_c09767
+c09767 lda $dd57
+c0976a bmi .Branch_c097ae
+
+c0976c bit $dd57
+c0976f bvs .Branch_c097a0
+
+c09771 tay
+c09772 lda $c3a5,y
+c09775 and #$0001
+c09778 beq .Branch_c097ae
+
+c0977a lda $c3a5,y
+c0977d and #$0020
+c09780 bne .Branch_c097ae
+
+c09782 lda $cf25,y
+c09785 bmi .Branch_c097ae
+
+c09787 lda $7e3500
+c0978b and #$0010
+c0978e beq .Branch_c097ae
+
+c09790 lda $dd3f
+c09793 cmp #$007b
+c09796 bcs .Branch_c097ae
+
+c09798 ldx $cfe5,y
+c0979b jsr ($c6c6,x)
+c0979e bra .Branch_c097ae
+
+
+.Branch_c097ae
+c097ae lda $dd59
+c097b1 bmi .Branch_c097f5
+
+c097b3 bit $dd59
+c097b6 bvs .Branch_c097e7
+
+c097b8 tay
+c097b9 lda $c3a5,y
+c097bc and #$0001
+c097bf beq .Branch_c097f5
+
+c097c1 lda $c3a5,y
+c097c4 and #$0020
+c097c7 bne .Branch_c097f5
+
+c097c9 lda $cf25,y
+c097cc bmi .Branch_c097f5
+
+c097ce lda $7e3500
+c097d2 and #$0010
+c097d5 beq .Branch_c097f5
+
+c097d7 lda $dd3f
+c097da cmp #$007b
+c097dd bcs .Branch_c097f5
+
+c097df ldx $cfe5,y
+c097e2 jsr ($c6c6,x)
+c097e5 bra .Branch_c097f5
+
+
+.Branch_c097f5
+c097f5 lda $dd5b
+c097f8 bmi .Branch_c0983c
+
+c097fa bit $dd5b
+c097fd bvs .Branch_c0982e
+
+c097ff tay
+c09800 lda $c3a5,y
+c09803 and #$0001
+c09806 beq .Branch_c0983c
+
+c09808 lda $c3a5,y
+c0980b and #$0020
+c0980e bne .Branch_c0983c
+
+c09810 lda $cf25,y
+c09813 bmi .Branch_c0983c
+
+c09815 lda $7e3500
+c09819 and #$0010
+c0981c beq .Branch_c0983c
+
+c0981e lda $dd3f
+c09821 cmp #$007b
+c09824 bcs .Branch_c0983c
+
+c09826 ldx $cfe5,y
+c09829 jsr ($c6c6,x)
+c0982c bra .Branch_c0983c
+
+
+.Branch_c0983c
+c0983c lda $dd5d
+c0983f bmi .Branch_c09883
+
+c09841 bit $dd5d
+c09844 bvs .Branch_c09875
+
+c09846 tay
+c09847 lda $c3a5,y
+c0984a and #$0001
+c0984d beq .Branch_c09883
+
+c0984f lda $c3a5,y
+c09852 and #$0020
+c09855 bne .Branch_c09883
+
+c09857 lda $cf25,y
+c0985a bmi .Branch_c09883
+
+c0985c lda $7e3500
+c09860 and #$0010
+c09863 beq .Branch_c09883
+
+c09865 lda $dd3f
+c09868 cmp #$007b
+c0986b bcs .Branch_c09883
+
+c0986d ldx $cfe5,y
+c09870 jsr ($c6c6,x)
+c09873 bra .Branch_c09883
+
+
+.Branch_c09883
+c09883 lda $dd5f
+c09886 bmi .Branch_c098ca
+
+c09888 bit $dd5f
+c0988b bvs .Branch_c098bc
+
+c0988d tay
+c0988e lda $c3a5,y
+c09891 and #$0001
+c09894 beq .Branch_c098ca
+
+c09896 lda $c3a5,y
+c09899 and #$0020
+c0989c bne .Branch_c098ca
+
+c0989e lda $cf25,y
+c098a1 bmi .Branch_c098ca
+
+c098a3 lda $7e3500
+c098a7 and #$0010
+c098aa beq .Branch_c098ca
+
+c098ac lda $dd3f
+c098af cmp #$007b
+c098b2 bcs .Branch_c098ca
+
+c098b4 ldx $cfe5,y
+c098b7 jsr ($c6c6,x)
+c098ba bra .Branch_c098ca
+
+
+.Branch_c098ca
+c098ca lda $dd61
+c098cd bmi .Branch_c09911
+
+c098cf bit $dd61
+c098d2 bvs .Branch_c09903
+
+c098d4 tay
+c098d5 lda $c3a5,y
+c098d8 and #$0001
+c098db beq .Branch_c09911
+
+c098dd lda $c3a5,y
+c098e0 and #$0020
+c098e3 bne .Branch_c09911
+
+c098e5 lda $cf25,y
+c098e8 bmi .Branch_c09911
+
+c098ea lda $7e3500
+c098ee and #$0010
+c098f1 beq .Branch_c09911
+
+c098f3 lda $dd3f
+c098f6 cmp #$007b
+c098f9 bcs .Branch_c09911
+
+c098fb ldx $cfe5,y
+c098fe jsr ($c6c6,x)
+c09901 bra .Branch_c09911
+
+
+.Branch_c09911
+c09911 lda $dd63
+c09914 bmi .Branch_c09958
+
+c09916 bit $dd63
+c09919 bvs .Branch_c0994a
+
+c0991b tay
+c0991c lda $c3a5,y
+c0991f and #$0001
+c09922 beq .Branch_c09958
+
+c09924 lda $c3a5,y
+c09927 and #$0020
+c0992a bne .Branch_c09958
+
+c0992c lda $cf25,y
+c0992f bmi .Branch_c09958
+
+c09931 lda $7e3500
+c09935 and #$0010
+c09938 beq .Branch_c09958
+
+c0993a lda $dd3f
+c0993d cmp #$007b
+c09940 bcs .Branch_c09958
+
+c09942 ldx $cfe5,y
+c09945 jsr ($c6c6,x)
+c09948 bra .Branch_c09958
+
+
+.Branch_c09958
+c09958 lda $dd65
+c0995b bmi .Branch_c0999f
+
+c0995d bit $dd65
+c09960 bvs .Branch_c09991
+
+c09962 tay
+c09963 lda $c3a5,y
+c09966 and #$0001
+c09969 beq .Branch_c0999f
+
+c0996b lda $c3a5,y
+c0996e and #$0020
+c09971 bne .Branch_c0999f
+
+c09973 lda $cf25,y
+c09976 bmi .Branch_c0999f
+
+c09978 lda $7e3500
+c0997c and #$0010
+c0997f beq .Branch_c0999f
+
+c09981 lda $dd3f
+c09984 cmp #$007b
+c09987 bcs .Branch_c0999f
+
+c09989 ldx $cfe5,y
+c0998c jsr ($c6c6,x)
+c0998f bra .Branch_c0999f
+
+
+.Branch_c0999f
+c0999f lda $dd67
+c099a2 bmi .Branch_c099e6
+
+
+.Branch_c099e6
+c099e6 lda $dd69
+c099e9 bmi .Branch_c09a2d
+
+
+.Branch_c09a2d
+c09a2d lda $dd6b
+c09a30 bmi .Branch_c09a74
+
+
+.Branch_c09a74
+c09a74 lda $dd6d
+c09a77 bmi .Branch_c09abb
+
+
+.Branch_c09abb
+c09abb lda $dd6f
+c09abe bmi .Branch_c09b02
+
+
+.Branch_c09b02
+c09b02 lda $dd71
+c09b05 bmi .Branch_c09b49
+
+
+.Branch_c09b49
+c09b49 lda $dd73
+c09b4c bmi .Branch_c09b90
+
+
+.Branch_c09b90
+c09b90 lda $dd75
+c09b93 bmi .Branch_c09bd7
+
+
+.Branch_c09bd7
+c09bd7 lda $dd77
+c09bda bmi .Branch_c09c1e
+
+
+.Branch_c09c1e
+c09c1e lda $dd79
+c09c21 bmi .Branch_c09c65
+
+
+.Branch_c09c65
+c09c65 lda $dd7b
+c09c68 bmi .Branch_c09cac
+
+
+.Branch_c09cac
+c09cac lda $dd7d
+c09caf bmi .Branch_c09cf3
+
+
+.Branch_c09cf3
+c09cf3 lda $dd7f
+c09cf6 bmi .Branch_c09d3a
+
+
+.Branch_c09d3a
+c09d3a lda $dd81
+c09d3d bmi .Branch_c09d81
+
+
+.Branch_c09d81
+c09d81 lda $dd83
+c09d84 bmi .Branch_c09dc8
+
+
+.Branch_c09dc8
+c09dc8 lda $dd85
+c09dcb bmi .Branch_c09e0f
+
+
+.Branch_c09e0f
+c09e0f lda $dd87
+c09e12 bmi .Branch_c09e56
+
+
+.Branch_c09e56
+c09e56 plp
+c09e57 rtl
+c0bd7e lda $28
+c0bd80 bne .Branch_c0bdb2
+
+
+.Branch_c0bdb2
+c0bdb2 ldx $c665,y
+c0bdb5 lda $c5e5,y
+c0bdb8 sec
+c0bdb9 sbc $7fe36c,x
+c0bdbd cmp #$fff8
+c0bdc0 bcs .Branch_c0bdca
+
+c0bdc2 and $96a0
+c0bdc5 cmp #$00f8
+c0bdc8 bcs .Branch_c0bde5
+
+
+.Branch_c0bdca
+c0bdca sta $18
+c0bdcc lda $c625,y
+c0bdcf sec
+c0bdd0 sbc $7fe376,x
+c0bdd4 cmp #$fff0
+c0bdd7 bcs .Branch_c0bde1
+
+c0bdd9 and $96a0
+c0bddc cmp #$00d8
+c0bddf bcs .Branch_c0bde5
+
+
+.Branch_c0bde1
+c0bde1 sta $1a
+c0bde3 bra .Branch_c0bde6
+
+
+.Branch_c0bde5
+c0bde5 rts
+
+.Branch_c0bde6
+c0bde6 lda $c825,y
+c0bde9 sta $1c
+c0bdeb ldx $c6e5,y
+c0bdee sec
+c0bdef sbc $9ae1,x
+c0bdf2 sta $1e
+c0bdf4 sbc $9ae1,x
+c0bdf7 sta $20
+c0bdf9 lda $c3a5,y
+c0bdfc and #$3000
+c0bdff pha
+c0be00 lda $c425,y
+c0be03 and #$0800
+c0be06 ora $01,s
+c0be08 sta $22
+c0be0a pla
+c0be0b jsr Routine_c0c6d4
+
+c0be0e lda $dd3f
+c0be11 asl
+c0be12 asl
+c0be13 tax
+c0be14 lda #$0000
+c0be17 sep #$20
+c0be19 lda $18
+c0be1b sta $db1f,x
+c0be1e sta $db23,x
+c0be21 sta $db27,x
+c0be24 clc
+c0be25 adc #$08
+c0be27 sta $db2b,x
+c0be2a sta $db2f,x
+c0be2d sta $db33,x
+c0be30 lda $1a
+c0be32 sta $db20,x
+c0be35 sta $db2c,x
+c0be38 clc
+c0be39 adc #$08
+c0be3b sta $db24,x
+c0be3e sta $db30,x
+c0be41 clc
+c0be42 adc #$08
+c0be44 sta $db28,x
+c0be47 sta $db34,x
+c0be4a rep #$20
+c0be4c lda $28
+c0be4e beq .Branch_c0be53
+
+c0be50 jmp Jump_c0bed4
+
+
+Jump_c0bed4:
+c0bed4 stx $26
+c0bed6 ldy $24
+c0bed8 lda $e2a1,y
+c0bedb ora $2a
+c0bedd ora $22
+c0bedf sta $db21,x
+c0bee2 lda $e2a3,y
+c0bee5 ora $2a
+c0bee7 ora $22
+c0bee9 sta $db25,x
+c0beec lda $e2a5,y
+c0beef ora $2a
+c0bef1 ora $22
+c0bef3 sta $db29,x
+c0bef6 lda $e2a7,y
+c0bef9 ora $2a
+c0befb ora $22
+c0befd sta $db2d,x
+c0bf00 lda $e2a9,y
+c0bf03 ora $2a
+c0bf05 ora $22
+c0bf07 sta $db31,x
+c0bf0a lda $e2ab,y
+c0bf0d ora $2a
+c0bf0f ora $22
+c0bf11 sta $db35,x
+c0bf14 lda $dd3f
+c0bf17 clc
+c0bf18 adc #$0006
+c0bf1b sta $dd3f
+c0bf1e rts
+
+Routine_c0c6d4:
+c0c6d4 lda $cf25,y
+c0c6d7 tax
+c0c6d8 lda $cfa5,y
+c0c6db asl
+c0c6dc asl
+c0c6dd sta $24
+c0c6df asl
+c0c6e0 adc $24
+c0c6e2 adc $c0c6ee,x
+c0c6e6 sta $24
+c0c6e8 lda $d025,y
+c0c6eb sta $2a
+c0c6ed rts
+
+Routine_c0c7f7:
+c0c7f7 jsl Routine_7eeaed
+
+c0c7fb jsl Routine_7eeaf1
+
+c0c7ff jsl Routine_7eeaf5
+
+c0c803 jsl Routine_7eeaf9
+
+c0c807 jsl Routine_7eeafd
+
+c0c80b jsl Routine_7eeb01
+
+c0c80f jsl Routine_7eeb05
+
+c0c813 rtl
+
+Jump_c0c92e:
+c0c92e rtl
+
+Jump_c0c9ff:
+c0c9ff sep #$20
+c0ca01 lda $7fc8
+c0ca04 sta $ee3f
+c0ca07 lda $7fca
+c0ca0a sta $ee40
+c0ca0d lda $7fcc
+c0ca10 sta $ee41
+c0ca13 lda $7fce
+c0ca16 sta $ee42
+c0ca19 rep #$20
+c0ca1b rtl
+
+Routine_c16995:
+c16995 rep #$30
+c16997 pea #$7f7f
+c1699a plb
+c1699b plb
+c1699c lda $e39e
+c1699f ora $e3a0
+c169a2 ora $e3a2
+c169a5 ora $e3a4
+c169a8 ora $e3a6
+c169ab ora $e3a8
+c169ae ora $e3aa
+c169b1 ora $e3ac
+c169b4 ora $e3ae
+c169b7 ora $e3b0
+c169ba bne .Branch_c169bd
+
+c169bc rtl
+c600dd jsl Routine_c60f98
+
+c60b57 jsr Routine_c60b76
+
+c60b5a jsr Routine_c60b83
+
+c60b5d jsr Routine_c60bce
+
+c60b60 jsr Routine_c60c19
+
+c60b63 jsr Routine_c60c64
+
+c60b66 jsr Routine_c60caf
+
+c60b69 jsr Routine_c60cfa
+
+c60b6c jsr Routine_c60d50
+
+c60b6f jsr Routine_c60d83
+
+c60b72 jsr Routine_c60e43
+
+c60b75 rtl
+
+Routine_c60b76:
+c60b76 lda #$0100
+c60b79 sta $9a0f
+c60b7c lda #$0100
+c60b7f sta $9a17
+c60b82 rts
+
+Routine_c60b83:
+c60b83 ldx #$0000
+
+.Branch_c60b86
+c60b86 phx
+c60b87 lda $98b3,x
+c60b8a cmp #$0000
+c60b8d beq .Branch_c60bc5
+
+
+.Branch_c60bc5
+c60bc5 plx
+c60bc6 inx
+c60bc7 inx
+c60bc8 cpx #$0004
+c60bcb bcc .Branch_c60b86
+
+c60bcd rts
+
+Routine_c60bce:
+c60bce ldx #$0000
+
+.Branch_c60bd1
+c60bd1 phx
+c60bd2 lda $98c7,x
+c60bd5 cmp #$0000
+c60bd8 beq .Branch_c60c10
+
+
+.Branch_c60c10
+c60c10 plx
+c60c11 inx
+c60c12 inx
+c60c13 cpx #$0004
+c60c16 bcc .Branch_c60bd1
+
+c60c18 rts
+
+Routine_c60c19:
+c60c19 ldx #$0000
+
+.Branch_c60c1c
+c60c1c phx
+c60c1d lda $98db,x
+c60c20 cmp #$0000
+c60c23 beq .Branch_c60c5b
+
+
+.Branch_c60c5b
+c60c5b plx
+c60c5c inx
+c60c5d inx
+c60c5e cpx #$0008
+c60c61 bcc .Branch_c60c1c
+
+c60c63 rts
+
+Routine_c60c64:
+c60c64 ldx #$0000
+
+.Branch_c60c67
+c60c67 phx
+c60c68 lda $9903,x
+c60c6b cmp #$0000
+c60c6e beq .Branch_c60ca6
+
+
+.Branch_c60ca6
+c60ca6 plx
+c60ca7 inx
+c60ca8 inx
+c60ca9 cpx #$000c
+c60cac bcc .Branch_c60c67
+
+c60cae rts
+
+Routine_c60caf:
+c60caf ldx #$0000
+
+.Branch_c60cb2
+c60cb2 phx
+c60cb3 lda $993f,x
+c60cb6 cmp #$0000
+c60cb9 beq .Branch_c60cf1
+
+c60cbb lda $9943,x
+c60cbe clc
+c60cbf adc $9a0f
+c60cc2 sta $7ffc46
+c60cc6 lda $9947,x
+c60cc9 clc
+c60cca adc $9a17
+c60ccd sta $7ffc48
+c60cd1 lda #$ffff
+c60cd4 sta $7ffc4a
+c60cd8 lda $994b,x
+c60cdb sta $7ffc4c
+c60cdf lda $993f,x
+c60ce2 jsl Routine_c07f7d
+
+c60ce6 lda $7fe552
+c60cea sta $994f,x
+c60ced jsl Routine_c60d42
+
+
+.Branch_c60cf1
+c60cf1 plx
+c60cf2 inx
+c60cf3 inx
+c60cf4 cpx #$0004
+c60cf7 bcc .Branch_c60cb2
+
+c60cf9 rts
+
+Routine_c60cfa:
+c60cfa ldx #$0000
+
+.Branch_c60cfd
+c60cfd phx
+c60cfe lda $9953,x
+c60d01 cmp #$0000
+c60d04 beq .Branch_c60d39
+
+
+.Branch_c60d39
+c60d39 plx
+c60d3a inx
+c60d3b inx
+c60d3c cpx #$0002
+c60d3f bcc .Branch_c60cfd
+
+c60d41 rts
+
+Routine_c60d42:
+c60d42 lda $7ffc4c
+c60d46 asl
+c60d47 tax
+c60d48 lda $7fe552
+c60d4c sta $9a1f,x
+c60d4f rtl
+
+Routine_c60d50:
+c60d50 lda $996f
+c60d53 jsl Routine_c030d2
+
+c60d57 sta $9977
+c60d5a lda $9971
+c60d5d jsl Routine_c030d2
+
+c60d61 sta $9979
+c60d64 lda $9973
+c60d67 cmp #$0000
+c60d6a beq .Branch_c60d73
+
+c60d6c jsl Routine_c03086
+
+c60d70 sta $997b
+
+.Branch_c60d73
+c60d73 lda $9975
+c60d76 cmp #$0000
+c60d79 beq .Branch_c60d82
+
+c60d7b jsl Routine_c030ac
+
+c60d7f sta $997d
+
+.Branch_c60d82
+c60d82 rts
+
+Routine_c60d83:
+c60d83 ldy #$0000
+
+.Branch_c60d86
+c60d86 lda $995d,y
+c60d89 pha
+c60d8a phy
+c60d8b ldx #$0000
+
+.Branch_c60d8e
+c60d8e lda $7fe3e2,x
+c60d92 bpl .Branch_c60da4
+
+c60d94 lda $7fe472,x
+c60d98 asl
+c60d99 cmp $01,s
+c60d9b bne .Branch_c60da4
+
+c60d9d lda $03,s
+c60d9f sta $18
+c60da1 jsr Routine_c60db5
+
+
+.Branch_c60da4
+c60da4 inx
+c60da5 inx
+c60da6 cpx #$0010
+c60da9 bcc .Branch_c60d8e
+
+c60dab ply
+c60dac pla
+c60dad iny
+c60dae iny
+c60daf cpy #$0008
+c60db2 bcc .Branch_c60d86
+
+c60db4 rts
+
+Routine_c60db5:
+c60db5 lda $99bd
+c60db8 sta $7fe4d2,x
+c60dbc sta $7fe4e2,x
+c60dc0 sta $7fe4f2,x
+c60dc4 sta $7fe502,x
+c60dc8 sta $7fe512,x
+c60dcc sta $7fe522,x
+c60dd0 sta $7fe532,x
+c60dd4 sta $7fe542,x
+c60dd8 sta $7fe402,x
+c60ddc lda $18
+c60dde bmi .Branch_c60e37
+
+c60de0 lda $7fe3f2,x
+c60de4 cmp #$000e
+c60de7 beq .Branch_c60e37
+
+
+.Branch_c60e37
+c60e37 lda $7fe402,x
+c60e3b ora #$0001
+c60e3e sta $7fe402,x
+c60e42 rts
+
+Routine_c60e43:
+c60e43 lda $7e99c5
+c60e47 and #$0010
+c60e4a bne .Branch_c60e6f
+
+
+.Branch_c60e6f
+c60e6f lda $996d
+
+.Branch_c60e72
+c60e72 beq .Branch_c60e72
+
+c60e74 dec
+c60e75 sec
+c60e76 rol
+c60e77 sec
+c60e78 rol
+c60e79 sec
+c60e7a rol
+c60e7b sec
+c60e7c rol
+c60e7d sta $96a0
+c60e80 lda $996d
+c60e83 sta $1a
+c60e85 lsr
+c60e86 sta $18
+c60e88 lda $996d
+c60e8b sta $1c
+c60e8d lsr
+c60e8e lsr
+c60e8f sep #$20
+c60e91 xba
+c60e92 lda $18
+c60e94 jsl Routine_c01098
+
+c60e98 rep #$20
+c60e9a sta $18
+c60e9c jsl Routine_c08fd7
+
+c60ea0 lda $7fae9e
+c60ea4 sta $9a41
+c60ea7 lda $18
+c60ea9 jsl Routine_c08fd7
+
+c60ead lda $7fae9e
+c60eb1 sta $9a43
+c60eb4 ldx $9a41
+c60eb7 ldy $9a43
+c60eba lsr $18
+c60ebc pea #$7f7f
+c60ebf plb
+c60ec0 plb
+c60ec1 lda #$0000
+
+.Branch_c60ec4
+c60ec4 sta $0000,x
+c60ec7 sta $0000,y
+c60eca inx
+c60ecb inx
+c60ecc iny
+c60ecd iny
+c60ece dec $18
+c60ed0 bne .Branch_c60ec4
+
+c60ed2 pea #$7e7e
+c60ed5 plb
+c60ed6 plb
+c60ed7 stz $9a61
+c60eda stz $9a81
+c60edd lda $1a
+c60edf asl
+c60ee0 sta $9aa1
+c60ee3 sta $9aa3
+c60ee6 lsr
+c60ee7 sta $9ae1
+c60eea sta $9ae3
+c60eed lda $1a
+c60eef asl
+c60ef0 dec
+c60ef1 sta $9c01
+c60ef4 lda $1c
+c60ef6 asl
+c60ef7 sta $9ac1
+c60efa sta $9ac3
+c60efd dec
+c60efe sta $9c03
+c60f01 rts
+
+Routine_c679a7:
+c679a7 rep #$30
+c679a9 pea #$7e7e
+c679ac plb
+c679ad plb
+c679ae lda $7ff0
+c679b1 ora $7ff1
+c679b4 bne .Branch_c679d0
+
+c679b6 lda $7fea
+c679b9 ora $7fec
+c679bc ora $7fee
+c679bf ora $7fe8
+c679c2 and #$00ff
+c679c5 bne .Branch_c679d0
+
+c679c7 lda $93ae
+c679ca bne .Branch_c679d0
+
+
+.Branch_c679d0
+c679d0 rtl
+
+.Branch_c79b5d
+c79b5d jsr Routine_c79b6b
+
+c79b60 bcc .Branch_c79b65
+
+
+.Branch_c79b65
+c79b65 jsl Routine_c028b4
+
+c79b69 bra .Branch_c79b5d
+
+
+Routine_c79b6b:
+c79b6b lda $9806
+c79b6e cmp #$0004
+c79b71 bne .Branch_c79b94
+
+c79b73 ldx $9836
+c79b76 cpx #$0000
+c79b79 beq .Branch_c79b94
+
+
+.Branch_c79b94
+c79b94 lda #$0000
+c79b97 sta $9836
+c79b9a clc
+c79b9b rts
+
+Routine_c9029e:
+c9029e php
+c9029f sei
+c902a0 rep #$30
+c902a2 pha
+c902a3 phb
+c902a4 phy
+c902a5 phx
+c902a6 sep #$10
+c902a8 lda $0d,s
+c902aa tax
+c902ab phx
+c902ac plb
+c902ad ldy #$00
+c902af lda $0e,s
+c902b1 and ($10,s),y
+c902b3 sta $40
+c902b5 lda $0e,s
+c902b7 beq .Branch_c902cd
+
+c902b9 lsr
+c902ba bcs .Branch_c902cd
+
+c902bc tax
+c902bd lda $0c,s
+c902bf ldy #$02
+c902c1 and ($10,s),y
+
+.Branch_c902c3
+c902c3 lsr
+c902c4 ror $40
+c902c6 tay
+c902c7 txa
+c902c8 lsr
+c902c9 tax
+c902ca tya
+c902cb bcc .Branch_c902c3
+
+
+.Branch_c902cd
+c902cd rep #$30
+c902cf plx
+c902d0 ply
+c902d1 plb
+c902d2 lda $05,s
+c902d4 sta $0b,s
+c902d6 lda $03,s
+c902d8 sta $09,s
+c902da lda $40
+c902dc sta $07,s
+c902de tsc
+c902df clc
+c902e0 adc #$0006
+c902e3 tcs
+c902e4 pla
+c902e5 plp
+c902e6 lda $40
+c902e8 rtl
+
+Routine_c903ee:
+c903ee php
+c903ef phb
+c903f0 sei
+c903f1 rep #$30
+c903f3 pha
+c903f4 phx
+c903f5 phy
+c903f6 stx $40
+c903f8 sep #$30
+c903fa lda $0b,s
+c903fc pha
+c903fd plb
+c903fe ldy #$01
+c90400 lda ($09,s),y
+c90402 bne .Branch_c9044a
+
+c90404 rep #$20
+c90406 ldy #$02
+c90408 lda ($09,s),y
+c9040a ldx #$40
+c9040c jsl Routine_c01146
+
+c90410 ldy #$04
+c90412 lda ($09,s),y
+c90414 ldy #$07
+c90416 clc
+c90417 adc ($09,s),y
+c90419 bcc .Branch_c9041e
+
+
+.Branch_c9041e
+c9041e adc $40
+c90420 rep #$10
+c90422 tax
+c90423 bcc .Branch_c90427
+
+
+.Branch_c90427
+c90427 sep #$20
+c90429 ldy #$0006
+c9042c lda ($09,s),y
+c9042e clc
+c9042f adc $42
+c90431 pha
+c90432 plb
+c90433 rep #$30
+c90435 lda $0000,x
+c90438 sta $40
+c9043a lda $09,s
+c9043c clc
+c9043d adc #$0008
+c90440 sta $09,s
+c90442 ply
+c90443 plx
+c90444 pla
+c90445 plb
+c90446 plp
+c90447 lda $40
+c90449 rtl
+
+Routine_c9050d:
+c9050d php
+c9050e phb
+c9050f sei
+c90510 rep #$30
+c90512 pha
+c90513 phx
+c90514 phy
+c90515 stx $40
+c90517 sep #$30
+c90519 lda $0b,s
+c9051b pha
+c9051c plb
+c9051d ldy #$01
+c9051f lda ($09,s),y
+c90521 bne .Branch_c9055d
+
+c90523 rep #$20
+c90525 ldy #$02
+c90527 lda ($09,s),y
+c90529 ldx #$40
+c9052b jsl Routine_c01146
+
+c9052f ldy #$04
+c90531 lda ($09,s),y
+c90533 clc
+c90534 adc $40
+c90536 sta $40
+c90538 ldy #$06
+c9053a lda ($09,s),y
+c9053c adc $42
+c9053e sta $42
+c90540 ldy #$07
+c90542 lda ($09,s),y
+c90544 tax
+c90545 lda $40
+c90547 sta $00,x
+c90549 lda $41
+c9054b sta $01,x
+c9054d rep #$30
+c9054f lda $09,s
+c90551 clc
+c90552 adc #$0007
+c90555 sta $09,s
+c90557 ply
+c90558 plx
+c90559 pla
+c9055a plb
+c9055b plp
+c9055c rtl
+
+Routine_c90572:
+c90572 php
+c90573 phb
+c90574 sei
+c90575 rep #$30
+c90577 pha
+c90578 phx
+c90579 phy
+c9057a stx $40
+c9057c sep #$30
+c9057e lda $0b,s
+c90580 pha
+c90581 plb
+c90582 ldy #$01
+c90584 lda ($09,s),y
+c90586 beq .Branch_c9058b
+
+
+.Branch_c9058b
+c9058b rep #$20
+c9058d ldy #$02
+c9058f lda ($09,s),y
+c90591 ldx #$40
+c90593 jsl Routine_c01146
+
+c90597 ldy #$04
+c90599 lda ($09,s),y
+c9059b ldy #$07
+c9059d clc
+c9059e adc ($09,s),y
+c905a0 bcc .Branch_c905a5
+
+
+.Branch_c905a5
+c905a5 adc $40
+c905a7 sta $40
+c905a9 bcc .Branch_c905ad
+
+
+.Branch_c905ad
+c905ad sep #$20
+c905af ldy #$06
+c905b1 lda ($09,s),y
+c905b3 clc
+c905b4 adc $42
+c905b6 sta $42
+c905b8 rep #$30
+c905ba lda [$40]
+c905bc tax
+c905bd ldy #$0001
+c905c0 lda [$40],y
+c905c2 sta $41
+c905c4 txa
+c905c5 sta $40
+c905c7 ldy #$000a
+c905ca lda ($09,s),y
+c905cc and #$ff00
+c905cf bne .Branch_c905e5
+
+c905d1 lda $40
+c905d3 ldy #$0009
+c905d6 and ($09,s),y
+c905d8 sta $40
+c905da lda ($09,s),y
+c905dc beq .Branch_c90600
+
+
+.Branch_c905de
+c905de lsr
+c905df bcs .Branch_c90600
+
+c905e1 lsr $40
+c905e3 bra .Branch_c905de
+
+
+.Branch_c905e5
+c905e5 lda $41
+c905e7 ldy #$000a
+c905ea and ($09,s),y
+c905ec sta $41
+c905ee lda $40
+c905f0 dey
+c905f1 and ($09,s),y
+c905f3 sta $40
+c905f5 lda ($09,s),y
+
+.Branch_c905f7
+c905f7 lsr
+c905f8 bcs .Branch_c90600
+
+c905fa lsr $42
+c905fc ror $40
+c905fe bra .Branch_c905f7
+
+
+.Branch_c90600
+c90600 lda $09,s
+c90602 clc
+c90603 adc #$000b
+c90606 sta $09,s
+c90608 ply
+c90609 plx
+c9060a pla
+c9060b plb
+c9060c plp
+c9060d lda $40
+c9060f rtl

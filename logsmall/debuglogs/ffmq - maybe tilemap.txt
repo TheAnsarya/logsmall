@@ -1,0 +1,349 @@
+01FA21 $AD $3F $1A     LDA $1A3F [011A3F] = $2409      A:2408 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvmxdizC V:116 H:289
+01FA24 $99 $02 $08     STA $0802,Y [010802] = $0600    A:2409 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvmxdizC V:116 H:299
+01FA27 $AD $41 $1A     LDA $1A41 [011A41] = $2018      A:2409 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvmxdizC V:116 H:310
+01FA2A $99 $80 $08     STA $0880,Y [010880] = $1448    A:2018 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvmxdizC V:116 H:320
+01FA2D $AD $43 $1A     LDA $1A43 [011A43] = $2019      A:2018 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvmxdizC V:116 H:331
+01FA30 $99 $82 $08     STA $0882,Y [010882] = $1449    A:2019 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvmxdizC V:117 H:1  
+01FA33 $E2 $20         SEP #$20                        A:2019 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvmxdizC V:117 H:12 
+01FA35 $C8             INY                             A:2019 X:0008 Y:0000 S:1FBB D:0000 DB:01 P:nvMxdizC V:117 H:18 
+01FA36 $C8             INY                             A:2019 X:0008 Y:0001 S:1FBB D:0000 DB:01 P:nvMxdizC V:117 H:21 
+01FA37 $C8             INY                             A:2019 X:0008 Y:0002 S:1FBB D:0000 DB:01 P:nvMxdizC V:117 H:25 
+01FA38 $C8             INY                             A:2019 X:0008 Y:0003 S:1FBB D:0000 DB:01 P:nvMxdizC V:117 H:28 
+01FA39 $AD $31 $1A     LDA $1A31 [011A31] = $26        A:2019 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvMxdizC V:117 H:32 
+01FA3C $1A             INC                             A:2026 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvMxdizC V:117 H:40 
+01FA3D $CD $24 $19     CMP $1924 [011924] = $40        A:2027 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvMxdizC V:117 H:43 
+01FA40 $90 $04         BCC $01FA46                     A:2027 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:NvMxdizc V:117 H:51 
+01FA46 $8D $31 $1A     STA $1A31 [011A31] = $26        A:2027 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:NvMxdizc V:117 H:57 
+01FA49 $C0 $44 $00     CPY #$0044                      A:2027 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:NvMxdizc V:117 H:65 
+01FA4C $D0 $C0         BNE $01FA0E                     A:2027 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:NvMxdizc V:117 H:71 
+01FA0E $5A             PHY                             A:2027 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:NvMxdizc V:117 H:76 
+01FA0F $AC $31 $1A     LDY $1A31 [011A31] = $27        A:2027 X:0008 Y:0004 S:1FB9 D:0000 DB:01 P:NvMxdizc V:117 H:84 
+01FA12 $AD $33 $1A     LDA $1A33 [011A33] = $00        A:2027 X:0008 Y:1227 S:1FB9 D:0000 DB:01 P:nvMxdizc V:117 H:94 
+01FA15 $20 $8E $FC     JSR $FC8E [01FC8E] = $8D        A:2000 X:0008 Y:1227 S:1FB9 D:0000 DB:01 P:nvMxdiZc V:117 H:102
+01FC8E $8D $3A $1A     STA $1A3A [011A3A] = $00        A:2000 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:117 H:113
+01FC91 $C2 $20         REP #$20                        A:2000 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:117 H:121
+01FC93 $98             TYA                             A:2000 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdiZc V:117 H:127
+01FC94 $E2 $20         SEP #$20                        A:1227 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:130
+01FC96 $EB             XBA                             A:1227 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:146
+01FC97 $8D $02 $42     STA $4202 [014202] = $00        A:2712 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:151
+01FC9A $AD $24 $19     LDA $1924 [011924] = $40        A:2712 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:158
+01FC9D $8D $03 $42     STA $4203 [014203] = $00        A:2740 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:166
+01FCA0 $EB             XBA                             A:2740 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:174
+01FCA1 $C2 $20         REP #$20                        A:4027 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:179
+01FCA3 $29 $3F $00     AND #$003F                      A:4027 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:184
+01FCA6 $18             CLC                             A:0027 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:190
+01FCA7 $6D $16 $42     ADC $4216 [014216] = $0000      A:0027 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:194
+01FCAA $18             CLC                             A:04A7 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:203
+01FCAB $6D $2F $1A     ADC $1A2F [011A2F] = $0000      A:04A7 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:206
+01FCAE $AA             TAX                             A:04A7 X:0008 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:216
+01FCAF $A9 $00 $00     LDA #$0000                      A:04A7 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:220
+01FCB2 $E2 $20         SEP #$20                        A:0000 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdiZc V:117 H:226
+01FCB4 $BF $00 $80 $7F LDA $7F8000,X [7F84A7] = $21    A:0000 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:117 H:231
+01FCB8 $4D $3A $1A     EOR $1A3A [011A3A] = $00        A:0021 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:241
+01FCBB $10 $02         BPL $01FCBF                     A:0021 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:249
+01FCBF $C2 $20         REP #$20                        A:0021 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:255
+01FCC1 $29 $7F $00     AND #$007F                      A:0021 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:260
+01FCC4 $A8             TAY                             A:0021 X:04A7 Y:1227 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:266
+01FCC5 $0A             ASL                             A:0021 X:04A7 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:270
+01FCC6 $0A             ASL                             A:0042 X:04A7 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:273
+01FCC7 $AA             TAX                             A:0084 X:04A7 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:277
+01FCC8 $BF $F4 $CE $7F LDA $7FCEF4,X [7FCF78] = $0809  A:0084 X:0084 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:280
+01FCCC $8D $35 $1A     STA $1A35 [011A35] = $0908      A:0809 X:0084 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:292
+01FCCF $BF $F6 $CE $7F LDA $7FCEF6,X [7FCF7A] = $1A0A  A:0809 X:0084 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:302
+01FCD3 $8D $37 $1A     STA $1A37 [011A37] = $1918      A:1A0A X:0084 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:314
+01FCD6 $E2 $20         SEP #$20                        A:1A0A X:0084 Y:0021 S:1FB7 D:0000 DB:01 P:nvmxdizc V:117 H:324
+01FCD8 $BB             TYX                             A:1A0A X:0084 Y:0021 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:329
+01FCD9 $BF $F4 $D0 $7F LDA $7FD0F4,X [7FD115] = $03    A:1A0A X:0021 Y:0021 S:1FB7 D:0000 DB:01 P:nvMxdizc V:117 H:332
+01FCDD $8D $39 $1A     STA $1A39 [011A39] = $00        A:1A03 X:0021 Y:0021 S:1FB7 D:0000 DB:01 P:nvMxdizc V:118 H:2  
+01FCE0 $8D $3C $1A     STA $1A3C [011A3C] = $00        A:1A03 X:0021 Y:0021 S:1FB7 D:0000 DB:01 P:nvMxdizc V:118 H:10 
+01FCE3 $10 $07         BPL $01FCEC                     A:1A03 X:0021 Y:0021 S:1FB7 D:0000 DB:01 P:nvMxdizc V:118 H:18 
+01FCEC $E2 $10         SEP #$10                        A:1A03 X:0021 Y:0021 S:1FB7 D:0000 DB:01 P:nvMxdizc V:118 H:24 
+01FCEE $A2 $00         LDX #$00                        A:1A03 X:0021 Y:0021 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:29 
+01FCF0 $9B             TXY                             A:1A03 X:0000 Y:0021 S:1FB7 D:0000 DB:01 P:nvMXdiZc V:118 H:33 
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A35] = $09      A:1A03 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdiZc V:118 H:37 
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A3D] = $08      A:1A09 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:45 
+01FCF7 $DA             PHX                             A:1A09 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:54 
+01FCF8 $AA             TAX                             A:1A09 X:0000 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:60 
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $03        A:1A09 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:63 
+01FCFC $6A             ROR                             A:1A09 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizC V:118 H:75 
+01FCFD $6A             ROR                             A:1A84 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:NvMXdizC V:118 H:78 
+01FCFE $29 $40         AND #$40                        A:1AC2 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:NvMXdizc V:118 H:82 
+01FD00 $EB             XBA                             A:1A40 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:86 
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $03        A:401A X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:91 
+01FD04 $30 $09         BMI $01FD0F                     A:4003 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:99 
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF27D] = $01    A:4003 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:103
+01FD0A $0A             ASL                             A:4001 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:113
+01FD0B $0A             ASL                             A:4002 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:116
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $00        A:4004 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:120
+01FD0F $EB             XBA                             A:4004 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:128
+01FD10 $FA             PLX                             A:0440 X:0009 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:133
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0440 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdiZc V:118 H:150
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $04        A:0460 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:158
+01FD17 $9D $3E $1A     STA $1A3E,X [011A3E] = $24      A:0464 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:166
+01FD1A $E8             INX                             A:0464 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:175
+01FD1B $E8             INX                             A:0464 X:0001 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:179
+01FD1C $C8             INY                             A:0464 X:0002 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:182
+01FD1D $C0 $04         CPY #$04                        A:0464 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:186
+01FD1F $D0 $D0         BNE $01FCF1                     A:0464 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:NvMXdizc V:118 H:190
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A36] = $08      A:0464 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:NvMXdizc V:118 H:195
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A3F] = $09      A:0408 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:203
+01FCF7 $DA             PHX                             A:0408 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:213
+01FCF8 $AA             TAX                             A:0408 X:0002 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:218
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $01        A:0408 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:222
+01FCFC $6A             ROR                             A:0408 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:118 H:233
+01FCFD $6A             ROR                             A:0484 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:NvMXdizc V:118 H:237
+01FCFE $29 $40         AND #$40                        A:0442 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:240
+01FD00 $EB             XBA                             A:0440 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:244
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $03        A:4004 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:249
+01FD04 $30 $09         BMI $01FD0F                     A:4003 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:257
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF27C] = $01    A:4003 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:261
+01FD0A $0A             ASL                             A:4001 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:271
+01FD0B $0A             ASL                             A:4002 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:275
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $04        A:4004 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:278
+01FD0F $EB             XBA                             A:4004 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:286
+01FD10 $FA             PLX                             A:0440 X:0008 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:118 H:291
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0440 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:298
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $04        A:0460 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:306
+01FD17 $9D $3E $1A     STA $1A3E,X [011A40] = $24      A:0464 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:314
+01FD1A $E8             INX                             A:0464 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:323
+01FD1B $E8             INX                             A:0464 X:0003 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:327
+01FD1C $C8             INY                             A:0464 X:0004 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:330
+01FD1D $C0 $04         CPY #$04                        A:0464 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:118 H:333
+01FD1F $D0 $D0         BNE $01FCF1                     A:0464 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:NvMXdizc V:118 H:337
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A37] = $0A      A:0464 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:NvMXdizc V:119 H:3  
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A41] = $18      A:040A X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:11 
+01FCF7 $DA             PHX                             A:040A X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:20 
+01FCF8 $AA             TAX                             A:040A X:0004 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:119 H:26 
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $00        A:040A X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:119 H:29 
+01FCFC $6A             ROR                             A:040A X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:41 
+01FCFD $6A             ROR                             A:0405 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:119 H:44 
+01FCFE $29 $40         AND #$40                        A:0402 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizC V:119 H:48 
+01FD00 $EB             XBA                             A:0400 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:119 H:52 
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $03        A:0004 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizC V:119 H:57 
+01FD04 $30 $09         BMI $01FD0F                     A:0003 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizC V:119 H:65 
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF27E] = $00    A:0003 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizC V:119 H:69 
+01FD0A $0A             ASL                             A:0000 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:119 H:79 
+01FD0B $0A             ASL                             A:0000 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:82 
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $04        A:0000 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:86 
+01FD0F $EB             XBA                             A:0000 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:94 
+01FD10 $FA             PLX                             A:0000 X:000A Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:99 
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0000 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:106
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $00        A:0020 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:114
+01FD17 $9D $3E $1A     STA $1A3E,X [011A42] = $20      A:0020 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:122
+01FD1A $E8             INX                             A:0020 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:131
+01FD1B $E8             INX                             A:0020 X:0005 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:145
+01FD1C $C8             INY                             A:0020 X:0006 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:148
+01FD1D $C0 $04         CPY #$04                        A:0020 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:152
+01FD1F $D0 $D0         BNE $01FCF1                     A:0020 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:NvMXdizc V:119 H:156
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A38] = $1A      A:0020 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:NvMXdizc V:119 H:161
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A43] = $19      A:001A X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:169
+01FCF7 $DA             PHX                             A:001A X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:179
+01FCF8 $AA             TAX                             A:001A X:0006 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:119 H:184
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $00        A:001A X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:119 H:188
+01FCFC $6A             ROR                             A:001A X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:199
+01FCFD $6A             ROR                             A:000D X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:119 H:203
+01FCFE $29 $40         AND #$40                        A:0006 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizC V:119 H:206
+01FD00 $EB             XBA                             A:0000 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:119 H:210
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $03        A:0000 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:119 H:215
+01FD04 $30 $09         BMI $01FD0F                     A:0003 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizC V:119 H:223
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF28E] = $00    A:0003 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizC V:119 H:227
+01FD0A $0A             ASL                             A:0000 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:119 H:237
+01FD0B $0A             ASL                             A:0000 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:241
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $00        A:0000 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:244
+01FD0F $EB             XBA                             A:0000 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:252
+01FD10 $FA             PLX                             A:0000 X:001A Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:119 H:257
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0000 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:264
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $00        A:0020 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:272
+01FD17 $9D $3E $1A     STA $1A3E,X [011A44] = $20      A:0020 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:280
+01FD1A $E8             INX                             A:0020 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:290
+01FD1B $E8             INX                             A:0020 X:0007 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:293
+01FD1C $C8             INY                             A:0020 X:0008 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:297
+01FD1D $C0 $04         CPY #$04                        A:0020 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdizc V:119 H:300
+01FD1F $D0 $D0         BNE $01FCF1                     A:0020 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdiZC V:119 H:304
+01FD21 $C2 $10         REP #$10                        A:0020 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdiZC V:119 H:308
+01FD23 $60             RTS                             A:0020 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMxdiZC V:119 H:314
+01FA18 $7A             PLY                             A:0020 X:0008 Y:0004 S:1FB9 D:0000 DB:01 P:nvMxdiZC V:119 H:324
+01FA19 $C2 $20         REP #$20                        A:0020 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvMxdizC V:119 H:332
+01FA1B $AD $3D $1A     LDA $1A3D [011A3D] = $6409      A:0020 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:119 H:338
+01FA1E $99 $00 $08     STA $0800,Y [010804] = $857A    A:6409 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:8  
+01FA21 $AD $3F $1A     LDA $1A3F [011A3F] = $6408      A:6409 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:19 
+01FA24 $99 $02 $08     STA $0802,Y [010806] = $7A06    A:6408 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:29 
+01FA27 $AD $41 $1A     LDA $1A41 [011A41] = $200A      A:6408 X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:41 
+01FA2A $99 $80 $08     STA $0880,Y [010884] = $1448    A:200A X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:51 
+01FA2D $AD $43 $1A     LDA $1A43 [011A43] = $201A      A:200A X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:62 
+01FA30 $99 $82 $08     STA $0882,Y [010886] = $1449    A:201A X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:72 
+01FA33 $E2 $20         SEP #$20                        A:201A X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvmxdizC V:120 H:84 
+01FA35 $C8             INY                             A:201A X:0008 Y:0004 S:1FBB D:0000 DB:01 P:nvMxdizC V:120 H:89 
+01FA36 $C8             INY                             A:201A X:0008 Y:0005 S:1FBB D:0000 DB:01 P:nvMxdizC V:120 H:93 
+01FA37 $C8             INY                             A:201A X:0008 Y:0006 S:1FBB D:0000 DB:01 P:nvMxdizC V:120 H:96 
+01FA38 $C8             INY                             A:201A X:0008 Y:0007 S:1FBB D:0000 DB:01 P:nvMxdizC V:120 H:100
+01FA39 $AD $31 $1A     LDA $1A31 [011A31] = $27        A:201A X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvMxdizC V:120 H:103
+01FA3C $1A             INC                             A:2027 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvMxdizC V:120 H:111
+01FA3D $CD $24 $19     CMP $1924 [011924] = $40        A:2028 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvMxdizC V:120 H:115
+01FA40 $90 $04         BCC $01FA46                     A:2028 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:NvMxdizc V:120 H:123
+01FA46 $8D $31 $1A     STA $1A31 [011A31] = $27        A:2028 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:NvMxdizc V:120 H:128
+01FA49 $C0 $44 $00     CPY #$0044                      A:2028 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:NvMxdizc V:120 H:146
+01FA4C $D0 $C0         BNE $01FA0E                     A:2028 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:NvMxdizc V:120 H:152
+01FA0E $5A             PHY                             A:2028 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:NvMxdizc V:120 H:158
+01FA0F $AC $31 $1A     LDY $1A31 [011A31] = $28        A:2028 X:0008 Y:0008 S:1FB9 D:0000 DB:01 P:NvMxdizc V:120 H:165
+01FA12 $AD $33 $1A     LDA $1A33 [011A33] = $00        A:2028 X:0008 Y:1228 S:1FB9 D:0000 DB:01 P:nvMxdizc V:120 H:175
+01FA15 $20 $8E $FC     JSR $FC8E [01FC8E] = $8D        A:2000 X:0008 Y:1228 S:1FB9 D:0000 DB:01 P:nvMxdiZc V:120 H:183
+01FC8E $8D $3A $1A     STA $1A3A [011A3A] = $00        A:2000 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:120 H:195
+01FC91 $C2 $20         REP #$20                        A:2000 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:120 H:203
+01FC93 $98             TYA                             A:2000 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdiZc V:120 H:208
+01FC94 $E2 $20         SEP #$20                        A:1228 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:212
+01FC96 $EB             XBA                             A:1228 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:217
+01FC97 $8D $02 $42     STA $4202 [014202] = $00        A:2812 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:222
+01FC9A $AD $24 $19     LDA $1924 [011924] = $40        A:2812 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:230
+01FC9D $8D $03 $42     STA $4203 [014203] = $00        A:2840 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:238
+01FCA0 $EB             XBA                             A:2840 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:245
+01FCA1 $C2 $20         REP #$20                        A:4028 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:250
+01FCA3 $29 $3F $00     AND #$003F                      A:4028 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:256
+01FCA6 $18             CLC                             A:0028 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:262
+01FCA7 $6D $16 $42     ADC $4216 [014216] = $0000      A:0028 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:265
+01FCAA $18             CLC                             A:04A8 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:274
+01FCAB $6D $2F $1A     ADC $1A2F [011A2F] = $0000      A:04A8 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:278
+01FCAE $AA             TAX                             A:04A8 X:0008 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:288
+01FCAF $A9 $00 $00     LDA #$0000                      A:04A8 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:291
+01FCB2 $E2 $20         SEP #$20                        A:0000 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdiZc V:120 H:297
+01FCB4 $BF $00 $80 $7F LDA $7F8000,X [7F84A8] = $03    A:0000 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:120 H:303
+01FCB8 $4D $3A $1A     EOR $1A3A [011A3A] = $00        A:0003 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:313
+01FCBB $10 $02         BPL $01FCBF                     A:0003 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:321
+01FCBF $C2 $20         REP #$20                        A:0003 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvMxdizc V:120 H:326
+01FCC1 $29 $7F $00     AND #$007F                      A:0003 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:331
+01FCC4 $A8             TAY                             A:0003 X:04A8 Y:1228 S:1FB7 D:0000 DB:01 P:nvmxdizc V:120 H:337
+01FCC5 $0A             ASL                             A:0003 X:04A8 Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:0  
+01FCC6 $0A             ASL                             A:0006 X:04A8 Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:4  
+01FCC7 $AA             TAX                             A:000C X:04A8 Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:7  
+01FCC8 $BF $F4 $CE $7F LDA $7FCEF4,X [7FCF00] = $0403  A:000C X:000C Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:11 
+01FCCC $8D $35 $1A     STA $1A35 [011A35] = $0809      A:0403 X:000C Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:23 
+01FCCF $BF $F6 $CE $7F LDA $7FCEF6,X [7FCF02] = $1413  A:0403 X:000C Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:33 
+01FCD3 $8D $37 $1A     STA $1A37 [011A37] = $1A0A      A:1413 X:000C Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:45 
+01FCD6 $E2 $20         SEP #$20                        A:1413 X:000C Y:0003 S:1FB7 D:0000 DB:01 P:nvmxdizc V:121 H:55 
+01FCD8 $BB             TYX                             A:1413 X:000C Y:0003 S:1FB7 D:0000 DB:01 P:nvMxdizc V:121 H:60 
+01FCD9 $BF $F4 $D0 $7F LDA $7FD0F4,X [7FD0F7] = $00    A:1413 X:0003 Y:0003 S:1FB7 D:0000 DB:01 P:nvMxdizc V:121 H:64 
+01FCDD $8D $39 $1A     STA $1A39 [011A39] = $03        A:1400 X:0003 Y:0003 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:121 H:74 
+01FCE0 $8D $3C $1A     STA $1A3C [011A3C] = $00        A:1400 X:0003 Y:0003 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:121 H:82 
+01FCE3 $10 $07         BPL $01FCEC                     A:1400 X:0003 Y:0003 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:121 H:90 
+01FCEC $E2 $10         SEP #$10                        A:1400 X:0003 Y:0003 S:1FB7 D:0000 DB:01 P:nvMxdiZc V:121 H:95 
+01FCEE $A2 $00         LDX #$00                        A:1400 X:0003 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdiZc V:121 H:101
+01FCF0 $9B             TXY                             A:1400 X:0000 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdiZc V:121 H:105
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A35] = $03      A:1400 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdiZc V:121 H:108
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A3D] = $09      A:1403 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:116
+01FCF7 $DA             PHX                             A:1403 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:126
+01FCF8 $AA             TAX                             A:1403 X:0000 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:131
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $00        A:1403 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:145
+01FCFC $6A             ROR                             A:1403 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:121 H:156
+01FCFD $6A             ROR                             A:1401 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizC V:121 H:160
+01FCFE $29 $40         AND #$40                        A:1480 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:NvMXdizC V:121 H:163
+01FD00 $EB             XBA                             A:1400 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:121 H:167
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $00        A:0014 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizC V:121 H:172
+01FD04 $30 $09         BMI $01FD0F                     A:0000 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:121 H:180
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF277] = $01    A:0000 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:121 H:184
+01FD0A $0A             ASL                             A:0001 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizC V:121 H:194
+01FD0B $0A             ASL                             A:0002 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:198
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $00        A:0004 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:201
+01FD0F $EB             XBA                             A:0004 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:209
+01FD10 $FA             PLX                             A:0400 X:0003 Y:0000 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:121 H:214
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0400 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdiZc V:121 H:221
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $04        A:0420 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:229
+01FD17 $9D $3E $1A     STA $1A3E,X [011A3E] = $64      A:0424 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:237
+01FD1A $E8             INX                             A:0424 X:0000 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:247
+01FD1B $E8             INX                             A:0424 X:0001 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:250
+01FD1C $C8             INY                             A:0424 X:0002 Y:0000 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:254
+01FD1D $C0 $04         CPY #$04                        A:0424 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:257
+01FD1F $D0 $D0         BNE $01FCF1                     A:0424 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:NvMXdizc V:121 H:261
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A36] = $04      A:0424 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:NvMXdizc V:121 H:267
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A3F] = $08      A:0404 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:275
+01FCF7 $DA             PHX                             A:0404 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:121 H:284
+01FCF8 $AA             TAX                             A:0404 X:0002 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:290
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $00        A:0404 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:293
+01FCFC $6A             ROR                             A:0404 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:121 H:305
+01FCFD $6A             ROR                             A:0402 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:308
+01FCFE $29 $40         AND #$40                        A:0401 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:312
+01FD00 $EB             XBA                             A:0400 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:121 H:316
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $00        A:0004 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:121 H:321
+01FD04 $30 $09         BMI $01FD0F                     A:0000 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:121 H:328
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF278] = $01    A:0000 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:121 H:332
+01FD0A $0A             ASL                             A:0001 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:2  
+01FD0B $0A             ASL                             A:0002 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:5  
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $04        A:0004 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:9  
+01FD0F $EB             XBA                             A:0004 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:17 
+01FD10 $FA             PLX                             A:0400 X:0004 Y:0001 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:22 
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0400 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:29 
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $04        A:0420 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:37 
+01FD17 $9D $3E $1A     STA $1A3E,X [011A40] = $64      A:0424 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:45 
+01FD1A $E8             INX                             A:0424 X:0002 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:54 
+01FD1B $E8             INX                             A:0424 X:0003 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:58 
+01FD1C $C8             INY                             A:0424 X:0004 Y:0001 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:61 
+01FD1D $C0 $04         CPY #$04                        A:0424 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:65 
+01FD1F $D0 $D0         BNE $01FCF1                     A:0424 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:NvMXdizc V:122 H:69 
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A37] = $13      A:0424 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:NvMXdizc V:122 H:74 
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A41] = $0A      A:0413 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:82 
+01FCF7 $DA             PHX                             A:0413 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:92 
+01FCF8 $AA             TAX                             A:0413 X:0004 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:97 
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $00        A:0413 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:101
+01FCFC $6A             ROR                             A:0413 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:112
+01FCFD $6A             ROR                             A:0409 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizC V:122 H:116
+01FCFE $29 $40         AND #$40                        A:0484 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:NvMXdizC V:122 H:119
+01FD00 $EB             XBA                             A:0400 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:122 H:123
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $00        A:0004 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizC V:122 H:128
+01FD04 $30 $09         BMI $01FD0F                     A:0000 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:122 H:146
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF287] = $01    A:0000 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZC V:122 H:150
+01FD0A $0A             ASL                             A:0001 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizC V:122 H:160
+01FD0B $0A             ASL                             A:0002 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:164
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $04        A:0004 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:167
+01FD0F $EB             XBA                             A:0004 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:175
+01FD10 $FA             PLX                             A:0400 X:0013 Y:0002 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:180
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0400 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:187
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $04        A:0420 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:195
+01FD17 $9D $3E $1A     STA $1A3E,X [011A42] = $20      A:0424 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:203
+01FD1A $E8             INX                             A:0424 X:0004 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:213
+01FD1B $E8             INX                             A:0424 X:0005 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:216
+01FD1C $C8             INY                             A:0424 X:0006 Y:0002 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:220
+01FD1D $C0 $04         CPY #$04                        A:0424 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:223
+01FD1F $D0 $D0         BNE $01FCF1                     A:0424 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:NvMXdizc V:122 H:227
+01FCF1 $B9 $35 $1A     LDA $1A35,Y [011A38] = $14      A:0424 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:NvMXdizc V:122 H:233
+01FCF4 $9D $3D $1A     STA $1A3D,X [011A43] = $1A      A:0414 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:241
+01FCF7 $DA             PHX                             A:0414 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:250
+01FCF8 $AA             TAX                             A:0414 X:0006 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:256
+01FCF9 $4E $3C $1A     LSR $1A3C [011A3C] = $00        A:0414 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:259
+01FCFC $6A             ROR                             A:0414 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:271
+01FCFD $6A             ROR                             A:040A X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:274
+01FCFE $29 $40         AND #$40                        A:0405 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:278
+01FD00 $EB             XBA                             A:0400 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:282
+01FD01 $AD $39 $1A     LDA $1A39 [011A39] = $00        A:0004 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:287
+01FD04 $30 $09         BMI $01FD0F                     A:0000 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:295
+01FD06 $BF $74 $F2 $7F LDA $7FF274,X [7FF288] = $01    A:0000 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:299
+01FD0A $0A             ASL                             A:0001 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:309
+01FD0B $0A             ASL                             A:0002 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:312
+01FD0C $8D $3B $1A     STA $1A3B [011A3B] = $04        A:0004 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:316
+01FD0F $EB             XBA                             A:0004 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdizc V:122 H:323
+01FD10 $FA             PLX                             A:0400 X:0014 Y:0003 S:1FB6 D:0000 DB:01 P:nvMXdiZc V:122 H:328
+01FD11 $0D $34 $1A     ORA $1A34 [011A34] = $20        A:0400 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:122 H:335
+01FD14 $0D $3B $1A     ORA $1A3B [011A3B] = $04        A:0420 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:123 H:3  
+01FD17 $9D $3E $1A     STA $1A3E,X [011A44] = $20      A:0424 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:123 H:11 
+01FD1A $E8             INX                             A:0424 X:0006 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:123 H:20 
+01FD1B $E8             INX                             A:0424 X:0007 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:123 H:24 
+01FD1C $C8             INY                             A:0424 X:0008 Y:0003 S:1FB7 D:0000 DB:01 P:nvMXdizc V:123 H:27 
+01FD1D $C0 $04         CPY #$04                        A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdizc V:123 H:31 
+01FD1F $D0 $D0         BNE $01FCF1                     A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdiZC V:123 H:35 
+01FD21 $C2 $10         REP #$10                        A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdiZC V:123 H:39 
+01FD23 $60             RTS                             A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMxdiZC V:123 H:44 
+01FA18 $7A             PLY                             A:0424 X:0008 Y:0004 S:1FB9 D:0000 DB:01 P:nvMxdiZC V:123 H:55 
+01FA19 $C2 $20         REP #$20                        A:0424 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:64 
+01FA1B $AD $3D $1A     LDA $1A3D [011A3D] = $2403      A:0424 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:69 
+01FA1E $99 $00 $08     STA $0800,Y [010808] = $8185    A:2403 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:79 
+01FA21 $AD $3F $1A     LDA $1A3F [011A3F] = $2404      A:2403 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:91 
+01FA24 $99 $02 $08     STA $0802,Y [01080A] = $00FF    A:2404 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:101
+01FA27 $AD $41 $1A     LDA $1A41 [011A41] = $2413      A:2404 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:112
+01FA2A $99 $80 $08     STA $0880,Y [010888] = $1448    A:2413 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:122
+01FA2D $AD $43 $1A     LDA $1A43 [011A43] = $2414      A:2413 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:144
+01FA30 $99 $82 $08     STA $0882,Y [01088A] = $1449    A:2414 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:154
+01FA33 $E2 $20         SEP #$20                        A:2414 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:165
+01FA35 $C8             INY                             A:2414 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:171
+01FA36 $C8             INY                             A:2414 X:0008 Y:0009 S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:174
+01FA37 $C8             INY                             A:2414 X:0008 Y:000A S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:178
+01FA38 $C8             INY                             A:2414 X:0008 Y:000B S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:181
+01FA39 $AD $31 $1A     LDA $1A31 [011A31] = $28        A:2414 X:0008 Y:000C S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:185
+01FA3C $1A             INC                             A:2428 X:0008 Y:000C S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:193

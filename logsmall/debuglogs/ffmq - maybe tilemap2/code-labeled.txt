@@ -1,0 +1,745 @@
+000117 jmp Jump_00b82a
+
+000117 jmp Jump_00b86c
+
+000117 jmp Jump_00b898
+
+000117 jmp Jump_00b8da
+
+
+Routine_00012f:
+00012f jsl Routine_00969f
+
+000133 jsl Routine_018336
+
+000137 jsl Routine_02eee7
+
+00013b jsl Routine_008337
+
+00013f jsl Routine_00969f
+
+000143 jsl Routine_018527
+
+000147 jsl Routine_02f0f5
+
+00014b jmp Jump_008784
+
+
+Routine_00014f:
+00014f jsl Routine_00969f
+
+000153 jsl Routine_01831f
+
+000157 jsl Routine_02f120
+
+00015b jmp Jump_008966
+
+
+Routine_008337:
+008337 rep #$30
+008339 lda #$4300
+00833c tcd
+00833d sep #$20
+00833f stz $420c
+008342 lda #$40
+008344 and $00e2
+008347 bne .Branch_00837d
+
+008349 lda #$02
+00834b and $00d4
+00834e bne .Branch_00837a
+
+008350 lda #$40
+008352 and $00dd
+008355 bne .Branch_008385
+
+008357 lda #$80
+008359 and $00d8
+00835c beq .Branch_008366
+
+
+.Branch_008366
+008366 lda #$c0
+008368 and $00d2
+00836b bne .Branch_0083a8
+
+00836d lda #$10
+00836f and $00d2
+008372 bne .Branch_008377
+
+008374 jmp Jump_008428
+
+
+.Branch_0083a8
+Jump_0083a8:
+0083a8 lda #$80
+0083aa and $00d2
+0083ad beq .Branch_0083d3
+
+
+.Branch_0083d3
+0083d3 lda #$20
+0083d5 and $00d2
+0083d8 beq .Branch_0083dd
+
+
+.Branch_0083dd
+0083dd lda #$40
+0083df trb $00dd
+0083e2 lda #$a0
+0083e4 trb $00d2
+0083e7 rtl
+
+Jump_008428:
+008428 lda #$80
+00842a and $00d4
+00842d beq .Branch_008476
+
+
+.Branch_008476
+008476 jmp Jump_0083a8
+
+
+Jump_008784:
+008784 sep #$20
+008786 rep #$10
+008788 lda #$20
+00878a and $00d4
+00878d beq .Branch_0087ce
+
+
+.Branch_0087ce
+0087ce phk
+0087cf plb
+0087d0 lda #$40
+0087d2 and $00d4
+0087d5 beq .Branch_00883a
+
+
+.Branch_00883a
+00883a rep #$30
+00883c lda #$0040
+00883f and $00d2
+008842 beq .Branch_0088a7
+
+
+.Branch_0088a7
+0088a7 sep #$20
+0088a9 lda #$04
+0088ab and $00d8
+0088ae beq .Branch_0088ca
+
+
+.Branch_0088ca
+0088ca lda #$80
+0088cc and $00da
+0088cf beq .Branch_00890c
+
+
+.Branch_00890c
+00890c lda #$10
+00890e and $00d4
+008911 beq .Branch_008934
+
+
+.Branch_008934
+008934 rep #$30
+008936 lda #$0020
+008939 and $0eac
+00893c bne .Branch_00894d
+
+
+.Branch_00894d
+00894d sep #$20
+00894f lda $0111
+008952 sta $420c
+008955 rtl
+
+Jump_008966:
+008966 rep #$30
+008968 lda #$0000
+00896b tcd
+00896c inc $0e97
+00896f bne .Branch_008974
+
+
+.Branch_008974
+008974 jsr Routine_0089c6
+
+008977 lda #$0004
+00897a and $00d4
+00897d beq .Branch_008999
+
+
+.Branch_008999
+008999 jsr Routine_008bfd
+
+00899c lda #$0010
+00899f and $00da
+0089a2 bne .Branch_0089ac
+
+0089a4 lda #$0004
+0089a7 and $00e2
+0089aa bne .Branch_0089bd
+
+
+.Branch_0089ac
+0089ac lda $07
+0089ae and $8e
+0089b0 beq .Branch_0089bd
+
+
+.Branch_0089bd
+0089bd rep #$30
+0089bf jsr Routine_009342
+
+0089c2 jsr Routine_009264
+
+0089c5 rtl
+
+Routine_0089c6:
+0089c6 phd
+0089c7 lda #$0080
+0089ca and $00de
+0089cd beq .Branch_008a26
+
+
+.Branch_008a26
+008a26 rep #$30
+008a28 pld
+008a29 rts
+
+Routine_008b69:
+008b69 lda $00d2
+008b6c bne .Branch_008b7a
+
+008b6e lda $00d7
+008b71 bmi .Branch_008b7a
+
+008b73 jsl Routine_00012f
+
+008b77 rep #$30
+008b79 rts
+
+Routine_008b88:
+008b88 lda $00d2
+008b8b bne .Branch_008b99
+
+008b8d lda $00d7
+008b90 bmi .Branch_008b99
+
+008b92 jsl Routine_00014f
+
+008b96 rep #$30
+008b98 rts
+
+Routine_008ba0:
+008ba0 rep #$30
+008ba2 lda #$0000
+008ba5 tcd
+008ba6 lda #$0040
+008ba9 and $00d6
+008bac bne .Branch_008bfc
+
+008bae lda $92
+008bb0 sta $96
+008bb2 lda #$0008
+008bb5 and $00d2
+008bb8 bne .Branch_008bc7
+
+008bba lda #$0004
+008bbd and $00db
+008bc0 bne .Branch_008bd2
+
+008bc2 lda $4218
+008bc5 bra .Branch_008bea
+
+
+.Branch_008bea
+008bea ora $90
+008bec and #$fff0
+008bef sta $94
+008bf1 tax
+008bf2 trb $96
+008bf4 lda $92
+008bf6 trb $94
+008bf8 stx $92
+008bfa stz $90
+
+.Branch_008bfc
+008bfc rts
+
+Routine_008bfd:
+008bfd stz $07
+008bff lda $94
+008c01 bne .Branch_008c13
+
+008c03 lda $92
+008c05 beq .Branch_008c12
+
+
+.Branch_008c12
+008c12 rts
+
+Routine_009264:
+009264 sep #$30
+009266 lda #$20
+009268 and $00d9
+00926b bne .Branch_009270
+
+00926d jsr Routine_009273
+
+
+.Branch_009270
+009270 rep #$30
+009272 rts
+
+Routine_009273:
+009273 rep #$10
+009275 lda #$20
+009277 tsb $00d9
+00927a pea #$0500
+00927d pld
+00927e cli
+00927f lda #$04
+009281 and $00e2
+009284 bne .Branch_0092a3
+
+009286 lda $00
+009288 bmi .Branch_0092a3
+
+
+.Branch_0092a3
+0092a3 lda $05
+0092a5 bmi .Branch_0092c2
+
+
+.Branch_0092c2
+0092c2 lda $0a
+0092c4 beq .Branch_0092e9
+
+
+.Branch_0092e9
+0092e9 sei
+0092ea lda #$20
+0092ec trb $00d9
+0092ef rts
+
+Routine_009342:
+009342 lda #$0004
+009345 and $00db
+009348 beq .Branch_009352
+
+
+.Branch_009352
+009352 rts
+
+Routine_00969f:
+00969f rtl
+
+Jump_00b82a:
+00b82a rep #$30
+00b82c phb
+00b82d pha
+00b82e phx
+00b82f sep #$20
+00b831 phk
+00b832 plb
+00b833 stz $4200
+
+.Branch_00b836
+00b836 lda $2137
+00b839 lda $213f
+00b83c lda $213d
+00b83f sta $0118
+00b842 lda #$40
+00b844 and $00da
+00b847 bne .Branch_00b854
+
+00b849 lda $0118
+00b84c asl
+00b84d adc $0118
+00b850 adc #$9a
+00b852 pha
+00b853 plp
+
+.Branch_00b854
+00b854 lsr $0118
+00b857 bcs .Branch_00b836
+
+00b859 ldx #$b86c
+00b85c stx $0118
+00b85f lda #$11
+00b861 sta $4200
+00b864 cli
+00b865 wai
+00b866 rep #$30
+00b868 plx
+00b869 pla
+00b86a plb
+00b86b rti
+
+Jump_00b86c:
+00b86c lda #$80
+00b86e sta $2100
+00b871 lda #$01
+00b873 sta $4200
+00b876 rep #$30
+00b878 phd
+00b879 phy
+00b87a jsr Routine_008b69
+
+00b87d sep #$20
+00b87f lda #$07
+00b881 sta $4209
+00b884 ldx #$b898
+00b887 stx $0118
+00b88a lda $0112
+00b88d sta $4200
+00b890 lda #$40
+00b892 tsb $00d8
+00b895 ply
+00b896 pld
+00b897 rti
+
+Jump_00b898:
+00b898 rep #$30
+00b89a phb
+00b89b pha
+00b89c phx
+00b89d sep #$20
+00b89f phk
+00b8a0 plb
+00b8a1 stz $4200
+
+.Branch_00b8a4
+00b8a4 lda $2137
+00b8a7 lda $213f
+00b8aa lda $213d
+00b8ad sta $0118
+00b8b0 lda #$40
+00b8b2 and $00da
+00b8b5 bne .Branch_00b8c2
+
+00b8b7 lda $0118
+00b8ba asl
+00b8bb adc $0118
+00b8be adc #$0f
+00b8c0 pha
+00b8c1 plp
+
+.Branch_00b8c2
+00b8c2 lsr $0118
+00b8c5 bcc .Branch_00b8a4
+
+00b8c7 ldx #$b8da
+00b8ca stx $0118
+00b8cd lda #$11
+00b8cf sta $4200
+00b8d2 cli
+00b8d3 wai
+00b8d4 rep #$30
+00b8d6 plx
+00b8d7 pla
+00b8d8 plb
+00b8d9 rti
+
+Jump_00b8da:
+00b8da lda $0110
+00b8dd sta $2100
+00b8e0 lda #$01
+00b8e2 sta $4200
+00b8e5 phd
+00b8e6 jsr Routine_008ba0
+
+00b8e9 phy
+00b8ea jsr Routine_008b88
+
+00b8ed sep #$20
+00b8ef lda #$d8
+00b8f1 sta $4209
+00b8f4 ldx #$b82a
+00b8f7 stx $0118
+00b8fa lda $0112
+00b8fd sta $4200
+00b900 lda #$20
+00b902 tsb $00d8
+00b905 ply
+00b906 pld
+00b907 rti
+
+Routine_01831f:
+01831f sep #$20
+018321 rep #$10
+018323 phb
+018324 lda $19a5
+018327 bne .Branch_01832c
+
+
+.Branch_01832c
+01832c plb
+01832d rtl
+
+Routine_018336:
+018336 php
+018337 phb
+018338 phk
+018339 plb
+01833a sep #$20
+01833c rep #$10
+01833e lda $19a5
+018341 bmi .Branch_018357
+
+
+.Branch_018357
+018357 plb
+018358 plp
+018359 rtl
+
+Routine_018527:
+018527 php
+018528 phb
+018529 phk
+01852a plb
+01852b rep #$30
+01852d inc $19a6
+018530 sep #$20
+018532 stz $19f7
+018535 lda $19a5
+018538 inc
+018539 beq .Branch_018553
+
+01853b bmi .Branch_018546
+
+
+.Branch_018546
+018546 lda #$00
+018548 xba
+018549 lda $1a45
+01854c and #$03
+01854e asl
+01854f tax
+018550 jsr ($8556,x)
+
+.Branch_018553
+018553 plb
+018554 plp
+018555 rtl
+0185da lda #$0f
+0185dc sta $0110
+0185df lda $080e
+0185e2 bit #$80
+0185e4 bne .Branch_018651
+
+0185e6 pha
+0185e7 sec
+0185e8 sbc #$1e
+0185ea beq .Branch_0185ee
+
+0185ec bpl .Branch_0185f0
+
+
+.Branch_0185ee
+0185ee lda #$01
+
+.Branch_0185f0
+0185f0 sta $0800
+0185f3 pla
+0185f4 sta $0804
+0185f7 sta $0807
+0185fa pha
+0185fb eor #$ff
+0185fd sta $0805
+018600 sta $0808
+018603 lda #$80
+018605 sec
+018606 sbc $01,s
+018608 sta $0803
+01860b sta $0806
+01860e pla
+01860f lda $0800
+018612 cmp #$0c
+018614 bcs .Branch_01861b
+
+018616 stz $2106
+018619 bra .Branch_018626
+
+
+.Branch_018626
+018626 rep #$20
+018628 lda $080f
+01862b adc $080d
+01862e sta $080d
+018631 lda $080f
+018634 adc #$0018
+018637 sta $080f
+01863a sep #$20
+01863c ldx #$2601
+01863f stx $4310
+018642 ldx #$0800
+018645 stx $4312
+018648 stz $4314
+01864b lda #$02
+01864d tsb $0111
+018650 rts
+019176 ldy $0e89
+
+Routine_02eee7:
+02eee7 phk
+02eee8 plb
+02eee9 pea #$0a00
+02eeec pld
+02eeed sep #$30
+02eeef lda $0ae2
+02eef2 beq .Branch_02ef0d
+
+
+.Branch_02ef0d
+02ef0d rtl
+
+Routine_02f0f5:
+02f0f5 phk
+02f0f6 plb
+02f0f7 php
+02f0f8 sep #$30
+02f0fa pea #$0a00
+02f0fd pld
+02f0fe lda $0ae2
+02f101 beq .Branch_02f11b
+
+
+.Branch_02f11b
+02f11b plp
+02f11c rtl
+
+Routine_02f120:
+02f120 phk
+02f121 plb
+02f122 sep #$30
+02f124 pea #$0a00
+02f127 pld
+02f128 lda $0ae2
+02f12b beq .Branch_02f196
+
+
+.Branch_02f196
+02f196 rtl
+
+Routine_0b0918:
+0b0918 phb
+0b091c plb
+0b091d rts
+
+Routine_0b091e:
+0b091e phb
+0b0922 plb
+0b0923 rts
+0b84fb rep #$20
+0b84fd lda $1918
+0b8500 and #$00f0
+0b8503 lsr
+0b8504 lsr
+0b8505 lsr
+0b8506 tax
+0b8507 lda $0b8540,x
+0b850b sta $1924
+0b850e sep #$20
+0b8510 lda $1910
+0b8513 and #$3f
+0b8515 sta $4202
+0b8518 lda #$03
+0b851a sta $4203
+0b851d ldx #$7f80
+0b8520 stx $0904
+0b8523 stz $0903
+0b8526 ldx $4216
+0b8529 rep #$20
+0b852b lda $0b8735,x
+0b852f sta $0900
+0b8532 sep #$20
+0b8534 lda $0b8737,x
+0b8538 sta $0902
+0b853b jsl Routine_0b8669
+
+0b853f rtl
+
+Routine_0b8669:
+0b8669 php
+0b866a phd
+0b866b phb
+0b866c pea #$0900
+0b866f pld
+0b8670 rep #$30
+0b8672 ldx #$86de
+0b8675 ldy #$0918
+0b8678 lda #$000b
+0b867e ldx $00
+0b8680 inx
+0b8681 inx
+0b8682 txa
+0b8683 clc
+0b8684 adc [$00]
+0b8686 sta $06
+0b8688 sep #$20
+0b868a lda $02
+0b868c sta $1b
+0b868e pha
+0b868f plb
+0b8690 lda $05
+0b8692 sta $1a
+0b8694 sta $20
+0b8696 sta $21
+0b8698 ldy $03
+0b869a stz $0d
+
+.Branch_0b869c
+0b869c sep #$20
+0b869e lda $0000,x
+0b86a1 beq .Branch_0b86da
+
+0b86a3 inx
+0b86a4 rep #$20
+0b86a6 pha
+0b86a7 and #$000f
+0b86aa beq .Branch_0b86b6
+
+0b86ac phx
+0b86ad ldx $06
+0b86af dec
+0b86b0 jsr Routine_0b0918
+
+0b86b3 stx $06
+0b86b5 plx
+
+.Branch_0b86b6
+0b86b6 pla
+0b86b7 and #$00f0
+0b86ba beq .Branch_0b869c
+
+0b86bc lsr
+0b86bd lsr
+0b86be lsr
+0b86bf lsr
+0b86c0 sta $08
+0b86c2 lda $0000,x
+0b86c5 inx
+0b86c6 and #$00ff
+0b86c9 sta $0a
+0b86cb tya
+0b86cc clc
+0b86cd sbc $0a
+0b86cf phx
+0b86d0 tax
+0b86d1 lda $08
+0b86d3 inc
+0b86d4 jsr Routine_0b091e
+
+0b86d7 plx
+0b86d8 bra .Branch_0b869c
+
+
+.Branch_0b86da
+0b86da plb
+0b86db pld
+0b86dc plp
+0b86dd rtl

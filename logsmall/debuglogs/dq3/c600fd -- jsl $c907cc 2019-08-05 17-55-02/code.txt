@@ -1,0 +1,46 @@
+c600b9 jmp $c02dff
+c60107 jsl $c907cc
+c60111 rts
+c907cc php
+c907cd sei
+c907ce rep #$30
+c907d0 pha
+c907d1 phb
+c907d2 phx
+c907d3 phy
+c907d4 lda $0a,s
+c907d6 pha
+c907d7 plb
+c907d8 plb
+c907d9 ldy #$0004
+c907dc lda ($09,s),y
+c907de eor #$ffff
+c907e1 sta $40
+c907e3 iny
+c907e4 lda ($09,s),y
+c907e6 eor #$ffff
+c907e9 sta $41
+c907eb ldy #$0001
+c907ee lda ($09,s),y
+c907f0 tax
+c907f1 iny
+c907f2 lda ($09,s),y
+c907f4 pha
+c907f5 plb
+c907f6 plb
+c907f7 lda $0000,x
+c907fa and $40
+c907fc sta $0000,x
+c907ff lda $0001,x
+c90802 and $41
+c90804 sta $0001,x
+c90807 lda $09,s
+c90809 clc
+c9080a adc #$0006
+c9080d sta $09,s
+c9080f ply
+c90810 plx
+c90811 plb
+c90812 pla
+c90813 plp
+c90814 rtl

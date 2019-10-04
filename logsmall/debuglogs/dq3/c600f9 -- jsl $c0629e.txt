@@ -1,0 +1,21 @@
+C0629E $08             PHP                             A:0000 X:001A Y:7FFE S:0377 D:0000 DB:7E P:46 V:69  H:96 
+C0629F $C2 $30         REP #$30                        A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:69  H:101
+C062A1 $48             PHA                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:69  H:105
+C062A2 $DA             PHX                             A:0000 X:001A Y:7FFE S:0374 D:0000 DB:7E P:46 V:69  H:112
+C062A3 $5A             PHY                             A:0000 X:001A Y:7FFE S:0372 D:0000 DB:7E P:46 V:69  H:119
+C062A4 $8B             PHB                             A:0000 X:001A Y:7FFE S:0370 D:0000 DB:7E P:46 V:69  H:126
+C062A5 $F4 $7F $7F     PEA #$7F7F                      A:0000 X:001A Y:7FFE S:036F D:0000 DB:7E P:46 V:69  H:131
+C062A8 $AB             PLB                             A:0000 X:001A Y:7FFE S:036D D:0000 DB:7E P:46 V:69  H:150
+C062A9 $AB             PLB                             A:0000 X:001A Y:7FFE S:036E D:0000 DB:7F P:44 V:69  H:156
+C062AA $A9 $20 $00     LDA #$0020                      A:0000 X:001A Y:7FFE S:036F D:0000 DB:7F P:44 V:69  H:163
+C062AD $8D $4C $B7     STA $B74C [7FB74C] = $00D0      A:0020 X:001A Y:7FFE S:036F D:0000 DB:7F P:44 V:69  H:167
+C062B0 $A9 $32 $00     LDA #$0032                      A:0020 X:001A Y:7FFE S:036F D:0000 DB:7F P:44 V:69  H:176
+C062B3 $8D $4E $B7     STA $B74E [7FB74E] = $00D0      A:0032 X:001A Y:7FFE S:036F D:0000 DB:7F P:44 V:69  H:180
+C062B6 $AB             PLB                             A:0032 X:001A Y:7FFE S:036F D:0000 DB:7F P:44 V:69  H:189
+C062B7 $C2 $30         REP #$30                        A:0032 X:001A Y:7FFE S:0370 D:0000 DB:7E P:44 V:69  H:195
+C062B9 $7A             PLY                             A:0032 X:001A Y:7FFE S:0370 D:0000 DB:7E P:44 V:69  H:200
+C062BA $FA             PLX                             A:0032 X:001A Y:7FFE S:0372 D:0000 DB:7E P:44 V:69  H:208
+C062BB $68             PLA                             A:0032 X:001A Y:7FFE S:0374 D:0000 DB:7E P:44 V:69  H:217
+C062BC $28             PLP                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:69  H:225
+C062BD $6B             RTL                             A:0000 X:001A Y:7FFE S:0377 D:0000 DB:7E P:46 V:69  H:232
+C600FD $22 $CC $07 $C9 JSL $C907CC                     A:0000 X:001A Y:7FFE S:037A D:0000 DB:7E P:46 V:69  H:242

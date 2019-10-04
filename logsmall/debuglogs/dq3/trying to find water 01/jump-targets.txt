@@ -1,0 +1,4 @@
+c18c2e jsr ($a843,x) [c199ca] - 1
+c199f9 jsr ($99fd,x) [c1a32b] - 1
+c1a382 jmp ($a385,x) [c1a39a] - 1
+c1a73b jsr ($a73f,x) [c1a751] - 1

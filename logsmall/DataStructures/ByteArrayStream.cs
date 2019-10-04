@@ -37,6 +37,10 @@ namespace logsmall.DataStructures {
 			Buffer[Address++] = value;
 		}
 
+		public byte ByteAt(int offset) {
+			return Buffer[Address + offset];
+		}
+
 		public ushort Word() {
 			byte a = Buffer[Address++];
 			byte b = Buffer[Address++];
@@ -110,7 +114,7 @@ namespace logsmall.DataStructures {
 			// TODO: check for off by one
 			start = Math.Max(0, start);
 			end = Math.Min(Buffer.Length, end);
-			
+
 			var lastIndex = end - searchTerm.Length;
 			for (int i = lastIndex; i >= start; i--) {
 				var matches = true;
@@ -155,17 +159,17 @@ namespace logsmall.DataStructures {
 			return output;
 		}
 
-		public (byte[] data, int startAddress, int endAddress) ReadUntil(byte endValue) {
+		public byte[] ReadUntil(byte endValue, int? maxLength = null) {
 			var startAddress = Address;
 			var data = new List<byte>();
 			byte value = Byte();
 
-			while (value != endValue && HasSpace) {
+			while (value != endValue && HasSpace && (maxLength == null || (data.Count < maxLength))) {
 				data.Add(value);
 				value = Byte();
 			}
 
-			return (data.ToArray(), startAddress, startAddress + data.Count - 1);
+			return data.ToArray();
 		}
 
 		// TODO: Add error checking

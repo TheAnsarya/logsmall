@@ -1,0 +1,89 @@
+C907CC $08             PHP                             A:0000 X:001A Y:7FFE S:0377 D:0000 DB:7E P:46 V:69  H:256
+C907CD $78             SEI                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:69  H:261
+C907CE $C2 $30         REP #$30                        A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:69  H:264
+C907D0 $48             PHA                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:69  H:268
+C907D1 $8B             PHB                             A:0000 X:001A Y:7FFE S:0374 D:0000 DB:7E P:46 V:69  H:275
+C907D2 $DA             PHX                             A:0000 X:001A Y:7FFE S:0373 D:0000 DB:7E P:46 V:69  H:286
+C907D3 $5A             PHY                             A:0000 X:001A Y:7FFE S:0371 D:0000 DB:7E P:46 V:69  H:293
+C907D4 $A3 $0A         LDA $0A,S [000379] = $C601      A:0000 X:001A Y:7FFE S:036F D:0000 DB:7E P:46 V:69  H:300
+C907D6 $48             PHA                             A:C601 X:001A Y:7FFE S:036F D:0000 DB:7E P:C4 V:69  H:309
+C907D7 $AB             PLB                             A:C601 X:001A Y:7FFE S:036D D:0000 DB:7E P:C4 V:69  H:316
+C907D8 $AB             PLB                             A:C601 X:001A Y:7FFE S:036E D:0000 DB:01 P:44 V:69  H:322
+C907D9 $A0 $04 $00     LDY #$0004                      A:C601 X:001A Y:7FFE S:036F D:0000 DB:C6 P:C4 V:69  H:328
+C907DC $B3 $09         LDA ($09,S),Y [C60104] = $0010  A:C601 X:001A Y:0004 S:036F D:0000 DB:C6 P:44 V:69  H:332
+C907DE $49 $FF $FF     EOR #$FFFF                      A:0010 X:001A Y:0004 S:036F D:0000 DB:C6 P:44 V:70  H:5  
+C907E1 $85 $40         STA $40 [000040] = $0001        A:FFEF X:001A Y:0004 S:036F D:0000 DB:C6 P:C4 V:70  H:10 
+C907E3 $C8             INY                             A:FFEF X:001A Y:0004 S:036F D:0000 DB:C6 P:C4 V:70  H:17 
+C907E4 $B3 $09         LDA ($09,S),Y [C60105] = $0000  A:FFEF X:001A Y:0005 S:036F D:0000 DB:C6 P:44 V:70  H:20 
+C907E6 $49 $FF $FF     EOR #$FFFF                      A:0000 X:001A Y:0005 S:036F D:0000 DB:C6 P:46 V:70  H:33 
+C907E9 $85 $41         STA $41 [000041] = $CEFF        A:FFFF X:001A Y:0005 S:036F D:0000 DB:C6 P:C4 V:70  H:37 
+C907EB $A0 $01 $00     LDY #$0001                      A:FFFF X:001A Y:0005 S:036F D:0000 DB:C6 P:C4 V:70  H:44 
+C907EE $B3 $09         LDA ($09,S),Y [C60101] = $353D  A:FFFF X:001A Y:0001 S:036F D:0000 DB:C6 P:44 V:70  H:49 
+C907F0 $AA             TAX                             A:353D X:001A Y:0001 S:036F D:0000 DB:C6 P:44 V:70  H:62 
+C907F1 $C8             INY                             A:353D X:353D Y:0001 S:036F D:0000 DB:C6 P:44 V:70  H:65 
+C907F2 $B3 $09         LDA ($09,S),Y [C60102] = $7E35  A:353D X:353D Y:0002 S:036F D:0000 DB:C6 P:44 V:70  H:68 
+C907F4 $48             PHA                             A:7E35 X:353D Y:0002 S:036F D:0000 DB:C6 P:44 V:70  H:81 
+C907F5 $AB             PLB                             A:7E35 X:353D Y:0002 S:036D D:0000 DB:C6 P:44 V:70  H:88 
+C907F6 $AB             PLB                             A:7E35 X:353D Y:0002 S:036E D:0000 DB:35 P:44 V:70  H:94 
+C907F7 $BD $00 $00     LDA $0000,X [7E353D] = $0128    A:7E35 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:101
+C907FA $25 $40         AND $40 [000040] = $FFEF        A:0128 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:111
+C907FC $9D $00 $00     STA $0000,X [7E353D] = $0128    A:0128 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:118
+C907FF $BD $01 $00     LDA $0001,X [7E353E] = $0001    A:0128 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:128
+C90802 $25 $41         AND $41 [000041] = $FFFF        A:0001 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:148
+C90804 $9D $01 $00     STA $0001,X [7E353E] = $0001    A:0001 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:155
+C90807 $A3 $09         LDA $09,S [000378] = $0100      A:0001 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:165
+C90809 $18             CLC                             A:0100 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:173
+C9080A $69 $06 $00     ADC #$0006                      A:0100 X:353D Y:0002 S:036F D:0000 DB:7E P:44 V:70  H:176
+C9080D $83 $09         STA $09,S [000378] = $0100      A:0106 X:353D Y:0002 S:036F D:0000 DB:7E P:04 V:70  H:181
+C9080F $7A             PLY                             A:0106 X:353D Y:0002 S:036F D:0000 DB:7E P:04 V:70  H:189
+C90810 $FA             PLX                             A:0106 X:353D Y:7FFE S:0371 D:0000 DB:7E P:04 V:70  H:198
+C90811 $AB             PLB                             A:0106 X:001A Y:7FFE S:0373 D:0000 DB:7E P:04 V:70  H:206
+C90812 $68             PLA                             A:0106 X:001A Y:7FFE S:0374 D:0000 DB:7E P:04 V:70  H:213
+C90813 $28             PLP                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:06 V:70  H:221
+C90814 $6B             RTL                             A:0000 X:001A Y:7FFE S:0377 D:0000 DB:7E P:46 V:70  H:228
+C60107 $22 $CC $07 $C9 JSL $C907CC                     A:0000 X:001A Y:7FFE S:037A D:0000 DB:7E P:46 V:70  H:238
+C907CC $08             PHP                             A:0000 X:001A Y:7FFE S:0377 D:0000 DB:7E P:46 V:70  H:252
+C907CD $78             SEI                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:70  H:257
+C907CE $C2 $30         REP #$30                        A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:70  H:260
+C907D0 $48             PHA                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:46 V:70  H:264
+C907D1 $8B             PHB                             A:0000 X:001A Y:7FFE S:0374 D:0000 DB:7E P:46 V:70  H:271
+C907D2 $DA             PHX                             A:0000 X:001A Y:7FFE S:0373 D:0000 DB:7E P:46 V:70  H:284
+C907D3 $5A             PHY                             A:0000 X:001A Y:7FFE S:0371 D:0000 DB:7E P:46 V:70  H:291
+C907D4 $A3 $0A         LDA $0A,S [000379] = $C601      A:0000 X:001A Y:7FFE S:036F D:0000 DB:7E P:46 V:70  H:298
+C907D6 $48             PHA                             A:C601 X:001A Y:7FFE S:036F D:0000 DB:7E P:C4 V:70  H:306
+C907D7 $AB             PLB                             A:C601 X:001A Y:7FFE S:036D D:0000 DB:7E P:C4 V:70  H:313
+C907D8 $AB             PLB                             A:C601 X:001A Y:7FFE S:036E D:0000 DB:01 P:44 V:70  H:320
+C907D9 $A0 $04 $00     LDY #$0004                      A:C601 X:001A Y:7FFE S:036F D:0000 DB:C6 P:C4 V:70  H:326
+C907DC $B3 $09         LDA ($09,S),Y [C6010E] = $0040  A:C601 X:001A Y:0004 S:036F D:0000 DB:C6 P:44 V:70  H:330
+C907DE $49 $FF $FF     EOR #$FFFF                      A:0040 X:001A Y:0004 S:036F D:0000 DB:C6 P:44 V:71  H:3  
+C907E1 $85 $40         STA $40 [000040] = $FFEF        A:FFBF X:001A Y:0004 S:036F D:0000 DB:C6 P:C4 V:71  H:7  
+C907E3 $C8             INY                             A:FFBF X:001A Y:0004 S:036F D:0000 DB:C6 P:C4 V:71  H:14 
+C907E4 $B3 $09         LDA ($09,S),Y [C6010F] = $0000  A:FFBF X:001A Y:0005 S:036F D:0000 DB:C6 P:44 V:71  H:17 
+C907E6 $49 $FF $FF     EOR #$FFFF                      A:0000 X:001A Y:0005 S:036F D:0000 DB:C6 P:46 V:71  H:30 
+C907E9 $85 $41         STA $41 [000041] = $FFFF        A:FFFF X:001A Y:0005 S:036F D:0000 DB:C6 P:C4 V:71  H:35 
+C907EB $A0 $01 $00     LDY #$0001                      A:FFFF X:001A Y:0005 S:036F D:0000 DB:C6 P:C4 V:71  H:42 
+C907EE $B3 $09         LDA ($09,S),Y [C6010B] = $353C  A:FFFF X:001A Y:0001 S:036F D:0000 DB:C6 P:44 V:71  H:46 
+C907F0 $AA             TAX                             A:353C X:001A Y:0001 S:036F D:0000 DB:C6 P:44 V:71  H:59 
+C907F1 $C8             INY                             A:353C X:353C Y:0001 S:036F D:0000 DB:C6 P:44 V:71  H:62 
+C907F2 $B3 $09         LDA ($09,S),Y [C6010C] = $7E35  A:353C X:353C Y:0002 S:036F D:0000 DB:C6 P:44 V:71  H:65 
+C907F4 $48             PHA                             A:7E35 X:353C Y:0002 S:036F D:0000 DB:C6 P:44 V:71  H:78 
+C907F5 $AB             PLB                             A:7E35 X:353C Y:0002 S:036D D:0000 DB:C6 P:44 V:71  H:85 
+C907F6 $AB             PLB                             A:7E35 X:353C Y:0002 S:036E D:0000 DB:35 P:44 V:71  H:92 
+C907F7 $BD $00 $00     LDA $0000,X [7E353C] = $2884    A:7E35 X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:98 
+C907FA $25 $40         AND $40 [000040] = $FFBF        A:2884 X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:108
+C907FC $9D $00 $00     STA $0000,X [7E353C] = $2884    A:2884 X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:115
+C907FF $BD $01 $00     LDA $0001,X [7E353D] = $0128    A:2884 X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:125
+C90802 $25 $41         AND $41 [000041] = $FFFF        A:0128 X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:145
+C90804 $9D $01 $00     STA $0001,X [7E353D] = $0128    A:0128 X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:152
+C90807 $A3 $09         LDA $09,S [000378] = $010A      A:0128 X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:162
+C90809 $18             CLC                             A:010A X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:171
+C9080A $69 $06 $00     ADC #$0006                      A:010A X:353C Y:0002 S:036F D:0000 DB:7E P:44 V:71  H:174
+C9080D $83 $09         STA $09,S [000378] = $010A      A:0110 X:353C Y:0002 S:036F D:0000 DB:7E P:04 V:71  H:178
+C9080F $7A             PLY                             A:0110 X:353C Y:0002 S:036F D:0000 DB:7E P:04 V:71  H:187
+C90810 $FA             PLX                             A:0110 X:353C Y:7FFE S:0371 D:0000 DB:7E P:04 V:71  H:195
+C90811 $AB             PLB                             A:0110 X:001A Y:7FFE S:0373 D:0000 DB:7E P:04 V:71  H:204
+C90812 $68             PLA                             A:0110 X:001A Y:7FFE S:0374 D:0000 DB:7E P:04 V:71  H:210
+C90813 $28             PLP                             A:0000 X:001A Y:7FFE S:0376 D:0000 DB:7E P:06 V:71  H:219
+C90814 $6B             RTL                             A:0000 X:001A Y:7FFE S:0377 D:0000 DB:7E P:46 V:71  H:225
+C60111 $60             RTS                             A:0000 X:001A Y:7FFE S:037A D:0000 DB:7E P:46 V:71  H:236
+C600B9 $5C $FF $2D $C0 JMP $C02DFF                     A:0000 X:001A Y:7FFE S:037C D:0000 DB:7E P:46 V:71  H:246

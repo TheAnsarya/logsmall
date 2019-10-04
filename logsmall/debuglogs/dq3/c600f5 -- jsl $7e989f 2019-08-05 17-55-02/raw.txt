@@ -1,0 +1,2 @@
+7E989F $6B             RTL                             A:0000 X:001A Y:7FFE S:0377 D:0000 DB:7E P:46 V:69  H:72 
+C600F9 $22 $9E $62 $C0 JSL $C0629E                     A:0000 X:001A Y:7FFE S:037A D:0000 DB:7E P:46 V:69  H:82 

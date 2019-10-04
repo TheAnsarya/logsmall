@@ -18,9 +18,14 @@ using System.Threading.Tasks;
 namespace logsmall {
 	class Program {
 		static void Main(string[] args) {
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - text if statement 2.txt");
 
+			FZeroFindJetColorsJSR();
 
-			FFMQGetLongTextLines();
+			//FFMQGetLongTextFromOffsets();
+			//FFMQGetLongTextOffsets();
+			//FFMQGetLongTextUnder30JumpTable();
+			//FFMQGetLongTextLines();
 			//FFMQGetLongTextLookups();
 			//OutputHexChunkFFMQ();
 			//MapData.Go();
@@ -35,45 +40,14 @@ namespace logsmall {
 
 			//var bytecode = SNES.OpToHex("c01576", "jml", "[$1d9a]");
 			//var t = 0;
-			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - decode boulder text.txt");
 			//Getc90717Calls();
 			//GetPossibleGoldSpots();
 			//LookForAString();
 			//DecodeStringBlock();
 
-
-			//BasicRing400.TestLayout();
-
-
-			//TrimLog();
-			//MergeTrace();
-			//FixA16();
-			//TestRange64();
-			//ConvertBranches();
-			//sortAddresses();
-
 			//var filename = @"c:\working\dq3\dq3-a.log"
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 - decompressing ow bg1.log";
 			//processBSNES(filename);
-
-			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 decompress overworld map - bg1 - from c0539b - wuth zeros.txt";
-			//processMesen(filename);
-
-			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600fd -- jsl $c907cc.txt");
-
-
-			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\trying to find water 02.txt");
-			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\c600d9 -- jsl $c60b57 -- c086 stuff.txt");
-
-			//OverworldMap2.TestGetLayout();
-			//MakeTilesImage();
-			//OverworldMap2.GetMapImage();
-			//OverworldMap2.TestTilemapToChunks();
-			//OverworldMap2.ProcessDQ4NesMap();
-			//OverworldMap2.TranslateDQ4Map();
-			//OverworldMap2.DrawDQ4SnesMap();
-
-			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3-all-raw.log";
 			//processSimple(filename);
 		}
 
@@ -737,7 +711,10 @@ namespace logsmall {
 				var stream = Rom.GetStream(list.StartAddress);
 
 				while (stream.Address < maxAddress) {
-					var (data, startAddress, endAddress) = stream.ReadUntil(SmallFontTable.EndOfString);
+					var startAddress = stream.Address;
+					var data = stream.ReadUntil(SmallFontTable.EndOfString);
+					var endAddress = stream.Address - 2;
+
 					startAddress += (int)Rom.AddressOffset;
 					endAddress += (int)Rom.AddressOffset;
 					var jap = SmallFontTable.Decode(data);
@@ -757,7 +734,10 @@ namespace logsmall {
 			var stream = Rom.GetStream(MonsterNames.Instance.StartAddress);
 
 			while (stream.Address < maxAddress) {
-				var (data, startAddress, endAddress) = stream.ReadUntil(SmallFontTable.EndOfString);
+				var startAddress = stream.Address;
+				var data = stream.ReadUntil(SmallFontTable.EndOfString);
+				var endAddress = stream.Address - 2;
+
 				startAddress += (int)Rom.AddressOffset;
 				endAddress += (int)Rom.AddressOffset;
 				var jap = SmallFontTable.Decode(data);
@@ -814,9 +794,13 @@ namespace logsmall {
 
 		static void FFMQGetLongTextLookups() {
 			var filename = @"c:\working\ffmq\longtext.tbl";
+			//var filename = @"c:\working\ffmq\longtext.raw.txt";
 			var lines =
-				FFMQ.LongText.GetTextLookups()
+				FFMQ.LongText
+					.GetTextLookups()
 					.Select(x => $"{x.Key.ToString("X2")}={x.Value}")
+					//.GetRawTextLookups()
+					//.Select(x => $"{x.Key.ToString("X2")}={x.Value.ToHexString()}")
 					.OrderBy(x => x)
 					.ToList();
 
@@ -831,6 +815,126 @@ namespace logsmall {
 					.OrderBy(x => x)
 					.ToList();
 
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void FFMQGetLongTextUnder30JumpTable() {
+			var filename = @"c:\working\ffmq\~long text under 30 jump table.txt";
+			var stream = FFMQ.LongText.Under30JumpTable();
+			var lines =
+				Enumerable.Range(0, 0x2f)
+					.Select(x => $"{x.ToString("x2")} - {stream.Word().ToString("x6")}")
+					.OrderBy(x => x)
+					.ToList();
+
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void FFMQGetLongTextOffsets() {
+			var rom = FFMQ.Game.Rom;
+			var filename = @"c:\working\ffmq\~long text offsets.txt";
+			var stream = FFMQ.LongText.Offsets();
+			var lines =
+				Enumerable.Range(0, 0x7b)
+					.Select(x =>
+						new {
+							Index = x.ToString("x2"),
+							Source = rom.AddressToSNES(stream.Address).ToString("x6"),
+							Address = 0x030000 + stream.Word()
+						}
+					)
+					.Select(x => $"{x.Index} - {x.Source} - {x.Address.ToString("x6")} - {FFMQGetLongTextOffsets_Helper(x.Address)}")
+					.OrderBy(x => x)
+					.ToList();
+
+			File.WriteAllLines(filename, lines);
+		}
+
+		static string FFMQGetLongTextOffsets_Helper(int address) {
+			try {
+				return address == 0x030000 ? "" : LongText.AttemptTranslateLine(FFMQ.Game.Rom.GetStream(address));
+			} catch (Exception ex) {
+				return ex.Message;
+			}
+		}
+
+		static void FFMQGetLongTextFromOffsets() {
+			var rom = FFMQ.Game.Rom;
+			var filename = @"c:\working\ffmq\~long text from offsets.txt";
+			var stream = FFMQ.LongText.Offsets();
+			var addresses =
+				Enumerable.Range(0, 0x7b)
+					.Select(x => 0x030000 + stream.Word())
+					.Where(x => x != 0x030000)
+					.Distinct()
+					.OrderBy(x => x)
+					.ToList();
+
+			addresses.Add(addresses[addresses.Count - 1] + 0x30);
+
+			var lines = new List<string>();
+			var nl = Environment.NewLine;
+
+			for (int i = 0; i < addresses.Count() - 1; i++) {
+				var data = rom.GetStream(addresses[i]).GetBytes(addresses[i + 1] - addresses[i]);
+
+				lines.Add($"{addresses[i].ToString("x6")}{nl}{data.ToHexString()}{nl}{FFMQGetLongTextFromOffsets_Helper(data)}{nl}");
+			}
+
+			File.WriteAllLines(filename, lines);
+		}
+
+		static string FFMQGetLongTextFromOffsets_Helper(byte[] data) {
+			try {
+				return LongText.AttemptTranslateLine(data);
+			} catch (Exception ex) {
+				return ex.Message;
+			}
+		}
+		static void FZeroFindJetColorsJSR() {
+			var rom = new LoRom {
+				Filename = @"c:\working\F-ZERO (U) [!].smc"
+			};
+
+			var searchTerm =
+				string.Join("",
+					new List<string> {
+						SNES.OpToHex("000000", "lsr", "a"),
+						SNES.OpToHex("000000", "lsr", "a"),
+						SNES.OpToHex("000000", "lsr", "a"),
+						SNES.OpToHex("000000", "sep", "#$20"),
+						SNES.OpToHex("000000", "sta", "$4202"),
+						SNES.OpToHex("000000", "lda", "#$5e"),
+						SNES.OpToHex("000000", "sta", "$4203"),
+						SNES.OpToHex("000000", "nop", ""),
+						SNES.OpToHex("000000", "nop", ""),
+						SNES.OpToHex("000000", "nop", ""),
+					})
+				.Split(2)
+				.Select(x => byte.Parse(x, NumberStyles.HexNumber))
+				.ToArray();
+
+			var dataOffset = searchTerm.Length;
+			var dataLength = 16 + 3;
+
+			var found =
+				rom
+					.GetStream(0x8000)
+					.FindAll(searchTerm)
+					   .Select(x => new {
+						   Address = rom.AddressToSNES(x.Address),
+						   DataAddress = rom.AddressToSNES(x.Address) + dataOffset,
+						   Data = x.GetBytes(dataLength, x.Address + dataOffset)
+					   });
+
+			var lines =
+				found
+					.Select(x =>
+						$"{x.Address.ToString("x6")} -- {x.DataAddress.ToString("x6")} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2")))}"
+					);
+
+			Directory.CreateDirectory(@"c:\working\fzero\");
+			var filename = @"c:\working\fzero\~find jsr.txt";
 			File.WriteAllLines(filename, lines);
 		}
 	}

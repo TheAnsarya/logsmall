@@ -1,0 +1,32 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 6E8A-50D5
+
+ Directory of C:\Users\Andy\Documents\Mesen-S\Debugger
+
+2019-08-05  16:33    <DIR>          .
+2019-08-05  16:33    <DIR>          ..
+2019-08-05  16:07        21,183,138 c600bd --- jsl $c6061f.txt
+2019-08-05  16:08           890,340 c600c1 -- jsl $c609e0.txt
+2019-08-05  16:09           378,936 c600c5 -- jsl $c6029a.txt
+2019-08-05  16:10        97,812,456 c600c9 -- jsl $c60f42.txt
+2019-08-05  16:12         5,488,188 c600cd -- jsl $c60286.txt
+2019-08-05  16:13            44,802 c600d1 -- jsl $c60951.txt
+2019-08-05  16:14            53,352 c600d5 -- jsl $c60706.txt
+2019-08-05  16:14        36,584,994 c600d9 -- jsl $c60b57.txt
+2019-08-05  16:15        17,083,584 c600dd -- jsl $c60f98.txt
+2019-08-05  16:16           157,206 c600e1 -- jsl $c6072b.txt
+2019-08-05  16:17             1,254 c600e5 -- jsl $7e9893.txt
+2019-08-05  16:18           126,084 c600e9 -- jsl $7e9897.txt
+2019-08-05  16:19               228 c600ed -- jsl $7e989b.txt
+2019-08-05  16:19         7,217,796 c600f1 -- jsl $c60654.txt
+2019-08-05  16:20               228 c600f5 -- jsl $7e989f.txt
+2019-08-05  16:21             2,394 c600f9 -- jsl $c0629e.txt
+2019-08-05  16:22            10,146 c600fd -- jsl $c907cc.txt
+2019-07-30  20:37         2,211,480 dq3 decompress overworld map - bg1 - #2.txt
+2019-07-30  20:58         2,351,160 dq3 decompress overworld map - bg1 - from c0539b - wuth zeros.txt
+2019-07-28  14:50         2,192,760 dq3 decompress overworld map - bg1.txt
+2019-07-30  02:16         4,194,304 Dragon Quest III - Soshite Densetsu he... (J).cdl
+2019-07-27  20:25            40,511 Dragon Quest III - Soshite Densetsu he... (J).Workspace.xml
+2019-08-05  16:33                 0 ~i.txt
+              23 File(s)    198,025,341 bytes
+               2 Dir(s)  161,742,815,232 bytes free

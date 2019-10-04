@@ -1,0 +1,219 @@
+
+
+
+; $0900 long -- holds address to offset to the start of the source data (used for $0906)
+; $0903 long -- holds destination address
+; $0906 word -- holds source address, starts @ address at $00 + value at [$00], increments so continuous/contiguous stream
+
+; $090d word -- is set to 0 then never used
+
+; $0918-$0923 -- holds utility copy routines
+
+; $1910 byte -- lower 6 bits * 3 is index into source address (the X in $0b8735,x)
+; $1918 byte -- upper 4 bits * 2 (or rather, AND #$f0 >> 3) used to index $0b8540,x into $1924 which is not used here
+; $1924 word -- $0b8540,x with X from $1918, not used
+
+
+
+; 019172 $22 $FB $84 $0B JSL $0B84FB                     A:4C00 X:000C Y:4C00 S:1FCB D:0000 DB:01 P:nvMxdizc V:28  H:198
+
+
+
+
+; line this all returns to when it's done, not really part of this code
+019176 ldy $0e89
+
+
+; Missing 019179 - 0b0917 (620447 bytes)
+
+
+; These two routines are copied to ram, banks are dynamically set
+
+; RUN FROM RAM: UTILITY: Copy from bank $08 to bank $7f
+Routine_0b0918:
+0b0918 phb
+0b0919 mvn $08 -> $7f
+0b091c plb
+0b091d rts
+
+; RUN FROM RAM: UTILITY: Copy from bank $7f to bank $7f
+Routine_0b091e:
+0b091e phb
+0b091f mvn $7f -> $7f
+0b0922 plb
+0b0923 rts
+
+
+; Missing 0b0924 - 0b84fa (31703 bytes)
+
+
+; ROUTINE: Loads tilemap data into $7f8000 - $7f8fff
+Routine_0b84fb:
+0b84fb rep #$20
+; $1924 is not used here so I don't know what this load does
+0b84fd lda $1918
+0b8500 and #$00f0
+0b8503 lsr
+0b8504 lsr
+0b8505 lsr
+0b8506 tax
+0b8507 lda $0b8540,x
+0b850b sta $1924
+
+; multiply (lower six bits of $1910) * 3
+0b850e sep #$20
+0b8510 lda $1910
+0b8513 and #$3f
+0b8515 sta $4202
+0b8518 lda #$03
+0b851a sta $4203
+
+; set destination address, long, at $0903 => $7f8000
+0b851d ldx #$7f80
+0b8520 stx $0904
+0b8523 stz $0903
+
+; get multiply result
+0b8526 ldx $4216
+
+; store source data lookup address, long, at $0900 => value at $0b8735,x
+0b8529 rep #$20
+0b852b lda $0b8735,x
+0b852f sta $0900
+0b8532 sep #$20
+0b8534 lda $0b8737,x
+0b8538 sta $0902
+
+0b853b jsl Routine_0b8669
+
+0b853f rtl
+
+
+
+; Missing 0b8540 - 0b8668 (297 bytes)
+
+
+
+; ROUTINE: 
+Routine_0b8669:
+; Setup
+0b8669 php
+0b866a phd
+0b866b phb
+0b866c pea #$0900
+0b866f pld
+0b8670 rep #$30
+
+; Copy the two utility copy routines to ram
+; From: $0b86de - $0b86e9
+;   To: $0918 - $0923
+0b8672 ldx #$86de
+0b8675 ldy #$0918
+0b8678 lda #$000b
+0b867b mvn $0b -> $0b
+
+; source address, starts @ address at $0900 + value at [$0900]
+0b867e ldx $00
+0b8680 inx
+0b8681 inx
+0b8682 txa
+0b8683 clc
+0b8684 adc [$00]
+0b8686 sta $06
+
+; copy source address bank into the first utility copy routine
+0b8688 sep #$20
+0b868a lda $02
+0b868c sta $1b
+0b868e pha
+
+; also set databank so we can check for end-of-data 
+0b868f plb
+
+; copy destination address bank into the first utility copy routine
+0b8690 lda $05
+0b8692 sta $1a
+
+; destination bank is used as source and destination in second utility copy routine
+0b8694 sta $20
+0b8696 sta $21
+
+; pull the starting destination address
+0b8698 ldy $03
+
+; zero out $090d, which is not used here
+0b869a stz $0d
+
+.Loop
+;	{
+0b869c sep #$20
+
+; get next source byte
+0b869e lda $0000,x
+
+; if zero, exit
+0b86a1 beq .Branch_Exit
+
+; increment source address
+0b86a3 inx
+
+; save source byte
+0b86a4 rep #$20
+0b86a6 pha
+
+; if lower nibble is zero, skip first copy
+0b86a7 and #$000f
+0b86aa beq .SkipFirstCopy
+
+
+0b86ac phx					; save source address????
+0b86ad ldx $06				; load current source address
+0b86af dec					; decrement copy size for use with mvn
+0b86b0 jsr $0918			; call first copy routine
+
+0b86b3 stx $06				; save current source address
+0b86b5 plx
+
+.SkipFirstCopy
+0b86b6 pla
+; if upper nibble is zero, skip second copy
+0b86b7 and #$00f0
+0b86ba beq .Loop
+
+; shift nibble and save to $0908
+0b86bc lsr
+0b86bd lsr
+0b86be lsr
+0b86bf lsr
+0b86c0 sta $08
+
+; next source byte is offset backwards from curent destination address
+; used as the source address for the second copy
+0b86c2 lda $0000,x
+0b86c5 inx
+0b86c6 and #$00ff
+0b86c9 sta $0a
+
+; set the source address for the second copy
+0b86cb tya
+0b86cc clc
+0b86cd sbc $0a
+0b86cf phx
+0b86d0 tax
+
+; call second copy routine
+0b86d1 lda $08
+0b86d3 inc					; increment copy size (so a size command of $01 means copy 3 bytes)
+0b86d4 jsr $091e
+
+; restore source address and loop
+0b86d7 plx
+0b86d8 bra .Loop
+;	}
+
+
+.Branch_Exit
+0b86da plb
+0b86db pld
+0b86dc plp
+0b86dd rtl

@@ -1,0 +1,80 @@
+0181db sep #$20
+0181dd rep #$10
+0181df phd
+0181e0 pea #$192b
+0181e3 pld
+0181e4 ldx #$0780
+0181e7 ldy #$c708
+0181ea lda #$10
+0181ec jsr $8207
+0181ef ldx #$0900
+0181f2 ldy #$c908
+0181f5 lda #$0c
+0181f7 jsr $8207
+0181fa ldx #$0a80
+0181fd ldy #$ca48
+018200 lda #$1c
+018202 jsr $8207
+018205 pld
+018206 rts
+018207 php
+018208 rep #$30
+01820a stx $00
+01820c sty $02
+01820e and #$00ff
+018211 sta $04
+018213 sta $06
+018215 jsr $822e
+018218 lda $00
+01821a clc
+01821b adc #$0018
+01821e sta $00
+018220 lda $02
+018222 clc
+018223 adc #$0020
+018226 sta $02
+018228 dec $06
+01822a bne $018215
+01822c plp
+01822d rts
+01822e phb
+01822f php
+018230 rep #$30
+018232 phb
+018233 lda $192b
+018236 clc
+018237 adc #$ca20
+01823a tax
+01823b ldy $192d
+01823e lda #$000f
+018241 mvn $04 -> $7f
+018244 plb
+018245 txa
+018246 sec
+018247 sbc #$ca20
+01824a tax
+01824b sep #$20
+01824d rep #$10
+01824f pea #$007f
+018252 plb
+018253 pla
+018254 xba
+018255 lda #$08
+018257 sta $1933
+01825a lda $04ca20,x
+01825e inx
+01825f sta $0000,y
+018262 iny
+018263 lda #$00
+018265 sta $0000,y
+018268 iny
+018269 dec $1933
+01826c bne $01825a
+01826e plp
+01826f plb
+018270 rts
+
+; Missing 018271 - 01916b (3835 bytes)
+
+01916c jsr $81db
+01916f jsr $fe0b

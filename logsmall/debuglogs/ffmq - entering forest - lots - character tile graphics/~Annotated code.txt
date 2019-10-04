@@ -1,0 +1,156 @@
+
+; character tile graphics
+; fills: $7f4000 - $7f4bff 
+; ends up in vram $c200 - $cdff ($c00 bytes) from a dma transfer later
+
+
+; starts this routine
+01916f jsr Routine_01fe0b
+019172 jsl Routine_0b84fb
+
+
+; Missing 019176 - 01e90b (22422 bytes)
+
+
+
+; ExpandSecondHalfWithZeros
+Routine_01e90c:
+01e90c phd
+01e90d phx
+01e90e pea #$2100
+01e911 pld
+01e912 ldx #$0010
+
+.Branch_01e915
+01e915 lda $0000,y
+01e918 iny
+01e919 sta $80
+01e91b dex
+01e91c bne .Branch_01e915
+
+01e91e ldx #$0008
+
+.Branch_01e921
+01e921 lda $0000,y
+01e924 iny
+01e925 sta $80
+01e927 stz $80
+01e929 dex
+01e92a bne .Branch_01e921
+
+01e92c plx
+01e92d pld
+01e92e rts
+
+
+
+
+; Fill the empty bytes from the "ExpandSecondHalfWithZeros" data
+; value11 = value00 | value01 | value10
+; value13 = value02 | value03 | value12
+; etc..
+Routine_01e92f:
+01e92f phx
+01e930 ldx #$0008
+
+.Branch_01e933
+01e933 lda $0000,y
+01e936 ora $0010,y
+01e939 iny
+01e93a ora $0000,y
+01e93d sta $0010,y
+01e940 iny
+01e941 dex
+01e942 bne .Branch_01e933
+
+01e944 plx
+01e945 rts
+
+
+
+; Missing 01e946 - 01fe0a (5317 bytes)
+
+
+; Entry point
+
+Routine_01fe0b:
+; Set databank to $04
+01fe0b phb
+01fe0c lda #$04
+01fe0e pha
+01fe0f plb
+
+; set wram destination to $7f4000
+01fe10 stz $2181
+01fe13 ldx #$7f40
+01fe16 stx $2182
+
+; copy $049a20 - $049b9f to wram as ExpandSecondHalfWithZeros
+01fe19 ldy #$9a20
+.Branch_01fe1c
+01fe1c jsr Routine_01e90c
+01fe1f cpy #$9ba0
+01fe22 bne .Branch_01fe1c
+
+; copy $04ca20 - $04d1bf to wram as ExpandSecondHalfWithZeros
+01fe24 ldy #$ca20
+.Branch_01fe27
+01fe27 jsr Routine_01e90c
+01fe2a cpy #$d1a0
+01fe2d bne .Branch_01fe27
+
+01fe2f ldx #$0000
+01fe32 lda $1910
+01fe35 bpl .Branch_01fe3a
+
+
+; Missing 01fe37 - 01fe39 (3 bytes)
+
+
+.Branch_01fe3a
+; using $7f4000
+01fe3a lda #$7f
+01fe3c pha
+01fe3d plb
+01fe3e ldy #$4000
+
+
+01fe41 lda #$0c
+
+.OuterLoop
+01fe43 pha
+01fe44 lda $018a14,x				; x goes from $00 to $0b
+01fe48 inx
+01fe49 phx
+01fe4a ldx #$0008
+
+; for each bit high to low, if 1 then call the "Or routine"
+.InnerLoop
+01fe4d asl
+01fe4e pha
+01fe4f bcc .SkipOrBytesCall
+
+01fe51 phy
+01fe52 jsr Routine_01e92f
+01fe55 ply
+
+.SkipOrBytesCall
+; add $20 to Y
+01fe56 rep #$20
+01fe58 tya
+01fe59 clc
+01fe5a adc #$0020
+01fe5d tay
+01fe5e sep #$20
+
+01fe60 pla
+01fe61 dex
+01fe62 bne .InnerLoop
+
+01fe64 plx
+01fe65 pla
+01fe66 dec
+01fe67 bne .OuterLoop
+
+01fe69 plb
+01fe6a rts

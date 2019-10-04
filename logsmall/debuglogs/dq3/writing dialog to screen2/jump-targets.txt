@@ -1,0 +1,15 @@
+c095aa jsr ($c6c6,x) [c0bd7e] - 8
+c095f1 jsr ($c6c6,x) [c0bd7e] - 8
+c09638 jsr ($c6c6,x) [c0bd7e] - 8
+c0967f jsr ($c6c6,x) [c0bd7e] - 8
+c096c6 jsr ($c6c6,x) [c0bd7e] - 8
+c0970d jsr ($c6c6,x) [c0bd7e] - 8
+c09754 jsr ($c6c6,x) [c0bd7e] - 8
+c0979b jsr ($c6c6,x) [c0bd7e] - 8
+c097e2 jsr ($c6c6,x) [c0bd7e] - 8
+c09829 jsr ($c6c6,x) [c0bd7e] - 8
+c09870 jsr ($c6c6,x) [c0bd7e] - 8
+c098b7 jsr ($c6c6,x) [c0bd7e] - 8
+c098fe jsr ($c6c6,x) [c0bd7e] - 8
+c09945 jsr ($c6c6,x) [c0bd7e] - 8
+c0998c jsr ($c6c6,x) [c0bd7e] - 8

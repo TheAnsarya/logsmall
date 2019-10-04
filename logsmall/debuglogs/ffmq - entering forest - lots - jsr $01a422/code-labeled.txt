@@ -1,0 +1,441 @@
+
+Routine_00975a:
+00975a jsr Routine_0097da
+
+00975d and $00
+00975f rtl
+
+Routine_009776:
+009776 phd
+009777 pea #$0ea8
+00977a pld
+00977b jsl Routine_00975a
+
+00977f pld
+009780 inc
+009781 dec
+009782 rtl
+
+Routine_0097da:
+0097da php
+0097db rep #$30
+0097dd and #$00ff
+0097e0 pha
+0097e1 lsr
+0097e2 lsr
+0097e3 lsr
+0097e4 phd
+0097e5 clc
+0097e6 adc $01,s
+0097e8 tcd
+0097e9 pla
+0097ea pla
+0097eb and #$0007
+0097ee eor #$0007
+0097f1 plp
+0097f2 phx
+0097f3 asl
+0097f4 tax
+0097f5 lda $0097fb,x
+0097f9 plx
+0097fa rts
+
+
+; Call that kicks it off
+01a40e jsr Routine_01a422
+
+
+; entry point
+Routine_01a422:
+; setup
+01a422 rep #$30
+01a424 phd
+01a425 pea #$192b
+01a428 pld
+01a429 phb
+
+; zero out $7f0000 - $7f3dff
+01a42a lda #$0000
+01a42d sta $7f0000
+01a431 ldx #$0000
+01a434 ldy #$0001
+01a437 lda #$3dff
+01a43a mvn $7f -> $7f
+
+01a43d plb
+01a43e sep #$20
+01a440 rep #$10
+01a442 lda #$06
+01a444 sta $0a			; $1935
+01a446 stz $0c			; $1937
+01a448 lda #$0c
+01a44a sta $0b			; $1936
+01a44c ldx #$c488
+01a44f stx $00			; $192b
+01a451 ldy #$0006
+01a454 ldx $19b9
+01a457 rep #$30
+
+.Branch_01a459
+01a459 lda $0b88fc,x
+01a45d and #$00ff
+01a460 asl
+01a461 asl
+01a462 asl
+01a463 asl
+01a464 clc
+01a465 adc #$d824
+01a468 phx
+01a469 phy
+01a46a phb
+01a46b ldy $00
+01a46d tax
+01a46e lda #$000f
+01a471 mvn $07 -> $7f
+01a474 plb
+01a475 ply
+01a476 plx
+01a477 inx
+01a478 lda $00
+01a47a clc
+01a47b adc #$0020
+01a47e sta $00
+01a480 dey
+01a481 bne .Branch_01a459
+
+01a483 rep #$30
+01a485 pea #$0004
+01a488 plb
+01a489 lda #$0010
+01a48c sta $14
+01a48e ldy #$e520
+01a491 ldx #$0000
+
+.Branch_01a494
+01a494 rep #$30
+01a496 lda #$0002
+01a499 sta $16
+
+.Branch_01a49b
+01a49b lda $0000,y
+01a49e sta $7f0000,x
+01a4a2 lda $0002,y
+01a4a5 sta $7f0002,x
+01a4a9 lda $0004,y
+01a4ac sta $7f0004,x
+01a4b0 lda $0006,y
+01a4b3 sta $7f0006,x
+01a4b7 tya
+01a4b8 clc
+01a4b9 adc #$0008
+01a4bc tay
+01a4bd txa
+01a4be clc
+01a4bf adc #$0008
+01a4c2 tax
+01a4c3 dec $16
+01a4c5 bne .Branch_01a49b
+
+01a4c7 sep #$20
+01a4c9 rep #$10
+01a4cb lda #$08
+01a4cd sta $18
+
+.Branch_01a4cf
+01a4cf lda $0000,y
+01a4d2 sta $7f0000,x
+01a4d6 lda #$00
+01a4d8 sta $7f0001,x
+01a4dc inx
+01a4dd inx
+01a4de iny
+01a4df dec $18
+01a4e1 bne .Branch_01a4cf
+
+01a4e3 rep #$30
+01a4e5 dec $14
+01a4e7 bne .Branch_01a494
+
+01a4e9 plb
+
+.Branch_01a4ea
+01a4ea sep #$20
+01a4ec rep #$10
+01a4ee lda #$80
+01a4f0 sta $0e
+01a4f2 ldy #$0008
+
+.Branch_01a4f5
+01a4f5 lda #$00
+01a4f7 xba
+01a4f8 lda $0a
+01a4fa rep #$30
+01a4fc clc
+01a4fd adc $19b9
+01a500 tax
+01a501 sep #$20
+01a503 rep #$10
+01a505 lda $0b88fc,x
+01a509 sta $0d
+
+.Branch_01a50b
+01a50b phy
+01a50c lda $0d
+01a50e and $0e
+01a510 beq .Branch_01a52b
+
+01a512 lda #$00
+01a514 xba
+01a515 lda $0b
+01a517 inc $0b
+01a519 rep #$30
+01a51b clc
+01a51c adc $19b9
+01a51f tax
+01a520 sep #$20
+01a522 rep #$10
+01a524 lda $0b88fc,x
+01a528 jsr Routine_01a864
+
+
+.Branch_01a52b
+01a52b sep #$20
+01a52d rep #$10
+01a52f inc $0c
+01a531 lda $0e
+01a533 lsr
+01a534 sta $0e
+01a536 ply
+01a537 dey
+01a538 bne .Branch_01a50b
+
+01a53a inc $0a
+01a53c lda $0a
+01a53e cmp #$0c
+01a540 beq .Branch_01a54f
+
+01a542 cmp #$0b
+01a544 bne .Branch_01a4ea
+
+01a546 lda #$80
+01a548 sta $0e
+01a54a ldy #$0004
+01a54d bra .Branch_01a4f5
+
+
+.Branch_01a54f
+01a54f rep #$30
+01a551 lda #$000b
+01a554 clc
+01a555 adc $19b9
+01a558 tax
+01a559 sep #$20
+01a55b rep #$10
+01a55d lda $0b88fc,x
+01a561 bit #$01
+01a563 beq .Branch_01a572
+
+01a565 lda #$f2
+01a567 jsl Routine_009776
+
+01a56b bne .Branch_01a570
+
+01a56d jsr Routine_01a5a9
+
+
+.Branch_01a570
+01a570 bra .Branch_01a5a7
+
+
+.Branch_01a5a7
+01a5a7 pld
+01a5a8 rts
+
+Routine_01a5a9:
+01a5a9 php
+01a5aa phd
+01a5ab pea #$192b
+01a5ae pld
+01a5af ldx #$be20
+01a5b2 stx $02
+01a5b4 lda #$04
+01a5b6 sta $06
+01a5b8 lda #$7f
+01a5ba sta $07
+01a5bc rep #$30
+01a5be lda #$1e00
+01a5c1 sta $04
+01a5c3 ldy #$0080
+
+.Branch_01a5c6
+01a5c6 jsr Routine_01a900
+
+01a5c9 lda $02
+01a5cb clc
+01a5cc adc #$0018
+01a5cf sta $02
+01a5d1 lda $04
+01a5d3 clc
+01a5d4 adc #$0020
+01a5d7 sta $04
+01a5d9 dey
+01a5da bne .Branch_01a5c6
+
+01a5dc pld
+01a5dd plp
+01a5de rts
+
+Routine_01a864:
+01a864 phb
+01a865 phd
+01a866 pea #$192b
+01a869 pld
+01a86a sep #$20
+01a86c rep #$10
+01a86e sta $00
+01a870 bit #$80
+01a872 bne .Branch_01a89c
+
+01a874 rep #$30
+01a876 and #$007f
+01a879 asl
+01a87a asl
+01a87b asl
+01a87c asl
+01a87d asl
+01a87e asl
+01a87f asl
+01a880 ldx $00
+01a882 phx
+01a883 sta $00
+01a885 asl
+01a886 clc
+01a887 adc $00
+01a889 plx
+01a88a stx $00
+01a88c clc
+01a88d adc #$9a20
+01a890 sta $02
+01a892 sep #$20
+01a894 rep #$10
+01a896 lda #$10
+01a898 sta $08
+01a89a bra .Branch_01a8ba
+
+
+.Branch_01a89c
+01a89c rep #$30
+01a89e and #$007f
+01a8a1 asl
+01a8a2 asl
+01a8a3 asl
+01a8a4 asl
+01a8a5 asl
+01a8a6 sta $02
+01a8a8 asl
+01a8a9 clc
+01a8aa adc $02
+01a8ac clc
+01a8ad adc #$d7a0
+01a8b0 sta $02
+01a8b2 sep #$20
+01a8b4 rep #$10
+01a8b6 lda #$08
+01a8b8 sta $08
+
+.Branch_01a8ba
+01a8ba sep #$20
+01a8bc rep #$10
+01a8be lda #$04
+01a8c0 sta $06
+01a8c2 lda #$7f
+01a8c4 sta $07
+01a8c6 lda #$00
+01a8c8 xba
+01a8c9 lda $0c
+01a8cb asl
+01a8cc tax
+01a8cd rep #$30
+01a8cf lda $01a5df,x
+01a8d3 sta $04
+
+.Branch_01a8d5
+01a8d5 sep #$20
+01a8d7 rep #$10
+01a8d9 jsr Routine_01a900
+
+01a8dc lda $08
+01a8de dec
+01a8df sta $08
+01a8e1 beq .Branch_01a8fd
+
+01a8e3 pha
+01a8e4 rep #$30
+01a8e6 lda $02
+01a8e8 clc
+01a8e9 adc #$0018
+01a8ec sta $02
+01a8ee lda $04
+01a8f0 clc
+01a8f1 adc #$0020
+01a8f4 sta $04
+01a8f6 sep #$20
+01a8f8 rep #$10
+01a8fa pla
+01a8fb bra .Branch_01a8d5
+
+
+.Branch_01a8fd
+01a8fd pld
+01a8fe plb
+01a8ff rts
+
+Routine_01a900:
+01a900 phb
+01a901 phy
+01a902 php
+01a903 phd
+01a904 pea #$192b
+01a907 pld
+01a908 rep #$30
+01a90a phb
+01a90b ldx $02
+01a90d ldy $04
+01a90f lda #$000f
+01a912 mvn $04 -> $7f
+01a915 plb
+01a916 sep #$20
+01a918 rep #$10
+01a91a lda #$08
+01a91c sta $01
+
+.Branch_01a91e
+01a91e phb
+01a91f lda $06
+01a921 pha
+01a922 plb
+01a923 lda $0000,x
+01a926 inx
+01a927 pha
+01a928 lda $07
+01a92a pha
+01a92b plb
+01a92c pla
+01a92d xba
+01a92e lda #$00
+01a930 xba
+01a931 rep #$30
+01a933 sta $0000,y
+01a936 iny
+01a937 iny
+01a938 sep #$20
+01a93a rep #$10
+01a93c plb
+01a93d dec $01
+01a93f bne .Branch_01a91e
+
+01a941 pld
+01a942 plp
+01a943 ply
+01a944 plb
+01a945 rts

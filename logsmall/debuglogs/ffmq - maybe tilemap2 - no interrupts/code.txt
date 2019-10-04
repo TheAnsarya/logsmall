@@ -1,0 +1,104 @@
+019176 ldy $0e89
+0b0918 phb
+0b0919 mvn $08 -> $7f
+0b091c plb
+0b091d rts
+0b091e phb
+0b091f mvn $7f -> $7f
+0b0922 plb
+0b0923 rts
+0b84fb rep #$20
+0b84fd lda $1918
+0b8500 and #$00f0
+0b8503 lsr
+0b8504 lsr
+0b8505 lsr
+0b8506 tax
+0b8507 lda $0b8540,x
+0b850b sta $1924
+0b850e sep #$20
+0b8510 lda $1910
+0b8513 and #$3f
+0b8515 sta $4202
+0b8518 lda #$03
+0b851a sta $4203
+0b851d ldx #$7f80
+0b8520 stx $0904
+0b8523 stz $0903
+0b8526 ldx $4216
+0b8529 rep #$20
+0b852b lda $0b8735,x
+0b852f sta $0900
+0b8532 sep #$20
+0b8534 lda $0b8737,x
+0b8538 sta $0902
+0b853b jsl $0b8669
+0b853f rtl
+0b8669 php
+0b866a phd
+0b866b phb
+0b866c pea #$0900
+0b866f pld
+0b8670 rep #$30
+0b8672 ldx #$86de
+0b8675 ldy #$0918
+0b8678 lda #$000b
+0b867b mvn $0b -> $0b
+0b867e ldx $00
+0b8680 inx
+0b8681 inx
+0b8682 txa
+0b8683 clc
+0b8684 adc [$00]
+0b8686 sta $06
+0b8688 sep #$20
+0b868a lda $02
+0b868c sta $1b
+0b868e pha
+0b868f plb
+0b8690 lda $05
+0b8692 sta $1a
+0b8694 sta $20
+0b8696 sta $21
+0b8698 ldy $03
+0b869a stz $0d
+0b869c sep #$20
+0b869e lda $0000,x
+0b86a1 beq $0b86da
+0b86a3 inx
+0b86a4 rep #$20
+0b86a6 pha
+0b86a7 and #$000f
+0b86aa beq $0b86b6
+0b86ac phx
+0b86ad ldx $06
+0b86af dec
+0b86b0 jsr $0918
+0b86b3 stx $06
+0b86b5 plx
+0b86b6 pla
+0b86b7 and #$00f0
+0b86ba beq $0b869c
+0b86bc lsr
+0b86bd lsr
+0b86be lsr
+0b86bf lsr
+0b86c0 sta $08
+0b86c2 lda $0000,x
+0b86c5 inx
+0b86c6 and #$00ff
+0b86c9 sta $0a
+0b86cb tya
+0b86cc clc
+0b86cd sbc $0a
+0b86cf phx
+0b86d0 tax
+0b86d1 lda $08
+0b86d3 inc
+0b86d4 jsr $091e
+0b86d7 plx
+0b86d8 bra $0b869c
+0b86da plb
+0b86db pld
+0b86dc plp
+0b86dd rtl

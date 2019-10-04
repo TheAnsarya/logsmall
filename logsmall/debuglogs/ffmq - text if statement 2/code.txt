@@ -1,0 +1,83 @@
+00975a jsr $97da
+00975d and $00
+00975f rtl
+0097da php
+0097db rep #$30
+0097dd and #$00ff
+0097e0 pha
+0097e1 lsr
+0097e2 lsr
+0097e3 lsr
+0097e4 phd
+0097e5 clc
+0097e6 adc $01,s
+0097e8 tcd
+0097e9 pla
+0097ea pla
+0097eb and #$0007
+0097ee eor #$0007
+0097f1 plp
+0097f2 phx
+0097f3 asl
+0097f4 tax
+0097f5 lda $0097fb,x
+0097f9 plx
+0097fa rts
+009ddf ldx #$0000
+009de2 sbc #$0030
+009de5 beq $009df9
+009de7 tay
+009de8 lda $03ba86,x
+009dec and #$00ff
+009def sta $64
+009df1 txa
+009df2 sec
+009df3 adc $64
+009df5 tax
+009df6 dey
+009df7 bne $009de8
+00a06e lda #$0ea6
+00a071 sta $2e
+00a073 rts
+00a56e bne $00a519
+00a570 bra $00a597
+00a581 jsr $b1a1
+00a584 bra $00a56e
+00a597 inc $17
+00a599 inc $17
+00a59b rts
+00b1a1 phd
+00b1a2 lda [$17]
+00b1a4 inc $17
+00b1a6 and #$00ff
+00b1a9 pei $2e
+00b1ab pld
+00b1ac jsl $00975a
+00b1b0 pld
+00b1b1 inc
+00b1b2 dec
+00b1b3 rts
+00e062 jsr $e07b
+00e065 lda $00d0
+00e068 and #$0090
+00e06b cmp #$0010
+00e06e beq $00e062
+00e07b lda [$17]
+00e07d inc $17
+00e07f and #$00ff
+00e082 cmp #$0080
+00e085 bcc $00e08f
+00e08f cmp #$0030
+00e092 bcc $00e097
+00e094 jmp $9ddf
+00e097 asl
+00e098 tax
+00e099 jsr ($e1cf,x)
+00e09c rep #$30
+00e09e rts
+00e45b lda [$17]
+00e45d inc $17
+00e45f and #$00ff
+00e462 asl
+00e463 tax
+00e464 jmp ($e22f,x)

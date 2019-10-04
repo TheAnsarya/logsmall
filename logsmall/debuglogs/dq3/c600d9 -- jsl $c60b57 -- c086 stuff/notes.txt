@@ -1,0 +1,16 @@
+
+
+
+
+no cgram changes
+no oam changes
+no sram changes
+
+vram 0020-1fff changed
+vram 0-20 is zeros (the blank tile)
+
+
+
+
+
+
