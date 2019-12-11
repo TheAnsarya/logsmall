@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -13,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall.DQ3 {
-	public class OverworldMap2 {
+	public static class OverworldMap2 {
 
 
 		public static byte[,] GetTilemapData() {
@@ -741,12 +742,16 @@ namespace logsmall.DQ3 {
 
 		public static string BitmapHash(Bitmap image) {
 			var bytes = BitmapToByteArray(image);
-			var hasher = SHA1.Create();
-			var hash = string.Join("", hasher.ComputeHash(bytes).Select(x => x.ToString("x2")));
+			using var hasher = SHA1.Create();
+			var hash = string.Join("", hasher.ComputeHash(bytes).Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
 			return hash;
 		}
 
 		public static byte[] BitmapToByteArray(Bitmap image) {
+			if (image == null) {
+				throw new ArgumentNullException(nameof(image));
+			}
+
 			BitmapData bmpdata = null;
 
 			try {
@@ -765,7 +770,7 @@ namespace logsmall.DQ3 {
 			}
 		}
 
-		public class TileEntry {
+		class TileEntry {
 			public byte Index { get; set; }
 			public Bitmap Tile { get; set; }
 

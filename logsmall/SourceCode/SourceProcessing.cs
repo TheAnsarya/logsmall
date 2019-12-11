@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,7 +17,7 @@ namespace logsmall.SourceCode {
 				if (lastGroup != null) {
 					missing.AddRange(new List<string> {
 						"",
-						$"; Missing {lastGroup.NextAddress.ToString("x6")} - {(group.StartAddress - 1).ToString("x6")} ({lastGroup.BytesBetween(group)} bytes)",
+						$"; Missing {lastGroup.NextAddress.ToString("x6", CultureInfo.InvariantCulture)} - {(group.StartAddress - 1).ToString("x6", CultureInfo.InvariantCulture)} ({lastGroup.BytesBetween(group)} bytes)",
 						""
 					});
 				}
@@ -167,8 +168,8 @@ namespace logsmall.SourceCode {
 				all.GroupBy(x => x.line)
 				.Where(x => x.Count() > 1);
 
-			var emptylines = all.Count(x => x.line == "");
-			var oklines = all.Count(x => x.line != "");
+			var emptylines = all.Count(x => string.IsNullOrEmpty(x.line));
+			var oklines = all.Count(x => !string.IsNullOrEmpty(x.line));
 
 			var replacements = all.ToDictionary(x => x.line, x => x.newline);
 

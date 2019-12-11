@@ -8,7 +8,7 @@ namespace logsmall.Common {
 	public class Ram {
 		public const int AddressOffset = 0x7e0000;
 
-		public byte[] wram = new byte[0x2_0000];
+		public byte[] wram { get; set; } = new byte[0x2_0000];
 
 		// TODO: Make sure these are all right (run tests)
 		public byte Byte(int address) {

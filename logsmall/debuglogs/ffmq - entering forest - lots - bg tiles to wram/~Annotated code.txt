@@ -85,7 +85,7 @@ Routine_01fd7b:
 01fdb5 sep #$20
 01fdb7 phx
 
-; loop 20 times
+; loop 20 times - so copying 20 tiles
 01fdb8 ldx #$0020
 
 .CopyATileLoop
@@ -111,7 +111,8 @@ Routine_01fd7b:
 
 
 
-; don't know what it is
+; don't know what it is ----- is 8 $10 byte chunks, nibbles split into $20 bytes, so one per tile copied
+; probably collision and other flags
 
 .Branch_01fdd5
 ; offset = index * 0x10

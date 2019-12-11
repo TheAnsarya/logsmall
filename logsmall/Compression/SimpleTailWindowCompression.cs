@@ -2,6 +2,7 @@ using logsmall.DataStructures;
 using MoreLinq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -157,8 +158,8 @@ namespace logsmall.Compression {
 
 			WriteBytesToFile(testDecomp, Path.Combine(folder, "testDecomp.txt"));
 			Console.WriteLine($"  Decompression: {(decompPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testDecomp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{uncompressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testDecomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{uncompressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.WriteLine();
 
@@ -168,8 +169,8 @@ namespace logsmall.Compression {
 
 			WriteBytesToFile(testComp, Path.Combine(folder, "testComp.txt"));
 			Console.WriteLine($"    Compression: {(compPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testComp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{compressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testComp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{compressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.WriteLine();
 
@@ -179,8 +180,8 @@ namespace logsmall.Compression {
 
 			WriteBytesToFile(testReDecomp, Path.Combine(folder, "testReDecomp.txt"));
 			Console.WriteLine($"ReDecompression: {(reDecompPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testReDecomp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{uncompressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testReDecomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{uncompressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.WriteLine();
 
@@ -199,32 +200,32 @@ namespace logsmall.Compression {
 				var (comp, decomp) = DecompressFull(rom.GetStream(pointer), 0x2000);
 				var recomp = Compress(decomp);
 				var redecomp = Decompress(recomp, 0x2000);
-				WriteBytesToFile(comp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -1- original.txt");
-				WriteBytesToFile(decomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -2- decompressed.txt");
-				WriteBytesToFile(recomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -3- compressed.txt");
-				WriteBytesToFile(redecomp, $"c:\\working\\test\\map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")} -4- redecompressed.txt");
+				WriteBytesToFile(comp, $"c:\\working\\test\\map - {map.ToString("D2", CultureInfo.InvariantCulture)} - ${pointer.ToString("x6", CultureInfo.InvariantCulture)} - ${(pointer + comp.Length - 1).ToString("x6", CultureInfo.InvariantCulture)} -1- original.txt");
+				WriteBytesToFile(decomp, $"c:\\working\\test\\map - {map.ToString("D2", CultureInfo.InvariantCulture)} - ${pointer.ToString("x6", CultureInfo.InvariantCulture)} - ${(pointer + comp.Length - 1).ToString("x6", CultureInfo.InvariantCulture)} -2- decompressed.txt");
+				WriteBytesToFile(recomp, $"c:\\working\\test\\map - {map.ToString("D2", CultureInfo.InvariantCulture)} - ${pointer.ToString("x6", CultureInfo.InvariantCulture)} - ${(pointer + comp.Length - 1).ToString("x6", CultureInfo.InvariantCulture)} -3- compressed.txt");
+				WriteBytesToFile(redecomp, $"c:\\working\\test\\map - {map.ToString("D2", CultureInfo.InvariantCulture)} - ${pointer.ToString("x6", CultureInfo.InvariantCulture)} - ${(pointer + comp.Length - 1).ToString("x6", CultureInfo.InvariantCulture)} -4- redecompressed.txt");
 
-				Console.WriteLine($"map - {map.ToString("D2")} - ${pointer.ToString("x6")} - ${(pointer + comp.Length - 1).ToString("x6")}");
+				Console.WriteLine($"map - {map.ToString("D2", CultureInfo.InvariantCulture)} - ${pointer.ToString("x6", CultureInfo.InvariantCulture)} - ${(pointer + comp.Length - 1).ToString("x6", CultureInfo.InvariantCulture)}");
 				Console.WriteLine($"comp: {(comp.SequenceEqual(recomp) ? "Passed" : "Failed")}");
-				Console.WriteLine($"	size 1: 0x{comp.Length.ToString("x4")}");
-				Console.WriteLine($"	size 2: 0x{recomp.Length.ToString("x4")}");
+				Console.WriteLine($"	size 1: 0x{comp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+				Console.WriteLine($"	size 2: 0x{recomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 				Console.WriteLine($"decomp: {(decomp.SequenceEqual(redecomp) ? "Passed" : "Failed")}");
-				Console.WriteLine($"	size 1: 0x{decomp.Length.ToString("x4")}");
-				Console.WriteLine($"	size 2: 0x{redecomp.Length.ToString("x4")}");
+				Console.WriteLine($"	size 1: 0x{decomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+				Console.WriteLine($"	size 2: 0x{redecomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 				Console.WriteLine();
 
 				map++;
 			}
 
 				Console.WriteLine();
-				Console.WriteLine($"pointers at: ${pointersAddress.ToString("x6")} - ${rom.AddressToSNES(pointerStream.Address - 4).ToString("x6")}");
+				Console.WriteLine($"pointers at: ${pointersAddress.ToString("x6", CultureInfo.InvariantCulture)} - ${rom.AddressToSNES(pointerStream.Address - 4).ToString("x6")}");
 				Console.WriteLine();
 			Console.ReadKey();
 		}
 
 
 		public static void WriteBytesToFile(byte[] data, string filename) {
-			var lines = data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2"))));
+			var lines = data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture))));
 			File.WriteAllLines(filename, lines);
 		}
 	}

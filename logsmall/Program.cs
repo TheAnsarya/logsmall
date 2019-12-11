@@ -20,7 +20,7 @@ namespace logsmall {
 		static void Main(string[] args) {
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - text if statement 2.txt");
 
-			FZeroFindJetColorsJSR();
+			//FZeroFindJetColorsJSR();
 
 			//FFMQGetLongTextFromOffsets();
 			//FFMQGetLongTextOffsets();
@@ -28,7 +28,7 @@ namespace logsmall {
 			//FFMQGetLongTextLines();
 			//FFMQGetLongTextLookups();
 			//OutputHexChunkFFMQ();
-			//MapData.Go();
+			MapData.Go();
 			//SimpleTailWindowCompression.TestLayout();
 			//SimpleTailWindowCompression.TestDumpData();
 
@@ -429,7 +429,7 @@ namespace logsmall {
 			// Simple, just code & address ordered
 			var code =
 				lines
-					.Where(x => x != "")
+					.Where(x => !string.IsNullOrEmpty(x))
 					.Select(x => x.Substring(0, 20).Trim())
 					.Distinct()
 					.OrderBy(x => x)
@@ -719,10 +719,10 @@ namespace logsmall {
 					endAddress += (int)Rom.AddressOffset;
 					var jap = SmallFontTable.Decode(data);
 					var eng = list.ToEnglish(jap);
-					lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexString()} -- {jap} -- {eng}");
+					lines.Add($"{startAddress.ToString("x6", CultureInfo.InvariantCulture)} - {endAddress.ToString("x6", CultureInfo.InvariantCulture)} -- {data.Length.ToString("x2", CultureInfo.InvariantCulture)} -- {data.ToHexString()} -- {jap} -- {eng}");
 				}
 
-				File.WriteAllLines(string.Format(filename, list.TitleTag), lines);
+				File.WriteAllLines(string.Format(CultureInfo.InvariantCulture, filename, list.TitleTag), lines);
 			}
 		}
 
@@ -742,7 +742,7 @@ namespace logsmall {
 				endAddress += (int)Rom.AddressOffset;
 				var jap = SmallFontTable.Decode(data);
 				var eng = MonsterNames.Instance.ToEnglish(jap);
-				lines.Add($"{startAddress.ToString("x6")} - {endAddress.ToString("x6")} -- {data.Length.ToString("x2")} -- {data.ToHexString()} -- {jap} -- {eng}");
+				lines.Add($"{startAddress.ToString("x6", CultureInfo.InvariantCulture)} - {endAddress.ToString("x6", CultureInfo.InvariantCulture)} -- {data.Length.ToString("x2", CultureInfo.InvariantCulture)} -- {data.ToHexString()} -- {jap} -- {eng}");
 			}
 
 			File.WriteAllLines(filename, lines);
@@ -761,7 +761,7 @@ namespace logsmall {
 			var lines =
 				spots
 					.Select(x =>
-						$"{x.Address.ToString("x6")} -- {x.DataAddress.ToString("x6")} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2")))}"
+						$"{x.Address.ToString("x6", CultureInfo.InvariantCulture)} -- {x.DataAddress.ToString("x6", CultureInfo.InvariantCulture)} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2", CultureInfo.InvariantCulture)))}"
 					);
 
 			return lines.ToList();
@@ -798,7 +798,7 @@ namespace logsmall {
 			var lines =
 				FFMQ.LongText
 					.GetTextLookups()
-					.Select(x => $"{x.Key.ToString("X2")}={x.Value}")
+					.Select(x => $"{x.Key.ToString("X2", CultureInfo.InvariantCulture)}={x.Value}")
 					//.GetRawTextLookups()
 					//.Select(x => $"{x.Key.ToString("X2")}={x.Value.ToHexString()}")
 					.OrderBy(x => x)
@@ -811,7 +811,7 @@ namespace logsmall {
 			var filename = @"c:\working\ffmq\~long text.txt";
 			var lines =
 				FFMQ.LongText.GetLongStrings()
-					.Select(x => $"{x.Key.ToString("x6")} - {x.Value}")
+					.Select(x => $"{x.Key.ToString("x6", CultureInfo.InvariantCulture)} - {x.Value}")
 					.OrderBy(x => x)
 					.ToList();
 
@@ -823,7 +823,7 @@ namespace logsmall {
 			var stream = FFMQ.LongText.Under30JumpTable();
 			var lines =
 				Enumerable.Range(0, 0x2f)
-					.Select(x => $"{x.ToString("x2")} - {stream.Word().ToString("x6")}")
+					.Select(x => $"{x.ToString("x2", CultureInfo.InvariantCulture)} - {stream.Word().ToString("x6", CultureInfo.InvariantCulture)}")
 					.OrderBy(x => x)
 					.ToList();
 
@@ -838,12 +838,12 @@ namespace logsmall {
 				Enumerable.Range(0, 0x7b)
 					.Select(x =>
 						new {
-							Index = x.ToString("x2"),
-							Source = rom.AddressToSNES(stream.Address).ToString("x6"),
+							Index = x.ToString("x2", CultureInfo.InvariantCulture),
+							Source = rom.AddressToSNES(stream.Address).ToString("x6", CultureInfo.InvariantCulture),
 							Address = 0x030000 + stream.Word()
 						}
 					)
-					.Select(x => $"{x.Index} - {x.Source} - {x.Address.ToString("x6")} - {FFMQGetLongTextOffsets_Helper(x.Address)}")
+					.Select(x => $"{x.Index} - {x.Source} - {x.Address.ToString("x6", CultureInfo.InvariantCulture)} - {FFMQGetLongTextOffsets_Helper(x.Address)}")
 					.OrderBy(x => x)
 					.ToList();
 
@@ -875,10 +875,10 @@ namespace logsmall {
 			var lines = new List<string>();
 			var nl = Environment.NewLine;
 
-			for (int i = 0; i < addresses.Count() - 1; i++) {
+			for (int i = 0; i < addresses.Count - 1; i++) {
 				var data = rom.GetStream(addresses[i]).GetBytes(addresses[i + 1] - addresses[i]);
 
-				lines.Add($"{addresses[i].ToString("x6")}{nl}{data.ToHexString()}{nl}{FFMQGetLongTextFromOffsets_Helper(data)}{nl}");
+				lines.Add($"{addresses[i].ToString("x6", CultureInfo.InvariantCulture)}{nl}{data.ToHexString()}{nl}{FFMQGetLongTextFromOffsets_Helper(data)}{nl}");
 			}
 
 			File.WriteAllLines(filename, lines);
@@ -911,7 +911,7 @@ namespace logsmall {
 						SNES.OpToHex("000000", "nop", ""),
 					})
 				.Split(2)
-				.Select(x => byte.Parse(x, NumberStyles.HexNumber))
+				.Select(x => byte.Parse(x, NumberStyles.HexNumber, CultureInfo.InvariantCulture))
 				.ToArray();
 
 			var dataOffset = searchTerm.Length;
@@ -930,7 +930,7 @@ namespace logsmall {
 			var lines =
 				found
 					.Select(x =>
-						$"{x.Address.ToString("x6")} -- {x.DataAddress.ToString("x6")} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2")))}"
+						$"{x.Address.ToString("x6", CultureInfo.InvariantCulture)} -- {x.DataAddress.ToString("x6", CultureInfo.InvariantCulture)} -- {string.Join(" ", x.Data.Select(y => y.ToString("x2", CultureInfo.InvariantCulture)))}"
 					);
 
 			Directory.CreateDirectory(@"c:\working\fzero\");

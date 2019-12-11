@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace logsmall.DataStructures {
 	public class ByteArrayStream {
-		public byte[] Buffer;
+		public byte[] Buffer { get; set; }
 		public virtual int Address { get; set; }
 
 		public int Size { get => Buffer.Length; }
@@ -87,6 +87,10 @@ namespace logsmall.DataStructures {
 		}
 
 		public List<ByteArrayStream> FindAll(byte[] searchTerm) {
+			if (searchTerm == null) {
+				throw new ArgumentNullException(nameof(searchTerm));
+			}
+
 			var found = new List<ByteArrayStream>();
 
 			var lastIndex = Buffer.Length - searchTerm.Length;
@@ -111,6 +115,10 @@ namespace logsmall.DataStructures {
 		// clamps to [0, Buffer.Length]
 		// TODO: test & verify
 		public (bool found, int address) FindLastInWindow(byte[] searchTerm, int start, int end) {
+			if (searchTerm == null) {
+				throw new ArgumentNullException(nameof(searchTerm));
+			}
+
 			// TODO: check for off by one
 			start = Math.Max(0, start);
 			end = Math.Min(Buffer.Length, end);
@@ -178,6 +186,9 @@ namespace logsmall.DataStructures {
 			//Array.Copy(Buffer, Address, destination.Buffer, destination.Address, length);
 			//Address += length;
 			//destination.Address += length;
+			if (destination == null) {
+				throw new ArgumentNullException(nameof(destination));
+			}
 
 			for (int i = 0; i < length; i++) {
 				destination.Byte(Byte());
@@ -186,6 +197,10 @@ namespace logsmall.DataStructures {
 
 		// TODO: Add error checking
 		public void Write(IEnumerable<byte> data) {
+			if (data == null) {
+				throw new ArgumentNullException(nameof(data));
+			}
+
 			foreach (var b in data) {
 				Byte(b);
 			}

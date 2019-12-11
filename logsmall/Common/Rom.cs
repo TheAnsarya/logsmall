@@ -1,6 +1,7 @@
 using logsmall.DataStructures;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,7 @@ namespace logsmall.Common {
 			string segment = "";
 
 			for (int i = 0; i < length; i++) {
-				segment += ROM[address + i].ToString("x2");
+				segment += ROM[address + i].ToString("x2", CultureInfo.InvariantCulture);
 			}
 
 			return segment;

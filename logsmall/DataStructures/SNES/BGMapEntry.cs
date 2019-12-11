@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace logsmall.DataStructures.SNES {
 	public class BGMapEntry {
-		public ushort Data;
+		public ushort Data { get; set; }
 
 		public BGMapEntry() { }
 

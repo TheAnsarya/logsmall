@@ -2,13 +2,14 @@ using logsmall.DataStructures;
 using MoreLinq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall.Compression {
-	public class BasicRing400 {
+	public static class BasicRing400 {
 		// All known decompressions use 0x03be
 		private const int StartWriteAddress = 0x03be;
 
@@ -24,6 +25,10 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] Decompress(ByteArrayStream source, int outputSize) {
+			if (source == null) {
+				throw new ArgumentNullException(nameof(source));
+			}
+
 			var output = new ByteArrayStream(outputSize);
 			var work = new ByteRingBuffer(RingSize, StartWriteAddress);
 			Queue<bool> commands = source.Byte().ToBooleanQueue();
@@ -60,6 +65,10 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] Compress(byte[] target) {
+			if (target == null) {
+				throw new ArgumentNullException(nameof(target));
+			}
+
 			var commands = new List<Command>();
 			var address = target.Length - 1;
 			var data = new ReverseWindowReader(target, address);
@@ -89,6 +98,10 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] CompressMax(byte[] target) {
+			if (target == null) {
+				throw new ArgumentNullException(nameof(target));
+			}
+
 			var data = new ReverseWindowReader(target, 0);
 			var states = new State[target.Length];
 
@@ -196,6 +209,8 @@ namespace logsmall.Compression {
 		}
 
 		private class Command {
+			public const int MIN_COPY_SIZE = 3;
+			public const int MAX_COPY_SIZE = 66;
 			public bool Simple { get; set; }
 			public byte Value { get; set; }
 
@@ -206,7 +221,7 @@ namespace logsmall.Compression {
 				}
 				set {
 					if ((value < 0) || (value >= RingSize)) {
-						throw new ArgumentOutOfRangeException($"{nameof(Address)} must be between 0x000 and 0x3ff: 0x{value.ToString("x3")}");
+						throw new ArgumentOutOfRangeException($"{nameof(Address)} must be between 0x000 and 0x{RingSize.ToString("x3", CultureInfo.InvariantCulture)}: 0x{value.ToString("x3", CultureInfo.InvariantCulture)}");
 					}
 					_address = value;
 				}
@@ -218,9 +233,9 @@ namespace logsmall.Compression {
 					return _copySize;
 				}
 				set {
-					if (!Simple && (value < 3) || (value > 66)) {
+					if (!Simple && (value < MIN_COPY_SIZE) || (value > MAX_COPY_SIZE)) {
 						// Range is (6 bits) + 3
-						throw new ArgumentOutOfRangeException($"{nameof(CopySize)} must be between 3 and 66: {value}");
+						throw new ArgumentOutOfRangeException($"{nameof(CopySize)} must be between {MIN_COPY_SIZE} and {MAX_COPY_SIZE}: {value}");
 					}
 					_copySize = value;
 				}
@@ -279,38 +294,38 @@ namespace logsmall.Compression {
 			WriteBytesToFile(testReDecomp, Path.Combine(folder, "testReDecomp.txt"));
 
 			Console.WriteLine($"  Decompression: {(decompPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testDecomp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{uncompressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testDecomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{uncompressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.WriteLine();
 
 			Console.WriteLine($"    Compression: {(compPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testComp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{compressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testComp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{compressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.WriteLine();
 
 			Console.WriteLine($"ReDecompression: {(reDecompPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testReDecomp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{uncompressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testReDecomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{uncompressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.WriteLine();
 
 			Console.WriteLine($"Max Compression: {(maxcompPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testMaxComp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{compressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testMaxComp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{compressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.WriteLine();
 
 			Console.WriteLine($"Max ReDecompped: {(maxreDecompPassed ? "Passed" : "Failed")}");
-			Console.WriteLine($"           size: 0x{testMaxReDecomp.Count().ToString("x4")}");
-			Console.WriteLine($"       realsize: 0x{uncompressed.Count().ToString("x4")}");
+			Console.WriteLine($"           size: 0x{testMaxReDecomp.Length.ToString("x4", CultureInfo.InvariantCulture)}");
+			Console.WriteLine($"       realsize: 0x{uncompressed.Length.ToString("x4", CultureInfo.InvariantCulture)}");
 
 			Console.ReadKey();
 		}
 
 		public static void WriteBytesToFile(byte[] data, string filename) {
-			var lines = data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2"))));
+			var lines = data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture))));
 			File.WriteAllLines(filename, lines);
 		}
 	}

@@ -1,4 +1,5 @@
 using logsmall.Compression;
+using logsmall.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,7 @@ namespace logsmall.FFMQ {
 			var (tilemapcomp, tilemapdecomp) = SimpleTailWindowCompression.DecompressFull(rom.GetStream(mapDataOffset), 0x2000);
 
 
+			Utilities.WriteBytesToFile(tilemapcomp, @"c:\working\ffmq\~go! -- comp.txt");
 			Utilities.WriteBytesToFile(tilemapdecomp, @"c:\working\ffmq\~go! -- decomp.txt");
 
 
@@ -83,18 +85,51 @@ namespace logsmall.FFMQ {
 			var lookup_0b8cd9 = rom.GetStream(0x0b8cd9);
 
 			// $1918 - $1921
-			// $1918 and $1919 are ???
+			// $1918 is ???
+			// $1919 is color data index to 
 			// $191a to $1921 are bg tile graphics offsets
 			var x1918 = lookup_0b8cd9.GetBytesAt(0x0a, bgGraphicsOffsetsIndex);
 
 
 
+			// TODO: clean up data access, this is awkward
+			// bgTileIndexes is $191a to $1921
+			var bgTileIndexes = new ByteArrayStream(x1918, 2);
+			var bgTileData = rom.GetStream(0x058c80);
+			var bgTilePaletteIndexData = rom.GetStream(0x05f280);
+
+			var bgTileSets = new List<BgTileSetEntry>();
+			while (!bgTileIndexes.AtEnd) {
+				var bgTileIndex = bgTileIndexes.Byte();
+
+				// $300 is $20 tiles of $18 bytes
+				var tileDataAddressOffset = 0x300 * bgTileIndex;
+				var tileData = ExpandSecondHalfWithZeros.Decompress(bgTileData.GetBytes(0x300, tileDataAddressOffset));
+
+				// $10 is $20 tiles, each a nibble
+				var paletteAddress = 0x10 * bgTileIndex;
+				var palette = ExpandNibblesMasked.Decompress(bgTilePaletteIndexData.GetBytes(0x10, paletteAddress));
+
+				bgTileSets.Add(new BgTileSetEntry {
+					TileDataAddress = bgTileData.Address + tileDataAddressOffset,
+					PaletteIndexAddress = bgTilePaletteIndexData.Address + paletteAddress,
+					TileData = tileData,
+					PaletteIndex = palette
+				});
+			}
 
 
 
 
 
 			Console.ReadKey();
+		}
+
+		public class BgTileSetEntry {
+			public int TileDataAddress { get; set; }
+			public int PaletteIndexAddress { get; set; }
+			public byte[] TileData { get; set; }
+			public byte[] PaletteIndex { get; set; }
 		}
 	}
 }

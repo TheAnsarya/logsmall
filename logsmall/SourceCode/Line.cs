@@ -12,7 +12,7 @@ namespace logsmall.SourceCode {
 	class Line {
 		public string Address { get; set; }
 		// TODO: rename which address is what
-		public uint AddressRaw { get => uint.Parse(Address, NumberStyles.HexNumber); }
+		public uint AddressRaw { get => uint.Parse(Address, NumberStyles.HexNumber, CultureInfo.InvariantCulture); }
 		public string Op { get; set; }
 		public string Parameters { get; set; }
 		public string Bytecode { get => SNES.OpToHex(this.Address, this.Op, this.Parameters); }

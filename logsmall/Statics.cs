@@ -1,6 +1,7 @@
 using MoreLinq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,11 @@ namespace logsmall {
 	static class Statics {
 
 		public static string ToHexString(this byte[] data) {
-			return string.Join(" ", data.Select(x => x.ToString("x2")));
+			return string.Join(" ", data.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
 		}
 
 		public static string[] ToHexStrings(this byte[] data) {
-			return data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2")))).ToArray();
+			return data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture)))).ToArray();
 		}
 
 		// Reverse the bits of a byte

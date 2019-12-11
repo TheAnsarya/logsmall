@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall.Overworld {
-	public class MapData {
+	public static class MapData {
 		public const int ChunkEntries = 0xa3d;
 
 		// Overworld tilemap top-level grid layout
@@ -38,22 +38,22 @@ namespace logsmall.Overworld {
 				chunks.Add(new Chunk {
 					Index = i,
 					Data = new byte[] {
-						sources[0, 0].Byte(),
-						sources[0, 1].Byte(),
-						sources[0, 2].Byte(),
-						sources[0, 3].Byte(),
-						sources[1, 0].Byte(),
-						sources[1, 1].Byte(),
-						sources[1, 2].Byte(),
-						sources[1, 3].Byte(),
-						sources[2, 0].Byte(),
-						sources[2, 1].Byte(),
-						sources[2, 2].Byte(),
-						sources[2, 3].Byte(),
-						sources[3, 0].Byte(),
-						sources[3, 1].Byte(),
-						sources[3, 2].Byte(),
-						sources[3, 3].Byte(),
+						sources[0][0].Byte(),
+						sources[0][1].Byte(),
+						sources[0][2].Byte(),
+						sources[0][3].Byte(),
+						sources[1][0].Byte(),
+						sources[1][1].Byte(),
+						sources[1][2].Byte(),
+						sources[1][3].Byte(),
+						sources[2][0].Byte(),
+						sources[2][1].Byte(),
+						sources[2][2].Byte(),
+						sources[2][3].Byte(),
+						sources[3][0].Byte(),
+						sources[3][1].Byte(),
+						sources[3][2].Byte(),
+						sources[3][3].Byte(),
 					}
 				});
 			}
@@ -61,29 +61,29 @@ namespace logsmall.Overworld {
 			return chunks.ToArray();
 		}
 
-		public static ByteArrayStream[,] GetTilemapChunkStreams() {
-			var tilemaps = new ByteArrayStream[4, 4] {
+		public static ByteArrayStream[][] GetTilemapChunkStreams() {
+			var tilemaps = new ByteArrayStream[][] {
 				// Top Row
-				{
+				new ByteArrayStream[]{
 					Rom.GetStream(0xeda49c),	// Top left tile
 					Rom.GetStream(0xedaed9),
 					Rom.GetStream(0xedb916),
 					Rom.GetStream(0xedc353)		// Top right tile
 				},
-				{
+				new ByteArrayStream[]{
 					Rom.GetStream(0xedcd90),
 					Rom.GetStream(0xedd7cd),
 					Rom.GetStream(0xede20a),
 					Rom.GetStream(0xedec47)
 				},
-				{
+				new ByteArrayStream[]{
 					Rom.GetStream(0xedf684),
 					Rom.GetStream(0xee00c1),
 					Rom.GetStream(0xee0afe),
 					Rom.GetStream(0xee153b)
 				},
 				// Bottom row
-				{
+				new ByteArrayStream[]{
 					Rom.GetStream(0xee1f78),	// Bottom left tile
 					Rom.GetStream(0xee29b5),
 					Rom.GetStream(0xee33f2),

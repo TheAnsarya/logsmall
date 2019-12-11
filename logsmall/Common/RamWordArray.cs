@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace logsmall.Common {
 	public class RamWordArray {
-		public int Address;
-		public Ram Ram;
+		public int Address { get; set; }
+		public Ram Ram { get; set; }
 
 		// Offset is by bytes so increase by 2 each time when iterating
 		public ushort this[int offset] {

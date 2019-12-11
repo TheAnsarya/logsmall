@@ -46,8 +46,8 @@ namespace logsmall.SourceCode {
 				this.D = match.Groups[11].Value.ToLowerInvariant();
 				this.DB = match.Groups[12].Value.ToLowerInvariant();
 				this.P = new ProcessorStatus(match.Groups[13].Value);
-				this.V = int.Parse(match.Groups[14].Value.Trim());
-				this.H = int.Parse(match.Groups[15].Value.Trim());
+				this.V = int.Parse(match.Groups[14].Value.Trim(), CultureInfo.InvariantCulture);
+				this.H = int.Parse(match.Groups[15].Value.Trim(), CultureInfo.InvariantCulture);
 			}
 		}
 

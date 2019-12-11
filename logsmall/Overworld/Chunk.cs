@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,16 @@ namespace logsmall.Overworld {
 
 	public class Chunk {
 		public int Index { get; set; }
+
+		// TODO: Make sure temp var access is not an issue (ie, looping)
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "Is allowed to be written to")]
 		public byte[] Data { get; set; }
 
 		private string _key = null;
 		public string Key {
 			get {
 				if (_key == null) {
-					_key = string.Join("", Data.Select(x => x.ToString("x2")));
+					_key = string.Join("", Data.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
 				}
 				return _key;
 			}

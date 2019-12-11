@@ -1,0 +1,162 @@
+
+entering level forest
+break on vram @ 0, background tiles
+
+191F8  $20 $35 $84   JSR $8435 [018435] = $A2        A:0200 X:023C Y:2000 S:1FCA D:0000 DB:01 P:nvMxdiZc V:221 H:151
+18435  $A2 $00 $00   LDX #$0000                      A:0200 X:023C Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdiZc V:221 H:163
+18438  $8E $16 $21   STX $2116 [012116] = $00        A:0200 X:0000 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdiZc V:221 H:169
+1843B  $A9 $80       LDA #$80                        A:0200 X:0000 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdiZc V:221 H:178
+1843D  $8D $15 $21   STA $2115 [012115] = $00        A:0280 X:0000 Y:2000 S:1FC8 D:0000 DB:01 P:NvMxdizc V:221 H:182
+18440  $A2 $01 $18   LDX #$1801                      A:0280 X:0000 Y:2000 S:1FC8 D:0000 DB:01 P:NvMxdizc V:221 H:189
+18443  $8E $00 $43   STX $4300 [014300] = $00        A:0280 X:1801 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:195
+18446  $A2 $74 $D2   LDX #$D274                      A:0280 X:1801 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:204
+18449  $8E $02 $43   STX $4302 [014302] = $00        A:0280 X:D274 Y:2000 S:1FC8 D:0000 DB:01 P:NvMxdizc V:221 H:210
+1844C  $A9 $7F       LDA #$7F                        A:0280 X:D274 Y:2000 S:1FC8 D:0000 DB:01 P:NvMxdizc V:221 H:219
+1844E  $8D $04 $43   STA $4304 [014304] = $00        A:027F X:D274 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:223
+18451  $A2 $00 $20   LDX #$2000                      A:027F X:D274 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:231
+18454  $8E $05 $43   STX $4305 [014305] = $00        A:027F X:2000 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:237
+18457  $A9 $01       LDA #$01                        A:027F X:2000 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:246
+18459  $8D $0B $42   STA $420B [01420B] = $00        A:0201 X:2000 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:250
+1845C  $60           RTS                             A:0201 X:2000 Y:2000 S:1FC8 D:0000 DB:01 P:nvMxdizc V:221 H:257
+
+
+$2000 bytes
+from: 7FD274
+
+
+19161  $20 $7B $FD   JSR $FD7B [01FD7B] = $8B        A:FF01 X:0006 Y:D274 S:1FCB D:0000 DB:01 P:nvMxdizC V:113 H:27
+1FD7B  $8B           PHB                             A:FF01 X:0006 Y:D274 S:1FC9 D:0000 DB:01 P:nvMxdizC V:113 H:39
+1FD7C  $A9 $05       LDA #$05                        A:FF01 X:0006 Y:D274 S:1FC8 D:0000 DB:01 P:nvMxdizC V:113 H:44
+1FD7E  $48           PHA                             A:FF05 X:0006 Y:D274 S:1FC8 D:0000 DB:01 P:nvMxdizC V:113 H:48
+1FD7F  $AB           PLB                             A:FF05 X:0006 Y:D274 S:1FC7 D:0000 DB:01 P:nvMxdizC V:113 H:54
+1FD80  $A2 $74 $D2   LDX #$D274                      A:FF05 X:0006 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdizC V:113 H:61
+1FD83  $8E $81 $21   STX $2181 [052181] = $00        A:FF05 X:D274 Y:D274 S:1FC8 D:0000 DB:05 P:NvMxdizC V:113 H:67
+1FD86  $A9 $7F       LDA #$7F                        A:FF05 X:D274 Y:D274 S:1FC8 D:0000 DB:05 P:NvMxdizC V:113 H:76
+1FD88  $8D $83 $21   STA $2183 [052183] = $00        A:FF7F X:D274 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdizC V:113 H:80
+1FD8B  $A2 $00 $00   LDX #$0000                      A:FF7F X:D274 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdizC V:113 H:87
+1FD8E  $BD $1A $19   LDA $191A,X [05191A] = $00      A:FF7F X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdiZC V:113 H:93
+1FD91  $10 $0B       BPL $01FD9E                     A:FF00 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdiZC V:113 H:103
+1FD9E  $EB           XBA                             A:FF00 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdiZC V:113 H:108
+1FD9F  $9C $1B $21   STZ $211B [05211B] = $00        A:00FF X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:NvMxdizC V:113 H:113
+1FDA2  $A9 $03       LDA #$03                        A:00FF X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:NvMxdizC V:113 H:121
+1FDA4  $8D $1B $21   STA $211B [05211B] = $00        A:0003 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdizC V:113 H:125
+1FDA7  $EB           XBA                             A:0003 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdizC V:113 H:132
+1FDA8  $8D $1C $21   STA $211C [05211C] = $00        A:0300 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdiZC V:113 H:147
+1FDAB  $C2 $20       REP #$20                        A:0300 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvMxdiZC V:113 H:155
+1FDAD  $A9 $80 $8C   LDA #$8C80                      A:0300 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:nvmxdiZC V:113 H:160
+1FDB0  $18           CLC                             A:8C80 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:NvmxdizC V:113 H:166
+1FDB1  $6D $34 $21   ADC $2134 [052134] = $0000      A:8C80 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:Nvmxdizc V:113 H:170
+1FDB4  $A8           TAY                             A:8C80 X:0000 Y:D274 S:1FC8 D:0000 DB:05 P:Nvmxdizc V:113 H:179
+1FDB5  $E2 $20       SEP #$20                        A:8C80 X:0000 Y:8C80 S:1FC8 D:0000 DB:05 P:Nvmxdizc V:113 H:182
+1FDB7  $DA           PHX                             A:8C80 X:0000 Y:8C80 S:1FC8 D:0000 DB:05 P:NvMxdizc V:113 H:188
+1FDB8  $A2 $20 $00   LDX #$0020                      A:8C80 X:0000 Y:8C80 S:1FC6 D:0000 DB:05 P:NvMxdizc V:113 H:195
+1FDBB  $20 $0C $E9   JSR $E90C [01E90C] = $0B        A:8C80 X:0020 Y:8C80 S:1FC6 D:0000 DB:05 P:nvMxdizc V:113 H:201
+1E90C  $0B           PHD                             A:8C80 X:0020 Y:8C80 S:1FC4 D:0000 DB:05 P:nvMxdizc V:113 H:213
+1E90D  $DA           PHX                             A:8C80 X:0020 Y:8C80 S:1FC2 D:0000 DB:05 P:nvMxdizc V:113 H:220
+1E90E  $F4 $00 $21   PEA #$2100                      A:8C80 X:0020 Y:8C80 S:1FC0 D:0000 DB:05 P:nvMxdizc V:113 H:228
+1E911  $2B           PLD                             A:8C80 X:0020 Y:8C80 S:1FBE D:0000 DB:05 P:nvMxdizc V:113 H:238
+1E912  $A2 $10 $00   LDX #$0010                      A:8C80 X:0020 Y:8C80 S:1FC0 D:2100 DB:05 P:nvMxdizc V:113 H:247
+1E915  $B9 $00 $00   LDA $0000,Y [058C80] = $00      A:8C80 X:0010 Y:8C80 S:1FC0 D:2100 DB:05 P:nvMxdizc V:113 H:253
+1E918  $C8           INY                             A:8C00 X:0010 Y:8C80 S:1FC0 D:2100 DB:05 P:nvMxdiZc V:113 H:262
+1E919  $85 $80       STA $80 [002180] = $00          A:8C00 X:0010 Y:8C81 S:1FC0 D:2100 DB:05 P:NvMxdizc V:113 H:266
+1E91B  $CA           DEX                             A:8C00 X:0010 Y:8C81 S:1FC0 D:2100 DB:05 P:NvMxdizc V:113 H:271
+
+
+$058C80
+$1800 bytes
+first $10 bytes then byte/$00 pairs for $8 bytes
+$20 tiles
+---------------------
+
+tilemap is at $8000-8fff in vram
+start at $000800
+copy size $40
+so one line of tilemap data
+
+1FFE3  $20 $BE $83   JSR $83BE [0183BE] = $20        A:47FF X:0000 Y:0044 S:1FC4 D:0000 DB:01 P:nvMxdiZC V:170 H:14
+183BE  $20 $CB $83   JSR $83CB [0183CB] = $A2        A:47FF X:0000 Y:0044 S:1FC2 D:0000 DB:01 P:nvMxdiZC V:170 H:25
+183CB  $A2 $00 $00   LDX #$0000                      A:47FF X:0000 Y:0044 S:1FC0 D:0000 DB:01 P:nvMxdiZC V:170 H:37
+183CE  $BC $0B $1A   LDY $1A0B,X [011A0B] = $40      A:47FF X:0000 Y:0044 S:1FC0 D:0000 DB:01 P:nvMxdiZC V:170 H:43
+183D1  $F0 $2C       BEQ $0183FF                     A:47FF X:0000 Y:0040 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:54
+183D3  $8C $05 $43   STY $4305 [014305] = $00        A:47FF X:0000 Y:0040 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:58
+183D6  $A0 $01 $18   LDY #$1801                      A:47FF X:0000 Y:0040 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:67
+183D9  $8C $00 $43   STY $4300 [014300] = $00        A:47FF X:0000 Y:1801 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:73
+183DC  $BC $03 $1A   LDY $1A03,X [011A03] = $00      A:47FF X:0000 Y:1801 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:82
+183DF  $8C $02 $43   STY $4302 [014302] = $00        A:47FF X:0000 Y:0800 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:94
+183E2  $A9 $00       LDA #$00                        A:47FF X:0000 Y:0800 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:103
+183E4  $8D $04 $43   STA $4304 [014304] = $00        A:4700 X:0000 Y:0800 S:1FC0 D:0000 DB:01 P:nvMxdiZC V:170 H:107
+183E7  $BC $FB $19   LDY $19FB,X [0119FB] = $C0      A:4700 X:0000 Y:0800 S:1FC0 D:0000 DB:01 P:nvMxdiZC V:170 H:114
+183EA  $8C $16 $21   STY $2116 [012116] = $00        A:4700 X:0000 Y:43C0 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:126
+183ED  $AD $FA $19   LDA $19FA [0119FA] = $80        A:4700 X:0000 Y:43C0 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:145
+183F0  $8D $15 $21   STA $2115 [012115] = $00        A:4780 X:0000 Y:43C0 S:1FC0 D:0000 DB:01 P:NvMxdizC V:170 H:153
+183F3  $A9 $01       LDA #$01                        A:4780 X:0000 Y:43C0 S:1FC0 D:0000 DB:01 P:NvMxdizC V:170 H:160
+183F5  $8D $0B $42   STA $420B [01420B] = $00        A:4701 X:0000 Y:43C0 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:164
+183F8  $E8           INX                             A:4701 X:0000 Y:43C0 S:1FC0 D:0000 DB:01 P:nvMxdizC V:170 H:172
+
+
+
+1FD1D  $C0 $04       CPY #$04                        A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdizc V:123 H:31
+1FD1F  $D0 $D0       BNE $01FCF1                     A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdiZC V:123 H:35
+1FD21  $C2 $10       REP #$10                        A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMXdiZC V:123 H:39
+1FD23  $60           RTS                             A:0424 X:0008 Y:0004 S:1FB7 D:0000 DB:01 P:nvMxdiZC V:123 H:44
+1FA18  $7A           PLY                             A:0424 X:0008 Y:0004 S:1FB9 D:0000 DB:01 P:nvMxdiZC V:123 H:55
+1FA19  $C2 $20       REP #$20                        A:0424 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:64
+1FA1B  $AD $3D $1A   LDA $1A3D [011A3D] = $2403      A:0424 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:69
+1FA1E  $99 $00 $08   STA $0800,Y [010808] = $2403    A:2403 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:79
+1FA21  $AD $3F $1A   LDA $1A3F [011A3F] = $2404      A:2403 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:91
+1FA24  $99 $02 $08   STA $0802,Y [01080A] = $2404    A:2404 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:101
+1FA27  $AD $41 $1A   LDA $1A41 [011A41] = $2413      A:2404 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:112
+1FA2A  $99 $80 $08   STA $0880,Y [010888] = $2413    A:2413 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:122
+1FA2D  $AD $43 $1A   LDA $1A43 [011A43] = $2414      A:2413 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:144
+1FA30  $99 $82 $08   STA $0882,Y [01088A] = $2414    A:2414 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:154
+1FA33  $E2 $20       SEP #$20                        A:2414 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvmxdizC V:123 H:165
+1FA35  $C8           INY                             A:2414 X:0008 Y:0008 S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:171
+1FA36  $C8           INY                             A:2414 X:0008 Y:0009 S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:174
+1FA37  $C8           INY                             A:2414 X:0008 Y:000A S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:178
+1FA38  $C8           INY                             A:2414 X:0008 Y:000B S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:181
+1FA39  $AD $31 $1A   LDA $1A31 [011A31] = $28        A:2414 X:0008 Y:000C S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:185
+1FA3C  $1A           INC                             A:2428 X:0008 Y:000C S:1FBB D:0000 DB:01 P:nvMxdizC V:123 H:193
+
+$011A3D-$011A44
+
+
+
+
+$7fc588 ($80 bytes) color data -- $10 byte chunks of 8 colors a piece, fills in left side of color data first 8 colors of each palette
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
