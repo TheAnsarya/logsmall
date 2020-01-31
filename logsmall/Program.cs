@@ -20,8 +20,10 @@ namespace logsmall {
 		static void Main(string[] args) {
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - text if statement 2.txt");
 
+
+			LookingForxce0080();
 			//CompareAndFind();
-			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\2020-01-23 load first enemy tile.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\2020-01-23 load first enemy tile.txt");
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\attack raven - base.txt");
 			//processSimple(@"C:\Users\Andy\Documents\Mesen-S\Debugger\attack raven diff.txt");
 
@@ -655,6 +657,15 @@ namespace logsmall {
 			var filename = @"c:\working\dq3\c90566 parameters.txt";
 			var searchTerm = new byte[] { 0x22, 0x66, 0x05, 0xC9 };
 			var lines = FindInRom(searchTerm, 4, 0xb);
+			File.WriteAllLines(filename, lines);
+		}
+
+		static void LookingForxce0080() {
+			var filename = @"c:\working\dq3\looking for $ce0080.txt";
+			//var searchTerm = new byte[] { 0xA9, 0x80, 0x00 };
+			//var lines = FindInRom(searchTerm, 0, 0xa);
+			var searchTerm = new byte[] { 0xee, 0x45, 0xc5 };
+			var lines = FindInRom(searchTerm, 0, 0x3);
 			File.WriteAllLines(filename, lines);
 		}
 

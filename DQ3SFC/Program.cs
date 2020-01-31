@@ -1,3 +1,4 @@
+using DQ3SFC.Attributes;
 using logsmall;
 using System;
 using System.Collections.Generic;
@@ -70,7 +71,11 @@ C79D12 $9D $72 $44     STA $4472,X [7E4472] = $00EE    A:00F3 X:0000 Y:0002 S:06
 		// tile numbers/offsets or skip destination commands
 		// $ffxx means skip xx tiles in destination, used in "total tile count" thing
 		class TileLayoutList {
+			[FieldSize(Ima.Long)]
 			public int Address { get; set; }
+
+			[FieldSize(Ima.Word)]
+			public int UnknownOne { get; set; }
 
 			// not actual number tiles copied, for example the slime is 4 tiles:
 			// endTileOffset is $12
@@ -80,6 +85,7 @@ C79D12 $9D $72 $44     STA $4472,X [7E4472] = $00EE    A:00F3 X:0000 Y:0002 S:06
 			// endTileOffset is $02
 			// write one tile, --, write one tile --
 			// endTileOffset is $00 so done
+			[FieldSize(Ima.Word)]
 			public int Size { get; set; }
 
 			public List<Item> Items { get; set; } = new List<Item>();
@@ -110,11 +116,19 @@ C79D12 $9D $72 $44     STA $4472,X [7E4472] = $00EE    A:00F3 X:0000 Y:0002 S:06
 			public class Item {
 				public bool IsTile { get; set; }
 
+				[FieldSize(Ima.Word)]
 				public int Value { get; set; }
 
-				public int Skip { get => Value & 0x00ff; set => Value = value | 0xff00; }
+				[FieldSize(Ima.Word)]
+				public int Skip {
+					get => Value & 0x00ff;
+					set => Value = value | 0xff00;
+				}
 
-				public int Index { get => Value; }
+				[FieldSize(Ima.Word)]
+				public int Index {
+					get => Value;
+				}
 			}
 		}
 
@@ -124,22 +138,32 @@ C79D12 $9D $72 $44     STA $4472,X [7E4472] = $00EE    A:00F3 X:0000 Y:0002 S:06
 			// Main graphics bank at $ce0080
 			// NumberOfTiles = 0xafc4
 			public static readonly TileBank Primary = new TileBank() {
-				// described in code at $c7c0b1
+				// TODO: pull or verify address from rom
+				// stored at $40 [0019DA]
+				// described in code at:
+				// c7c0b1 -- a9 80 00 85 40 a9 ce 00 85 42
+				// c7c185 -- a9 80 00 85 40 a9 ce 00 85 42
 				StartAddress = 0xce0080,
+
 				// This is a guess based on looking in TileMolester
 				// Non inclusive, last byte is at $e3f8ff
 				EndAddress = 0xe3f900,
+
 				// $20 bytes
 				TileDataSize = 0x20
 			};
 
+			[FieldSize(Ima.Long)]
 			public int StartAddress { get; set; }
 
+			[FieldSize(Ima.Long)]
 			public int EndAddress { get; set; }
 
 			public int TileDataSize { get; set; }
 
-			public int NumberOfTiles { get => (EndAddress - StartAddress) / TileDataSize; }
+			public int NumberOfTiles {
+				get => (EndAddress - StartAddress) / TileDataSize;
+			}
 
 			public int AddressOf(int index) => StartAddress + (index << 5);
 
