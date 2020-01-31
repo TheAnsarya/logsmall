@@ -14,9 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall.DQ3 {
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "<Pending>")]
 	public static class OverworldMap2 {
-
-
 		public static byte[,] GetTilemapData() {
 			var layout = GetLayout();
 
@@ -28,7 +27,7 @@ namespace logsmall.DQ3 {
 					Rom.ByteArray(0xedb916),
 					Rom.ByteArray(0xedc353)		// Top right tile
 				},
-				{
+				{               
 					Rom.ByteArray(0xedcd90),
 					Rom.ByteArray(0xedd7cd),
 					Rom.ByteArray(0xede20a),

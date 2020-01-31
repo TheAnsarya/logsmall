@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EditorTests", "EditorTests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorTestsWinforms", "EditorTestsWinforms\EditorTestsWinforms.csproj", "{EDBB298E-15AC-4AF0-8CEB-78C4B4C86883}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DQ3SFC", "DQ3SFC\DQ3SFC.csproj", "{1D31D8C9-CF58-40D5-90B8-EFE470D45C9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EDBB298E-15AC-4AF0-8CEB-78C4B4C86883}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDBB298E-15AC-4AF0-8CEB-78C4B4C86883}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDBB298E-15AC-4AF0-8CEB-78C4B4C86883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D31D8C9-CF58-40D5-90B8-EFE470D45C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D31D8C9-CF58-40D5-90B8-EFE470D45C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D31D8C9-CF58-40D5-90B8-EFE470D45C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D31D8C9-CF58-40D5-90B8-EFE470D45C9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

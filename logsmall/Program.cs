@@ -20,6 +20,11 @@ namespace logsmall {
 		static void Main(string[] args) {
 			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\ffmq - text if statement 2.txt");
 
+			//CompareAndFind();
+			processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\2020-01-23 load first enemy tile.txt");
+			//processMesen(@"C:\Users\Andy\Documents\Mesen-S\Debugger\attack raven - base.txt");
+			//processSimple(@"C:\Users\Andy\Documents\Mesen-S\Debugger\attack raven diff.txt");
+
 			//FZeroFindJetColorsJSR();
 
 			//FFMQGetLongTextFromOffsets();
@@ -28,7 +33,7 @@ namespace logsmall {
 			//FFMQGetLongTextLines();
 			//FFMQGetLongTextLookups();
 			//OutputHexChunkFFMQ();
-			MapData.Go();
+			//MapData.Go();
 			//SimpleTailWindowCompression.TestLayout();
 			//SimpleTailWindowCompression.TestDumpData();
 
@@ -48,7 +53,6 @@ namespace logsmall {
 			//var filename = @"c:\working\dq3\dq3-a.log"
 			//var filename = @"C:\Users\Andy\OneDrive\Desktop\DQ3 Stuff\dq3 - decompressing ow bg1.log";
 			//processBSNES(filename);
-			//processSimple(filename);
 		}
 
 		private static string BuildFolder(string filename) {
@@ -632,6 +636,10 @@ namespace logsmall {
 
 			var allrawOps = SourceProcessing.GetAllRaw(lines, (x) => x.ToLongString());
 			File.WriteAllLines(Path.Combine(folder, "all-raw-with-ops.txt"), allrawOps);
+
+			// Code with labels and line breaks
+			var labeled = SourceProcessing.LabelCode(allraw);
+			File.WriteAllLines(Path.Combine(folder, "code-labeled.txt"), labeled);
 		}
 
 
@@ -936,6 +944,21 @@ namespace logsmall {
 			Directory.CreateDirectory(@"c:\working\fzero\");
 			var filename = @"c:\working\fzero\~find jsr.txt";
 			File.WriteAllLines(filename, lines);
+		}
+
+
+		static void CompareAndFind() {
+			var before = File.ReadAllBytes(@"c:\working\dq3\wram before attack slime.dmp");
+			var after = File.ReadAllBytes(@"c:\working\dq3\wram before attack slime 2.dmp");
+			var output = new List<string>();
+
+			for (var i = 0; i < before.Length; i++) {
+				if ((before[i] == 8) && (after[i] == 0)) {
+					output.Add(i.ToString("x4", CultureInfo.InvariantCulture));
+				}
+			}
+
+			File.WriteAllLines(@"c:\working\dq3\wram before attack slime.txt", output);
 		}
 	}
 }

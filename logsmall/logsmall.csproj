@@ -76,6 +76,7 @@
     <Compile Include="FFMQ\Text\Data\CharacterNames.cs" />
     <Compile Include="FFMQ\Text\Data\ItemNames.cs" />
     <Compile Include="FFMQ\Text\Data\LocationNames.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SourceCode\Line.cs" />
     <Compile Include="SourceCode\LineGroup.cs" />
     <Compile Include="SourceCode\LineInfo.cs" />

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace logsmall {
+	// TODO: Depreciate and remove
 	class Rom {
 		static readonly string filename = @"c:\working\Dragon Quest III - Soshite Densetsu he... (J).smc";
 
