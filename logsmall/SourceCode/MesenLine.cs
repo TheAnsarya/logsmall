@@ -39,15 +39,15 @@ namespace logsmall.SourceCode {
 			public int H { get; set; }
 
 			public EmuState(Match match) {
-				this.A = match.Groups[7].Value.ToLowerInvariant();
-				this.X = match.Groups[8].Value.ToLowerInvariant();
-				this.Y = match.Groups[9].Value.ToLowerInvariant();
-				this.S = match.Groups[10].Value.ToLowerInvariant();
-				this.D = match.Groups[11].Value.ToLowerInvariant();
-				this.DB = match.Groups[12].Value.ToLowerInvariant();
-				this.P = new ProcessorStatus(match.Groups[13].Value);
-				this.V = int.Parse(match.Groups[14].Value.Trim(), CultureInfo.InvariantCulture);
-				this.H = int.Parse(match.Groups[15].Value.Trim(), CultureInfo.InvariantCulture);
+				A = match.Groups[7].Value.ToLowerInvariant();
+				X = match.Groups[8].Value.ToLowerInvariant();
+				Y = match.Groups[9].Value.ToLowerInvariant();
+				S = match.Groups[10].Value.ToLowerInvariant();
+				D = match.Groups[11].Value.ToLowerInvariant();
+				DB = match.Groups[12].Value.ToLowerInvariant();
+				P = new ProcessorStatus(match.Groups[13].Value);
+				V = int.Parse(match.Groups[14].Value.Trim(), CultureInfo.InvariantCulture);
+				H = int.Parse(match.Groups[15].Value.Trim(), CultureInfo.InvariantCulture);
 			}
 		}
 
@@ -115,20 +115,20 @@ namespace logsmall.SourceCode {
 		public MesenLine(string line) {
 			var match = CreateRegex.Match(line);
 
-			this.Address = match.Groups[1].Value.ToLowerInvariant();
-			this.BytecodeOriginal = match.Groups[2].Value.ToLowerInvariant().Replace("$", "").Replace(" ", "");
-			this.Op = match.Groups[3].Value.ToLowerInvariant();
-			this.Parameters = match.Groups[4].Value.ToLowerInvariant();
-			this.Target = match.Groups[5].Value.ToLowerInvariant();
-			this.TargetValue = match.Groups[6].Value.ToLowerInvariant();
-			this.State = new EmuState(match);
+			Address = match.Groups[1].Value.ToLowerInvariant();
+			BytecodeOriginal = match.Groups[2].Value.ToLowerInvariant().Replace("$", "").Replace(" ", "");
+			Op = match.Groups[3].Value.ToLowerInvariant();
+			Parameters = match.Groups[4].Value.ToLowerInvariant();
+			Target = match.Groups[5].Value.ToLowerInvariant();
+			TargetValue = match.Groups[6].Value.ToLowerInvariant();
+			State = new EmuState(match);
 		}
 
 		public override Line ToLine() =>
 			new Line {
-				Address = this.Address,
-				Op = this.Op,
-				Parameters = this.Parameters
+				Address = Address,
+				Op = Op,
+				Parameters = Parameters
 			};
 
 		public static Line MakeLine(string line) {

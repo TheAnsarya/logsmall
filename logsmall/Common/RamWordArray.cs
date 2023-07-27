@@ -11,8 +11,8 @@ namespace logsmall.Common {
 
 		// Offset is by bytes so increase by 2 each time when iterating
 		public ushort this[int offset] {
-			get => this.Ram.Word(this.Address + offset);
-			set => this.Ram.Word(this.Address + offset, value);
+			get => Ram.Word(Address + offset);
+			set => Ram.Word(Address + offset, value);
 		}
 	}
 }

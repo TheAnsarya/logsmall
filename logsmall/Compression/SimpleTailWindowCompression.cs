@@ -30,7 +30,7 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] Decompress(ByteArrayStream source, int outputSize) {
-			var (comp, decomp) = DecompressFull(source, outputSize);
+			var (_, decomp) = DecompressFull(source, outputSize);
 			return decomp;
 		}
 

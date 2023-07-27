@@ -9,7 +9,7 @@ namespace logsmall {
 		public int Address { get; set; }
 
 		public byte this[int offset] {
-			get => Rom.Byte(this.Address + offset);
+			get => Rom.Byte(Address + offset);
 		}
 	}
 }

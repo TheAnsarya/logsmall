@@ -10,8 +10,8 @@ namespace logsmall.Common {
 		public Ram Ram { get; set; }
 
 		public byte this[int offset] {
-			get => this.Ram.Byte(this.Address + offset);
-			set => this.Ram.Byte(this.Address + offset, value);
+			get => Ram.Byte(Address + offset);
+			set => Ram.Byte(Address + offset, value);
 		}
 	}
 }

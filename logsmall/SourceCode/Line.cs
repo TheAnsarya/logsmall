@@ -14,7 +14,7 @@ namespace logsmall.SourceCode {
 		public uint AddressRaw { get => uint.Parse(Address, NumberStyles.HexNumber, CultureInfo.InvariantCulture); }
 		public string Op { get; set; }
 		public string Parameters { get; set; }
-		public string Bytecode { get => SNES.OpToHex(this.Address, this.Op, this.Parameters); }
+		public string Bytecode { get => SNES.OpToHex(Address, Op, Parameters); }
 		public int ByteLength { get => Bytecode.Length / 2; }
 		public override string ToString() => $"{Address} {Op} {Parameters}".Trim();
 		public string ToLongString() {
@@ -25,9 +25,9 @@ namespace logsmall.SourceCode {
 		// Simplify from a more complex type
 		public virtual Line ToLine() {
 			return
-				this.GetType() == typeof(Line)
+				GetType() == typeof(Line)
 					? this
-					: new Line { Address = this.Address, Op = this.Op, Parameters = this.Parameters };
+					: new Line { Address = Address, Op = Op, Parameters = Parameters };
 		}
 
 		public static IOrderedEnumerable<Line> ToLines(IEnumerable<Line> lines)
@@ -41,21 +41,21 @@ namespace logsmall.SourceCode {
 		protected static Regex IsBranchRegex = new Regex(@"^(bcc|bcs|beq|bmi|bne|bpl|bra|bvc|bvs|brl)$", RegexOptions.Compiled);
 		public bool IsBranch {
 			get {
-				return IsBranchRegex.IsMatch(this.Op);
+				return IsBranchRegex.IsMatch(Op);
 			}
 		}
 
 		protected static Regex IsCallRegex = new Regex(@"^(jsr|jsl)$", RegexOptions.Compiled);
 		public bool IsCall {
 			get {
-				return IsCallRegex.IsMatch(this.Op);
+				return IsCallRegex.IsMatch(Op);
 			}
 		}
 
 		protected static Regex IsJumpRegex = new Regex(@"^(jmp|jml)$", RegexOptions.Compiled);
 		public bool IsJump {
 			get {
-				return IsJumpRegex.IsMatch(this.Op);
+				return IsJumpRegex.IsMatch(Op);
 			}
 		}
 	}

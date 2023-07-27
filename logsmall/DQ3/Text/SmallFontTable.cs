@@ -247,9 +247,7 @@ namespace logsmall.DQ3.Text {
 		}
 
 		public static bool TryEncode(string text, out byte[] data) {
-			if (text == null) {
-				throw new ArgumentNullException($"{nameof(text)} cannot be null");
-			}
+			ArgumentNullException.ThrowIfNull(text, nameof(text));
 
 			var error = false;
 			var output = new List<byte>();

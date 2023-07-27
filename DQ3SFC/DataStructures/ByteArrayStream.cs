@@ -106,7 +106,7 @@ namespace DQ3SFC.DataStructures {
 				}
 
 				if (matches) {
-					found.Add(this.Branch(i));
+					found.Add(Branch(i));
 				}
 			}
 
