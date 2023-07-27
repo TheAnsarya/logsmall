@@ -1,5 +1,4 @@
 using logsmall.DataStructures;
-using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -81,6 +80,7 @@ namespace logsmall.Compression {
 					if ((testCommand != null) && ((cmd == null) || (testCommand.CopySize > cmd.CopySize))) {
 						cmd = testCommand;
 					}
+
 					offset++;
 				}
 
@@ -115,6 +115,7 @@ namespace logsmall.Compression {
 						// TODO: not checking states[] access for null because we want it to throw exception
 						current.PathLength = states[current.NextAddress].PathLength + current.Size;
 					}
+
 					if ((best == null) || (current.PathLength < best.PathLength)) {
 						best = current;
 					}
@@ -123,7 +124,7 @@ namespace logsmall.Compression {
 				states[i] = best;
 			}
 
-			var step = states[states.Length - 1];
+			var step = states[^1];
 			var commands = new List<Command> { step.Command };
 			while (step.NextAddress >= 0) {
 				step = states[step.NextAddress];
@@ -155,7 +156,7 @@ namespace logsmall.Compression {
 		private static byte[] CommandsToBytes(List<Command> commands) {
 			commands.Reverse();
 			var output = new List<byte>();
-			foreach (var batch in commands.Batch(8)) {
+			foreach (var batch in commands.Chunk(8)) {
 				byte command = 0;
 				var batchData = new List<byte>();
 				var count = 0;
@@ -223,6 +224,7 @@ namespace logsmall.Compression {
 					if ((value < 0) || (value >= RingSize)) {
 						throw new ArgumentOutOfRangeException($"{nameof(Address)} must be between 0x000 and 0x{RingSize.ToString("x3", CultureInfo.InvariantCulture)}: 0x{value.ToString("x3", CultureInfo.InvariantCulture)}");
 					}
+
 					_address = value;
 				}
 			}
@@ -233,10 +235,11 @@ namespace logsmall.Compression {
 					return _copySize;
 				}
 				set {
-					if (!Simple && (value < MIN_COPY_SIZE) || (value > MAX_COPY_SIZE)) {
+					if ((!Simple && (value < MIN_COPY_SIZE)) || (value > MAX_COPY_SIZE)) {
 						// Range is (6 bits) + 3
 						throw new ArgumentOutOfRangeException($"{nameof(CopySize)} must be between {MIN_COPY_SIZE} and {MAX_COPY_SIZE}: {value}");
 					}
+
 					_copySize = value;
 				}
 			}
@@ -325,7 +328,7 @@ namespace logsmall.Compression {
 		}
 
 		public static void WriteBytesToFile(byte[] data, string filename) {
-			var lines = data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture))));
+			var lines = data.Chunk(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture))));
 			File.WriteAllLines(filename, lines);
 		}
 	}

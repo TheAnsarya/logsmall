@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class DebugMenu : TextList {
 		private DebugMenu() { }
 
-		private static DebugMenu _instance = null;
+		private static DebugMenu _instance;
 		public static DebugMenu Instance {
 			get {
-				if (_instance == null) {
-					_instance = new DebugMenu();
-				}
+				_instance ??= new DebugMenu();
 
 				return _instance;
 			}

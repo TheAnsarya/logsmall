@@ -20,7 +20,7 @@ namespace logsmall.Compression {
 
 		public static byte[] Decompress(ByteArrayStream source, int compressedSize) {
 			if (compressedSize % 0x18 != 0) {
-				throw new ArgumentException($"{nameof(compressedSize)} is wrong ({compressedSize.ToString("x2")}), {nameof(source)} needs to be in full $18 byte chunks");
+				throw new ArgumentException($"{nameof(compressedSize)} is wrong ({compressedSize:x2}), {nameof(source)} needs to be in full $18 byte chunks");
 			}
 
 			var output = new List<byte>(compressedSize * 4 / 3);
@@ -46,8 +46,9 @@ namespace logsmall.Compression {
 			if (target.Address != 0) {
 				throw new ArgumentException($"{nameof(target)} address must be 0");
 			}
+
 			if (target.Size % 0x20 != 0) {
-				throw new ArgumentException($"size is wrong ({target.Size.ToString("x2")}), {nameof(target)} needs to be in full $20 byte chunks");
+				throw new ArgumentException($"size is wrong ({target.Size:x2}), {nameof(target)} needs to be in full $20 byte chunks");
 			}
 
 			var output = new List<byte>(target.Size * 3 / 4);
@@ -59,7 +60,7 @@ namespace logsmall.Compression {
 					var zero = target.Byte();
 
 					if (zero != 0) {
-						throw new Exception($"byte should be zero. value: ${zero.ToString("x2")}  address: ${(target.Address - 1).ToString("x4")}");
+						throw new Exception($"byte should be zero. value: ${zero:x2}  address: ${target.Address - 1:x4}");
 					}
 				}
 			}

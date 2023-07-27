@@ -65,15 +65,12 @@ namespace MoreLinq
             Debug.Assert(size > 0);
             Debug.Assert(resultSelector != null);
 
-            TSource[] bucket = null;
+            TSource[]? bucket = null;
             var count = 0;
 
             foreach (var item in source)
             {
-                if (bucket == null)
-                {
-                    bucket = new TSource[size];
-                }
+                bucket ??= new TSource[size];
 
                 bucket[count++] = item;
 

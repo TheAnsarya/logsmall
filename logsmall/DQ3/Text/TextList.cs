@@ -12,7 +12,7 @@ namespace logsmall.DQ3.Text {
 		public virtual int RoughEndAddress { get => EndAddress; }
 		public abstract string[][] Known { get; }
 
-		private Dictionary<string, string> _toEnglishLookup = null;
+		private Dictionary<string, string> _toEnglishLookup;
 		public Dictionary<string, string> ToEnglishLookup {
 			get {
 				if (_toEnglishLookup == null) {

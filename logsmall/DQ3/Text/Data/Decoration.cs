@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class Decoration : TextList {
 		private Decoration() { }
 
-		private static Decoration _instance = null;
+		private static Decoration _instance;
 		public static Decoration Instance {
 			get {
-				if (_instance == null) {
-					_instance = new Decoration();
-				}
+				_instance ??= new Decoration();
 
 				return _instance;
 			}

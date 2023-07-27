@@ -1,15 +1,15 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logsmall", "logsmall\logsmall.csproj", "{5213D98A-170E-4500-B743-763DE672DCB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "logsmall", "logsmall\logsmall.csproj", "{5213D98A-170E-4500-B743-763DE672DCB7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EditorTests", "EditorTests\EditorTests.csproj", "{86E3EE2E-7F24-4354-8C51-1BAD2A4DC94B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorTestsWinforms", "EditorTestsWinforms\EditorTestsWinforms.csproj", "{EDBB298E-15AC-4AF0-8CEB-78C4B4C86883}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EditorTestsWinforms", "EditorTestsWinforms\EditorTestsWinforms.csproj", "{EDBB298E-15AC-4AF0-8CEB-78C4B4C86883}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DQ3SFC", "DQ3SFC\DQ3SFC.csproj", "{1D31D8C9-CF58-40D5-90B8-EFE470D45C9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DQ3SFC", "DQ3SFC\DQ3SFC.csproj", "{1D31D8C9-CF58-40D5-90B8-EFE470D45C9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -141,8 +141,8 @@ namespace logsmall.Overworld {
 			for (int i = 0; i < 0x1000; i++) {
 				// each 4 by 4 chunk
 				var sourceIndex = layout[i * 2];
-				var xStart = (i % 64) * 4;
-				var yStart = (i / 64) * 4;
+				var xStart = i % 64 * 4;
+				var yStart = i / 64 * 4;
 
 				for (int k = 0; k < 4; k++) {
 					fullmap[yStart + 0, xStart + k] = tilemaps[0, k][sourceIndex];

@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class Helmet : TextList {
 		private Helmet() { }
 
-		private static Helmet _instance = null;
+		private static Helmet _instance;
 		public static Helmet Instance {
 			get {
-				if (_instance == null) {
-					_instance = new Helmet();
-				}
+				_instance ??= new Helmet();
 
 				return _instance;
 			}

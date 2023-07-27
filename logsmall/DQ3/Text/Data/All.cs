@@ -28,12 +28,10 @@ namespace logsmall.DQ3.Text.Data {
 			_known = AllLists.Select(x => x.Known).SelectMany(x => x).ToArray();
 		}
 
-		private static All _instance = null;
+		private static All _instance;
 		public static All Instance {
 			get {
-				if (_instance == null) {
-					_instance = new All();
-				}
+				_instance ??= new All();
 
 				return _instance;
 			}
@@ -45,6 +43,6 @@ namespace logsmall.DQ3.Text.Data {
 		public override int RoughEndAddress { get => EndAddress; }
 
 		public override string[][] Known { get => _known; }
-		private string[][] _known = null;
+		private string[][] _known;
 	}
 }

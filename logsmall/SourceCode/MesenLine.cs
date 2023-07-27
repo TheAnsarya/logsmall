@@ -52,7 +52,7 @@ namespace logsmall.SourceCode {
 		}
 
 		public class ProcessorStatus {
-			private static Regex IsFlagsString = new Regex("^nvmxdizc$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+			private static readonly Regex IsFlagsString = new Regex("^nvmxdizc$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
 			// nvmxdizc
 			public bool Negative { get; set; }

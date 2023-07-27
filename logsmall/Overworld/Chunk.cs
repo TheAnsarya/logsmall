@@ -14,12 +14,11 @@ namespace logsmall.Overworld {
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "Is allowed to be written to")]
 		public byte[] Data { get; set; }
 
-		private string _key = null;
+		private string _key;
 		public string Key {
 			get {
-				if (_key == null) {
-					_key = string.Join("", Data.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
-				}
+				_key ??= string.Join("", Data.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
+
 				return _key;
 			}
 		}
@@ -50,8 +49,8 @@ namespace logsmall.Overworld {
 
 			for (int i = 0; i < totalBlocks; i++) {
 				// each 4 by 4 chunk
-				var xStart = (i % xBlocks) * 4;
-				var yStart = (i / xBlocks) * 4;
+				var xStart = i % xBlocks * 4;
+				var yStart = i / xBlocks * 4;
 				var current = new Chunk {
 					Data = new byte[] {
 						fullmap[yStart + 0, xStart + 0],

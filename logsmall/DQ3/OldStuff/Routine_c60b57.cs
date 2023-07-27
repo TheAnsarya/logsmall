@@ -24,12 +24,12 @@ C62148 $9E $62 $FC     STZ $FC62,X [7FFC64] = $027C    A:0400 X:0002 Y:6000 S:03
 C6214B $9E $A2 $FC     STZ $FCA2,X [7FFCA4] = $027C    A:0400 X:0002 Y:6000 S:0371 D:0000 DB:7F P:84 V:88  H:201
 */
 		public class LocalRam {
-			public Ram ram { get; private set; }
+			public Ram WRam { get; private set; }
 
 			// $40
-			public int x40 {
-				get => ram.Word(0x7e0040);
-				set => ram.Word(0x7e0040, (ushort)value);
+			public int X40 {
+				get => WRam.Word(0x7e0040);
+				set => WRam.Word(0x7e0040, (ushort)value);
 			}
 		}
 
@@ -47,9 +47,9 @@ C6214B $9E $A2 $FC     STZ $FCA2,X [7FFCA4] = $027C    A:0400 X:0002 Y:6000 S:03
 
 		// Covers: $c62145 - $c6217c
 		public static void Routine_c62145(LocalRam data) {
-			data.ram.Zero(0x7ffc62, 0xc0);
-			data.ram.Zero(0x7ea843, 0xb4);
-			data.ram.Zero(0x7eac7b, 0x80);
+			data.WRam.Zero(0x7ffc62, 0xc0);
+			data.WRam.Zero(0x7ea843, 0xb4);
+			data.WRam.Zero(0x7eac7b, 0x80);
 		}
 
 		// Covers: $c6217d - $c6219f
@@ -95,11 +95,12 @@ c6219c jsr Routine_c621a0
 		}
 
 		public static void Routine_c90572(LocalRam data, int optionsAddress, int X) {
-			data.x40 = X;
+			data.X40 = X;
 			var tmp = Rom.Byte(optionsAddress);
 			if (tmp != 0) {
 				// c90588 brl.Branch_c90610
 			}
+
 			var a = Rom.Word(optionsAddress + 1);
 			X = 0x40;
 
@@ -110,9 +111,9 @@ c6219c jsr Routine_c621a0
 		}
 
 		private static void Routine_c01146(LocalRam data, int X, ushort A) {
-			var tmpC0114C = data.ram.Byte(0x7e0001 + X);
+			var tmpC0114C = data.WRam.Byte(0x7e0001 + X);
 
-			var tmpC01152 = data.ram.Byte(0x7e0000 + X);
+			var tmpC01152 = data.WRam.Byte(0x7e0000 + X);
 			var m1 = tmpC0114C * tmpC01152;
 			//data.ram.Word(0x7e0001 + X, )
 

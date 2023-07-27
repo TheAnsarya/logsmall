@@ -19,9 +19,9 @@ namespace logsmall.SourceCode {
 		public SimpleLine(string line) {
 			var match = CreateRegex.Match(line);
 
-			this.Address = match.Groups[1].Value.ToLowerInvariant();
-			this.Op = match.Groups[2].Value.ToLowerInvariant();
-			this.Parameters = match.Groups[3].Value.ToLowerInvariant();
+			Address = match.Groups[1].Value.ToLowerInvariant();
+			Op = match.Groups[2].Value.ToLowerInvariant();
+			Parameters = match.Groups[3].Value.ToLowerInvariant();
 		}
 
 		public static List<Line> FromFile(string filename) {

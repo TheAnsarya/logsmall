@@ -1,5 +1,5 @@
 using DQ3SFC.Attributes;
-using logsmall;
+using DQ3SFC.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -67,7 +67,7 @@ C79D12 $9D $72 $44     STA $4472,X [7E4472] = $00EE    A:00F3 X:0000 Y:0002 S:06
 			Console.ReadKey();
 		}
 
-		// for copying slime grapgics to vram
+		// for copying slime graphics to vram
 		// tile numbers/offsets or skip destination commands
 		// $ffxx means skip xx tiles in destination, used in "total tile count" thing
 		class TileLayoutList {
@@ -97,6 +97,7 @@ C79D12 $9D $72 $44     STA $4472,X [7E4472] = $00EE    A:00F3 X:0000 Y:0002 S:06
 
 			public void Refresh() {
 				var address = Address;
+				UnknownOne = Rom.All.Word(address);
 				var size = Size = Rom.All.Word(address + 2);
 
 				address += 4;

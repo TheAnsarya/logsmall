@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 namespace logsmall {
 	// TODO: Depreciate and remove
 	class Rom {
-		static readonly string filename = @"c:\working\Dragon Quest III - Soshite Densetsu he... (J).smc";
+		const string filename = @"c:\working\Dragon Quest III - Soshite Densetsu he... (J).smc";
 
 		public const uint AddressOffset = 0xc00000U;
 
-		private static byte[] _rom = null;
+		private static byte[] _rom;
 		public static byte[] ROM {
 			get {
 				if (_rom == null) {
 					var size = (int)new FileInfo(filename).Length;
 					_rom = new byte[size];
-					using (var romstream = File.OpenRead(filename)) {
-						romstream.Read(_rom, 0, size);
-					}
+					using var romstream = File.OpenRead(filename);
+					romstream.Read(_rom, 0, size);
 				}
 
 				return _rom;
@@ -40,7 +39,7 @@ namespace logsmall {
 			string segment = "";
 
 			for (int i = 0; i < length; i++) {
-				segment += ROM[address + i].ToString("x2");
+				segment += $"{ROM[address + i]:x2}";
 			}
 
 			return segment;

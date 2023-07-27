@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace logsmall.FFMQ.Text.Data {
 	class CharacterNames {
-		public static readonly int RecordSize = 0x50;
-		public static readonly int EntrySize = 0x10;
-		public static readonly byte BufferByte = 0x03;
+		public const int RecordSize = 0x50;
+		public const int EntrySize = 0x10;
+		public const byte BufferByte = 0x03;
 
 		// TODO: We can do this better once the whole character datastructure is done
 		public static ByteArrayStream GetDataStream(int index) {

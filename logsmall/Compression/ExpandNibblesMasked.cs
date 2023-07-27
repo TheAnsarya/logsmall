@@ -35,8 +35,9 @@ namespace logsmall.Compression {
 			if (target.Address != 0) {
 				throw new ArgumentException($"{nameof(target)} address must be 0");
 			}
+
 			if (target.Size % 2 != 0) {
-				throw new ArgumentException($"size is wrong ({target.Size.ToString("x2")}), {nameof(target)} needs to be in 2 byte chunks (words)");
+				throw new ArgumentException($"size is wrong ({target.Size:x2}), {nameof(target)} needs to be in 2 byte chunks (words)");
 			}
 
 			var output = new List<byte>(target.Size / 2);
@@ -46,10 +47,11 @@ namespace logsmall.Compression {
 				var high = target.Byte();
 
 				if ((low & 0x07) != low) {
-					throw new Exception($"{nameof(low)} byte should be lower three bits only. value: ${low.ToString("x2")}  address: ${(target.Address - 2).ToString("x2")}");
+					throw new Exception($"{nameof(low)} byte should be lower three bits only. value: ${low:x2}  address: ${target.Address - 2:x2}");
 				}
+
 				if ((high & 0x07) != low) {
-					throw new Exception($"{nameof(high)} byte should be lower three bits only. value: ${high.ToString("x2")}  address: ${(target.Address - 1).ToString("x2")}");
+					throw new Exception($"{nameof(high)} byte should be lower three bits only. value: ${high:x2}  address: ${target.Address - 1:x2}");
 				}
 
 				var data = (byte)(low + (high << 4));

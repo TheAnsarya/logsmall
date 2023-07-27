@@ -219,7 +219,7 @@ namespace logsmall.DQ3.Text {
 			[0xfc] = '〜',
 		};
 
-		private static Dictionary<char, byte> _reverseTable = null;
+		private static Dictionary<char, byte> _reverseTable;
 		public static Dictionary<char, byte> ReverseTable {
 			get {
 				if (_reverseTable == null) {
@@ -243,7 +243,7 @@ namespace logsmall.DQ3.Text {
 				return null;
 			}
 
-			return $"{{{source.ToString("x2")}}}";
+			return $"{{{source:x2}}}";
 		}
 
 		public static bool TryEncode(string text, out byte[] data) {

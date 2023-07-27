@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class Spells : TextList {
 		private Spells() { }
 
-		private static Spells _instance = null;
+		private static Spells _instance;
 		public static Spells Instance {
 			get {
-				if (_instance == null) {
-					_instance = new Spells();
-				}
+				_instance ??= new Spells();
 
 				return _instance;
 			}

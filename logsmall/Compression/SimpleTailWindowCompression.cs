@@ -1,5 +1,4 @@
 using logsmall.DataStructures;
-using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -100,6 +99,7 @@ namespace logsmall.Compression {
 					} else {
 						copyData++;
 					}
+
 					data.Add(target.Byte());
 				} else {
 					commands.Add((byte)((copyOutput << 4) + copyData));
@@ -107,7 +107,6 @@ namespace logsmall.Compression {
 					copyData = 0;
 					target.Address += term.Length;
 				}
-
 			}
 
 			// Add last copy data command
@@ -218,14 +217,14 @@ namespace logsmall.Compression {
 			}
 
 				Console.WriteLine();
-				Console.WriteLine($"pointers at: ${pointersAddress.ToString("x6", CultureInfo.InvariantCulture)} - ${rom.AddressToSNES(pointerStream.Address - 4).ToString("x6")}");
+				Console.WriteLine($"pointers at: ${pointersAddress.ToString("x6", CultureInfo.InvariantCulture)} - ${rom.AddressToSNES(pointerStream.Address - 4):x6}");
 				Console.WriteLine();
 			Console.ReadKey();
 		}
 
 
 		public static void WriteBytesToFile(byte[] data, string filename) {
-			var lines = data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture))));
+			var lines = data.Chunk(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture))));
 			File.WriteAllLines(filename, lines);
 		}
 	}

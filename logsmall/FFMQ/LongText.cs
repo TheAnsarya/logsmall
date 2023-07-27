@@ -66,12 +66,13 @@ namespace logsmall.FFMQ {
 
 		public static string AttemptTranslate(byte code, int depthLeft = 2) {
 			if (code < 0x30) {
-				return $"{{{code.ToString("x2")}}}";
+				return $"{{{code:x2}}}";
 			} else if (code >= 0x80) {
 				return BasicTable.Lookup(code);
 			} else if (depthLeft == 0) {
-				return $"{{{code.ToString("x2")}}}";
+				return $"{{{code:x2}}}";
 			}
+
 			var text = string.Join("", LookupBytes(code).Select(x => AttemptTranslate(x, depthLeft - 1)));
 
 			return text;
@@ -87,18 +88,23 @@ namespace logsmall.FFMQ {
 				if (code == 0x01) {
 					return $"{{windowbreak}}";
 				}
+
 				if (code == 0x05) {
-					return $"{{05:{stream.Byte().ToString("x2")}}}";
+					return $"{{05:{stream.Byte():x2}}}";
 				}
+
 				if (code == 0x1b) {
-					return $"{{swapspeaker:{stream.Byte().ToString("x2")}}}";
+					return $"{{swapspeaker:{stream.Byte():x2}}}";
 				}
+
 				if (code == 0x1d) {
 					return $"{{character:{CharacterNames.GetString(stream.Byte())}}}";
 				}
+
 				if (code == 0x1e) {
 					return $"{{item:{ItemNames.GetString(stream.Byte())}}}";
 				}
+
 				if (code == 0x1f) {
 					return $"{{location:{LocationNames.GetString(stream.Byte())}}}";
 				}
@@ -107,11 +113,11 @@ namespace logsmall.FFMQ {
 				//}
 
 
-				return $"{{{code.ToString("x2")}}}";
+				return $"{{{code:x2}}}";
 			}
 
 			if (depthLeft == 0) {
-				return $"{{{code.ToString("x2")}}}";
+				return $"{{{code:x2}}}";
 			}
 
 			//var text = string.Join("", LookupBytes(code).Select(x => AttemptTranslate(x, depthLeft - 1)));

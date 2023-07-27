@@ -14,15 +14,14 @@ namespace logsmall.Common {
 		abstract public int AddressToPC(int address);
 		abstract public int AddressToSNES(int address);
 
-		private byte[] _rom = null;
+		private byte[] _rom;
 		public byte[] ROM {
 			get {
 				if (_rom == null) {
 					var size = (int)new FileInfo(Filename).Length;
 					_rom = new byte[size];
-					using (var romstream = File.OpenRead(Filename)) {
-						romstream.Read(_rom, 0, size);
-					}
+					using var romStream = File.OpenRead(Filename);
+					romStream.Read(_rom, 0, size);
 				}
 
 				return _rom;
@@ -77,7 +76,7 @@ namespace logsmall.Common {
 			return (uint)((ROM[addy + 2] << 16) + (ROM[addy + 1] << 8) + ROM[addy]);
 		}
 
-		public RomByteArray ByteArray(int address) {
+		public static RomByteArray ByteArray(int address) {
 			return new RomByteArray { Address = address };
 		}
 	}

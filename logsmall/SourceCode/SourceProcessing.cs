@@ -47,7 +47,7 @@ namespace logsmall.SourceCode {
 						}
 					)
 					.Where(x => x.Converted != x.Rom)
-					.Select(x => $"{x.Line.ToString()}   rom={x.Rom}  converted={x.Converted}")
+					.Select(x => $"{x.Line}   rom={x.Rom}  converted={x.Converted}")
 					.ToList();
 			return bytecodes;
 		}

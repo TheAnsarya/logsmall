@@ -9,8 +9,8 @@ namespace logsmall.FFMQ.Text.Data {
 	class LocationNames {
 		public static ByteArrayStream GetDataStream() => FFMQ.Game.Rom.GetStream(0x0cbed0);
 
-		public static readonly byte BufferByte = 0x03;
-		public static readonly int EntrySize = 0x10;
+		public const byte BufferByte = 0x03;
+		public const int EntrySize = 0x10;
 
 		public static string GetString(int index) {
 			var stream = GetDataStream();

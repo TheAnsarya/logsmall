@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class Unknown : TextList {
 		private Unknown() { }
 
-		private static Unknown _instance = null;
+		private static Unknown _instance;
 		public static Unknown Instance {
 			get {
-				if (_instance == null) {
-					_instance = new Unknown();
-				}
+				_instance ??= new Unknown();
 
 				return _instance;
 			}

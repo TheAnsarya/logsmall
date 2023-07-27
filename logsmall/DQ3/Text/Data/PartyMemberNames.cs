@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class PartyMemberNames : TextList {
 		private PartyMemberNames() { }
 
-		private static PartyMemberNames _instance = null;
+		private static PartyMemberNames _instance;
 		public static PartyMemberNames Instance {
 			get {
-				if (_instance == null) {
-					_instance = new PartyMemberNames();
-				}
+				_instance ??= new PartyMemberNames();
 
 				return _instance;
 			}

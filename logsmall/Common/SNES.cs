@@ -31,50 +31,52 @@ namespace logsmall.Common {
 					var dist =
 						(
 							(sbyte)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber)
-								- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber)
+							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+								- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
 								- 2)
 						)
-						.ToString("X2")
+						.ToString("X2", CultureInfo.InvariantCulture)
 						.ToLowerInvariant();
 					return $"{lookup.Byte}{dist}";
 				} else if (lookup.Mode == AddressingMode.PCRelative24) {
 					var dist =
 						(
 							(sbyte)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber)
-								- int.Parse(address, NumberStyles.HexNumber)
+							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+								- int.Parse(address, NumberStyles.HexNumber, CultureInfo.InvariantCulture)
 								- 2)
 						)
-						.ToString("X2")
+						.ToString("X2", CultureInfo.InvariantCulture)
 						.ToLowerInvariant();
 					return $"{lookup.Byte}{dist}";
 				} else if (lookup.Mode == AddressingMode.PCRelativeLong) {
 					var dist =
 						(
 							(short)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber)
-								- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber)
+							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+								- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
 								- 3)
 						)
-						.ToString("X4")
+						.ToString("X4", CultureInfo.InvariantCulture)
 						.ToLowerInvariant();
 					return $"{lookup.Byte}{dist.FlipBytes()}";
 				} else if (lookup.Mode == AddressingMode.PCRelativeLong24) {
 					var dist =
 						(
 							(short)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber)
-								- int.Parse(address, NumberStyles.HexNumber)
+							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+								- int.Parse(address, NumberStyles.HexNumber, CultureInfo.InvariantCulture)
 								- 3)
 						)
-						.ToString("X4")
+						.ToString("X4", CultureInfo.InvariantCulture)
 						.ToLowerInvariant();
 					return $"{lookup.Byte}{dist.FlipBytes()}";
 				}
+
 				if (lookup.Mode == AddressingMode.BlockMove) {
 					return $"{lookup.Byte}{GetValue(lookup.Mode, parameters).FlipBytes()}";
 				}
+
 				return $"{lookup.Byte}{GetValue(lookup.Mode, parameters).FlipBytes()}";
 			}
 

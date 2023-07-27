@@ -29,7 +29,7 @@ namespace EditorTestsWinforms {
 				Enumerable.Range(0, 256)
 					.ToDictionary(
 						x => x,
-						x => new Rectangle((x % 16) * 16, (x / 16) * 16, 16, 16)
+						x => new Rectangle(x % 16 * 16, x / 16 * 16, 16, 16)
 					);
 
 			using (var tiles = Image.FromFile(@"C:\working\dq3\overworld\dq3-tiles.png")) {

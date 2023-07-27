@@ -83,7 +83,7 @@ namespace logsmall.DataStructures {
 		public ByteArrayStream Branch() => Branch(0);
 
 		public ByteArrayStream Branch(int startAddress) {
-			return new ByteRingBuffer(Buffer, startAddress);
+			return new ByteArrayStream(Buffer, startAddress);
 		}
 
 		public List<ByteArrayStream> FindAll(byte[] searchTerm) {

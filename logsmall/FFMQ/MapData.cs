@@ -16,12 +16,12 @@ namespace logsmall.FFMQ {
 			var start = 0x0d; // byte
 			start *= 2;
 
-			Console.WriteLine($"{nameof(start)} == {start.ToString("x2")}");
+			Console.WriteLine($"{nameof(start)} == {start:x2}");
 			//0B81AF $BF $3B $AF $07 LDA $07AF3B,X[07AF55] = $0234  A: 001A X:001A Y:0080 S: 1FC8 D:0000 DB: 01 P: nvmxdizc V:30  H: 192
 			var lookup_07af3b = rom.GetStream(0x07af3b);
 			var offset = lookup_07af3b.WordAt(start);
 
-			Console.WriteLine($"{nameof(offset)} == {offset.ToString("x4")}");
+			Console.WriteLine($"{nameof(offset)} == {offset:x4}");
 
 			//0B81BC $BF $13 $B0 $07 LDA $07B013,X[07B247] = $07    A: 0234 X: 0234 Y: 0000 S: 1FC8 D:0000 DB: 01 P: nvMxdiZc V:30  H: 229
 			//0B81C0 $99 $10 $19     STA $1910,Y[011910] = $00      A: 0207 X: 0234 Y: 0000 S: 1FC8 D:0000 DB: 01 P: nvMxdizc V:30  H: 239
@@ -53,7 +53,7 @@ namespace logsmall.FFMQ {
 
 			var mapDataOffsetIndex = (options[0] & 0x3f) * 3;
 
-			Console.WriteLine($"{nameof(mapDataOffsetIndex)} == {mapDataOffsetIndex.ToString("x4")}");
+			Console.WriteLine($"{nameof(mapDataOffsetIndex)} == {mapDataOffsetIndex:x4}");
 
 			var mapDataOffsetLookup = rom.GetStream(0x0b8735);
 
@@ -68,7 +68,7 @@ namespace logsmall.FFMQ {
 
 			var mapDataOffset = mapDataOffsetLookup.LongAt(mapDataOffsetIndex);
 
-			Console.WriteLine($"{nameof(mapDataOffset)} == {mapDataOffset.ToString("x4")}");
+			Console.WriteLine($"{nameof(mapDataOffset)} == {mapDataOffset:x4}");
 
 			// $1000 seems to be the largest map, but using $2000 for now
 			var (tilemapcomp, tilemapdecomp) = SimpleTailWindowCompression.DecompressFull(rom.GetStream(mapDataOffset), 0x2000);

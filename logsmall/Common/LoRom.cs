@@ -16,7 +16,7 @@ namespace logsmall.Common {
 		}
 
 		public override int AddressToSNES(int address) {
-			var snes = ((address / 0x8000) * 0x10000) + (address % 0x8000) + 0x8000;
+			var snes = (address / 0x8000 * 0x10000) + (address % 0x8000) + 0x8000;
 			return snes;
 		}
 	}

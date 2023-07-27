@@ -28,6 +28,7 @@ namespace logsmall.SourceCode {
 				NextAddress += (uint)line.ByteLength;
 				return true;
 			}
+
 			return false;
 		}
 

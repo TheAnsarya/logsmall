@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace logsmall.FFMQ.Text {
 	class BasicTable {
 
-		public static byte EndOfString = 0x00;
-		public static char NotFound = '#';
+		public const byte EndOfString = 0x00;
+		public const char NotFound = '#';
 
 		public static Dictionary<byte, char> Table = new Dictionary<byte, char> {
 			//[0x03] = '*',
@@ -95,7 +95,7 @@ namespace logsmall.FFMQ.Text {
 			[0xff] = ' ',
 		};
 
-		private static Dictionary<char, byte> _reverseTable = null;
+		private static Dictionary<char, byte> _reverseTable;
 		public static Dictionary<char, byte> ReverseTable {
 			get {
 				if (_reverseTable == null) {
@@ -120,7 +120,7 @@ namespace logsmall.FFMQ.Text {
 			}
 
 			//return NotFound.ToString();
-			return $"{{{source.ToString("x2")}}}";
+			return $"{{{source:x2}}}";
 		}
 	}
 }

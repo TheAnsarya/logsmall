@@ -1,4 +1,3 @@
-using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,14 +13,14 @@ namespace logsmall {
 		}
 
 		public static string[] ToHexStrings(this byte[] data) {
-			return data.Batch(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture)))).ToArray();
+			return data.Chunk(16).Select(x => string.Join(" ", x.Select(y => y.ToString("x2", CultureInfo.InvariantCulture)))).ToArray();
 		}
 
 		// Reverse the bits of a byte
 		// Seems overly complicated but it works and is fast
 		// https://stackoverflow.com/a/3590938/3325644
 		private static byte ReverseBits(this byte b) {
-			return (byte)(((b * 0x80200802ul) & 0x0884422110ul) * 0x0101010101ul >> 32);
+			return (byte)((((b * 0x80200802ul) & 0x0884422110ul) * 0x0101010101ul) >> 32);
 		}
 
 		public static IEnumerable<string> Split(this string str, int chunkSize) {

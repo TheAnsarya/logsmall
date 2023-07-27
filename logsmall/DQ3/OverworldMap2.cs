@@ -1,6 +1,5 @@
 using logsmall.Common;
 using logsmall.Overworld;
-using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,10 +12,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace logsmall.DQ3 {
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "<Pending>")]
-	public static class OverworldMap2 {
-		public static byte[,] GetTilemapData() {
+namespace logsmall.DQ3
+{
+	public static class OverworldMap2
+	{
+		public static byte[,] GetTilemapData()
+		{
 			var layout = GetLayout();
 
 			var tilemaps = new RomByteArray[4, 4] {
@@ -27,7 +28,7 @@ namespace logsmall.DQ3 {
 					Rom.ByteArray(0xedb916),
 					Rom.ByteArray(0xedc353)		// Top right tile
 				},
-				{               
+				{
 					Rom.ByteArray(0xedcd90),
 					Rom.ByteArray(0xedd7cd),
 					Rom.ByteArray(0xede20a),
@@ -50,13 +51,15 @@ namespace logsmall.DQ3 {
 
 			// fullmap[y, x]
 			var fullmap = new byte[0x100, 0x100];
-			for (int i = 0; i < 0x1000; i++) {
+			for (int i = 0; i < 0x1000; i++)
+			{
 				// each 4 by 4 chunk
 				var sourceIndex = layout[i * 2];
 				var xStart = i % 64 * 4;
 				var yStart = i / 64 * 4;
 
-				for (int k = 0; k < 4; k++) {
+				for (int k = 0; k < 4; k++)
+				{
 					fullmap[yStart + 0, xStart + k] = tilemaps[0, k][sourceIndex];
 					fullmap[yStart + 1, xStart + k] = tilemaps[1, k][sourceIndex];
 					fullmap[yStart + 2, xStart + k] = tilemaps[2, k][sourceIndex];
@@ -67,7 +70,8 @@ namespace logsmall.DQ3 {
 			return fullmap;
 		}
 
-		public static void GetMapImage() {
+		public static void GetMapImage()
+		{
 			var fullmap = GetTilemapData();
 
 			var sources =
@@ -77,48 +81,50 @@ namespace logsmall.DQ3 {
 						x => new Rectangle(x % 16 * 16, x / 16 * 16, 16, 16)
 					);
 
-			using (var tiles = Image.FromFile(@"C:\working\dq3\overworld\dq3-tiles.png")) {
-				using (var img = new Bitmap(4096, 4096)) {
-					using (var g = Graphics.FromImage(img)) {
+			using var tiles = Image.FromFile(@"C:\working\dq3\overworld\dq3-tiles.png");
+			using var img = new Bitmap(4096, 4096);
+			using (var g = Graphics.FromImage(img))
+			{
 
-						for (var row = 0; row < 256; row++) {
-							for (var column = 0; column < 256; column++) {
-								g.DrawImage(tiles, new Rectangle(column * 16, row * 16, 16, 16), sources[fullmap[row, column]], GraphicsUnit.Pixel);
-							}
-						}
+				for (var row = 0; row < 256; row++)
+				{
+					for (var column = 0; column < 256; column++)
+					{
+						g.DrawImage(tiles, new Rectangle(column * 16, row * 16, 16, 16), sources[fullmap[row, column]], GraphicsUnit.Pixel);
 					}
-
-					img.Save(@"C:\working\dq3\overworld\overworld.png", ImageFormat.Png);
 				}
 			}
+
+			img.Save(@"C:\working\dq3\overworld\overworld.png", ImageFormat.Png);
 		}
 
-		public static void MakeTilesImage() {
+		public static void MakeTilesImage()
+		{
 			var sourceA = new Rectangle(24, 15, 16, 16);
 			var sourceB = new Rectangle(88, 15, 16, 16);
 			var sourceC = new Rectangle(152, 15, 16, 16);
 			var sourceD = new Rectangle(216, 15, 16, 16);
 
-			using (var tiles = new Bitmap(256, 256)) {
-				using (var g = Graphics.FromImage(tiles)) {
+			using var tiles = new Bitmap(256, 256);
+			using (var g = Graphics.FromImage(tiles))
+			{
 
-					for (int i = 0; i < 64; i++) {
-						var filename = $@"C:\working\dq3\overworld\screenshots\dq3-map test 1_{i.ToString("d3")}.png";
-						using (var img = Image.FromFile(filename)) {
+				for (int i = 0; i < 64; i++)
+				{
+					var filename = $@"C:\working\dq3\overworld\screenshots\dq3-map test 1_{i:d3}.png";
+					using var img = Image.FromFile(filename);
 
-							var x = i % 4 * 64;
-							var y = i / 4 * 16;
+					var x = i % 4 * 64;
+					var y = i / 4 * 16;
 
-							g.DrawImage(img, new Rectangle(x + 16 * 0, y, 16, 16), sourceA, GraphicsUnit.Pixel);
-							g.DrawImage(img, new Rectangle(x + 16 * 1, y, 16, 16), sourceB, GraphicsUnit.Pixel);
-							g.DrawImage(img, new Rectangle(x + 16 * 2, y, 16, 16), sourceC, GraphicsUnit.Pixel);
-							g.DrawImage(img, new Rectangle(x + 16 * 3, y, 16, 16), sourceD, GraphicsUnit.Pixel);
-						}
-					}
+					g.DrawImage(img, new Rectangle(x + (16 * 0), y, 16, 16), sourceA, GraphicsUnit.Pixel);
+					g.DrawImage(img, new Rectangle(x + (16 * 1), y, 16, 16), sourceB, GraphicsUnit.Pixel);
+					g.DrawImage(img, new Rectangle(x + (16 * 2), y, 16, 16), sourceC, GraphicsUnit.Pixel);
+					g.DrawImage(img, new Rectangle(x + (16 * 3), y, 16, 16), sourceD, GraphicsUnit.Pixel);
 				}
-
-				tiles.Save(@"C:\working\dq3\overworld\dq3-tiles.png", ImageFormat.Png);
 			}
+
+			tiles.Save(@"C:\working\dq3\overworld\dq3-tiles.png", ImageFormat.Png);
 		}
 
 		/*
@@ -137,7 +143,8 @@ namespace logsmall.DQ3 {
 		// Output is ram $7f0000 - $7f1fff ($2000 bytes)
 		// A => exitCounter
 		// X => destinationAddress
-		public static RamWordArray GetLayout() {
+		public static RamWordArray GetLayout()
+		{
 			// TODO: this can be greater simplified and won't require Ram class usage
 			//(int A, int X) {
 			// I think this is map layout (when to read a block of sea or something or when to read map data)
@@ -198,23 +205,27 @@ namespace logsmall.DQ3 {
 			// Y -- 16bit
 			var sourceAddress = 0;
 
-			while (true) {
+			while (true)
+			{
 				// decrement $19 basically, and rotate a one into the high bit of $18 (except first time in which $18 is thrown out anyways)
 				command = (ushort)(command >> 1);
 
 				// is $19 zero (happens at beginning of every cycle of 8)
 				// Gets new command byte $18 (each bit says how next bytes are interpreted)
-				if ((command & 0x0100) == 0) {
+				if ((command & 0x0100) == 0)
+				{
 					//set $19 to $ff and read $18 from source
-					command = (ushort)((command - 0x0100 & 0xff00) + layoutSource[sourceAddress]);
+					command = (ushort)(((command - 0x0100) & 0xff00) + layoutSource[sourceAddress]);
 					sourceAddress++;
 				}
 
 				// is $18 odd (bit 0 == 1)   --- command bit is 1
-				if ((command & 0x0001) != 0) {
+				if ((command & 0x0001) != 0)
+				{
 					// loads one byte directly
 
-					if ((columnIndex & 0x01) == 0) {
+					if ((columnIndex & 0x01) == 0)
+					{
 						// load low byte direct
 
 						lowValue = layoutSource[sourceAddress];
@@ -225,7 +236,9 @@ namespace logsmall.DQ3 {
 						workDestination &= 0x03ff;
 
 						columnIndex++;
-					} else {
+					}
+					else
+					{
 						// load high byte direct and write output
 
 						highValue = layoutSource[sourceAddress];
@@ -240,11 +253,14 @@ namespace logsmall.DQ3 {
 						destinationAddress += 2;
 
 						exitCounter--;
-						if (exitCounter == 0) {
+						if (exitCounter == 0)
+						{
 							return output;  // EXIT
 						}
 					}
-				} else {
+				}
+				else
+				{
 					// is $18 even (bit 0 == 0)   --- command bit is 0
 					// copy part of work into output
 					// next two source bytes are source address and number of bytes to copy
@@ -252,17 +268,19 @@ namespace logsmall.DQ3 {
 
 					// 10 bit number: low byte = ls[sa], high byte lower 2 bits = ls[sa+1] highest 2 bits
 					// source address is absolute in buffer, not relative
-					workSource = layoutSource[sourceAddress] + (layoutSource[sourceAddress + 1] << 2 & 0x0300);
+					workSource = layoutSource[sourceAddress] + ((layoutSource[sourceAddress + 1] << 2) & 0x0300);
 
 					// counter is lower 6 bits + 3
 					// smallest value is (0 + 3) copy 3 bytes
 					int counter = (layoutSource[sourceAddress + 1] & 0x3f) + 3;
 					sourceAddress += 2;
 
-					while (counter > 0) {
+					while (counter > 0)
+					{
 						counter--;
 
-						if ((columnIndex & 0x01) == 0) {
+						if ((columnIndex & 0x01) == 0)
+						{
 							// copy low byte from work buffer
 
 							lowValue = work[workSource];
@@ -274,7 +292,9 @@ namespace logsmall.DQ3 {
 							workDestination &= 0x03ff;
 
 							columnIndex++;
-						} else {
+						}
+						else
+						{
 							// copy high byte from work buffer and write to output
 
 							highValue = work[workSource];
@@ -291,7 +311,8 @@ namespace logsmall.DQ3 {
 							destinationAddress += 2;
 
 							exitCounter--;
-							if (exitCounter == 0) {
+							if (exitCounter == 0)
+							{
 								return output; // EXIT
 							}
 						}
@@ -300,7 +321,8 @@ namespace logsmall.DQ3 {
 			}
 		}
 
-		public static void TestGetLayout() {
+		public static void TestGetLayout()
+		{
 			// Yes, this is terrible code, IDGAF
 			var generated = GetLayout().Ram.ByteArray(0x7f0000);
 			var expected =
@@ -314,11 +336,13 @@ namespace logsmall.DQ3 {
 			var expectedTemp = new List<string>();
 			var outputLines = new List<string>();
 			var expectedLines = new List<string>();
-			foreach (var b in expected) {
-				outputTemp.Add(generated[i].ToString("x2"));
-				expectedTemp.Add(b.ToString("x2"));
+			foreach (var b in expected)
+			{
+				outputTemp.Add($"{generated[i]:x2}");
+				expectedTemp.Add($"{b:x2}");
 
-				if (outputTemp.Count == 16) {
+				if (outputTemp.Count == 16)
+				{
 					outputLines.Add(string.Join(" ", outputTemp));
 					expectedLines.Add(string.Join(" ", expectedTemp));
 
@@ -326,15 +350,20 @@ namespace logsmall.DQ3 {
 					expectedTemp = new List<string>();
 				}
 
-				if (generated[i] == b) {
+				if (generated[i] == b)
+				{
 					good++;
-				} else {
+				}
+				else
+				{
 					bad++;
 				}
+
 				i++;
 			}
 
-			if (outputTemp.Count > 0) {
+			if (outputTemp.Count > 0)
+			{
 				outputLines.Add(string.Join(" ", outputTemp));
 				expectedLines.Add(string.Join(" ", expectedTemp));
 			}
@@ -344,22 +373,24 @@ namespace logsmall.DQ3 {
 
 			Console.WriteLine($"Good: {good}");
 			Console.WriteLine($"Bad: {bad}");
-			Console.WriteLine($"Total: 0x{(good + bad).ToString("x4")}/0x{i.ToString("x4")}");
+			Console.WriteLine($"Total: 0x{good + bad:x4}/0x{i:x4}");
 			Console.ReadKey();
 		}
 
-		public static void TestTilemapToChunks() {
+		public static void TestTilemapToChunks()
+		{
 			var fullmap = GetTilemapData();
 			var (Chunks, Map) = Chunk.TilemapToChunks(fullmap);
 			var lines =
 				Map
-					.Batch(8)
-					.Select(x => string.Join(" ", x.Select(y => $"{(y & 0xff).ToString("x2")} {(y >> 8 & 0xff).ToString("x2")}")));
+					.Chunk(8)
+					.Select(x => string.Join(" ", x.Select(y => $"{y & 0xff:x2} {(y >> 8) & 0xff:x2}")));
 
 			File.WriteAllLines(@"c:\working\get-layout-test-from-chunks.txt", lines);
 		}
 
-		public static Ram GetLayoutAnnotated() {
+		public static Ram GetLayoutAnnotated()
+		{
 			var ram = new Ram();
 			// I think this is map layout (when to read a block of sea or something or when to read map data)
 			// see debug log: trying to find water 02
@@ -412,7 +443,8 @@ namespace logsmall.DQ3 {
 
 			// A => 8bit
 			// .Branch_c0494b -- top
-			while (true) {
+			while (true)
+			{
 				//c0494b lsr $19
 				//c0494d ror $18
 				x18x19 = (ushort)(x18x19 >> 1);
@@ -420,12 +452,13 @@ namespace logsmall.DQ3 {
 				//c0494f lda $19
 				//c04951 lsr
 				//c04952 bcs .Branch_c0495b
-				if ((x18x19 & 0x0100) == 0) {
+				if ((x18x19 & 0x0100) == 0)
+				{
 					//c04954 lda [$00],y
 					//c04956 iny
 					//c04957 sta $18
 					//c04959 dec $19
-					x18x19 = (ushort)((x18x19 - 0x0100 & 0xff00) + layoutSource[y]);
+					x18x19 = (ushort)(((x18x19 - 0x0100) & 0xff00) + layoutSource[y]);
 					y++;
 				}
 
@@ -433,12 +466,14 @@ namespace logsmall.DQ3 {
 				//c0495b lda $18
 				//c0495d lsr
 				//c0495e bcc .Branch_c049b4
-				if ((x18x19 & 0x0001) != 0) {
+				if ((x18x19 & 0x0001) != 0)
+				{
 
 					//c04960 lda $22
 					//c04962 lsr
 					//c04963 bcs .Branch_c0497e
-					if ((x22 & 0x01) == 0) {
+					if ((x22 & 0x01) == 0)
+					{
 
 						//c04965 lda [$00],y
 						//c04967 iny
@@ -501,13 +536,16 @@ namespace logsmall.DQ3 {
 					//c049a2 dec $1c
 					x1c--;
 					//c049a4 beq .Branch_c049ad
-					if (x1c != 0) {
+					if (x1c != 0)
+					{
 						//c049a6 lda #$0000
 						//c049a9 sep #$20
 						// ---------------------------------A => 8bit
 						//c049ab bra .Branch_c0494b	// back to top
 						continue;
-					} else {
+					}
+					else
+					{
 						//.Branch_c049ad
 						//c049ad %setAXYto16bit()
 						//c049af ply
@@ -532,7 +570,7 @@ namespace logsmall.DQ3 {
 				//c049bd rol
 				//c049be and #$03
 				//c049c0 sta $1b
-				x1b = (byte)(layoutSource[y] >> 6 & 0x03);
+				x1b = (byte)((layoutSource[y] >> 6) & 0x03);
 
 				//c049c2 lda [$00],y
 				//c049c4 iny
@@ -545,18 +583,21 @@ namespace logsmall.DQ3 {
 				y++;
 
 				//.Branch_c049cc
-				while (true) {
+				while (true)
+				{
 					//c049cc dey
 					counter--;
 					//c049cd bmi .Branch_c04a3a
-					if (SNES.IsNegative16(counter)) {
+					if (SNES.IsNegative16(counter))
+					{
 						break;
 					}
 
 					//c049cf lda $22
 					//c049d1 lsr
 					//c049d2 bcs .Branch_c049fc
-					if ((x22 & 0x01) == 0) {
+					if ((x22 & 0x01) == 0)
+					{
 
 						//c049d4 ldx $1a
 						//c049d6 lda $f3c6,x
@@ -566,7 +607,8 @@ namespace logsmall.DQ3 {
 						x1a++;
 
 						//c049dd bne .Branch_c049e8
-						if (x1a == 0) {
+						if (x1a == 0)
+						{
 							//c049df lda $1b
 							//c049e1 inc
 							//c049e2 and #$03
@@ -595,7 +637,9 @@ namespace logsmall.DQ3 {
 						//c049f8 inc $22
 						x22++;
 						//c049fa bra .Branch_c049cc
-					} else {
+					}
+					else
+					{
 
 						//.Branch_c049fc
 						//c049fc ldx $1a
@@ -607,7 +651,8 @@ namespace logsmall.DQ3 {
 						x1a++;
 						//c04a05 bne .Branch_c04a10
 
-						if (x1a == 0) {
+						if (x1a == 0)
+						{
 							//c04a07 lda $1b
 							//c04a09 inc
 							//c04a0a and #$03
@@ -650,7 +695,8 @@ namespace logsmall.DQ3 {
 						//c04a2f dec $1c
 						x1c--;
 						//c04a31 beq .Branch_c04a3e
-						if (x1c == 0) {
+						if (x1c == 0)
+						{
 							return ram; // EXIT
 						}
 
@@ -678,7 +724,8 @@ namespace logsmall.DQ3 {
 		}
 
 		// Super fucking slow, but works
-		public static void ProcessDQ4NesMap() {
+		public static void ProcessDQ4NesMap()
+		{
 			var inputFilename = @"C:\working\dq3\overworld\dq4-nes-map.png";
 			var tilesFilename = @"C:\working\dq3\overworld\dq4-nes-tiles.png";
 			var tilemapFilename = @"C:\working\dq3\overworld\dq4-nes-tilemap.txt";
@@ -686,20 +733,27 @@ namespace logsmall.DQ3 {
 			var tiles = new List<TileEntry>();
 			var tilesLookup = new Dictionary<string, TileEntry>();
 
-			using (var inmap = new Bitmap(inputFilename)) {
-				for (var row = 0; row < 0x100; row++) {
-					for (var column = 0; column < 0x100; column++) {
+			using (var inmap = new Bitmap(inputFilename))
+			{
+				for (var row = 0; row < 0x100; row++)
+				{
+					for (var column = 0; column < 0x100; column++)
+					{
 						var rect = new Rectangle(column * 16, row * 16, 16, 16);
-						var entry = new TileEntry {
+						var entry = new TileEntry
+						{
 							Tile = inmap.Clone(rect, PixelFormat.Format32bppArgb)
 						};
 
-						if (tilesLookup.ContainsKey(entry.Key)) {
+						if (tilesLookup.ContainsKey(entry.Key))
+						{
 							var index = tilesLookup[entry.Key].Index;
 							tilemap.Add(index);
 							entry.Tile.Dispose();
 							Console.WriteLine($"{row}, {column} : FOUND : {index}");
-						} else {
+						}
+						else
+						{
 							entry.Index = (byte)tiles.Count;
 							tiles.Add(entry);
 							tilemap.Add(entry.Index);
@@ -710,50 +764,57 @@ namespace logsmall.DQ3 {
 				}
 			}
 
-			if (tiles.Count > 256) {
+			if (tiles.Count > 256)
+			{
 				throw new Exception($"too many tiles {tiles.Count}/256");
 			}
 
-			using (var tilesImage = new Bitmap(256, 256)) {
-				using (var gTiles = Graphics.FromImage(tilesImage)) {
-					for (int i = 0; i < tiles.Count; i++) {
-						gTiles.DrawImage(tiles[i].Tile,
-							new Rectangle(i % 16 * 16, i / 16 * 16, 16, 16),
-							new Rectangle(0, 0, 16, 16),
-							GraphicsUnit.Pixel);
-					}
-
-					tilesImage.Save(tilesFilename, ImageFormat.Png);
+			using (var tilesImage = new Bitmap(256, 256))
+			{
+				using var gTiles = Graphics.FromImage(tilesImage);
+				for (int i = 0; i < tiles.Count; i++)
+				{
+					gTiles.DrawImage(tiles[i].Tile,
+						new Rectangle(i % 16 * 16, i / 16 * 16, 16, 16),
+						new Rectangle(0, 0, 16, 16),
+						GraphicsUnit.Pixel);
 				}
+
+				tilesImage.Save(tilesFilename, ImageFormat.Png);
 			}
 
-			foreach (var tile in tiles) {
+			foreach (var tile in tiles)
+			{
 				tile.Tile.Dispose();
 			}
 
 			var lines =
 				tilemap
-					.Batch(256)
-					.Select(x => string.Join(" ", x.Select(y => y.ToString("x2"))));
+					.Chunk(256)
+					.Select(x => string.Join(" ", x.Select(y => $"{y:x2}")));
 
 			File.WriteAllLines(tilemapFilename, lines);
 		}
 
-		public static string BitmapHash(Bitmap image) {
+		public static string BitmapHash(Bitmap image)
+		{
 			var bytes = BitmapToByteArray(image);
 			using var hasher = SHA1.Create();
 			var hash = string.Join("", hasher.ComputeHash(bytes).Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
 			return hash;
 		}
 
-		public static byte[] BitmapToByteArray(Bitmap image) {
-			if (image == null) {
+		public static byte[] BitmapToByteArray(Bitmap image)
+		{
+			if (image == null)
+			{
 				throw new ArgumentNullException(nameof(image));
 			}
 
 			BitmapData bmpdata = null;
 
-			try {
+			try
+			{
 				bmpdata = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
 				int size = bmpdata.Stride * image.Height;
 				byte[] bytedata = new byte[size];
@@ -762,40 +823,48 @@ namespace logsmall.DQ3 {
 				Marshal.Copy(ptr, bytedata, 0, size);
 
 				return bytedata;
-			} finally {
-				if (bmpdata != null) {
+			}
+			finally
+			{
+				if (bmpdata != null)
+				{
 					image.UnlockBits(bmpdata);
 				}
 			}
 		}
 
-		class TileEntry {
+		class TileEntry
+		{
 			public byte Index { get; set; }
 			public Bitmap Tile { get; set; }
 
-			private string _key = null;
-			public string Key {
-				get {
-					if (_key == null) {
-						_key = BitmapHash(Tile);
-					}
+			private string _key;
+			public string Key
+			{
+				get
+				{
+					_key ??= BitmapHash(Tile);
+
 					return _key;
 				}
 			}
 		}
-
-		public static void TranslateDQ4Map() {
-			var translate = new byte[] { 0x4b, 0x4b, 0x4b, 0x4b, 0x02, 0x4b, 0x4b, 0x4b, 0x4b, 0x4b, 0x4b, 0x4a, 0x4b, 0xc9, 0x64, 0x4b, 0x4b, 0x4b, 0x4b, 0x1c, 0x1d, 0x4b, 0xdd, 0x23, 0x24, 0x0d, 0x4b, 0x4b, 0xc9, 0x4b, 0x52, 0x61, 0x15, 0xff, 0x59, 0xdd, 0x9c, 0x4b, 0x0d, 0xdd, 0x0d, 0x0d, 0x4b, 0xdd, 0x4b, 0x4b, 0x4b, 0x9c, 0x4b, 0x4b, 0x4b, 0x4b, 0x4b, 0x02, 0x02, 0x4b, 0x4b, 0x9c, 0x4b, 0x4b, 0x4a, 0x4a, 0x02, 0x21, 0x4a, 0x4b, 0x4a, 0x4b, 0x4b, 0x4b, 0x4a, 0x21, 0x39, 0x4b, 0x04, 0x1a, 0x4b, 0x00, 0x00, 0x00 };
+		public static readonly byte[] translate = new byte[] { 0x4b, 0x4b, 0x4b, 0x4b, 0x02, 0x4b, 0x4b, 0x4b, 0x4b, 0x4b, 0x4b, 0x4a, 0x4b, 0xc9, 0x64, 0x4b, 0x4b, 0x4b, 0x4b, 0x1c, 0x1d, 0x4b, 0xdd, 0x23, 0x24, 0x0d, 0x4b, 0x4b, 0xc9, 0x4b, 0x52, 0x61, 0x15, 0xff, 0x59, 0xdd, 0x9c, 0x4b, 0x0d, 0xdd, 0x0d, 0x0d, 0x4b, 0xdd, 0x4b, 0x4b, 0x4b, 0x9c, 0x4b, 0x4b, 0x4b, 0x4b, 0x4b, 0x02, 0x02, 0x4b, 0x4b, 0x9c, 0x4b, 0x4b, 0x4a, 0x4a, 0x02, 0x21, 0x4a, 0x4b, 0x4a, 0x4b, 0x4b, 0x4b, 0x4a, 0x21, 0x39, 0x4b, 0x04, 0x1a, 0x4b, 0x00, 0x00, 0x00 };
+			
+		public static void TranslateDQ4Map()
+		{
 			var inFilename = @"C:\working\dq3\overworld\dq4-nes-tilemap.txt";
 			var outFilename = @"C:\working\dq3\overworld\dq4-snes-tilemap.txt";
 			var data =
 				File.ReadAllLines(inFilename)
 					.Select(x =>
 						string.Join(" ", x.Split(' ')
-							.Select(y => translate[Convert.ToByte(y, 16)].ToString("x2"))));
+							.Select(y => $"{translate[Convert.ToByte(y, 16)]:x2}")));
 			File.WriteAllLines(outFilename, data);
 		}
-		public static void DrawDQ4SnesMap() {
+
+		public static void DrawDQ4SnesMap()
+		{
 			var mapFilename = @"C:\working\dq3\overworld\dq4-snes-tilemap.txt";
 			var outFilename = @"C:\working\dq3\overworld\dq4-snes-tilemap.png";
 			var data =
@@ -810,23 +879,25 @@ namespace logsmall.DQ3 {
 						x => new Rectangle(x % 16 * 16, x / 16 * 16, 16, 16)
 					);
 
-			using (var tiles = Image.FromFile(@"C:\working\dq3\overworld\dq3-tiles.png")) {
-				using (var img = new Bitmap(4096, 4096)) {
-					using (var g = Graphics.FromImage(img)) {
+			using var tiles = Image.FromFile(@"C:\working\dq3\overworld\dq3-tiles.png");
+			using var img = new Bitmap(4096, 4096);
+			using (var g = Graphics.FromImage(img))
+			{
 
-						for (var row = 0; row < 256; row++) {
-							for (var column = 0; column < 256; column++) {
-								g.DrawImage(tiles, new Rectangle(column * 16, row * 16, 16, 16), sources[data[row][column]], GraphicsUnit.Pixel);
-							}
-						}
+				for (var row = 0; row < 256; row++)
+				{
+					for (var column = 0; column < 256; column++)
+					{
+						g.DrawImage(tiles, new Rectangle(column * 16, row * 16, 16, 16), sources[data[row][column]], GraphicsUnit.Pixel);
 					}
-
-					img.Save(outFilename, ImageFormat.Png);
 				}
 			}
+
+			img.Save(outFilename, ImageFormat.Png);
 		}
 
-		public static void EncodeLayout(byte[] target) {
+		public static void EncodeLayout(byte[] target)
+		{
 			/*
 
   # Find identical sequence in already decoded stream (return length, offset)

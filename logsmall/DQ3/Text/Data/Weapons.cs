@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class Weapons : TextList {
 		private Weapons() { }
 
-		private static Weapons _instance = null;
+		private static Weapons _instance;
 		public static Weapons Instance {
 			get {
-				if (_instance == null) {
-					_instance = new Weapons();
-				}
+				_instance ??= new Weapons();
 
 				return _instance;
 			}

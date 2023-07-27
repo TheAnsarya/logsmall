@@ -8,12 +8,10 @@ namespace logsmall.DQ3.Text.Data {
 	class Shield : TextList {
 		private Shield() { }
 
-		private static Shield _instance = null;
+		private static Shield _instance;
 		public static Shield Instance {
 			get {
-				if (_instance == null) {
-					_instance = new Shield();
-				}
+				_instance ??= new Shield();
 
 				return _instance;
 			}

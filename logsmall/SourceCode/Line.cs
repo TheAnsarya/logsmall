@@ -1,5 +1,4 @@
 using logsmall.Common;
-using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,7 +17,10 @@ namespace logsmall.SourceCode {
 		public string Bytecode { get => SNES.OpToHex(this.Address, this.Op, this.Parameters); }
 		public int ByteLength { get => Bytecode.Length / 2; }
 		public override string ToString() => $"{Address} {Op} {Parameters}".Trim();
-		public string ToLongString() => $"{Address} {string.Join(" ", Bytecode.Split(2).Select(x => $"${x}")).PadRight(15)} {Op} {Parameters}".Trim();
+		public string ToLongString() {
+			string v = string.Join(" ", Bytecode.Split(2).Select(x => $"${x}"));
+			return $"{Address} {v,-15} {Op} {Parameters}".Trim();
+		}
 
 		// Simplify from a more complex type
 		public virtual Line ToLine() {
@@ -28,9 +30,9 @@ namespace logsmall.SourceCode {
 					: new Line { Address = this.Address, Op = this.Op, Parameters = this.Parameters };
 		}
 
-		public static IOrderedEnumerable<Line> ToLines(IEnumerable<Line> lines) {
-			return
-				lines
+		public static IOrderedEnumerable<Line> ToLines(IEnumerable<Line> lines)
+		{
+			return lines
 					.Select(x => x.ToLine())
 					.DistinctBy(x => x.Address)
 					.OrderBy(x => x.Address);

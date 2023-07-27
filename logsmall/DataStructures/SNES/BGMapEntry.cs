@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace logsmall.DataStructures.SNES {
 			get => 0x03ff & Data;
 			set {
 				if (value < 0 || value > 0x3ff) {
-					throw new ArgumentOutOfRangeException($"Value must be between 0 and 0x3ff: {value}, {value.ToString("x4")}");
+					throw new ArgumentOutOfRangeException($"Value must be between 0 and 0x3ff: {value}, {value.ToString("x4", CultureInfo.InvariantCulture)}");
 				}
 
 				Data = (ushort)((Data & 0xfc) + value);
@@ -31,7 +32,7 @@ namespace logsmall.DataStructures.SNES {
 			get => (0x1c00 & Data) >> 10;
 			set {
 				if (value < 0 || value > 7) {
-					throw new ArgumentOutOfRangeException($"Value must be between 0 and 7: {value}, {value.ToString("x4")}");
+					throw new ArgumentOutOfRangeException($"Value must be between 0 and 7: {value}, {value.ToString("x4", CultureInfo.InvariantCulture)}");
 				}
 
 				Data = (ushort)((Data & 0xe3ff) + (value << 10));
