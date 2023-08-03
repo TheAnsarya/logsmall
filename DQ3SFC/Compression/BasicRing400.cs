@@ -1,7 +1,6 @@
 using DQ3SFC.DataStructures;
 using DQ3SFC.Extensions;
 using DQ3SFC.Sys;
-using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -156,7 +155,7 @@ namespace DQ3SFC.Compression {
 		private static byte[] CommandsToBytes(List<Command> commands) {
 			commands.Reverse();
 			var output = new List<byte>();
-			foreach (var batch in commands.Batch(8)) {
+			foreach (var batch in commands.Chunk(8)) {
 				byte command = 0;
 				var batchData = new List<byte>();
 				var count = 0;
@@ -198,11 +197,9 @@ namespace DQ3SFC.Compression {
 				count++;
 			}
 
-			if (count < MinCopySize) {
-				return null;
-			}
-
-			return new Command {
+			return count < MinCopySize
+				? null
+				: new Command {
 				Simple = false,
 				CopySize = count,
 				Address = (sourceAddress - count + 1 + StartWriteAddress) % RingSize

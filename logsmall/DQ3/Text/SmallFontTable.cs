@@ -239,11 +239,7 @@ namespace logsmall.DQ3.Text {
 				return Table[source].ToString();
 			}
 
-			if (returnNull) {
-				return null;
-			}
-
-			return $"{{{source:x2}}}";
+			return returnNull ? null : $"{{{source:x2}}}";
 		}
 
 		public static bool TryEncode(string text, out byte[] data) {
@@ -271,9 +267,7 @@ namespace logsmall.DQ3.Text {
 		}
 
 		public static bool TryDecode(byte[] data, out string text) {
-			if (data == null) {
-				throw new ArgumentNullException($"{nameof(data)} cannot be null");
-			}
+			ArgumentNullException.ThrowIfNull(data, nameof(data));
 
 			var error = false;
 			var output = new StringBuilder();

@@ -198,11 +198,9 @@ namespace logsmall.Compression {
 				count++;
 			}
 
-			if (count < MinCopySize) {
-				return null;
-			}
-
-			return new Command {
+			return count < MinCopySize
+				? null
+				: new Command {
 				Simple = false,
 				CopySize = count,
 				Address = (sourceAddress - count + 1 + StartWriteAddress) % RingSize

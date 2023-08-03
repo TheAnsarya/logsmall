@@ -538,7 +538,7 @@ namespace logsmall {
 			var moves =
 				lines
 					.Where(x => x.Op == "mvn" || x.Op == "mvp")
-					.Select(x => $"{GetMoveAddresses(x)} {x.Op}");
+					.Select(x => $"{getMoveAddresses(x)} {x.Op}");
 			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves.txt"));
 			moves = null;
 
@@ -546,7 +546,7 @@ namespace logsmall {
 			moves =
 				lines
 					.Where(x => x.Op == "mvn" || x.Op == "mvp")
-					.Select(x => $"{GetMoveAddresses(x).Split(' ')[0]} {x.Op}");
+					.Select(x => $"{getMoveAddresses(x).Split(' ')[0]} {x.Op}");
 			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves-source.txt"));
 			moves = null;
 
@@ -554,7 +554,7 @@ namespace logsmall {
 			moves =
 				lines
 					.Where(x => x.Op == "mvn" || x.Op == "mvp")
-					.Select(x => $"{GetMoveAddresses(x).Split(' ')[2]} {x.Op}");
+					.Select(x => $"{getMoveAddresses(x).Split(' ')[2]} {x.Op}");
 			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves-destination.txt"));
 			moves = null;
 
@@ -562,11 +562,11 @@ namespace logsmall {
 			moves =
 				lines
 					.Where(x => x.Op == "mvn" || x.Op == "mvp")
-					.Select(x => $"{GetMoveAddresses(x).Split(' ')[0]} {x.Op}")
+					.Select(x => $"{getMoveAddresses(x).Split(' ')[0]} {x.Op}")
 					.Concat(
 						lines
 							.Where(x => x.Op == "mvn" || x.Op == "mvp")
-							.Select(x => $"{GetMoveAddresses(x).Split(' ')[2]} {x.Op}")
+							.Select(x => $"{getMoveAddresses(x).Split(' ')[2]} {x.Op}")
 						);
 			GroupCountAndWriteFile(moves, Path.Combine(folder, "moves-both.txt"));
 			moves = null;
@@ -612,13 +612,15 @@ namespace logsmall {
 			File.WriteAllLines(filename, output);
 		}
 
-		static string GetMoveAddresses(MesenLine line) {
+		static string getMoveAddresses(MesenLine line) {
 			Match match;
 			if (AddressingMode.BlockMove.IsMatch(line.Parameters)) {
 				match = AddressingMode.BlockMove.Match(line.Parameters);
 			} else if (AddressingMode.BlockMoveArrow.IsMatch(line.Parameters)) {
 				match = AddressingMode.BlockMoveArrow.Match(line.Parameters);
-			} else { throw new Exception("Unknown addressing Mode"); }
+			} else {
+				throw new Exception("Unknown addressing Mode");
+			}
 
 			var source = $"${match.Groups[1].Value}{line.State.X}";
 			var dest = $"${match.Groups[2].Value}{line.State.Y}";
@@ -1100,10 +1102,10 @@ namespace logsmall {
 		//}
 
 		static void FindByteDifferenceDQ4HP() {
-			var one = File.ReadAllBytes("C:\\working\\dq3\\moving\\hp ram 1.dmp");
-			var two = File.ReadAllBytes("C:\\working\\dq3\\moving\\hp ram 2.dmp");
-			byte original = 38;
-			byte changed = 37;
+			var one = File.ReadAllBytes("C:\\working\\dq3\\moving\\hp ram 5.dmp");
+			var two = File.ReadAllBytes("C:\\working\\dq3\\moving\\hp ram 6.dmp");
+			byte original = 35;
+			byte changed = 27;
 
 			if (one.Length != two.Length) {
 				Console.WriteLine("Work RAM size mismatch!");
