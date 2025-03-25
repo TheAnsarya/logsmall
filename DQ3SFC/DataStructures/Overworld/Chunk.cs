@@ -31,9 +31,7 @@ namespace DQ3SFC.Overworld {
 
 		// fullmap is [y, x];
 		public static (List<Chunk> Chunks, List<int> Map) TilemapToChunks(byte[,] fullmap) {
-			if (fullmap == null) {
-				throw new ArgumentNullException(nameof(fullmap));
-			}
+			ArgumentNullException.ThrowIfNull(fullmap, nameof(fullmap));
 
 			if (((fullmap.GetLength(0) % 4) != 0) || ((fullmap.GetLength(1) % 4) != 0)) {
 				throw new ArgumentException("Array dimensions wrong, must be multiples of 4");

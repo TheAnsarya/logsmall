@@ -25,45 +25,43 @@ namespace DQ3SFC.Compression {
 			return Decompress(new ByteArrayStream(source), outputSize);
 		}
 
-		public static Memory<byte> Decompress(ByteArrayStream source, int outputSize) {
-			if (source == null) {
-				throw new ArgumentNullException(nameof(source));
-			}
+        public static Memory<byte> Decompress(ByteArrayStream source, int outputSize) {
+            ArgumentNullException.ThrowIfNull(source, nameof(source));
 
-			var output = new ByteArrayStream(outputSize);
-			var work = new ByteRingBuffer(RingSize, StartWriteAddress);
-			Queue<bool> commands = source.Byte().ToBooleanQueue();
+            var output = new ByteArrayStream(outputSize);
+            var work = new ByteRingBuffer(RingSize, StartWriteAddress);
+            Queue<bool> commands = source.Byte().ToBooleanQueue();
 
-			while (output.HasSpace) {
-				if (commands.Count == 0) {
-					commands = source.Byte().ToBooleanQueue();
-				}
+            while (output.HasSpace) {
+                if (commands.Count == 0) {
+                    commands = source.Byte().ToBooleanQueue();
+                }
 
-				if (commands.Dequeue()) {
-					var b = source.Byte();
+                if (commands.Dequeue()) {
+                    var b = source.Byte();
 
-					work.Byte(b);
-					output.Byte(b);
-				} else {
-					var d1 = source.Byte();
-					var d2 = source.Byte();
+                    work.Byte(b);
+                    output.Byte(b);
+                } else {
+                    var d1 = source.Byte();
+                    var d2 = source.Byte();
 
-					var address = d1 + ((d2 << 2) & 0x0300);
-					var counter = (d2 & 0x3f) + 3;
-					var copySource = work.Branch(address);
+                    var address = d1 + ((d2 << 2) & 0x0300);
+                    var counter = (d2 & 0x3f) + 3;
+                    var copySource = work.Branch(address);
 
-					while (output.HasSpace && (counter != 0)) {
-						var copy = copySource.Byte();
-						counter--;
+                    while (output.HasSpace && (counter != 0)) {
+                        var copy = copySource.Byte();
+                        counter--;
 
-						work.Byte(copy);
-						output.Byte(copy);
-					}
-				}
-			}
+                        work.Byte(copy);
+                        output.Byte(copy);
+                    }
+                }
+            }
 
-			return output.Buffer;
-		}
+            return output.Buffer;
+        }
 
 		public static byte[] Compress(Memory<byte> target) {
 			var commands = new List<Command>();

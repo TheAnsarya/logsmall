@@ -24,9 +24,7 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] Decompress(ByteArrayStream source, int outputSize) {
-			if (source == null) {
-				throw new ArgumentNullException(nameof(source));
-			}
+			ArgumentNullException.ThrowIfNull(source, nameof(source));
 
 			var output = new ByteArrayStream(outputSize);
 			var work = new ByteRingBuffer(RingSize, StartWriteAddress);
@@ -64,9 +62,7 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] Compress(byte[] target) {
-			if (target == null) {
-				throw new ArgumentNullException(nameof(target));
-			}
+			ArgumentNullException.ThrowIfNull(target, nameof(target));
 
 			var commands = new List<Command>();
 			var address = target.Length - 1;
@@ -98,9 +94,7 @@ namespace logsmall.Compression {
 		}
 
 		public static byte[] CompressMax(byte[] target) {
-			if (target == null) {
-				throw new ArgumentNullException(nameof(target));
-			}
+			ArgumentNullException.ThrowIfNull(target, nameof(target));
 
 			var data = new ReverseWindowReader(target, 0);
 			var states = new State[target.Length];

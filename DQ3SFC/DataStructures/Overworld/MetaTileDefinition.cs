@@ -14,9 +14,7 @@ namespace DQ3SFC.Overworld {
 		public BGMapEntry BottomRight { get; set; }
 
 		public MetaTileDefinition(ByteArrayStream source) {
-			if (source == null) {
-				throw new ArgumentNullException(nameof(source));
-			}
+			ArgumentNullException.ThrowIfNull(source, nameof(source));
 
 			TopLeft = new BGMapEntry(source.Word());
 			TopRight = new BGMapEntry(source.Word());

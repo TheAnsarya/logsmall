@@ -77,9 +77,7 @@ namespace logsmall.SourceCode {
 						+ (Carry ? "N" : "n");
 				}
 				set {
-					if (value == null) {
-						throw new ArgumentNullException(nameof(value));
-					}
+					ArgumentNullException.ThrowIfNull(value, nameof(value));
 
 					if ((value.Length == 8) && IsFlagsString.IsMatch(value)) {
 						Negative = value[0] == 'N';
