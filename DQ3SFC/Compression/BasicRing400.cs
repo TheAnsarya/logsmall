@@ -69,7 +69,7 @@ namespace DQ3SFC.Compression {
 			var data = new ReverseWindowReader(target, address);
 
 			while (address >= 0) {
-				Command cmd = null;
+				Command? cmd = null;
 				var offset = 1;
 				while ((offset <= RingSize) && (cmd == null || cmd.CopySize < MaxCopySize)) {
 					var testCommand = TestCandidate(data, address, address - offset);
@@ -132,12 +132,12 @@ namespace DQ3SFC.Compression {
 		}
 
 		private static List<State> GetStates(ReverseWindowReader data, int address) {
-			var states = new List<State>{
-				new State {
-					Command = new Command { Simple = true, Value = data[address], CopySize = 1 },
+			List<State> states = [
+				new() {
+					Command = new() { Simple = true, Value = data[address], CopySize = 1 },
 					Address = address
 				}
-			};
+			];
 
 			for (int offset = 1; offset <= RingSize; offset++) {
 				var cmd = TestCandidate(data, address, address - offset);
@@ -174,10 +174,10 @@ namespace DQ3SFC.Compression {
 				output.AddRange(batchData);
 			}
 
-			return output.ToArray();
+			return [.. output];
 		}
 
-		private static Command TestCandidate(ReverseWindowReader data, int targetAddress, int sourceAddress) {
+		private static Command? TestCandidate(ReverseWindowReader data, int targetAddress, int sourceAddress) {
 			if (data[targetAddress] != data[sourceAddress]) {
 				return null;
 			}
@@ -248,7 +248,7 @@ namespace DQ3SFC.Compression {
 		}
 
 		private class State {
-			public Command Command { get; set; }
+			public required Command Command { get; set; }
 
 			public int Address { get; set; }
 

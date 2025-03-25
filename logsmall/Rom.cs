@@ -19,8 +19,8 @@ namespace logsmall {
 				if (_rom == null) {
 					var size = (int)new FileInfo(filename).Length;
 					_rom = new byte[size];
-					using var romstream = File.OpenRead(filename);
-					romstream.Read(_rom, 0, size);
+					using var romStream = File.OpenRead(filename);
+					romStream.ReadExactly(_rom, 0, size);
 				}
 
 				return _rom;

@@ -21,7 +21,7 @@ namespace logsmall.Common {
 					var size = (int)new FileInfo(Filename).Length;
 					_rom = new byte[size];
 					using var romStream = File.OpenRead(Filename);
-					romStream.Read(_rom, 0, size);
+					romStream.ReadExactly(_rom, 0, size);
 				}
 
 				return _rom;
