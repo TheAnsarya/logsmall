@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DQ3SFC.DataStructures {
+namespace DQ3Lib.Streams {
 	public class ByteArrayStream {
-		public Memory<byte> Buffer { get; set; }
-
+		public byte[] Buffer { get; set; }
 		public virtual int Address { get; set; }
 
 		public int Size { get => Buffer.Length; }
@@ -23,59 +22,59 @@ namespace DQ3SFC.DataStructures {
 			Address = startAddress;
 		}
 
-		public ByteArrayStream(Memory<byte> buffer) : this(buffer, 0) { }
+		public ByteArrayStream(byte[] buffer) : this(buffer, 0) { }
 
-		public ByteArrayStream(Memory<byte> buffer, int startAddress) {
+		public ByteArrayStream(byte[] buffer, int startAddress) {
 			Buffer = buffer;
 			Address = startAddress;
 		}
 
 		public byte Byte() {
-			return Buffer.Span[Address++];
+			return Buffer[Address++];
 		}
 
 		public void Byte(byte value) {
-			Buffer.Span[Address++] = value;
+			Buffer[Address++] = value;
 		}
 
 		public byte ByteAt(int offset) {
-			return Buffer.Span[Address + offset];
+			return Buffer[Address + offset];
 		}
 
 		public ushort Word() {
-			byte a = Buffer.Span[Address++];
-			byte b = Buffer.Span[Address++];
+			byte a = Buffer[Address++];
+			byte b = Buffer[Address++];
 			return (ushort)((b << 8) + a);
 		}
 
 		public void Word(ushort value) {
-			Buffer.Span[Address++] = (byte)(value & 0x00ff);
-			Buffer.Span[Address++] = (byte)((value & 0xff00) >> 8);
+			Buffer[Address++] = (byte)(value & 0x00ff);
+			Buffer[Address++] = (byte)((value & 0xff00) >> 8);
 		}
 
 		public ushort WordAt(int offset) {
-			byte a = Buffer.Span[Address + offset];
-			byte b = Buffer.Span[Address + offset + 1];
+			byte a = Buffer[Address + offset];
+			byte b = Buffer[Address + offset + 1];
 			return (ushort)((b << 8) + a);
 		}
 
 		public int Long() {
-			byte a = Buffer.Span[Address++];
-			byte b = Buffer.Span[Address++];
-			byte c = Buffer.Span[Address++];
+			byte a = Buffer[Address++];
+			byte b = Buffer[Address++];
+			byte c = Buffer[Address++];
 			return (c << 16) + (b << 8) + a;
 		}
 
 		public void Long(int value) {
-			Buffer.Span[Address++] = (byte)(value & 0x0000ff);
-			Buffer.Span[Address++] = (byte)((value & 0x00ff00) >> 8);
-			Buffer.Span[Address++] = (byte)((value & 0xff0000) >> 16);
+			Buffer[Address++] = (byte)(value & 0x0000ff);
+			Buffer[Address++] = (byte)((value & 0x00ff00) >> 8);
+			Buffer[Address++] = (byte)((value & 0xff0000) >> 16);
 		}
 
 		public int LongAt(int offset) {
-			byte a = Buffer.Span[Address + offset];
-			byte b = Buffer.Span[Address + offset + 1];
-			byte c = Buffer.Span[Address + offset + 2];
+			byte a = Buffer[Address + offset];
+			byte b = Buffer[Address + offset + 1];
+			byte c = Buffer[Address + offset + 2];
 			return (c << 16) + (b << 8) + a;
 		}
 
@@ -93,12 +92,11 @@ namespace DQ3SFC.DataStructures {
 			var found = new List<ByteArrayStream>();
 
 			var lastIndex = Buffer.Length - searchTerm.Length;
-			var span = Buffer.Span;
 			for (int i = 0; i <= lastIndex; i++) {
 				var matches = true;
 
 				for (int j = 0; j < searchTerm.Length; j++) {
-					if (span[i + j] != searchTerm[j]) {
+					if (Buffer[i + j] != searchTerm[j]) {
 						matches = false;
 						break;
 					}
@@ -114,20 +112,19 @@ namespace DQ3SFC.DataStructures {
 
 		// clamps to [0, Buffer.Length]
 		// TODO: test & verify
-		public (bool found, int address) FindLastInWindow(Memory<byte> searchTerm, int start, int end) {
-			//			ArgumentNullException.ThrowIfNull(searchTerm, nameof(searchTerm));
+		public (bool found, int address) FindLastInWindow(byte[] searchTerm, int start, int end) {
+			ArgumentNullException.ThrowIfNull(searchTerm, nameof(searchTerm));
 
 			// TODO: check for off by one
 			start = Math.Max(0, start);
 			end = Math.Min(Buffer.Length, end);
 
 			var lastIndex = end - searchTerm.Length;
-			var span = Buffer.Span;
 			for (int i = lastIndex; i >= start; i--) {
 				var matches = true;
 
 				for (int j = 0; j < searchTerm.Length; j++) {
-					if (span[i + j] != searchTerm.Span[j]) {
+					if (Buffer[i + j] != searchTerm[j]) {
 						matches = false;
 						break;
 					}
@@ -141,47 +138,42 @@ namespace DQ3SFC.DataStructures {
 			return (false, -1);
 		}
 
-		public Memory<byte> GetBytes(int length) => GetBytes(length, Address);
+		public byte[] GetBytes(int length) => GetBytes(length, Address);
 
-		public Memory<byte> GetBytes(int length, int address) {
-			if ((address + length) > Buffer.Length) {
+		public byte[] GetBytes(int length, int address) {
+			if (address + length > Buffer.Length) {
 				length = Buffer.Length - address;
 			}
 
-			//var output = new byte[length];
-			//Array.Copy(Buffer, address, output, 0, length);
-
-			var output = Buffer.Slice(address, length);
+			var output = new byte[length];
+			Array.Copy(Buffer, address, output, 0, length);
 
 			return output;
 		}
 
-		public Memory<byte> GetBytesAt(int length, int offset) {
+		public byte[] GetBytesAt(int length, int offset) {
 			var from = Address + offset;
-			if ((from + length) > Buffer.Length) {
+			if (from + length > Buffer.Length) {
 				length = Buffer.Length - from;
 			}
 
-			//var output = new byte[length];
-			//Array.Copy(Buffer, from, output, 0, length);
-
-			var output = Buffer.Slice(from, length);
+			var output = new byte[length];
+			Array.Copy(Buffer, from, output, 0, length);
 
 			return output;
 		}
 
-		public Memory<byte> ReadUntil(byte endValue, int? maxLength = null) {
+		public byte[] ReadUntil(byte endValue, int? maxLength = null) {
 			var startAddress = Address;
-			var length = 0;
+			var data = new List<byte>();
 			byte value = Byte();
 
-			while (value != endValue && HasSpace && (maxLength == null || (length < maxLength))) {
-				length++;
+			while (value != endValue && HasSpace && (maxLength == null || data.Count < maxLength)) {
+				data.Add(value);
 				value = Byte();
 			}
 
-			var output = Buffer.Slice(startAddress, length);
-			return output;
+			return data.ToArray();
 		}
 
 		// TODO: Add error checking

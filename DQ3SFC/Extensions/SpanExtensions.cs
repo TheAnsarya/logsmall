@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace DQ3SFC.Extensions {
 	// Extension methods for Span<T> and Memory<T>
 	static class SpanExtensions {
-
 		// offset is in bytes
 		// throws out of bound exceptions
 		public static int Byte(this Span<byte> span, int offset) => span[offset];
