@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DQ3Lib.Text {
-	internal class DialogTableFile {
+	internal class DialogTableFile : Dictionary<int, TableFileEntry> {
 		// Examples of lines in the table file. Last line is blank:
 		// 0201=愛
 		// 00AB=[CODE AB]
@@ -14,26 +14,26 @@ namespace DQ3Lib.Text {
 
 		public string? OriginalFileName { get; set; }
 
-		public Dictionary<int, TableFileEntry> Entries { get; init; }
-
-		public DialogTableFile() {
-			Entries = [];
-		}
+		public DialogTableFile() { }
 
 		public DialogTableFile(string fileName) {
 			var lines = File.ReadAllLines(fileName);
-			Entries = DictionaryFromLines(lines);
+			DictionaryFromLines(this, lines);
 		}
 
 		public DialogTableFile(string[] lines) {
-			Entries = DictionaryFromLines(lines);
+			DictionaryFromLines(this, lines);
 		}
 
-		private static Dictionary<int, TableFileEntry> DictionaryFromLines(string[] lines) {
-			return lines
-				.Where(x => !string.IsNullOrWhiteSpace(x))
-				.Select(x => new TableFileEntry(int.Parse(x[..4], System.Globalization.NumberStyles.HexNumber), x[..4], x[5..]))
-				.ToDictionary(x => x.Key, y => y);
+		private static void DictionaryFromLines(DialogTableFile dictionary, string[] lines) {
+			var entries =
+				lines
+					.Where(x => !string.IsNullOrWhiteSpace(x))
+					.Select(x => new TableFileEntry(int.Parse(x[..4], System.Globalization.NumberStyles.HexNumber), x[..4], x[5..]));
+
+			foreach (var entry in entries) {
+				dictionary[entry.Key] = entry;
+			}
 		}
 	}
 }
