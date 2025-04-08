@@ -32,11 +32,7 @@ namespace DQ3Lib.Text {
 		private static Dictionary<int, TableFileEntry> DictionaryFromLines(string[] lines) {
 			return lines
 				.Where(x => !string.IsNullOrWhiteSpace(x))
-				.Select(x => new TableFileEntry {
-					Key = int.Parse(x[..4], System.Globalization.NumberStyles.HexNumber),
-					KeyString = x[..4],
-					Value = x[5..]
-				})
+				.Select(x => new TableFileEntry(int.Parse(x[..4], System.Globalization.NumberStyles.HexNumber), x[..4], x[5..]))
 				.ToDictionary(x => x.Key, y => y);
 		}
 	}
