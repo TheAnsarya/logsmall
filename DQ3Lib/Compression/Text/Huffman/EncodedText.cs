@@ -9,7 +9,7 @@ namespace DQ3Lib.Compression.Text.Huffman;
 internal class EncodedText(string Original, string Encoded, EncodingTable Encoding) {
 	public string Original { get; } = Original;
 
-	public string Encoded { get; } = Encoded;
+	public byte[] Encoded { get; } = Encoded;
 
 	public EncodingTable Encoding { get; } = Encoding;
 
