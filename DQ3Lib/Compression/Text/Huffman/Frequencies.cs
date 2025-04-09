@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DQ3Lib.Compression.Text.Huffman;
 
-internal class Frequencies : Dictionary<char, int> {
+internal class Frequencies : ReadOnlyDictionary<char, int> {
+	public Frequencies(Dictionary<char, int> dictionary) : base(dictionary) { }
+
 	public static Frequencies CalculateFrequencies(string text) {
 		ArgumentNullException.ThrowIfNull(text, nameof(text));
 
-		var frequencies = new Frequencies();
+		Dictionary<char, int> frequencies = [];
 
 		foreach (var character in text) {
 			if (!frequencies.ContainsKey(character)) {
@@ -20,6 +23,6 @@ internal class Frequencies : Dictionary<char, int> {
 			frequencies[character]++;
 		}
 
-		return frequencies;
+		return new Frequencies(frequencies);
 	}
 }
