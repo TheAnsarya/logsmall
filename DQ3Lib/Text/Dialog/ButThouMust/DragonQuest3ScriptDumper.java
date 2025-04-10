@@ -1,11 +1,3 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class DragonQuest3ScriptDumper {
 
@@ -24,42 +16,7 @@ public class DragonQuest3ScriptDumper {
     private static final int NUM_ENCODINGS = 2000;
     private static final String NO_TABLE_MATCH = "N/A";
 
-    private static void readTableFile(String tableFilename) throws IOException {
-        // assume file is sorted in increasing order by character code value
-        BufferedReader tableFileStream = new BufferedReader(new FileReader(tableFilename));
-        tableHexValues = new ArrayList<>(NUM_ENCODINGS);
-        encodings = new ArrayList<>(NUM_ENCODINGS);
-
-        // basic format of a table file line is "[hex value]=[character]\n"
-        String line;
-        final String EQUALS = "=";
-        while ((line = tableFileStream.readLine()) != null) {
-            if (line.equals(""))
-                continue;
-
-            String split[] = line.split(EQUALS);
-
-            // ignore special combination table entries that keep the script
-            // simpler, like for ." or ?! or Mr. or Mrs.
-            if (split[0].length() > 4)
-                continue;
-
-            int value = Integer.parseInt(split[0], 16);
-            tableHexValues.add(value);
-
-            // possible for a table entry to be for the equal sign "="
-            if (split.length == 1) {
-                encodings.add(EQUALS);
-            }
-            else {
-                encodings.add(split[1]);
-            }
-        }
-
-        System.out.println("Finished parsing table file.");
-        tableFileStream.close();
-        return;
-    }
+    //// DQ3Lib.Text.TableFile.Table 
 
     private static String getEncoding(int data) {
         data &= 0x1FFF;
