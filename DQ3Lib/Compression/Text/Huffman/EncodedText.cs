@@ -6,22 +6,10 @@ using System.Threading.Tasks;
 
 namespace DQ3Lib.Compression.Text.Huffman;
 
-internal class EncodedText(string Original, string Encoded, EncodingTable Encoding) {
+internal class EncodedText(string Original, byte[] Encoded, EncodingTable Encoding) {
 	public string Original { get; } = Original;
 
 	public byte[] Encoded { get; } = Encoded;
 
 	public EncodingTable Encoding { get; } = Encoding;
-
-	public int[] AsData {
-		get {
-			int[] data = new int[Encoded.Length / 8 + 1];
-
-			for (int i = 0; i < Encoded.Length; i += 8) {
-				data[i / 8] = Convert.ToInt32(Encoded.Substring(i, Math.Min(8, Encoded.Length - i)), 2);
-			}
-
-			return data;
-		}
-	}
 };
