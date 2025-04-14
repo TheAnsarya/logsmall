@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace DQ3Lib.Streams {
 	public class ByteArrayStream {
 		public byte[] Buffer { get; set; }
+
 		public virtual int Address { get; set; }
 
 		public int Size { get => Buffer.Length; }
@@ -164,7 +165,7 @@ namespace DQ3Lib.Streams {
 		}
 
 		public byte[] ReadUntil(byte endValue, int? maxLength = null) {
-			var startAddress = Address;
+			//var startAddress = Address;
 			var data = new List<byte>();
 			byte value = Byte();
 
@@ -173,7 +174,7 @@ namespace DQ3Lib.Streams {
 				value = Byte();
 			}
 
-			return data.ToArray();
+			return [.. data];
 		}
 
 		// TODO: Add error checking
