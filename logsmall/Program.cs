@@ -1,5 +1,4 @@
 using logsmall.Common;
-using logsmall.Compression;
 using logsmall.DataStructures;
 using logsmall.DQ3.Text;
 using logsmall.DQ3.Text.Data;
@@ -13,7 +12,6 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace logsmall {
 	class Program {

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall.Compression {
 	// Not sure what else to call this
@@ -216,9 +214,9 @@ namespace logsmall.Compression {
 				map++;
 			}
 
-				Console.WriteLine();
-				Console.WriteLine($"pointers at: ${pointersAddress.ToString("x6", CultureInfo.InvariantCulture)} - ${rom.AddressToSNES(pointerStream.Address - 4):x6}");
-				Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine($"pointers at: ${pointersAddress.ToString("x6", CultureInfo.InvariantCulture)} - ${rom.AddressToSNES(pointerStream.Address - 4):x6}");
+			Console.WriteLine();
 			Console.ReadKey();
 		}
 

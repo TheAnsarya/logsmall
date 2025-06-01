@@ -4,11 +4,10 @@ using logsmall.FFMQ.Text.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall.FFMQ {
 	class LongText {
+		public const ushort EndOfAction = 0xffff;
 
 		public static ByteArrayStream DTELookup() => FFMQ.Game.Rom.GetStream(0x03ba86);
 
@@ -77,53 +76,40 @@ namespace logsmall.FFMQ {
 
 			return text;
 		}
+
 		public static string AttemptTranslate(ByteArrayStream stream, int depthLeft = 2) {
 			var code = stream.Byte();
 
-			if (code >= 0x80) {
-				return BasicTable.Lookup(code);
+			return code switch {
+				0x01 => $"{{windowBreak}}",
+				0x05 => $"{{05:{stream.Byte():x2}}}",
+				0x1b => $"{{swapSpeaker:{stream.Byte():x2}}}",
+				0x1d => $"{{character:{CharacterNames.GetString(stream.Byte())}}}",
+				0x1e => $"{{item:{ItemNames.GetString(stream.Byte())}}}",
+				0x1f => $"{{location:{LocationNames.GetString(stream.Byte())}}}",
+				< 0x30 => $"{{{code:x2}}}",
+				0x30 => $"{{waitForButtonPress}}",
+				0x35 => $"{{playerName}}",
+				0x36 => $"{{runAction:{AttemptTranslateAction(stream)}}}",
+				>= 0x80 => BasicTable.Lookup(code),
+				_ => (depthLeft == 0) ? $"{{{code:x2}}}" : AttemptTranslate(code, depthLeft - 1)
+			};
+		}
+
+		public static string AttemptTranslateAction(ByteArrayStream stream) {
+			var action = stream.Word();
+
+			while (action != EndOfAction) {
+				return $"{{action:{TranslateAction(action)}}}";
 			}
 
-			if (code < 0x30) {
-				if (code == 0x01) {
-					return $"{{windowbreak}}";
-				}
+			return "{{endOfAction}}";
+		}
 
-				if (code == 0x05) {
-					return $"{{05:{stream.Byte():x2}}}";
-				}
-
-				if (code == 0x1b) {
-					return $"{{swapspeaker:{stream.Byte():x2}}}";
-				}
-
-				if (code == 0x1d) {
-					return $"{{character:{CharacterNames.GetString(stream.Byte())}}}";
-				}
-
-				if (code == 0x1e) {
-					return $"{{item:{ItemNames.GetString(stream.Byte())}}}";
-				}
-
-				if (code == 0x1f) {
-					return $"{{location:{LocationNames.GetString(stream.Byte())}}}";
-				}
-				//if (code == 0x2f) {
-				//	return $"{{if:{stream.Byte().ToString("x2")} {stream.Byte().ToString("x2")} {stream.Byte().ToString("x2")}}}";
-				//}
-
-
-				return $"{{{code:x2}}}";
-			}
-
-			if (depthLeft == 0) {
-				return $"{{{code:x2}}}";
-			}
-
-			//var text = string.Join("", LookupBytes(code).Select(x => AttemptTranslate(x, depthLeft - 1)));
-			var text = AttemptTranslateLine(LookupBytes(code), depthLeft - 1);
-
-			return text;
+		public static string TranslateAction(ushort action) {
+			return action switch {
+				_ => $"{action:x4}"
+			};
 		}
 
 		public static string AttemptTranslateLine(ByteArrayStream stream) {

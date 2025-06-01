@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall.Compression {
 	public static class BasicRing400 {
@@ -195,10 +193,10 @@ namespace logsmall.Compression {
 			return count < MinCopySize
 				? null
 				: new Command {
-				Simple = false,
-				CopySize = count,
-				Address = (sourceAddress - count + 1 + StartWriteAddress) % RingSize
-			};
+					Simple = false,
+					CopySize = count,
+					Address = (sourceAddress - count + 1 + StartWriteAddress) % RingSize
+				};
 		}
 
 		private class Command {

@@ -1,10 +1,5 @@
 using logsmall.DataStructures;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall {
 	// TODO: Depreciate and remove
@@ -44,7 +39,7 @@ namespace logsmall {
 
 			return segment;
 		}
-		
+
 		public static byte Byte(int address) {
 			var addy = (int)(address - AddressOffset);
 			return ROM[addy];

@@ -1,9 +1,5 @@
 using logsmall.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall.DQ3.OldStuff {
 	class OverWorldMap {
@@ -538,12 +534,12 @@ namespace logsmall.DQ3.OldStuff {
 
 
 
-//		c77e62 %setAXYto16bit()
-//c77e64 pea $7e7e
-//c77e67 plb
-//c77e68 plb
-//c77e69 ldy $daa5
-//c77e6c jmp $7e93
+		//		c77e62 %setAXYto16bit()
+		//c77e64 pea $7e7e
+		//c77e67 plb
+		//c77e68 plb
+		//c77e69 ldy $daa5
+		//c77e6c jmp $7e93
 
 
 

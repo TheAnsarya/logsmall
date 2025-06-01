@@ -1,11 +1,8 @@
 using logsmall.Common;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace logsmall.SourceCode {
 	class Line {
@@ -30,8 +27,7 @@ namespace logsmall.SourceCode {
 					: new Line { Address = Address, Op = Op, Parameters = Parameters };
 		}
 
-		public static IOrderedEnumerable<Line> ToLines(IEnumerable<Line> lines)
-		{
+		public static IOrderedEnumerable<Line> ToLines(IEnumerable<Line> lines) {
 			return lines
 					.Select(x => x.ToLine())
 					.DistinctBy(x => x.Address)

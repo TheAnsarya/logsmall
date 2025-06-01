@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 
 namespace DQ3Lib.Common.Rom;
 
-internal record PCAddress(int Address);
+public record PCAddress(int Address);

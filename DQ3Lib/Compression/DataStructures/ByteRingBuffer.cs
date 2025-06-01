@@ -1,20 +1,18 @@
-﻿using System;
+﻿using DQ3Lib.Streams;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DQ3Lib.Compression.DataStructures; 
+namespace DQ3Lib.Compression.DataStructures;
 
-class ByteRingBuffer : ByteArrayStream {
+public class ByteRingBuffer : ByteArrayStream {
 	private int _address;
+
 	public override int Address {
-		get {
-			return _address;
-		}
-		set {
-			_address = value % Size;
-		}
+		get => _address;
+		set => _address = value % Size;
 	}
 
 	public ByteRingBuffer(int size, int startAddress) : base(size, startAddress) {
@@ -27,7 +25,5 @@ class ByteRingBuffer : ByteArrayStream {
 	public new ByteRingBuffer Branch() => Branch(0);
 
 	// TODO: get rid of the new modifier?
-	public new ByteRingBuffer Branch(int startAddress) {
-		return new ByteRingBuffer(Buffer, startAddress);
-	}
+	public new ByteRingBuffer Branch(int startAddress) => new(Buffer, startAddress);
 }

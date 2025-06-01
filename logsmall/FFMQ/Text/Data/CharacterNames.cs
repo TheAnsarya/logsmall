@@ -1,9 +1,6 @@
 using logsmall.DataStructures;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall.FFMQ.Text.Data {
 	class CharacterNames {
@@ -13,8 +10,8 @@ namespace logsmall.FFMQ.Text.Data {
 
 		// TODO: We can do this better once the whole character datastructure is done
 		public static ByteArrayStream GetDataStream(int index) {
-			if ((index < 0) || (index >= 9)) {
-				throw new ArgumentOutOfRangeException($"{nameof(index)} must be between 0 and 8, actual value: {index}");
+			if (index is < 0 or >= 9) {
+				throw new ArgumentOutOfRangeException(nameof(index), $"{nameof(index)} must be between 0 and 8, actual value: {index}");
 			}
 
 			var offset = index * RecordSize;

@@ -17,7 +17,7 @@ internal static class EnumerableExtensions {
 	public static Queue<T> ToQueue<T>(this IEnumerable<T> enumerable) {
 		ArgumentNullException.ThrowIfNull(enumerable, nameof(enumerable));
 		
-		return new Queue<T>(enumerable);
+		return [.. enumerable];
 	}
 
 	public static PriorityQueue<T, T2> ToPriorityQueue<T, T2>(this IEnumerable<T> enumerable, Func<T, T2> predicate) {

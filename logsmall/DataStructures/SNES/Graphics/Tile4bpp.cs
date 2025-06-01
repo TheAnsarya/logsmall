@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace logsmall.DataStructures.SNES.Graphics {
 	class Tile4bpp {
 		// 4bpp is $20 bytes

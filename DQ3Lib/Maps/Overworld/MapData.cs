@@ -1,23 +1,27 @@
+using DQ3Lib.Common;
+using DQ3Lib.Common.Rom;
+using DQ3Lib.Compression;
+using DQ3Lib.Streams;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DQ3Lib.Maps.Overworld; 
+namespace DQ3Lib.Maps.Overworld;
 
 public static class MapData {
-	public const int ChunkEntries = 0xa3d;
-
 	// Overworld tilemap top-level grid layout
-	public static byte[] GetLayout() {
-		var source = Rom.GetStream(0xed8a00);
+	public static byte[] GetLayout(Rom rom, PCAddress? address) {
+		var actualAddress = address ?? rom.ToPCAddress(new SNESAddress(DefaultValues.MapsOverworldMapDataLayoutAddress));
+		var source = rom.GetStream(actualAddress);
 		return BasicRing400.Decompress(source, 0x2000);
 	}
 
-	public static MetaTileDefinition[] GetTileDefinitions() {
+	public static MetaTileDefinition[] GetTileDefinitions(Rom rom, PCAddress? address) {
 		// 0xe54f38 - 0xe5569f
-		var source = Rom.GetStream(0xe54f38);
+		var actualAddress = address ?? rom.ToPCAddress(new SNESAddress(DefaultValues.MapsOverworldMetaTileDefinition));
+		var source = rom.GetStream(actualAddress);
 		var entries = new List<MetaTileDefinition>();
 
 		// 237 entries at present, $00 to $EC
@@ -32,7 +36,7 @@ public static class MapData {
 		var chunks = new List<Chunk>();
 		var sources = GetTilemapChunkStreams();
 
-		for (int i = 0; i < ChunkEntries; i++) {
+		for (int i = 0; i < DefaultValues.MapsOverworldChunkEntries; i++) {
 			chunks.Add(new Chunk {
 				Index = i,
 				Data = new byte[] {
@@ -62,33 +66,33 @@ public static class MapData {
 		return chunks.ToArray();
 	}
 
-	public static ByteArrayStream[][] GetTilemapChunkStreams() {
+	public static ByteArrayStream[][] GetTilemapChunkStreams(Rom rom) {
 		var tilemaps = new ByteArrayStream[][] {
 			// Top Row
 			new ByteArrayStream[]{
-				Rom.GetStream(0xeda49c),	// Top left tile
-				Rom.GetStream(0xedaed9),
-				Rom.GetStream(0xedb916),
-				Rom.GetStream(0xedc353)		// Top right tile
+				rom.GetStream(0xeda49c),	// Top left tile
+				rom.GetStream(0xedaed9),
+				rom.GetStream(0xedb916),
+				rom.GetStream(0xedc353)		// Top right tile
 			},
 			new ByteArrayStream[]{
-				Rom.GetStream(0xedcd90),
-				Rom.GetStream(0xedd7cd),
-				Rom.GetStream(0xede20a),
-				Rom.GetStream(0xedec47)
+				rom.GetStream(0xedcd90),
+				rom.GetStream(0xedd7cd),
+				rom.GetStream(0xede20a),
+				rom.GetStream(0xedec47)
 			},
 			new ByteArrayStream[]{
-				Rom.GetStream(0xedf684),
-				Rom.GetStream(0xee00c1),
-				Rom.GetStream(0xee0afe),
-				Rom.GetStream(0xee153b)
+				rom.GetStream(0xedf684),
+				rom.GetStream(0xee00c1),
+				rom.GetStream(0xee0afe),
+				rom.GetStream(0xee153b)
 			},
 			// Bottom row
 			new ByteArrayStream[]{
-				Rom.GetStream(0xee1f78),	// Bottom left tile
-				Rom.GetStream(0xee29b5),
-				Rom.GetStream(0xee33f2),
-				Rom.GetStream(0xee3e2f)		// Bottom right tile
+				rom.GetStream(0xee1f78),	// Bottom left tile
+				rom.GetStream(0xee29b5),
+				rom.GetStream(0xee33f2),
+				rom.GetStream(0xee3e2f)		// Bottom right tile
 			}
 		};
 

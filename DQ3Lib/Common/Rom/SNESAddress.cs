@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace DQ3Lib.Common.Rom;
 
-internal record SNESAddress(int Address);
+public record SNESAddress(int Address);
 

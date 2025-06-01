@@ -1,11 +1,6 @@
 using logsmall.Compression;
 using logsmall.DataStructures;
-using logsmall.DataStructures.SNES;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall.Overworld {
 	public static class MapData {

@@ -3,7 +3,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<OutputType>Exe</OutputType>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<LangVersion>8.0</LangVersion>
+		<LangVersion>9.0</LangVersion>
 		<AssemblyTitle>logsmall</AssemblyTitle>
 		<Product>logsmall</Product>
 		<Copyright>Copyright ©  2019</Copyright>
@@ -35,5 +35,11 @@
 	<ItemGroup>
 		<Compile Remove="packages\MoreLinq.Source.MoreEnumerable.Batch.1.0.2\content\net20\MoreLinq\MoreEnumerable.Batch.cs" />
 		<Compile Remove="packages\MoreLinq.Source.MoreEnumerable.DistinctBy.1.0.2\content\net35\MoreLinq\MoreEnumerable.DistinctBy.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\Users\me\source\repos\logsmall\logsmall\.editorconfig" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="C:\Users\me\source\repos\logsmall\logsmall\.editorconfig" />
 	</ItemGroup>
 </Project>

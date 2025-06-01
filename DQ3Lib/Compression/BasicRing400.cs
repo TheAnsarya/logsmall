@@ -1,3 +1,4 @@
+using DQ3Lib.Compression.DataStructures;
 using DQ3Lib.Streams;
 using System.Globalization;
 

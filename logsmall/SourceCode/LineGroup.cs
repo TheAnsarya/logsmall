@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace logsmall.SourceCode {
 	class LineGroup {
@@ -12,7 +8,7 @@ namespace logsmall.SourceCode {
 		public uint NextAddress { get; set; }
 		public int Length { get => (int)(NextAddress - StartAddress); }
 		public int BytesBetween(LineGroup next) => (int)(next.StartAddress - NextAddress);
-		
+
 		public List<Line> Lines { get; set; }
 
 		public LineGroup(Line line) {

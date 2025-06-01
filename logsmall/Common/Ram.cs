@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace logsmall.Common {
 	public class Ram {
 		public const int AddressOffset = 0x7e0000;
