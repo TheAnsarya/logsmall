@@ -1,11 +1,5 @@
 using DQ3Lib.Common.Rom;
 using DQ3Lib.Compression;
-using DQ3Lib.Maps.Overworld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExtractDQ3.Maps.Overworld;
 

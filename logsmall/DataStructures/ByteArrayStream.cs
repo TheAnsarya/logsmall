@@ -1,198 +1,199 @@
 using System;
 using System.Collections.Generic;
 
-namespace logsmall.DataStructures {
-	public class ByteArrayStream {
-		public byte[] Buffer { get; set; }
-		public virtual int Address { get; set; }
+namespace logsmall.DataStructures;
 
-		public int Size { get => Buffer.Length; }
+public class ByteArrayStream {
+	public byte[] Buffer { get; set; }
+	public virtual int Address { get; set; }
 
-		public bool HasSpace { get => Address < Size; }
+	public int Size { get => Buffer.Length; }
 
-		public bool AtEnd { get => Address >= Size; }
+	public bool HasSpace { get => Address < Size; }
 
-		public ByteArrayStream(int size) : this(size, 0) { }
+	public bool AtEnd { get => Address >= Size; }
 
-		public ByteArrayStream(int size, int startAddress) {
-			Buffer = new byte[size];
-			Address = startAddress;
-		}
+	public ByteArrayStream(int size) : this(size, 0) { }
 
-		public ByteArrayStream(byte[] buffer) : this(buffer, 0) { }
+	public ByteArrayStream(int size, int startAddress) {
+		Buffer = new byte[size];
+		Address = startAddress;
+	}
 
-		public ByteArrayStream(byte[] buffer, int startAddress) {
-			Buffer = buffer;
-			Address = startAddress;
-		}
+	public ByteArrayStream(byte[] buffer) : this(buffer, 0) { }
 
-		public byte Byte() {
-			return Buffer[Address++];
-		}
+	public ByteArrayStream(byte[] buffer, int startAddress) {
+		Buffer = buffer;
+		Address = startAddress;
+	}
 
-		public void Byte(byte value) {
-			Buffer[Address++] = value;
-		}
+	public byte Byte() {
+		return Buffer[Address++];
+	}
 
-		public byte ByteAt(int offset) {
-			return Buffer[Address + offset];
-		}
+	public void Byte(byte value) {
+		Buffer[Address++] = value;
+	}
 
-		public ushort Word() {
-			byte a = Buffer[Address++];
-			byte b = Buffer[Address++];
-			return (ushort)((b << 8) + a);
-		}
+	public byte ByteAt(int offset) {
+		return Buffer[Address + offset];
+	}
 
-		public void Word(ushort value) {
-			Buffer[Address++] = (byte)(value & 0x00ff);
-			Buffer[Address++] = (byte)((value & 0xff00) >> 8);
-		}
+	public ushort Word() {
+		byte a = Buffer[Address++];
+		byte b = Buffer[Address++];
+		return (ushort)((b << 8) + a);
+	}
 
-		public ushort WordAt(int offset) {
-			byte a = Buffer[Address + offset];
-			byte b = Buffer[Address + offset + 1];
-			return (ushort)((b << 8) + a);
-		}
+	public void Word(ushort value) {
+		Buffer[Address++] = (byte)(value & 0x00ff);
+		Buffer[Address++] = (byte)((value & 0xff00) >> 8);
+	}
 
-		public int Long() {
-			byte a = Buffer[Address++];
-			byte b = Buffer[Address++];
-			byte c = Buffer[Address++];
-			return (c << 16) + (b << 8) + a;
-		}
+	public ushort WordAt(int offset) {
+		byte a = Buffer[Address + offset];
+		byte b = Buffer[Address + offset + 1];
+		return (ushort)((b << 8) + a);
+	}
 
-		public void Long(int value) {
-			Buffer[Address++] = (byte)(value & 0x0000ff);
-			Buffer[Address++] = (byte)((value & 0x00ff00) >> 8);
-			Buffer[Address++] = (byte)((value & 0xff0000) >> 16);
-		}
+	public int Long() {
+		byte a = Buffer[Address++];
+		byte b = Buffer[Address++];
+		byte c = Buffer[Address++];
+		return (c << 16) + (b << 8) + a;
+	}
 
-		public int LongAt(int offset) {
-			byte a = Buffer[Address + offset];
-			byte b = Buffer[Address + offset + 1];
-			byte c = Buffer[Address + offset + 2];
-			return (c << 16) + (b << 8) + a;
-		}
+	public void Long(int value) {
+		Buffer[Address++] = (byte)(value & 0x0000ff);
+		Buffer[Address++] = (byte)((value & 0x00ff00) >> 8);
+		Buffer[Address++] = (byte)((value & 0xff0000) >> 16);
+	}
 
-		public void Skip(int length) => Address += length;
+	public int LongAt(int offset) {
+		byte a = Buffer[Address + offset];
+		byte b = Buffer[Address + offset + 1];
+		byte c = Buffer[Address + offset + 2];
+		return (c << 16) + (b << 8) + a;
+	}
 
-		public ByteArrayStream Branch() => Branch(0);
+	public void Skip(int length) => Address += length;
 
-		public ByteArrayStream Branch(int startAddress) {
-			return new ByteArrayStream(Buffer, startAddress);
-		}
+	public ByteArrayStream Branch() => Branch(0);
 
-		public List<ByteArrayStream> FindAll(byte[] searchTerm) {
-			ArgumentNullException.ThrowIfNull(searchTerm, nameof(searchTerm));
+	public ByteArrayStream Branch(int startAddress) {
+		return new ByteArrayStream(Buffer, startAddress);
+	}
 
-			var found = new List<ByteArrayStream>();
+	public List<ByteArrayStream> FindAll(byte[] searchTerm) {
+		ArgumentNullException.ThrowIfNull(searchTerm, nameof(searchTerm));
 
-			var lastIndex = Buffer.Length - searchTerm.Length;
-			for (int i = 0; i <= lastIndex; i++) {
-				var matches = true;
+		var found = new List<ByteArrayStream>();
 
-				for (int j = 0; j < searchTerm.Length; j++) {
-					if (Buffer[i + j] != searchTerm[j]) {
-						matches = false;
-						break;
-					}
-				}
+		var lastIndex = Buffer.Length - searchTerm.Length;
+		for (int i = 0; i <= lastIndex; i++) {
+			var matches = true;
 
-				if (matches) {
-					found.Add(Branch(i));
+			for (int j = 0; j < searchTerm.Length; j++) {
+				if (Buffer[i + j] != searchTerm[j]) {
+					matches = false;
+					break;
 				}
 			}
 
-			return found;
+			if (matches) {
+				found.Add(Branch(i));
+			}
 		}
 
-		// clamps to [0, Buffer.Length]
-		// TODO: test & verify
-		public (bool found, int address) FindLastInWindow(byte[] searchTerm, int start, int end) {
-			ArgumentNullException.ThrowIfNull(searchTerm, nameof(searchTerm));
+		return found;
+	}
 
-			// TODO: check for off by one
-			start = Math.Max(0, start);
-			end = Math.Min(Buffer.Length, end);
+	// clamps to [0, Buffer.Length]
+	// TODO: test & verify
+	public (bool found, int address) FindLastInWindow(byte[] searchTerm, int start, int end) {
+		ArgumentNullException.ThrowIfNull(searchTerm, nameof(searchTerm));
 
-			var lastIndex = end - searchTerm.Length;
-			for (int i = lastIndex; i >= start; i--) {
-				var matches = true;
+		// TODO: check for off by one
+		start = Math.Max(0, start);
+		end = Math.Min(Buffer.Length, end);
 
-				for (int j = 0; j < searchTerm.Length; j++) {
-					if (Buffer[i + j] != searchTerm[j]) {
-						matches = false;
-						break;
-					}
+		var lastIndex = end - searchTerm.Length;
+		for (int i = lastIndex; i >= start; i--) {
+			var matches = true;
+
+			for (int j = 0; j < searchTerm.Length; j++) {
+				if (Buffer[i + j] != searchTerm[j]) {
+					matches = false;
+					break;
 				}
-
-				if (matches) {
-					return (true, i);
-				}
 			}
 
-			return (false, -1);
-		}
-
-		public byte[] GetBytes(int length) => GetBytes(length, Address);
-
-		public byte[] GetBytes(int length, int address) {
-			if ((address + length) > Buffer.Length) {
-				length = Buffer.Length - address;
-			}
-
-			var output = new byte[length];
-			Array.Copy(Buffer, address, output, 0, length);
-
-			return output;
-		}
-
-		public byte[] GetBytesAt(int length, int offset) {
-			var from = Address + offset;
-			if ((from + length) > Buffer.Length) {
-				length = Buffer.Length - from;
-			}
-
-			var output = new byte[length];
-			Array.Copy(Buffer, from, output, 0, length);
-
-			return output;
-		}
-
-		public byte[] ReadUntil(byte endValue, int? maxLength = null) {
-			var startAddress = Address;
-			var data = new List<byte>();
-			byte value = Byte();
-
-			while (value != endValue && HasSpace && (maxLength == null || (data.Count < maxLength))) {
-				data.Add(value);
-				value = Byte();
-			}
-
-			return data.ToArray();
-		}
-
-		// TODO: Add error checking
-		public void CopyTo(ByteArrayStream destination, int length) {
-			// Array.Copy() is not copying one byte at a time so copying within the same array doesn't update correctly.
-			//Array.Copy(Buffer, Address, destination.Buffer, destination.Address, length);
-			//Address += length;
-			//destination.Address += length;
-			ArgumentNullException.ThrowIfNull(destination, nameof(destination));
-
-			for (int i = 0; i < length; i++) {
-				destination.Byte(Byte());
+			if (matches) {
+				return (true, i);
 			}
 		}
 
-		// TODO: Add error checking
-		public void Write(IEnumerable<byte> data) {
-			ArgumentNullException.ThrowIfNull(data, nameof(data));
+		return (false, -1);
+	}
 
-			foreach (var b in data) {
-				Byte(b);
-			}
+	public byte[] GetBytes(int length) => GetBytes(length, Address);
+
+	public byte[] GetBytes(int length, int address) {
+		if ((address + length) > Buffer.Length) {
+			length = Buffer.Length - address;
+		}
+
+		var output = new byte[length];
+		Array.Copy(Buffer, address, output, 0, length);
+
+		return output;
+	}
+
+	public byte[] GetBytesAt(int length, int offset) {
+		var from = Address + offset;
+		if ((from + length) > Buffer.Length) {
+			length = Buffer.Length - from;
+		}
+
+		var output = new byte[length];
+		Array.Copy(Buffer, from, output, 0, length);
+
+		return output;
+	}
+
+	public byte[] ReadUntil(byte endValue, int? maxLength = null) {
+		var startAddress = Address;
+		var data = new List<byte>();
+		byte value = Byte();
+
+		while (value != endValue && HasSpace && (maxLength == null || (data.Count < maxLength))) {
+			data.Add(value);
+			value = Byte();
+		}
+
+		return data.ToArray();
+	}
+
+	// TODO: Add error checking
+	public void CopyTo(ByteArrayStream destination, int length) {
+		// Array.Copy() is not copying one byte at a time so copying within the same array doesn't update correctly.
+		//Array.Copy(Buffer, Address, destination.Buffer, destination.Address, length);
+		//Address += length;
+		//destination.Address += length;
+		ArgumentNullException.ThrowIfNull(destination, nameof(destination));
+
+		for (int i = 0; i < length; i++) {
+			destination.Byte(Byte());
+		}
+	}
+
+	// TODO: Add error checking
+	public void Write(IEnumerable<byte> data) {
+		ArgumentNullException.ThrowIfNull(data, nameof(data));
+
+		foreach (var b in data) {
+			Byte(b);
 		}
 	}
 }
+

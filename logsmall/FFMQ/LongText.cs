@@ -5,152 +5,152 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace logsmall.FFMQ {
-	class LongText {
-		public const ushort EndOfAction = 0xffff;
+namespace logsmall.FFMQ;
 
-		public static ByteArrayStream DTELookup() => FFMQ.Game.Rom.GetStream(0x03ba86);
+class LongText {
+	public const ushort EndOfAction = 0xffff;
 
-		public static ByteArrayStream LongTextData() => FFMQ.Game.Rom.GetStream(0x03d73b);
+	public static ByteArrayStream DTELookup() => FFMQ.Game.Rom.GetStream(0x03ba86);
 
-		public static ByteArrayStream Offsets() => FFMQ.Game.Rom.GetStream(0x03d636);
+	public static ByteArrayStream LongTextData() => FFMQ.Game.Rom.GetStream(0x03d73b);
 
-		public static ByteArrayStream Under30JumpTable() => FFMQ.Game.Rom.GetStream(0x00e1cf);
+	public static ByteArrayStream Offsets() => FFMQ.Game.Rom.GetStream(0x03d636);
 
-		public static byte ShortTextEndOfString = 0x03;
+	public static ByteArrayStream Under30JumpTable() => FFMQ.Game.Rom.GetStream(0x00e1cf);
 
-		// Codes $30 to $7f represent short runs of text
-		public static byte[] LookupBytes(byte code) {
-			if (!((code < 0x80) && (code >= 30))) {
-				throw new ArgumentOutOfRangeException($"{nameof(code)} must be between 0x30 and 0x7f, actual value: {code}");
-			}
+	public static byte ShortTextEndOfString = 0x03;
 
-			var lookups = DTELookup();
-			var index = code - 0x30;
-
-			while (index > 0) {
-				lookups.Skip(lookups.Byte());
-				index--;
-			}
-
-			var length = lookups.Byte();
-			var bytes = lookups.GetBytes(length);
-
-			return bytes;
+	// Codes $30 to $7f represent short runs of text
+	public static byte[] LookupBytes(byte code) {
+		if (code is not (< 0x80 and >= 30)) {
+			throw new ArgumentOutOfRangeException($"{nameof(code)} must be between 0x30 and 0x7f, actual value: {code}");
 		}
 
-		public static Dictionary<byte, string> GetTextLookups() {
-			var output = new Dictionary<byte, string>();
+		var lookups = DTELookup();
+		var index = code - 0x30;
 
-			for (byte code = 0x30; code < 0x80; code++) {
-				var text = AttemptTranslate(code);
-				output.Add(code, text);
-			}
-
-			return output;
+		while (index > 0) {
+			lookups.Skip(lookups.Byte());
+			index--;
 		}
 
-		public static Dictionary<byte, byte[]> GetRawTextLookups() {
-			var output = new Dictionary<byte, byte[]>();
+		var length = lookups.Byte();
+		var bytes = lookups.GetBytes(length);
 
-			for (byte code = 0x30; code < 0x80; code++) {
-				var data = LookupBytes(code);
-				output.Add(code, data);
-			}
+		return bytes;
+	}
 
-			return output;
+	public static Dictionary<byte, string> GetTextLookups() {
+		var output = new Dictionary<byte, string>();
+
+		for (byte code = 0x30; code < 0x80; code++) {
+			var text = AttemptTranslate(code);
+			output.Add(code, text);
 		}
 
-		public static string AttemptTranslate(byte[] codes) => string.Join("", codes.Select(x => AttemptTranslate(x)));
+		return output;
+	}
 
-		public static string AttemptTranslate(byte code, int depthLeft = 2) {
-			if (code < 0x30) {
-				return $"{{{code:x2}}}";
-			} else if (code >= 0x80) {
-				return BasicTable.Lookup(code);
-			} else if (depthLeft == 0) {
-				return $"{{{code:x2}}}";
-			}
+	public static Dictionary<byte, byte[]> GetRawTextLookups() {
+		var output = new Dictionary<byte, byte[]>();
 
-			var text = string.Join("", LookupBytes(code).Select(x => AttemptTranslate(x, depthLeft - 1)));
-
-			return text;
+		for (byte code = 0x30; code < 0x80; code++) {
+			var data = LookupBytes(code);
+			output.Add(code, data);
 		}
 
-		public static string AttemptTranslate(ByteArrayStream stream, int depthLeft = 2) {
-			var code = stream.Byte();
+		return output;
+	}
 
-			return code switch {
-				0x01 => $"{{windowBreak}}",
-				0x05 => $"{{05:{stream.Byte():x2}}}",
-				0x1b => $"{{swapSpeaker:{stream.Byte():x2}}}",
-				0x1d => $"{{character:{CharacterNames.GetString(stream.Byte())}}}",
-				0x1e => $"{{item:{ItemNames.GetString(stream.Byte())}}}",
-				0x1f => $"{{location:{LocationNames.GetString(stream.Byte())}}}",
-				< 0x30 => $"{{{code:x2}}}",
-				0x30 => $"{{waitForButtonPress}}",
-				0x35 => $"{{playerName}}",
-				0x36 => $"{{runAction:{AttemptTranslateAction(stream)}}}",
-				>= 0x80 => BasicTable.Lookup(code),
-				_ => (depthLeft == 0) ? $"{{{code:x2}}}" : AttemptTranslate(code, depthLeft - 1)
-			};
+	public static string AttemptTranslate(byte[] codes) => string.Join("", codes.Select(x => AttemptTranslate(x)));
+
+	public static string AttemptTranslate(byte code, int depthLeft = 2) {
+		if (code < 0x30) {
+			return $"{{{code:x2}}}";
+		} else if (code >= 0x80) {
+			return BasicTable.Lookup(code);
+		} else if (depthLeft == 0) {
+			return $"{{{code:x2}}}";
 		}
 
-		public static string AttemptTranslateAction(ByteArrayStream stream) {
-			var action = stream.Word();
+		var text = string.Join("", LookupBytes(code).Select(x => AttemptTranslate(x, depthLeft - 1)));
 
-			while (action != EndOfAction) {
-				return $"{{action:{TranslateAction(action)}}}";
-			}
+		return text;
+	}
 
-			return "{{endOfAction}}";
+	public static string AttemptTranslate(ByteArrayStream stream, int depthLeft = 2) {
+		var code = stream.Byte();
+
+		return code switch {
+			0x01 => $"{{windowBreak}}",
+			0x05 => $"{{05:{stream.Byte():x2}}}",
+			0x1b => $"{{swapSpeaker:{stream.Byte():x2}}}",
+			0x1d => $"{{character:{CharacterNames.GetString(stream.Byte())}}}",
+			0x1e => $"{{item:{ItemNames.GetString(stream.Byte())}}}",
+			0x1f => $"{{location:{LocationNames.GetString(stream.Byte())}}}",
+			< 0x30 => $"{{{code:x2}}}",
+			0x30 => $"{{waitForButtonPress}}",
+			0x35 => $"{{playerName}}",
+			0x36 => $"{{runAction:{AttemptTranslateAction(stream)}}}",
+			>= 0x80 => BasicTable.Lookup(code),
+			_ => (depthLeft == 0) ? $"{{{code:x2}}}" : AttemptTranslate(code, depthLeft - 1)
+		};
+	}
+
+	public static string AttemptTranslateAction(ByteArrayStream stream) {
+		var action = stream.Word();
+
+		while (action != EndOfAction) {
+			return $"{{action:{TranslateAction(action)}}}";
 		}
 
-		public static string TranslateAction(ushort action) {
-			return action switch {
-				_ => $"{action:x4}"
-			};
+		return "{{endOfAction}}";
+	}
+
+	public static string TranslateAction(ushort action) {
+		return action switch {
+			_ => $"{action:x4}"
+		};
+	}
+
+	public static string AttemptTranslateLine(ByteArrayStream stream) {
+		var line = new List<string>();
+
+		while (stream.ByteAt(0) != BasicTable.EndOfString) {
+			line.Add(AttemptTranslate(stream));
 		}
 
-		public static string AttemptTranslateLine(ByteArrayStream stream) {
-			var line = new List<string>();
+		var text = string.Join("", line);
+		stream.Byte();
 
-			while (stream.ByteAt(0) != BasicTable.EndOfString) {
-				line.Add(AttemptTranslate(stream));
-			}
+		return text;
+	}
 
-			var text = string.Join("", line);
+	public static string AttemptTranslateLine(byte[] input, int depthLeft = 3) {
+		var line = new List<string>();
+		var stream = new ByteArrayStream(input);
+		while (!stream.AtEnd) {
+			line.Add(AttemptTranslate(stream, depthLeft));
+		}
+
+		var text = string.Join("", line);
+
+		if (!stream.AtEnd) {
 			stream.Byte();
-
-			return text;
 		}
 
-		public static string AttemptTranslateLine(byte[] input, int depthLeft = 3) {
-			var line = new List<string>();
-			var stream = new ByteArrayStream(input);
-			while (!stream.AtEnd) {
-				line.Add(AttemptTranslate(stream, depthLeft));
-			}
+		return text;
+	}
 
-			var text = string.Join("", line);
+	public static Dictionary<int, string> GetLongStrings() {
+		var stream = LongTextData();
+		var endOfData = FFMQ.Game.Rom.AddressToPC(0x03ffff);
+		var lines = new Dictionary<int, string>();
 
-			if (!stream.AtEnd) {
-				stream.Byte();
-			}
-
-			return text;
+		while (stream.Address < endOfData && lines.Count < 123) {
+			lines.Add(FFMQ.Game.Rom.AddressToSNES(stream.Address), AttemptTranslateLine(stream));
 		}
 
-		public static Dictionary<int, string> GetLongStrings() {
-			var stream = LongTextData();
-			var endOfData = FFMQ.Game.Rom.AddressToPC(0x03ffff);
-			var lines = new Dictionary<int, string>();
-
-			while (stream.Address < endOfData && lines.Count < 123) {
-				lines.Add(FFMQ.Game.Rom.AddressToSNES(stream.Address), AttemptTranslateLine(stream));
-			}
-
-			return lines;
-		}
+		return lines;
 	}
 }

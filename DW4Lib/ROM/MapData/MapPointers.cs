@@ -1,9 +1,4 @@
 using DW4Lib.DataStructures;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DW4Lib.ROM.MapData;
 
@@ -25,11 +20,9 @@ internal class MapPointers {
 
 	public Word this[int index, int subIndex] {
 		get {
-			if (index is < 0 or >= NumberOfMaps) {
-				throw new ArgumentOutOfRangeException(nameof(index), $"Index {index} is out of range.");
-			}
-
-			return Data[index + (subIndex * 3)];
+			return index is < 0 or >= NumberOfMaps
+				? throw new ArgumentOutOfRangeException(nameof(index), $"Index {index} is out of range.")
+				: Data[index + (subIndex * 3)];
 		}
 		set {
 			if (index is < 0 or >= NumberOfMaps) {

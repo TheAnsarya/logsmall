@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DQ3Lib.Maps.Overworld;
+namespace ExtractDQ3.Maps.Overworld;
 
 public class Chunk {
 	public int Index { get; set; }
 
 	public required byte[] Data { get; set; }
 
-	private string _key;
+	private string? _key;
 
 	public string Key {
 		get {

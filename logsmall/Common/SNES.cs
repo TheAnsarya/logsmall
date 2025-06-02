@@ -1,81 +1,80 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace logsmall.Common {
-	class SNES {
+namespace logsmall.Common;
 
-		public static bool IsNegative16(int value) => (value & 0x8000) == 0x8000;
-		public static bool IsNegative8(int value) => (value & 0x80) == 0x80;
+class SNES {
 
-
-		public static string GetValue(Regex mode, string line) {
-			var match = mode.Match(line);
-			return match.Success
-				? (match.Groups.Count > 2)
-					? $"{match.Groups[1].Value}{match.Groups[2].Value}"
-					: match.Groups[1].Value
-				: null;
-		}
+	public static bool IsNegative16(int value) => (value & 0x8000) == 0x8000;
+	public static bool IsNegative8(int value) => (value & 0x80) == 0x80;
 
 
-		public static string OpToHex(string address, string op, string parameters) {
-			var lookup = OpLookup.Find(op, parameters);
+	public static string GetValue(Regex mode, string line) {
+		var match = mode.Match(line);
+		return match.Success
+			? (match.Groups.Count > 2)
+				? $"{match.Groups[1].Value}{match.Groups[2].Value}"
+				: match.Groups[1].Value
+			: null;
+	}
 
-			if (lookup != null) {
-				if (lookup.Mode == AddressingMode.PCRelative) {
-					var dist =
-						(
-							(sbyte)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- 2)
-						)
-						.ToString("X2", CultureInfo.InvariantCulture)
-						.ToLowerInvariant();
-					return $"{lookup.Byte}{dist}";
-				} else if (lookup.Mode == AddressingMode.PCRelative24) {
-					var dist =
-						(
-							(sbyte)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- int.Parse(address, NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- 2)
-						)
-						.ToString("X2", CultureInfo.InvariantCulture)
-						.ToLowerInvariant();
-					return $"{lookup.Byte}{dist}";
-				} else if (lookup.Mode == AddressingMode.PCRelativeLong) {
-					var dist =
-						(
-							(short)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- 3)
-						)
-						.ToString("X4", CultureInfo.InvariantCulture)
-						.ToLowerInvariant();
-					return $"{lookup.Byte}{dist.FlipBytes()}";
-				} else if (lookup.Mode == AddressingMode.PCRelativeLong24) {
-					var dist =
-						(
-							(short)
-							(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- int.Parse(address, NumberStyles.HexNumber, CultureInfo.InvariantCulture)
-								- 3)
-						)
-						.ToString("X4", CultureInfo.InvariantCulture)
-						.ToLowerInvariant();
-					return $"{lookup.Byte}{dist.FlipBytes()}";
-				}
 
-				if (lookup.Mode == AddressingMode.BlockMove) {
-					return $"{lookup.Byte}{GetValue(lookup.Mode, parameters).FlipBytes()}";
-				}
+	public static string OpToHex(string address, string op, string parameters) {
+		var lookup = OpLookup.Find(op, parameters);
 
-				return $"{lookup.Byte}{GetValue(lookup.Mode, parameters).FlipBytes()}";
+		if (lookup != null) {
+			if (lookup.Mode == AddressingMode.PCRelative) {
+				var dist =
+					(
+						(sbyte)
+						(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- 2)
+					)
+					.ToString("X2", CultureInfo.InvariantCulture)
+					.ToLowerInvariant();
+				return $"{lookup.Byte}{dist}";
+			} else if (lookup.Mode == AddressingMode.PCRelative24) {
+				var dist =
+					(
+						(sbyte)
+						(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- int.Parse(address, NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- 2)
+					)
+					.ToString("X2", CultureInfo.InvariantCulture)
+					.ToLowerInvariant();
+				return $"{lookup.Byte}{dist}";
+			} else if (lookup.Mode == AddressingMode.PCRelativeLong) {
+				var dist =
+					(
+						(short)
+						(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- int.Parse(address.Substring(2, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- 3)
+					)
+					.ToString("X4", CultureInfo.InvariantCulture)
+					.ToLowerInvariant();
+				return $"{lookup.Byte}{dist.FlipBytes()}";
+			} else if (lookup.Mode == AddressingMode.PCRelativeLong24) {
+				var dist =
+					(
+						(short)
+						(int.Parse(GetValue(lookup.Mode, parameters), NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- int.Parse(address, NumberStyles.HexNumber, CultureInfo.InvariantCulture)
+							- 3)
+					)
+					.ToString("X4", CultureInfo.InvariantCulture)
+					.ToLowerInvariant();
+				return $"{lookup.Byte}{dist.FlipBytes()}";
 			}
 
-			return null;
+			return lookup.Mode == AddressingMode.BlockMove
+				? $"{lookup.Byte}{GetValue(lookup.Mode, parameters).FlipBytes()}"
+				: $"{lookup.Byte}{GetValue(lookup.Mode, parameters).FlipBytes()}";
 		}
+
+		return null;
 	}
 }
+

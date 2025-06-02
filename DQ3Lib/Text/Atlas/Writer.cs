@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DQ3Lib.Text.Atlas;
+﻿namespace DQ3Lib.Text.Atlas;
 
 // Reference: https://github.com/ButThouMust/dq6-sfc/blob/main/DragonQuest3ScriptDumper.java
 internal class Writer {

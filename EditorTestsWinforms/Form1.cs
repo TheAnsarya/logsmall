@@ -8,41 +8,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EditorTestsWinforms {
-	public partial class Form1 : Form {
+namespace EditorTestsWinforms;
 
-		private Bitmap mapBitmap = new Bitmap(4096, 4096);
-		public Form1() {
-			InitializeComponent();
+public partial class Form1 : Form {
 
-			mapBox.Image = mapBitmap;
-			mapBox.Height = mapBitmap.Height;
-			mapBox.Width = mapBitmap.Width;
+	private Bitmap mapBitmap = new Bitmap(4096, 4096);
+	public Form1() {
+		InitializeComponent();
 
-			DrawMapImage();
-		}
+		mapBox.Image = mapBitmap;
+		mapBox.Height = mapBitmap.Height;
+		mapBox.Width = mapBitmap.Width;
 
-		public void DrawMapImage() {
-			var fullmap = logsmall.DQ3.OverworldMap2.GetTilemapData();
+		DrawMapImage();
+	}
 
-			var sources =
-				Enumerable.Range(0, 256)
-					.ToDictionary(
-						x => x,
-						x => new Rectangle(x % 16 * 16, x / 16 * 16, 16, 16)
-					);
+	public void DrawMapImage() {
+		var fullmap = logsmall.DQ3.OverworldMap2.GetTilemapData();
 
-			using (var tiles = Image.FromFile(@"C:\working\dq3\overworld\dq3-tiles.png")) {
-				using (var g = Graphics.FromImage(mapBitmap)) {
+		var sources =
+			Enumerable.Range(0, 256)
+				.ToDictionary(
+					x => x,
+					x => new Rectangle(x % 16 * 16, x / 16 * 16, 16, 16)
+				);
 
-					for (var row = 0; row < 256; row++) {
-						for (var column = 0; column < 256; column++) {
-							g.DrawImage(tiles, new Rectangle(column * 16, row * 16, 16, 16), sources[fullmap[row, column]], GraphicsUnit.Pixel);
-						}
+		using (var tiles = Image.FromFile(@"C:\working\dq3\overworld\dq3-tiles.png")) {
+			using (var g = Graphics.FromImage(mapBitmap)) {
+
+				for (var row = 0; row < 256; row++) {
+					for (var column = 0; column < 256; column++) {
+						g.DrawImage(tiles, new Rectangle(column * 16, row * 16, 16, 16), sources[fullmap[row, column]], GraphicsUnit.Pixel);
 					}
 				}
 			}
 		}
-
 	}
+
 }
+

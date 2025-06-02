@@ -16,7 +16,7 @@ class ExpandNibblesMasked {
 		for (int i = 0; i < compressedSize; i++) {
 			var data = source.Byte();
 			output.Add((byte)(data & 0x07));
-			output.Add((byte)(data >> 4 & 0x07));
+			output.Add((byte)((data >> 4) & 0x07));
 		}
 
 		return output.ToArray();

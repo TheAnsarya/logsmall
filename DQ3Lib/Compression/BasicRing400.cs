@@ -40,7 +40,7 @@ public static class BasicRing400 {
 				var d1 = source.Byte();
 				var d2 = source.Byte();
 
-				var address = d1 + (d2 << 2 & 0x0300);
+				var address = d1 + ((d2 << 2) & 0x0300);
 				var counter = (d2 & 0x3f) + 3;
 				var copySource = work.Branch(address);
 
@@ -65,7 +65,7 @@ public static class BasicRing400 {
 		var data = new ReverseWindowReader(target, address);
 
 		while (address >= 0) {
-			Command cmd = null;
+			Command? cmd = null;
 			var offset = 1;
 			while (offset <= RingSize && (cmd == null || cmd.CopySize < MaxCopySize)) {
 				var testCommand = TestCandidate(data, address, address - offset);
@@ -97,7 +97,7 @@ public static class BasicRing400 {
 
 		for (int i = 0; i < target.Length; i++) {
 			var candidates = GetStates(data, i);
-			State best = null;
+			State? best = null;
 			foreach (var current in candidates) {
 				if (current.NextAddress < 0) {
 					current.PathLength = current.Size;
@@ -126,7 +126,7 @@ public static class BasicRing400 {
 
 	private static List<State> GetStates(ReverseWindowReader data, int address) {
 		var states = new List<State>{
-			new State {
+			new() {
 				Command = new Command { Simple = true, Value = data[address], CopySize = 1 },
 				Address = address
 			}
@@ -170,7 +170,7 @@ public static class BasicRing400 {
 		return output.ToArray();
 	}
 
-	private static Command TestCandidate(ReverseWindowReader data, int targetAddress, int sourceAddress) {
+	private static Command? TestCandidate(ReverseWindowReader data, int targetAddress, int sourceAddress) {
 		if (data[targetAddress] != data[sourceAddress]) {
 			return null;
 		}
@@ -209,7 +209,7 @@ public static class BasicRing400 {
 				return _address;
 			}
 			set {
-				if (value < 0 || value >= RingSize) {
+				if (value is < 0 or >= RingSize) {
 					throw new ArgumentOutOfRangeException($"{nameof(Address)} must be between 0x000 and 0x{RingSize.ToString("x3", CultureInfo.InvariantCulture)}: 0x{value.ToString("x3", CultureInfo.InvariantCulture)}");
 				}
 
@@ -223,7 +223,7 @@ public static class BasicRing400 {
 				return _copySize;
 			}
 			set {
-				if (!Simple && value < MIN_COPY_SIZE || value > MAX_COPY_SIZE) {
+				if ((!Simple && value < MIN_COPY_SIZE) || value > MAX_COPY_SIZE) {
 					// Range is (6 bits) + 3
 					throw new ArgumentOutOfRangeException($"{nameof(CopySize)} must be between {MIN_COPY_SIZE} and {MAX_COPY_SIZE}: {value}");
 				}
@@ -241,7 +241,7 @@ public static class BasicRing400 {
 	}
 
 	private class State {
-		public Command Command { get; set; }
+		public required Command Command { get; set; }
 
 		public int Address { get; set; }
 

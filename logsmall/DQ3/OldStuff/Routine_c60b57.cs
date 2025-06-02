@@ -1,9 +1,10 @@
 using logsmall.Common;
 using System;
 
-namespace logsmall.DQ3.OldStuff {
-	class Routine_c60f98 {
-		/*
+namespace logsmall.DQ3.OldStuff;
+
+class Routine_c60f98 {
+	/*
 
 C61ED5 $AF $60 $98 $7E LDA $7E9860                     A:01FF X:4000 Y:6000 S:0373 D:0000 DB:7F P:04 V:88  H:103
 C61ED9 $8D $5A $FC     STA $FC5A [7FFC5A] = $0400      A:0400 X:4000 Y:6000 S:0373 D:0000 DB:7F P:04 V:88  H:113
@@ -19,40 +20,40 @@ C62156 $90 $F0         BCC $C62148                     A:0400 X:0002 Y:6000 S:03
 C62148 $9E $62 $FC     STZ $FC62,X [7FFC64] = $027C    A:0400 X:0002 Y:6000 S:0371 D:0000 DB:7F P:84 V:88  H:191
 C6214B $9E $A2 $FC     STZ $FCA2,X [7FFCA4] = $027C    A:0400 X:0002 Y:6000 S:0371 D:0000 DB:7F P:84 V:88  H:201
 */
-		public class LocalRam {
-			public Ram WRam { get; private set; }
+	public class LocalRam {
+		public Ram WRam { get; private set; }
 
-			// $40
-			public int X40 {
-				get => WRam.Word(0x7e0040);
-				set => WRam.Word(0x7e0040, (ushort)value);
-			}
+		// $40
+		public int X40 {
+			get => WRam.Word(0x7e0040);
+			set => WRam.Word(0x7e0040, (ushort)value);
 		}
+	}
 
-		public static void Routine_c0512f(LocalRam data, int A) {
-			Routine_c61ecf(data, A);
-		}
+	public static void Routine_c0512f(LocalRam data, int A) {
+		Routine_c61ecf(data, A);
+	}
 
-		public static void Routine_c61ecf(LocalRam data, int A) {
-			// $7ffc5a => $7e9860
-			Routine_c62145(data);
-			Routine_c6217d(data);
+	public static void Routine_c61ecf(LocalRam data, int A) {
+		// $7ffc5a => $7e9860
+		Routine_c62145(data);
+		Routine_c6217d(data);
 
 
-		}
+	}
 
-		// Covers: $c62145 - $c6217c
-		public static void Routine_c62145(LocalRam data) {
-			data.WRam.Zero(0x7ffc62, 0xc0);
-			data.WRam.Zero(0x7ea843, 0xb4);
-			data.WRam.Zero(0x7eac7b, 0x80);
-		}
+	// Covers: $c62145 - $c6217c
+	public static void Routine_c62145(LocalRam data) {
+		data.WRam.Zero(0x7ffc62, 0xc0);
+		data.WRam.Zero(0x7ea843, 0xb4);
+		data.WRam.Zero(0x7eac7b, 0x80);
+	}
 
-		// Covers: $c6217d - $c6219f
-		public static void Routine_c6217d(LocalRam data) {
-			// A, X => $7e99bf	-- $03ca
-			//Routine_c07d43(data, out bool carry);
-			/*
+	// Covers: $c6217d - $c6219f
+	public static void Routine_c6217d(LocalRam data) {
+		// A, X => $7e99bf	-- $03ca
+		//Routine_c07d43(data, out bool carry);
+		/*
 c62182 jsl Routine_c07d43
 
 .Branch_c62186
@@ -71,49 +72,49 @@ c62197 bcc .Branch_c62197
 c62199 ldx #$fca2
 c6219c jsr Routine_c621a0
 */
+	}
+
+
+	// $c07d43 - $c07d76
+	public static void Routine_c07d43(LocalRam data, out bool carry, int X) {
+		// bank => $7f
+
+		Routine_c90572(data, 0xc07d53, X);
+		//00 09 00 7D 18 C5 04 00 FF 03 00
+		//wiggles the stack for return
+
+		// tax
+		Routine_c067fd(data, out carry);
+	}
+
+	public static void Routine_c067fd(LocalRam data, out bool carry) {
+		throw new NotImplementedException();
+	}
+
+	public static void Routine_c90572(LocalRam data, int optionsAddress, int X) {
+		data.X40 = X;
+		var tmp = Rom.Byte(optionsAddress);
+		if (tmp != 0) {
+			// c90588 brl.Branch_c90610
 		}
 
+		var a = Rom.Word(optionsAddress + 1);
+		X = 0x40;
 
-		// $c07d43 - $c07d76
-		public static void Routine_c07d43(LocalRam data, out bool carry, int X) {
-			// bank => $7f
+		//c90593 jsl Routine_c01146
+		//Routine_c01146(data, X, A);
 
-			Routine_c90572(data, 0xc07d53, X);
-			//00 09 00 7D 18 C5 04 00 FF 03 00
-			//wiggles the stack for return
+		//........
+	}
 
-			// tax
-			Routine_c067fd(data, out carry);
-		}
+	private static void Routine_c01146(LocalRam data, int X, ushort A) {
+		var tmpC0114C = data.WRam.Byte(0x7e0001 + X);
 
-		public static void Routine_c067fd(LocalRam data, out bool carry) {
-			throw new NotImplementedException();
-		}
+		var tmpC01152 = data.WRam.Byte(0x7e0000 + X);
+		var m1 = tmpC0114C * tmpC01152;
+		//data.ram.Word(0x7e0001 + X, )
 
-		public static void Routine_c90572(LocalRam data, int optionsAddress, int X) {
-			data.X40 = X;
-			var tmp = Rom.Byte(optionsAddress);
-			if (tmp != 0) {
-				// c90588 brl.Branch_c90610
-			}
-
-			var a = Rom.Word(optionsAddress + 1);
-			X = 0x40;
-
-			//c90593 jsl Routine_c01146
-			//Routine_c01146(data, X, A);
-
-			//........
-		}
-
-		private static void Routine_c01146(LocalRam data, int X, ushort A) {
-			var tmpC0114C = data.WRam.Byte(0x7e0001 + X);
-
-			var tmpC01152 = data.WRam.Byte(0x7e0000 + X);
-			var m1 = tmpC0114C * tmpC01152;
-			//data.ram.Word(0x7e0001 + X, )
-
-			/*
+		/*
 C90593 $22 $46 $11 $C0 JSL $C01146                     A:0008 X:0040 Y:0002 S:034E D:0000 DB:C0 P:15 V:107 H:20 
 C01146 $08             PHP                             A:0008 X:0040 Y:0002 S:034B D:0000 DB:C0 P:15 V:107 H:34 
 C01147 $E2 $20         SEP #$20                        A:0008 X:0040 Y:0002 S:034A D:0000 DB:C0 P:15 V:107 H:39 
@@ -198,6 +199,6 @@ C011DE $68             PLA                             A:0000 X:0040 Y:0002 S:03
 C011DF $28             PLP                             A:0008 X:0040 Y:0002 S:034A D:0000 DB:C0 P:34 V:108 H:150
 C011E0 $6B             RTL                             A:0008 X:0040 Y:0002 S:034B D:0000 DB:C0 P:15 V:108 H:156
 */
-		}
 	}
 }
+

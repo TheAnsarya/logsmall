@@ -1,5 +1,6 @@
-﻿namespace DropToolsLib {
-	public class Class1 {
+namespace DropToolsLib;
 
-	}
+public class Class1 {
+
 }
+

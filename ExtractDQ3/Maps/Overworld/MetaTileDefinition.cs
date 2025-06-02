@@ -1,12 +1,7 @@
 using DQ3Lib.Common.SNES.Graphics;
 using DQ3Lib.Streams;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DQ3Lib.Maps.Overworld;
+namespace ExtractDQ3.Maps.Overworld;
 
 public class MetaTileDefinition {
 	public BGMapEntry TopLeft { get; set; }

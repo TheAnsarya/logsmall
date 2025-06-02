@@ -1,5 +1,6 @@
-﻿namespace DW4Lib {
-	public class Class1 {
+namespace DW4Lib;
 
-	}
+public class Class1 {
+
 }
+

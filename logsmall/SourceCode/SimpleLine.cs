@@ -3,33 +3,34 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace logsmall.SourceCode {
-	class SimpleLine : Line {
-		public static Regex CreateRegex = new Regex(@"^([0-9a-z]{6}) (...)(?: (\S*))?$", RegexOptions.Compiled);
+namespace logsmall.SourceCode;
 
-		public static bool IsA(string line) {
-			return CreateRegex.IsMatch(line);
-		}
+class SimpleLine : Line {
+	public static Regex CreateRegex = new(@"^([0-9a-z]{6}) (...)(?: (\S*))?$", RegexOptions.Compiled);
 
-		public SimpleLine() { }
+	public static bool IsA(string line) {
+		return CreateRegex.IsMatch(line);
+	}
 
-		public SimpleLine(string line) {
-			var match = CreateRegex.Match(line);
+	public SimpleLine() { }
 
-			Address = match.Groups[1].Value.ToLowerInvariant();
-			Op = match.Groups[2].Value.ToLowerInvariant();
-			Parameters = match.Groups[3].Value.ToLowerInvariant();
-		}
+	public SimpleLine(string line) {
+		var match = CreateRegex.Match(line);
 
-		public static List<Line> FromFile(string filename) {
-			var rawlines = File.ReadAllLines(filename);
+		Address = match.Groups[1].Value.ToLowerInvariant();
+		Op = match.Groups[2].Value.ToLowerInvariant();
+		Parameters = match.Groups[3].Value.ToLowerInvariant();
+	}
 
-			var lines =
-				rawlines
-					.Where(x => IsA(x))
-					.Select(x => (Line)new SimpleLine(x))
-					.ToList();
-			return lines;
-		}
+	public static List<Line> FromFile(string filename) {
+		var rawlines = File.ReadAllLines(filename);
+
+		var lines =
+			rawlines
+				.Where(x => IsA(x))
+				.Select(x => (Line)new SimpleLine(x))
+				.ToList();
+		return lines;
 	}
 }
+

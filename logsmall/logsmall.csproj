@@ -3,12 +3,8 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<OutputType>Exe</OutputType>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<LangVersion>9.0</LangVersion>
 		<AssemblyTitle>logsmall</AssemblyTitle>
 		<Product>logsmall</Product>
-		<Copyright>Copyright ©  2019</Copyright>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
 		<StartupObject>logsmall.Program</StartupObject>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 		<AnalysisLevel>latest</AnalysisLevel>

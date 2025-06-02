@@ -1,22 +1,23 @@
-namespace logsmall.DataStructures {
-	class ReverseWindowReader {
-		private byte[] Buffer { get; set; }
+namespace logsmall.DataStructures;
 
-		private int Address { get; set; }
+class ReverseWindowReader {
+	private byte[] Buffer { get; set; }
 
-		public byte this[int address] => (address < 0) ? (byte)0 : Buffer[address];
+	private int Address { get; set; }
 
-		public ReverseWindowReader(byte[] buffer, int startAddress) {
-			Buffer = buffer;
-			Address = startAddress;
-		}
+	public byte this[int address] => (address < 0) ? (byte)0 : Buffer[address];
 
-		public ReverseWindowReader Branch(int address) {
-			return new ReverseWindowReader(Buffer, address);
-		}
+	public ReverseWindowReader(byte[] buffer, int startAddress) {
+		Buffer = buffer;
+		Address = startAddress;
+	}
 
-		public byte Byte() {
-			return this[Address--];
-		}
+	public ReverseWindowReader Branch(int address) {
+		return new ReverseWindowReader(Buffer, address);
+	}
+
+	public byte Byte() {
+		return this[Address--];
 	}
 }
+

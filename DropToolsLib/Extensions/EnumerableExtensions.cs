@@ -1,11 +1,12 @@
 ﻿using DQ3Lib.Compression.Text.Huffman;
+using DQ3Lib.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DQ3Lib.Extensions;
+namespace DropToolsLib.Extensions;
 
 internal static class EnumerableExtensions {
 	public static void ThrowIfNullOrEmpty<T>(this IEnumerable<T> enumerable, string name) {

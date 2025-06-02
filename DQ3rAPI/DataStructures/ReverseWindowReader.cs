@@ -1,22 +1,23 @@
-namespace DQ3rAPI.DataStructures {
-	class ReverseWindowReader {
-		private Memory<byte> Buffer { get; set; }
+namespace DQ3rAPI.DataStructures;
 
-		private int Address { get; set; }
+class ReverseWindowReader {
+	private Memory<byte> Buffer { get; set; }
 
-		public byte this[int address] => address < 0 ? (byte)0 : Buffer.Span[address];
+	private int Address { get; set; }
 
-		public ReverseWindowReader(Memory<byte> buffer, int startAddress) {
-			Buffer = buffer;
-			Address = startAddress;
-		}
+	public byte this[int address] => address < 0 ? (byte)0 : Buffer.Span[address];
 
-		public ReverseWindowReader Branch(int address) {
-			return new ReverseWindowReader(Buffer, address);
-		}
+	public ReverseWindowReader(Memory<byte> buffer, int startAddress) {
+		Buffer = buffer;
+		Address = startAddress;
+	}
 
-		public byte Byte() {
-			return this[Address--];
-		}
+	public ReverseWindowReader Branch(int address) {
+		return new ReverseWindowReader(Buffer, address);
+	}
+
+	public byte Byte() {
+		return this[Address--];
 	}
 }
+

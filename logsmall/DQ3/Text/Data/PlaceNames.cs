@@ -1,26 +1,27 @@
-namespace logsmall.DQ3.Text.Data {
-	class PlaceNames : TextList {
-		private PlaceNames() { }
+namespace logsmall.DQ3.Text.Data;
 
-		private static PlaceNames _instance;
-		public static PlaceNames Instance {
-			get {
-				_instance ??= new PlaceNames();
+class PlaceNames : TextList {
+	private PlaceNames() { }
 
-				return _instance;
-			}
+	private static PlaceNames _instance;
+	public static PlaceNames Instance {
+		get {
+			_instance ??= new PlaceNames();
+
+			return _instance;
 		}
+	}
 
-		public override string TitleTag { get => nameof(PlaceNames); }
-		public override int StartAddress { get => 0xfee3af; }
-		public override int EndAddress { get => 0xfee5dd; }
-		public override int RoughEndAddress { get => EndAddress + 0x200; }
+	public override string TitleTag { get => nameof(PlaceNames); }
+	public override int StartAddress { get => 0xfee3af; }
+	public override int EndAddress { get => 0xfee5dd; }
+	public override int RoughEndAddress { get => EndAddress + 0x200; }
 
-		// TODO: Entries have NOT been ordered
-		// TODO: Entries have NOT been verified
-		// Translations from: https://gamefaqs.gamespot.com/snes/564402-dragon-quest-iii-soshite-densetsu-e/faqs/7856
-		public override string[][] Known { get => _known; }
-		private static readonly string[][] _known = new string[][] {
+	// TODO: Entries have NOT been ordered
+	// TODO: Entries have NOT been verified
+	// Translations from: https://gamefaqs.gamespot.com/snes/564402-dragon-quest-iii-soshite-densetsu-e/faqs/7856
+	public override string[][] Known { get => _known; }
+	private static readonly string[][] _known = new string[][] {
 new string[] { "ポルトガ", "Porutoga (Portoga)" },
 // "バーク"
 new string[] { "ノアニール", "Noani-ru (Noaniel)" },
@@ -104,6 +105,6 @@ new string[] { "レイアムランド", "Reiamrando (Leiamland)" },
 new string[] { "天界のどうくつ", "Tenkai no Doukutsu (Sky World Cave)" },
 new string[] { "天界のとう", "Tenkai no Tou (Sky World Tower)" },
 
-		};
-	}
+	};
 }
+

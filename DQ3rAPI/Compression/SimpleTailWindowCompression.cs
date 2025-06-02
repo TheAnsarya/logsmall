@@ -101,7 +101,6 @@ class SimpleTailWindowCompression {
 				copyData = 0;
 				target.Address += term.Length;
 			}
-
 		}
 
 		// Add last copy data command

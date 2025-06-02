@@ -1,26 +1,27 @@
-namespace logsmall.DQ3.Text.Data {
-	class Unknown : TextList {
-		private Unknown() { }
+namespace logsmall.DQ3.Text.Data;
 
-		private static Unknown _instance;
-		public static Unknown Instance {
-			get {
-				_instance ??= new Unknown();
+class Unknown : TextList {
+	private Unknown() { }
 
-				return _instance;
-			}
+	private static Unknown _instance;
+	public static Unknown Instance {
+		get {
+			_instance ??= new Unknown();
+
+			return _instance;
 		}
+	}
 
-		public override string TitleTag { get => nameof(Unknown); }
-		public override int StartAddress { get => 0xfecfb7; } // TODO: Not set
-		public override int EndAddress { get => 0xfee82b; } // TODO: Not set
-		public override int RoughEndAddress { get => EndAddress; }
+	public override string TitleTag { get => nameof(Unknown); }
+	public override int StartAddress { get => 0xfecfb7; } // TODO: Not set
+	public override int EndAddress { get => 0xfee82b; } // TODO: Not set
+	public override int RoughEndAddress { get => EndAddress; }
 
-		// TODO: Entries have NOT been ordered
-		// TODO: Entries have NOT been verified
-		// Translations from: https://gamefaqs.gamespot.com/snes/564402-dragon-quest-iii-soshite-densetsu-e/faqs/15068
-		public override string[][] Known { get => _known; }
-		private static readonly string[][] _known = new string[][] {
+	// TODO: Entries have NOT been ordered
+	// TODO: Entries have NOT been verified
+	// Translations from: https://gamefaqs.gamespot.com/snes/564402-dragon-quest-iii-soshite-densetsu-e/faqs/15068
+	public override string[][] Known { get => _known; }
+	private static readonly string[][] _known = new string[][] {
 new string[] { "ぼうけんをする", "Go out on the Adventure" },
 new string[] { "せっていをかえる", "Change the Establisment" },
 new string[] { "ぼうけんしょをつくる", "Create Adventure Log" },
@@ -92,6 +93,6 @@ new string[] { "ぼうぎょ", "Defend" },
 new string[] { "どうぐ", "Item" },
 new string[] { "そうび", "Equip" },
 new string[] { "にげる", "Run Away" },
-		};
-	}
+	};
 }
+

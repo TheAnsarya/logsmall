@@ -40,7 +40,7 @@ public static class BasicRing400 {
 				var d1 = source.Byte();
 				var d2 = source.Byte();
 
-				var address = d1 + (d2 << 2 & 0x0300);
+				var address = d1 + ((d2 << 2) & 0x0300);
 				var counter = (d2 & 0x3f) + 3;
 				var copySource = work.Branch(address);
 
@@ -224,7 +224,7 @@ public static class BasicRing400 {
 				return _copySize;
 			}
 			set {
-				if (!Simple && value < MIN_COPY_SIZE || value > MAX_COPY_SIZE) {
+				if ((!Simple && value < MIN_COPY_SIZE) || value > MAX_COPY_SIZE) {
 					// Range is (6 bits) + 3
 					throw new ArgumentOutOfRangeException($"{nameof(CopySize)} must be between {MIN_COPY_SIZE} and {MAX_COPY_SIZE}: {value}");
 				}

@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DQ3Lib.Text.TableFile;
 
 internal class TableFile : Dictionary<int, TableFileEntry> {
@@ -15,7 +9,7 @@ internal class TableFile : Dictionary<int, TableFileEntry> {
 		if (!File.Exists(fileName)) {
 			throw new FileNotFoundException($"File not found: {fileName}");
 		}
-		
+
 		FileName = fileName;
 
 		var lines = File.ReadAllLines(fileName);

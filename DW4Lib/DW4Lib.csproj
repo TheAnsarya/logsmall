@@ -7,6 +7,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EditorConfigFiles Include=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Folder Include="RAM\InternalRAM\" />
 		<Folder Include="RAM\SRAM\" />
 		<Folder Include="RAM\WRAM\" />

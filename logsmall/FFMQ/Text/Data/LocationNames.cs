@@ -1,19 +1,20 @@
 using logsmall.DataStructures;
 using System.Linq;
 
-namespace logsmall.FFMQ.Text.Data {
-	class LocationNames {
-		public static ByteArrayStream GetDataStream() => FFMQ.Game.Rom.GetStream(0x0cbed0);
+namespace logsmall.FFMQ.Text.Data;
 
-		public const byte BufferByte = 0x03;
-		public const int EntrySize = 0x10;
+class LocationNames {
+	public static ByteArrayStream GetDataStream() => FFMQ.Game.Rom.GetStream(0x0cbed0);
 
-		public static string GetString(int index) {
-			var stream = GetDataStream();
-			stream.Skip(EntrySize * index);
-			var data = stream.GetBytes(EntrySize);
-			var name = string.Join("", data.Where(x => x != BufferByte).Select(x => BasicTable.Lookup(x)));
-			return name;
-		}
+	public const byte BufferByte = 0x03;
+	public const int EntrySize = 0x10;
+
+	public static string GetString(int index) {
+		var stream = GetDataStream();
+		stream.Skip(EntrySize * index);
+		var data = stream.GetBytes(EntrySize);
+		var name = string.Join("", data.Where(x => x != BufferByte).Select(x => BasicTable.Lookup(x)));
+		return name;
 	}
 }
+

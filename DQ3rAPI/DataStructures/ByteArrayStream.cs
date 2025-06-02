@@ -72,7 +72,7 @@ public class ByteArrayStream {
 
 	public ByteArrayStream Branch() => Branch(0);
 
-	public ByteArrayStream Branch(int startAddress) => new ByteArrayStream(Buffer, startAddress);
+	public ByteArrayStream Branch(int startAddress) => new(Buffer, startAddress);
 
 	public List<ByteArrayStream> FindAll(byte[] searchTerm) {
 		ArgumentNullException.ThrowIfNull(searchTerm, nameof(searchTerm));

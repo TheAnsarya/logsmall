@@ -1,33 +1,29 @@
 using DQ3Lib.Streams;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DQ3Lib.Text.Compression.DialogHuffman {
-	internal class DecompressEngine {
-		private readonly int[] LeftTree;
+namespace DQ3Lib.Text.Compression.DialogHuffman;
 
-		private readonly int[] RightTree;
+internal class DecompressEngine {
+	private readonly int[] LeftTree;
 
-		public DecompressEngine(int[] leftTree, int[] rightTree) {
-			this.LeftTree = leftTree;
-			this.RightTree = rightTree;
+	private readonly int[] RightTree;
+
+	public DecompressEngine(int[] leftTree, int[] rightTree) {
+		this.LeftTree = leftTree;
+		this.RightTree = rightTree;
+	}
+
+	public string[] Decompress(ByteArrayStream data) {
+		var result = new List<string>();
+
+		while (!data.AtEnd) {
+			data
 		}
 
-		public string[] Decompress(ByteArrayStream data) {
-			var result = new List<string>();
-
-			while (!data.AtEnd) {
-				data
-			}
 
 
 
 
-
-			return [.. result];
-		}
+		return [.. result];
 	}
 }
+

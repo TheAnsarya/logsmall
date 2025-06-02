@@ -1,35 +1,36 @@
-namespace logsmall.DQ3.Text.Data {
-	class Classes : TextList {
-		private Classes() { }
+namespace logsmall.DQ3.Text.Data;
 
-		private static Classes _instance;
-		public static Classes Instance {
-			get {
-				_instance ??= new Classes();
+class Classes : TextList {
+	private Classes() { }
 
-				return _instance;
-			}
+	private static Classes _instance;
+	public static Classes Instance {
+		get {
+			_instance ??= new Classes();
+
+			return _instance;
 		}
-
-		public override string TitleTag { get => nameof(Classes); }
-		public override int StartAddress { get => 0xfed7f4; }
-		public override int EndAddress { get => 0xfed823; }
-		public override int RoughEndAddress { get => EndAddress; }
-
-		// Entries have been ordered
-		// Entries have been verified
-		// Translations from: https://gamefaqs.gamespot.com/snes/564402-dragon-quest-iii-soshite-densetsu-e/faqs/7856
-		public override string[][] Known { get => _known; }
-		private static readonly string[][] _known = new string[][] {
-			new string[] { "せんし", "Senshi (Soldier)" },
-			new string[] { "ぶとうか", "Butouka (Martial Artist)" },
-			new string[] { "まほうつかい", "Mahoutsukai (Magician)" },
-			new string[] { "そうりょ", "Souryo (Priest)" },
-			new string[] { "しょうにん", "Shounin (Merchant)" },
-			new string[] { "あそびにん", "Asobinin (Carouser)" },
-			new string[] { "とうぞく", "Touzoku (Thief)" },
-			new string[] { "けんじゃ", "Kenja (Sage)" },
-			new string[] { "ゆうしゃ", "Yuusha (Hero)" },
-		};
 	}
+
+	public override string TitleTag { get => nameof(Classes); }
+	public override int StartAddress { get => 0xfed7f4; }
+	public override int EndAddress { get => 0xfed823; }
+	public override int RoughEndAddress { get => EndAddress; }
+
+	// Entries have been ordered
+	// Entries have been verified
+	// Translations from: https://gamefaqs.gamespot.com/snes/564402-dragon-quest-iii-soshite-densetsu-e/faqs/7856
+	public override string[][] Known { get => _known; }
+	private static readonly string[][] _known = new string[][] {
+		new string[] { "せんし", "Senshi (Soldier)" },
+		new string[] { "ぶとうか", "Butouka (Martial Artist)" },
+		new string[] { "まほうつかい", "Mahoutsukai (Magician)" },
+		new string[] { "そうりょ", "Souryo (Priest)" },
+		new string[] { "しょうにん", "Shounin (Merchant)" },
+		new string[] { "あそびにん", "Asobinin (Carouser)" },
+		new string[] { "とうぞく", "Touzoku (Thief)" },
+		new string[] { "けんじゃ", "Kenja (Sage)" },
+		new string[] { "ゆうしゃ", "Yuusha (Hero)" },
+	};
 }
+

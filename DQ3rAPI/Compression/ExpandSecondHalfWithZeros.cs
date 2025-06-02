@@ -62,5 +62,4 @@ class ExpandSecondHalfWithZeros {
 
 		return output.ToArray();
 	}
-
 }

@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DQ3Lib.Text.TableFile;
 
 // WARNING: This is a naïve implementation. It assumes that the file is well-formed and that the keys are unique.

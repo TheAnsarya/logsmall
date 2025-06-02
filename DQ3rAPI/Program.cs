@@ -2,45 +2,46 @@
 using DQ3rAPI.Options;
 using Serilog;
 
-namespace DQ3rAPI {
-	public class Program {
-		public static void Main(string[] args) {
-			var builder = WebApplication.CreateBuilder(args);
+namespace DQ3rAPI;
 
-			// Add services to the container.
+public class Program {
+	public static void Main(string[] args) {
+		var builder = WebApplication.CreateBuilder(args);
 
-			builder.Configuration.AddJsonFile("datamap.json").Build();
+		// Add services to the container.
 
-			builder.Services.Configure<RomFileOptions>(
-				builder.Configuration.GetSection(RomFileOptions.RomFile));
+		builder.Configuration.AddJsonFile("datamap.json").Build();
 
-			// Add support to logging with SERILOG
-			builder.Host.UseSerilog((context, configuration) =>
-				configuration.ReadFrom.Configuration(context.Configuration));
+		builder.Services.Configure<RomFileOptions>(
+			builder.Configuration.GetSection(RomFileOptions.RomFile));
 
-			builder.Services.AddControllers();
+		// Add support to logging with SERILOG
+		builder.Host.UseSerilog((context, configuration) =>
+			configuration.ReadFrom.Configuration(context.Configuration));
 
-			// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-			builder.Services.AddOpenApi();
+		builder.Services.AddControllers();
 
-			var app = builder.Build();
+		// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+		builder.Services.AddOpenApi();
 
-			// Configure the HTTP request pipeline.
-			if (app.Environment.IsDevelopment()) {
-				app.MapOpenApi();
-			}
+		var app = builder.Build();
 
-			// Add support to logging request with SERILOG
-			app.UseSerilogRequestLogging();
-
-			app.UseHttpsRedirection();
-
-			app.UseAuthorization();
-
-
-			app.MapControllers();
-
-			app.Run();
+		// Configure the HTTP request pipeline.
+		if (app.Environment.IsDevelopment()) {
+			app.MapOpenApi();
 		}
+
+		// Add support to logging request with SERILOG
+		app.UseSerilogRequestLogging();
+
+		app.UseHttpsRedirection();
+
+		app.UseAuthorization();
+
+
+		app.MapControllers();
+
+		app.Run();
 	}
 }
+
