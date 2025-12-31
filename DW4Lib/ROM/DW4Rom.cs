@@ -301,4 +301,186 @@ public class DW4Rom {
 
 		return candidates;
 	}
+
+	// ============================================================
+	// Map Reading Methods
+	// ============================================================
+
+	/// <summary>
+	/// Read map pointer table from Bank $17.
+	/// Returns array of 73 pointers to map info structures.
+	/// </summary>
+	public ushort[] ReadMapPointerTable() {
+		const int pointerTableBank = 0x17;
+		const int pointerTableAddress = 0xB08D;
+		const int mapCount = 73;
+
+		var pointers = new ushort[mapCount];
+		for (int i = 0; i < mapCount; i++) {
+			pointers[i] = ReadWord(pointerTableAddress + (i * 2), pointerTableBank);
+		}
+
+		return pointers;
+	}
+
+	/// <summary>
+	/// Read map info data for a specific map.
+	/// Returns array of MapInfo for each submap.
+	/// </summary>
+	public DataStructures.Maps.MapInfo[] ReadMapInfo(int mapId) {
+		var pointers = ReadMapPointerTable();
+		if (mapId < 0 || mapId >= pointers.Length) {
+			throw new ArgumentOutOfRangeException(nameof(mapId), $"Map ID must be 0-{pointers.Length - 1}");
+		}
+
+		// Get pointer for this map and next map (or end) to determine submap count
+		ushort startPtr = pointers[mapId];
+		ushort endPtr = mapId < pointers.Length - 1 ? pointers[mapId + 1] : (ushort)0xB4AE;
+
+		int submapCount = (endPtr - startPtr) / 3;
+		var submaps = new DataStructures.Maps.MapInfo[submapCount];
+
+		const int infoBank = 0x17;
+		for (int i = 0; i < submapCount; i++) {
+			int address = startPtr + (i * 3);
+			var data = ReadBytes(address, infoBank, 3);
+
+			submaps[i] = new DataStructures.Maps.MapInfo {
+				MapId = mapId,
+				SubmapIndex = i,
+				TilesetNumber = data[0],
+				MapDataAddress = (ushort)(data[1] | (data[2] << 8)),
+				DataBank = GetMapDataBank(mapId)
+			};
+		}
+
+		return submaps;
+	}
+
+	/// <summary>
+	/// Get the bank containing map data for a given map ID.
+	/// Based on ROM research: Banks $09, $0A, $0B.
+	/// </summary>
+	public static int GetMapDataBank(int mapId) {
+		// Maps $00-$2C are in Bank $09
+		// Maps $2D-$45 are in Bank $0A
+		// Maps $45-$48 are in Bank $0B
+		// Note: Some maps span multiple banks
+
+		if (mapId <= 0x2C) return 0x09;
+		if (mapId <= 0x45) return 0x0A;
+		return 0x0B;
+	}
+
+	/// <summary>
+	/// Read main overworld map data.
+	/// Returns 256x256 decompressed tilemap.
+	/// </summary>
+	public byte[,] ReadMainOverworld() {
+		return ReadOverworld(
+			DataStructures.Maps.OverworldMap.Bank,
+			DataStructures.Maps.OverworldMap.MainOverworldAddress,
+			DataStructures.Maps.OverworldMap.MainOverworldRowPointers
+		);
+	}
+
+	/// <summary>
+	/// Read Gottside overworld map data.
+	/// </summary>
+	public byte[,] ReadGottsideOverworld() {
+		return ReadOverworld(
+			DataStructures.Maps.OverworldMap.Bank,
+			DataStructures.Maps.OverworldMap.GottsideOverworldAddress,
+			DataStructures.Maps.OverworldMap.GottsideRowPointers
+		);
+	}
+
+	/// <summary>
+	/// Read underworld map data.
+	/// </summary>
+	public byte[,] ReadUnderworld() {
+		return ReadOverworld(
+			DataStructures.Maps.OverworldMap.Bank,
+			DataStructures.Maps.OverworldMap.UnderworldAddress,
+			DataStructures.Maps.OverworldMap.UnderworldRowPointers
+		);
+	}
+
+	/// <summary>
+	/// Read and decompress an overworld map.
+	/// </summary>
+	private byte[,] ReadOverworld(int bank, int mapDataAddress, int rowPointersAddress) {
+		var map = new byte[256, 256];
+
+		// Read row pointers (256 rows, 4 bytes each)
+		for (int row = 0; row < 256; row++) {
+			int pointerAddress = rowPointersAddress + (row * 4);
+			var pointerData = ReadBytes(pointerAddress, bank, 4);
+
+			ushort dataPtr = (ushort)(pointerData[0] | (pointerData[1] << 8));
+			// byte sizeToX128 = pointerData[2]; // Not currently used
+			// byte sizeToX256 = pointerData[3]; // Not currently used
+
+			// Decompress row
+			var rowTiles = DecompressOverworldRow(bank, dataPtr, 256);
+			for (int col = 0; col < 256; col++) {
+				map[row, col] = rowTiles[col];
+			}
+		}
+
+		return map;
+	}
+
+	/// <summary>
+	/// Decompress a single overworld row.
+	/// Format: bits 0-4 = length+1, bits 5-7 = tile
+	/// Special: if byte >= $E8, subtract $E0 for tile number
+	/// </summary>
+	private byte[] DecompressOverworldRow(int bank, int address, int targetWidth) {
+		var result = new List<byte>();
+		int pos = 0;
+
+		while (result.Count < targetWidth) {
+			byte b = ReadByte(address + pos, bank);
+			pos++;
+
+			byte tile;
+			int length;
+
+			if (b >= 0xE8) {
+				tile = (byte)(b - 0xE0);
+				length = 1;
+			} else {
+				length = (b & 0x1F) + 1;
+				tile = (byte)((b >> 5) & 0x07);
+			}
+
+			for (int i = 0; i < length && result.Count < targetWidth; i++) {
+				result.Add(tile);
+			}
+		}
+
+		return result.ToArray();
+	}
+
+	/// <summary>
+	/// Read all tilesets from the ROM.
+	/// 51 tilesets at Bank $08, $8ADB-$979A.
+	/// </summary>
+	public DataStructures.Maps.Tileset[] ReadAllTilesets() {
+		const int tilesetBank = 0x08;
+		const int tilesetStartAddress = 0x8ADB;
+		const int tilesetCount = 51;
+		const int tilesetSize = 64;
+
+		var tilesets = new DataStructures.Maps.Tileset[tilesetCount];
+
+		for (int i = 0; i < tilesetCount; i++) {
+			int address = tilesetStartAddress + (i * tilesetSize);
+			var data = ReadBytes(address, tilesetBank, tilesetSize);
+			tilesets[i] = DataStructures.Maps.Tileset.Parse(data, 0, i);
+		}
+
+		return tilesets;
+	}
 }
