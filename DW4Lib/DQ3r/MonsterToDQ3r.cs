@@ -41,11 +41,31 @@ public static class MonsterToDQ3r {
 			AIPattern = 0, // Unknown in 27-byte format
 			Spells = new List<int>(), // Unknown in 27-byte format
 			Resistances = new Dictionary<string, int>(), // Unknown in 27-byte format
-			SpriteId = 0, // Unknown in 27-byte format
-			PaletteId = 0,
+			SpriteId = GetSpriteId(id),
+			PaletteId = GetPaletteId(id),
 			SourceDW4Id = id,
 			Notes = BuildConversionNotes(dw4Monster, id)
 		};
+	}
+
+	/// <summary>
+	/// Get the DQ3r sprite ID for a DW4 monster.
+	/// Uses the animation mapping tables when available.
+	/// </summary>
+	private static int GetSpriteId(int dw4MonsterId) {
+		return DQ3rMonsterMappings.GetSpriteForDW4Monster(dw4MonsterId) ?? 0;
+	}
+
+	/// <summary>
+	/// Get the DQ3r palette ID for a DW4 monster.
+	/// </summary>
+	private static int GetPaletteId(int dw4MonsterId) {
+		var sprite = DQ3rMonsterMappings.GetSpriteForDW4Monster(dw4MonsterId);
+		if (sprite.HasValue) {
+			var spriteData = DQ3rMonsterMappings.GetSprite(sprite.Value);
+			return spriteData?.PaletteId ?? 0;
+		}
+		return 0;
 	}
 
 	/// <summary>
@@ -70,6 +90,14 @@ public static class MonsterToDQ3r {
 
 		if (monster.StatusFlags != 0) {
 			notes.Add($"StatusFlags: 0x{monster.StatusFlags:X2}");
+		}
+
+		// Note sprite mapping status
+		var spriteId = DQ3rMonsterMappings.GetSpriteForDW4Monster(id);
+		if (spriteId.HasValue) {
+			notes.Add($"Sprite: 0x{spriteId:X2}");
+		} else {
+			notes.Add("No sprite mapping - needs custom graphics");
 		}
 
 		return string.Join("; ", notes);

@@ -56,6 +56,10 @@ public static class SpellToDQ3r {
 	/// Convert a single DW4 spell to DQ3r format.
 	/// </summary>
 	public static DQ3rSpell Convert(Spell dw4Spell, int id, string name = "") {
+		// Get animation and sound IDs from mapping tables
+		int animationId = DQ3rAnimationMappings.GetAnimationForDW4Spell(id);
+		int soundId = DQ3rAnimationMappings.SpellSounds.TryGetValue(animationId, out int snd) ? snd : 0;
+
 		return new DQ3rSpell {
 			Id = id,
 			Name = string.IsNullOrEmpty(name) ? $"Spell_{id:D3}" : name,
@@ -69,11 +73,13 @@ public static class SpellToDQ3r {
 			LearnLevel = 0,
 			UsableInField = CanUseInField(dw4Spell.Type),
 			UsableInBattle = CanUseInBattle(dw4Spell.Type),
-			AnimationId = 0,
-			SoundId = 0,
+			AnimationId = animationId,
+			SoundId = soundId,
 			Description = GenerateDescription(dw4Spell),
 			SourceDW4Id = id,
-			Notes = $"Converted from DW4 spell {id}"
+			Notes = animationId == 0
+				? $"Converted from DW4 spell {id} - no animation mapping"
+				: $"Converted from DW4 spell {id} - animation 0x{animationId:X2}"
 		};
 	}
 
