@@ -21,27 +21,15 @@ public static class MonsterToDQ3r {
 	}
 
 	/// <summary>
-	/// DW4 resistance bit positions to DQ3r element names.
-	/// </summary>
-	private static readonly Dictionary<int, string> ResistanceBitToElement = new() {
-		{ 0, "fire" },
-		{ 1, "ice" },
-		{ 2, "lightning" },
-		{ 3, "wind" },
-		{ 4, "sleep" },
-		{ 5, "stopspell" },
-		{ 6, "surround" },
-		{ 7, "death" },
-	};
-
-	/// <summary>
 	/// Convert a single DW4 monster to DQ3r format.
+	/// Note: Many DW4 monster bytes are still under research,
+	/// so some DQ3r fields use defaults or raw byte values.
 	/// </summary>
 	public static DQ3rMonster Convert(Monster dw4Monster, int id, string name = "") {
 		return new DQ3rMonster {
 			Id = id,
 			Name = string.IsNullOrEmpty(name) ? $"Monster_{id:D3}" : name,
-			HP = ScaleStat(dw4Monster.HP, ScalingFactors.HP),
+			HP = ScaleStat(GetEstimatedHP(dw4Monster), ScalingFactors.HP),
 			MP = 0, // DW4 doesn't track monster MP
 			Attack = ScaleStat(dw4Monster.Attack, ScalingFactors.Attack),
 			Defense = ScaleStat(dw4Monster.Defense, ScalingFactors.Defense),
@@ -50,14 +38,41 @@ public static class MonsterToDQ3r {
 			Gold = ScaleStat(dw4Monster.Gold, ScalingFactors.Gold),
 			ItemDrop = dw4Monster.ItemDrop,
 			DropRate = 32, // Default 12.5% (32/256)
-			AIPattern = dw4Monster.AIPattern,
-			Spells = ConvertSpells(dw4Monster.Spell1, dw4Monster.Spell2),
-			Resistances = ConvertResistances(dw4Monster.Resistances),
-			SpriteId = dw4Monster.SpriteID,
+			AIPattern = 0, // Unknown in 27-byte format
+			Spells = new List<int>(), // Unknown in 27-byte format
+			Resistances = new Dictionary<string, int>(), // Unknown in 27-byte format
+			SpriteId = 0, // Unknown in 27-byte format
 			PaletteId = 0,
 			SourceDW4Id = id,
-			Notes = $"Converted from DW4 monster {id}"
+			Notes = BuildConversionNotes(dw4Monster, id)
 		};
+	}
+
+	/// <summary>
+	/// Estimate HP from unknown bytes. The exact HP byte location is still being researched.
+	/// Using Byte15 as potential HP high byte combined with some pattern.
+	/// </summary>
+	private static int GetEstimatedHP(Monster monster) {
+		// The exact HP format in 27-byte structure is unknown
+		// For now, use a reasonable estimate based on Attack/Defense levels
+		// This should be updated once the HP byte position is confirmed
+		return Math.Max(monster.Attack, monster.Defense);
+	}
+
+	/// <summary>
+	/// Build conversion notes with raw byte information for debugging.
+	/// </summary>
+	private static string BuildConversionNotes(Monster monster, int id) {
+		var notes = new List<string> {
+			$"Converted from DW4 monster {id}",
+			$"IsMetal: {monster.IsMetal}"
+		};
+
+		if (monster.StatusFlags != 0) {
+			notes.Add($"StatusFlags: 0x{monster.StatusFlags:X2}");
+		}
+
+		return string.Join("; ", notes);
 	}
 
 	/// <summary>
@@ -79,54 +94,6 @@ public static class MonsterToDQ3r {
 	/// </summary>
 	private static int ScaleStat(int value, double factor) {
 		return (int)Math.Round(value * factor);
-	}
-
-	/// <summary>
-	/// Convert DW4 spell bytes to list of spell IDs.
-	/// </summary>
-	private static List<int> ConvertSpells(byte spell1, byte spell2) {
-		var spells = new List<int>();
-
-		if (spell1 > 0) spells.Add(MapSpellId(spell1));
-		if (spell2 > 0) spells.Add(MapSpellId(spell2));
-
-		return spells;
-	}
-
-	/// <summary>
-	/// Map DW4 spell ID to DQ3r equivalent.
-	/// </summary>
-	private static int MapSpellId(int dw4SpellId) {
-		// Basic mapping - expand as needed
-		// DW4 and DQ3r share many spell names
-		return dw4SpellId switch {
-			1 => 1,   // Heal
-			2 => 2,   // Hurt
-			3 => 3,   // Sleep
-			4 => 4,   // Radiant
-			5 => 5,   // Stopspell
-			6 => 6,   // Outside
-			7 => 7,   // Return
-			8 => 8,   // Repel
-			9 => 9,   // Healmore
-			10 => 10, // Hurtmore
-			_ => dw4SpellId
-		};
-	}
-
-	/// <summary>
-	/// Convert DW4 resistance flags to DQ3r format.
-	/// </summary>
-	private static Dictionary<string, int> ConvertResistances(byte resistanceByte) {
-		var resistances = new Dictionary<string, int>();
-
-		foreach (var (bit, element) in ResistanceBitToElement) {
-			bool isResistant = (resistanceByte & (1 << bit)) != 0;
-			// DQ3r uses 0-100 resistance scale, DW4 uses simple on/off
-			resistances[element] = isResistant ? 100 : 0;
-		}
-
-		return resistances;
 	}
 
 	/// <summary>

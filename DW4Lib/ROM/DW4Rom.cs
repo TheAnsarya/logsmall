@@ -136,20 +136,22 @@ public class DW4Rom {
 
 	/// <summary>
 	/// Read all monsters from the ROM.
-	/// Monster data is in Bank $06.
+	/// Monster data is in Bank 6 at $A2A2 (27 bytes per entry).
 	/// </summary>
 	public List<Monster> ReadAllMonsters() {
 		var monsters = new List<Monster>();
 
-		// Monster data starts at $8000 in bank 6 (0x0C in file terms - bank 12)
-		// Approximately 200 monsters
-		const int monsterBank = 12; // Bank $06 maps to file bank 12
-		const int monsterStartAddress = 0x8000;
-		const int monsterCount = 200; // Approximate
+		// Monster data at $A2A2 in Bank 6
+		// Bank 6 = file offset $C010 (header) + $6000 (bank * 8KB) = $C010 + 6*$2000
+		// Actually for MMC3, bank 6 is at file offset: header + (6 * 0x2000) = 0x10 + 0xC000 = 0xC010
+		// But $A2A2 is a CPU address in the $A000-$BFFF range (second 8KB window)
+		// So we need bank 6 mapped to $A000, meaning offset within bank = $A2A2 - $A000 = $2A2
+
+		const int monsterCount = 200; // Approximate count
 
 		for (int i = 0; i < monsterCount; i++) {
-			int address = monsterStartAddress + (i * Monster.Size);
-			var data = ReadBytes(address, monsterBank, Monster.Size);
+			int address = Monster.TableAddress + (i * Monster.Size);
+			var data = ReadBytes(address, Monster.Bank, Monster.Size);
 			monsters.Add(Monster.FromBytes(data));
 		}
 

@@ -21,20 +21,35 @@ public static class MonsterConverter {
 		return new MonsterJson {
 			Index = index,
 			Name = name ?? $"Monster_{index:D3}",
-			NameIndex = monster.NameIndex,
-			HP = monster.HP,
+			Experience = monster.Experience,
+			Gold = monster.Gold,
 			Attack = monster.Attack,
 			Defense = monster.Defense,
 			Agility = monster.Agility,
-			Experience = monster.Experience,
-			Gold = monster.Gold,
 			ItemDrop = monster.ItemDrop,
-			DropRate = monster.DropRate,
-			Spell1 = monster.Spell1,
-			Spell2 = monster.Spell2,
-			AIPattern = monster.AIPattern,
-			Resistances = ParseResistances(monster.Resistances),
-			SpriteID = monster.SpriteID
+			StatusFlags = monster.StatusFlags,
+			IsMetal = monster.IsMetal,
+			// Store raw bytes for unknown fields
+			RawBytes = new MonsterRawBytes {
+				Byte4 = monster.Byte4,
+				Byte5 = monster.Byte5,
+				Byte9 = monster.Byte9,
+				Byte10 = monster.Byte10,
+				Byte11 = monster.Byte11,
+				Byte12 = monster.Byte12,
+				Byte13 = monster.Byte13,
+				Byte14 = monster.Byte14,
+				Byte15 = monster.Byte15,
+				Byte16 = monster.Byte16,
+				Byte17 = monster.Byte17,
+				Byte18 = monster.Byte18,
+				Byte19 = monster.Byte19,
+				Byte20 = monster.Byte20,
+				MetalFlag = monster.MetalFlag,
+				Byte24 = monster.Byte24,
+				Byte25 = monster.Byte25,
+				Byte26 = monster.Byte26
+			}
 		};
 	}
 
@@ -73,53 +88,33 @@ public static class MonsterConverter {
 	/// </summary>
 	public static Monster FromJson(MonsterJson json) {
 		return new Monster {
-			NameIndex = json.NameIndex,
-			HP = json.HP,
+			Experience = json.Experience,
+			Gold = json.Gold,
 			Attack = json.Attack,
 			Defense = json.Defense,
 			Agility = json.Agility,
-			Experience = json.Experience,
-			Gold = json.Gold,
 			ItemDrop = json.ItemDrop,
-			DropRate = json.DropRate,
-			Spell1 = json.Spell1,
-			Spell2 = json.Spell2,
-			AIPattern = json.AIPattern,
-			Resistances = PackResistances(json.Resistances),
-			SpriteID = json.SpriteID
+			StatusFlags = json.StatusFlags,
+			// Restore raw bytes
+			Byte4 = json.RawBytes.Byte4,
+			Byte5 = json.RawBytes.Byte5,
+			Byte9 = json.RawBytes.Byte9,
+			Byte10 = json.RawBytes.Byte10,
+			Byte11 = json.RawBytes.Byte11,
+			Byte12 = json.RawBytes.Byte12,
+			Byte13 = json.RawBytes.Byte13,
+			Byte14 = json.RawBytes.Byte14,
+			Byte15 = json.RawBytes.Byte15,
+			Byte16 = json.RawBytes.Byte16,
+			Byte17 = json.RawBytes.Byte17,
+			Byte18 = json.RawBytes.Byte18,
+			Byte19 = json.RawBytes.Byte19,
+			Byte20 = json.RawBytes.Byte20,
+			MetalFlag = json.RawBytes.MetalFlag,
+			Byte24 = json.RawBytes.Byte24,
+			Byte25 = json.RawBytes.Byte25,
+			Byte26 = json.RawBytes.Byte26
 		};
-	}
-
-	/// <summary>
-	/// Parse resistance byte into named flags.
-	/// </summary>
-	private static ResistanceFlags ParseResistances(byte resistances) {
-		return new ResistanceFlags {
-			Fire = (resistances & 0x01) != 0,
-			Ice = (resistances & 0x02) != 0,
-			Wind = (resistances & 0x04) != 0,
-			Lightning = (resistances & 0x08) != 0,
-			Sleep = (resistances & 0x10) != 0,
-			Stopspell = (resistances & 0x20) != 0,
-			Death = (resistances & 0x40) != 0,
-			Drain = (resistances & 0x80) != 0
-		};
-	}
-
-	/// <summary>
-	/// Pack resistance flags back into byte.
-	/// </summary>
-	private static byte PackResistances(ResistanceFlags flags) {
-		byte result = 0;
-		if (flags.Fire) result |= 0x01;
-		if (flags.Ice) result |= 0x02;
-		if (flags.Wind) result |= 0x04;
-		if (flags.Lightning) result |= 0x08;
-		if (flags.Sleep) result |= 0x10;
-		if (flags.Stopspell) result |= 0x20;
-		if (flags.Death) result |= 0x40;
-		if (flags.Drain) result |= 0x80;
-		return result;
 	}
 }
 
@@ -129,32 +124,37 @@ public static class MonsterConverter {
 public class MonsterJson {
 	public int Index { get; set; }
 	public string Name { get; set; } = "";
-	public byte NameIndex { get; set; }
-	public byte HP { get; set; }
+	public ushort Experience { get; set; }
+	public ushort Gold { get; set; }
 	public byte Attack { get; set; }
 	public byte Defense { get; set; }
 	public byte Agility { get; set; }
-	public ushort Experience { get; set; }
-	public ushort Gold { get; set; }
 	public byte ItemDrop { get; set; }
-	public byte DropRate { get; set; }
-	public byte Spell1 { get; set; }
-	public byte Spell2 { get; set; }
-	public byte AIPattern { get; set; }
-	public ResistanceFlags Resistances { get; set; } = new();
-	public byte SpriteID { get; set; }
+	public byte StatusFlags { get; set; }
+	public bool IsMetal { get; set; }
+	public MonsterRawBytes RawBytes { get; set; } = new();
 }
 
 /// <summary>
-/// Named resistance flags for JSON readability.
+/// Raw byte storage for unknown monster data fields.
 /// </summary>
-public class ResistanceFlags {
-	public bool Fire { get; set; }
-	public bool Ice { get; set; }
-	public bool Wind { get; set; }
-	public bool Lightning { get; set; }
-	public bool Sleep { get; set; }
-	public bool Stopspell { get; set; }
-	public bool Death { get; set; }
-	public bool Drain { get; set; }
+public class MonsterRawBytes {
+	public byte Byte4 { get; set; }
+	public byte Byte5 { get; set; }
+	public byte Byte9 { get; set; }
+	public byte Byte10 { get; set; }
+	public byte Byte11 { get; set; }
+	public byte Byte12 { get; set; }
+	public byte Byte13 { get; set; }
+	public byte Byte14 { get; set; }
+	public byte Byte15 { get; set; }
+	public byte Byte16 { get; set; }
+	public byte Byte17 { get; set; }
+	public byte Byte18 { get; set; }
+	public byte Byte19 { get; set; }
+	public byte Byte20 { get; set; }
+	public byte MetalFlag { get; set; }
+	public byte Byte24 { get; set; }
+	public byte Byte25 { get; set; }
+	public byte Byte26 { get; set; }
 }
