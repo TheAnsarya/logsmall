@@ -51,7 +51,7 @@ public static class MonsterToDQ3r {
 			ItemDrop = dw4Monster.ItemDrop,
 			DropRate = 32, // Default 12.5% (32/256)
 			AIPattern = dw4Monster.AIPattern,
-			Spells = ConvertSpells(dw4Monster.Spells),
+			Spells = ConvertSpells(dw4Monster.Spell1, dw4Monster.Spell2),
 			Resistances = ConvertResistances(dw4Monster.Resistances),
 			SpriteId = dw4Monster.SpriteID,
 			PaletteId = 0,
@@ -82,14 +82,10 @@ public static class MonsterToDQ3r {
 	}
 
 	/// <summary>
-	/// Convert DW4 spell byte to list of spell IDs.
+	/// Convert DW4 spell bytes to list of spell IDs.
 	/// </summary>
-	private static List<int> ConvertSpells(byte spellByte) {
+	private static List<int> ConvertSpells(byte spell1, byte spell2) {
 		var spells = new List<int>();
-
-		// DW4 stores up to 2 spell slots in one byte (4 bits each)
-		int spell1 = spellByte & 0x0F;
-		int spell2 = (spellByte >> 4) & 0x0F;
 
 		if (spell1 > 0) spells.Add(MapSpellId(spell1));
 		if (spell2 > 0) spells.Add(MapSpellId(spell2));

@@ -27,14 +27,14 @@ public static class ItemToDQ3r {
 		{ ItemType.Helmet, DQ3rItemType.Helmet },
 		{ ItemType.Accessory, DQ3rItemType.Accessory },
 		{ ItemType.KeyItem, DQ3rItemType.KeyItem },
-		{ ItemType.Tool, DQ3rItemType.Tool },
+		{ ItemType.Special, DQ3rItemType.Tool },
 	};
 
 	/// <summary>
 	/// Convert a single DW4 item to DQ3r format.
 	/// </summary>
 	public static DQ3rItem Convert(Item dw4Item, int id, string name = "") {
-		var type = MapItemType(dw4Item.Type);
+		var type = MapItemType(dw4Item.EquipmentSlot);
 		int buyPrice = (int)(dw4Item.Price * PriceScaling);
 
 		return new DQ3rItem {

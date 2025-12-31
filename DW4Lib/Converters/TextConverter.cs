@@ -94,14 +94,14 @@ public static class TextConverter {
 			// Read pointer table
 			for (int i = 0; i < block.EntryCount; i++) {
 				int pointerOffset = rom.CpuToFileOffset(block.PointerTableAddress + i * 2, block.Bank);
-				int textPtr = rom.ReadWord(pointerOffset);
+				int textPtr = rom.ReadWordAtOffset(pointerOffset);
 
 				// Read text until end marker
 				int textOffset = rom.CpuToFileOffset(textPtr, block.Bank);
 				var textBytes = new List<byte>();
 
 				for (int j = 0; j < 256; j++) { // Max length safety
-					byte b = rom.ReadByte(textOffset + j);
+					byte b = rom.ReadByteAtOffset(textOffset + j);
 					textBytes.Add(b);
 					if (b == 0x10) break; // End marker
 				}
@@ -126,7 +126,7 @@ public static class TextConverter {
 				int startPos = currentOffset;
 
 				for (int j = 0; j < 256; j++) {
-					byte b = rom.ReadByte(currentOffset++);
+					byte b = rom.ReadByteAtOffset(currentOffset++);
 					textBytes.Add(b);
 					if (b == 0x10) break;
 				}

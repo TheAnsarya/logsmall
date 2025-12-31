@@ -106,6 +106,20 @@ public class DW4Rom {
 	}
 
 	/// <summary>
+	/// Read a single byte at file offset (header-relative).
+	/// </summary>
+	public byte ReadByteAtOffset(int offset) {
+		return _data[offset];
+	}
+
+	/// <summary>
+	/// Read a 16-bit word (little endian) at file offset (header-relative).
+	/// </summary>
+	public ushort ReadWordAtOffset(int offset) {
+		return (ushort)(_data[offset] | (_data[offset + 1] << 8));
+	}
+
+	/// <summary>
 	/// Read a single byte from a bank and CPU address.
 	/// </summary>
 	public byte ReadByte(int cpuAddress, int bank) {
