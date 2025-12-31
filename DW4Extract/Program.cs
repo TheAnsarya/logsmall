@@ -36,6 +36,8 @@ public static class Program {
 				case "items":
 				case "spells":
 				case "text":
+				case "exp":
+				case "experience":
 					command = args[i];
 					break;
 				case "-h":
@@ -78,6 +80,7 @@ public static class Program {
 					ExtractItems(rom, outputPath);
 					ExtractSpells(rom, outputPath);
 					ExtractText(rom, outputPath);
+					ExtractExperienceTables(rom, outputPath);
 					break;
 				case "monsters":
 					ExtractMonsters(rom, outputPath);
@@ -90,6 +93,10 @@ public static class Program {
 					break;
 				case "text":
 					ExtractText(rom, outputPath);
+					break;
+				case "exp":
+				case "experience":
+					ExtractExperienceTables(rom, outputPath);
 					break;
 			}
 
@@ -111,6 +118,7 @@ public static class Program {
 		Console.WriteLine("  items     Extract item data");
 		Console.WriteLine("  spells    Extract spell data");
 		Console.WriteLine("  text      Extract text strings");
+		Console.WriteLine("  exp       Extract experience tables");
 		Console.WriteLine();
 		Console.WriteLine("Options:");
 		Console.WriteLine("  -r, --rom     Path to Dragon Warrior IV NES ROM");
@@ -172,6 +180,18 @@ public static class Program {
 			}
 
 			Console.WriteLine($"OK ({textBlocks.Count} text blocks)");
+		} catch (Exception ex) {
+			Console.WriteLine($"FAILED: {ex.Message}");
+		}
+	}
+
+	private static void ExtractExperienceTables(DW4Rom rom, string outputPath) {
+		Console.Write("Extracting experience tables... ");
+		try {
+			var expTables = rom.ReadExperienceTables();
+			var filePath = Path.Combine(outputPath, "experience_tables.json");
+			ExperienceTableConverter.SaveToFile(expTables, filePath);
+			Console.WriteLine($"OK ({expTables.Tables.Count} character tables)");
 		} catch (Exception ex) {
 			Console.WriteLine($"FAILED: {ex.Message}");
 		}

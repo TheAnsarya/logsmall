@@ -211,4 +211,94 @@ public class DW4Rom {
 		Array.Copy(_data, HeaderSize, prg, 0, PrgRomSize);
 		return prg;
 	}
+
+	/// <summary>
+	/// Read experience tables from the ROM.
+	/// Based on research, Bank 8 contains experience table data.
+	/// Tables appear to be 3-byte entries (24-bit EXP values).
+	/// </summary>
+	public ExperienceTableCollection ReadExperienceTables() {
+		var collection = new ExperienceTableCollection();
+
+		// Known character names for DW4
+		var characterNames = new[] {
+			"Hero (Ch5)", "Ragnar", "Alena", "Cristo", "Brey",
+			"Taloon", "Nara", "Mara", "Panon", "Orin"
+		};
+
+		// Research suggests tables at Bank 8, starting around $A866
+		// Each table appears to be 50 levels * 3 bytes = 150 bytes
+		// But the exact layout needs verification
+
+		const int expBank = 8;
+		const int expTableStart = 0xA866; // First candidate from research
+		const int levelsPerTable = 50;
+		const int bytesPerEntry = 3; // 24-bit values
+		const int tableSize = levelsPerTable * bytesPerEntry;
+
+		for (int charId = 0; charId < characterNames.Length; charId++) {
+			var table = new ExperienceTable {
+				CharacterId = charId,
+				CharacterName = characterNames[charId]
+			};
+
+			int tableAddress = expTableStart + (charId * tableSize);
+
+			for (int level = 0; level < levelsPerTable; level++) {
+				int address = tableAddress + (level * bytesPerEntry);
+				var expData = ReadBytes(address, expBank, bytesPerEntry);
+
+				// Read 24-bit value (little endian)
+				uint exp = (uint)(expData[0] | (expData[1] << 8) | (expData[2] << 16));
+				table.ExpForLevel.Add(exp);
+			}
+
+			collection.Tables.Add(table);
+		}
+
+		return collection;
+	}
+
+	/// <summary>
+	/// Scan for potential experience table locations.
+	/// Returns addresses where ascending 3-byte sequences are found.
+	/// </summary>
+	public List<(int bank, int address, List<uint> firstFive)> ScanForExpTables(int minBank = 0, int maxBank = 63) {
+		var candidates = new List<(int bank, int address, List<uint> firstFive)>();
+
+		for (int bank = minBank; bank <= maxBank; bank++) {
+			// Scan through the bank
+			for (int addr = 0x8000; addr < 0xBF00; addr++) {
+				var values = new List<uint>();
+				bool ascending = true;
+				uint prevValue = 0;
+
+				// Check for 5 ascending 3-byte values
+				for (int i = 0; i < 5; i++) {
+					var data = ReadBytes(addr + (i * 3), bank, 3);
+					uint value = (uint)(data[0] | (data[1] << 8) | (data[2] << 16));
+
+					if (value <= prevValue && i > 0) {
+						ascending = false;
+						break;
+					}
+
+					// Filter: reasonable EXP values (not too high, not too low)
+					if (value > 0xFFFFFF || (i > 0 && value < 100)) {
+						ascending = false;
+						break;
+					}
+
+					values.Add(value);
+					prevValue = value;
+				}
+
+				if (ascending && values.Count == 5 && values[0] > 0 && values[0] < 1000) {
+					candidates.Add((bank, addr, values));
+				}
+			}
+		}
+
+		return candidates;
+	}
 }
