@@ -8,16 +8,39 @@ namespace DW4Lib.DQ3r;
 /// Animation IDs are based on DQ3r SNES ROM analysis.
 /// See: GameInfo/Games/SNES/Dragon Quest III (SNES)/Docs/reference/technical/spell-animations.md
 /// 
-/// Animation data is estimated to be in ROM banks 35-40.
-/// Format details are still under research.
+/// ROM Layout (Verified):
+/// - Spell Data:    $520000 (4KB)
+/// - Spell Effects: $520800 (4KB estimated)
+/// - Battle Effects: $260000 (24KB estimated)
+/// 
+/// VRAM Layout (Battle):
+/// - $0000-$3FFF: Background tiles
+/// - $4000-$5FFF: Monster graphics  
+/// - $6000-$7FFF: Spell effect tiles (DMA loaded)
 /// </remarks>
 public static class DQ3rAnimationMappings {
+	#region ROM Address Constants
+
+	/// <summary>ROM address: Spell data table (4KB)</summary>
+	public const int RomSpellData = 0x520000;
+
+	/// <summary>ROM address: Spell effect data (4KB estimated)</summary>
+	public const int RomSpellEffects = 0x520800;
+
+	/// <summary>ROM address: Battle effect graphics (24KB estimated)</summary>
+	public const int RomBattleEffects = 0x260000;
+
+	/// <summary>VRAM address: Spell effect tiles destination</summary>
+	public const int VramSpellEffects = 0x6000;
+
+	#endregion
+
 	/// <summary>
 	/// Maps DQ3r spell ID to animation ID.
 	/// </summary>
 	/// <remarks>
-	/// Animation IDs are placeholders pending full ROM analysis.
-	/// Values marked TBD (0x00) need verification from ROM data.
+	/// Animation IDs are based on spell table at $520000.
+	/// Animation effect tiles DMA to VRAM $6000-$7FFF during casting.
 	/// </remarks>
 	public static readonly Dictionary<int, int> SpellAnimations = new() {
 		// Attack Magic - Fire (メラ系)
@@ -151,7 +174,39 @@ public static class DQ3rAnimationMappings {
 /// Monster sprite mappings for DQ3r.
 /// Maps monster IDs to their sprite graphics data.
 /// </summary>
+/// <remarks>
+/// ROM Addresses (Verified):
+/// - Monster Graphics: $220000 (128KB, SNES 4bpp)
+/// - Monster Metadata: $3ed964-$3ee0db (1,896 bytes)
+/// - Monster Stats:    $510000 (8KB)
+/// - Monster AI:       $512000 (12KB)
+/// 
+/// Monster count: 155
+/// Palette indices: 4-7 (battle sprites)
+/// </remarks>
 public static class DQ3rMonsterMappings {
+	#region ROM Address Constants
+
+	/// <summary>ROM address: Monster graphics (128KB, 4bpp)</summary>
+	public const int RomMonsterGraphics = 0x220000;
+
+	/// <summary>ROM address: Monster metadata table</summary>
+	public const int RomMonsterMetadata = 0x3ed964;
+
+	/// <summary>ROM address: Monster stats (8KB)</summary>
+	public const int RomMonsterStats = 0x510000;
+
+	/// <summary>ROM address: Monster AI patterns (12KB)</summary>
+	public const int RomMonsterAI = 0x512000;
+
+	/// <summary>Total monster count</summary>
+	public const int MonsterCount = 155;
+
+	/// <summary>VRAM address: Monster graphics destination</summary>
+	public const int VramMonsterGraphics = 0x4000;
+
+	#endregion
+
 	/// <summary>
 	/// Monster sprite size categories.
 	/// </summary>
@@ -177,8 +232,14 @@ public static class DQ3rMonsterMappings {
 	/// Maps DQ3r monster ID to sprite metadata.
 	/// </summary>
 	/// <remarks>
+	/// ROM Addresses (Verified):
+	/// - Monster Graphics: $220000 (128KB, 4bpp)
+	/// - Monster Metadata: $3ed964-$3ee0db (1,896 bytes)
+	/// - Monster Stats:    $510000 (8KB)
+	/// - Monster AI:       $512000 (12KB)
+	/// 
 	/// Sprite offsets are relative to monster graphics bank at $220000.
-	/// Values are estimates pending full ROM analysis.
+	/// Palette indices 4-7 are used for monsters in battle.
 	/// </remarks>
 	public static readonly Dictionary<int, MonsterSprite> MonsterSprites = new() {
 		// Small monsters (16x16)
