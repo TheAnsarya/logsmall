@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFMQLib", "FFMQLib\FFMQLib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW4Extract", "DW4Extract\DW4Extract.csproj", "{79C5BE14-F0F7-45AF-B277-B73A8A7EB14E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW4Lib.Tests", "DW4Lib.Tests\DW4Lib.Tests.csproj", "{684E539C-0C01-476B-A11A-8396DE9EDD1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,18 @@ Global
 		{79C5BE14-F0F7-45AF-B277-B73A8A7EB14E}.Release|x64.Build.0 = Release|Any CPU
 		{79C5BE14-F0F7-45AF-B277-B73A8A7EB14E}.Release|x86.ActiveCfg = Release|Any CPU
 		{79C5BE14-F0F7-45AF-B277-B73A8A7EB14E}.Release|x86.Build.0 = Release|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Debug|x64.Build.0 = Debug|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Debug|x86.Build.0 = Debug|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|x64.ActiveCfg = Release|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|x64.Build.0 = Release|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
