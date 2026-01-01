@@ -101,7 +101,17 @@ dotnet test DW4Lib.Tests
 dotnet test DW4Lib.Tests --filter "FullyQualifiedName~Chapter"
 ```
 
-Current test count: **137 tests** (47 chapter tests)
+Current test count: **779 tests**
+
+## Chapter Event & Map Coverage
+
+| Chapter | Events | Maps | NPCs | Treasures | Tests |
+|---------|--------|------|------|-----------|-------|
+| Chapter 1 (Ragnar) | ✅ 17 scripts | ✅ 5 maps | ✅ 12 NPCs | ✅ 8 chests | ✅ 100+ |
+| Chapter 2 (Alena) | ✅ 26 scripts | ✅ 10 maps | ✅ 10 NPCs | ✅ 10 chests | ✅ 43 |
+| Chapter 3 (Torneko) | ✅ 24 scripts | ✅ 9 maps | ✅ 9 NPCs | ✅ 10 chests | ✅ 43 |
+| Chapter 4 (Sisters) | ✅ 31 scripts | ✅ 12 maps | ✅ 13 NPCs | ✅ 13 chests | ✅ 43 |
+| Chapter 5 (Hero) | ✅ 35 scripts | ✅ 16 maps | ✅ 15 NPCs | ✅ 15 chests | ✅ 46 |
 
 ## Related Projects
 
