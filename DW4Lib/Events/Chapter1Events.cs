@@ -138,7 +138,13 @@ public static class Chapter1Events {
 		BuildSaroShadowBattleScript(),
 		BuildChildrenRescuedScript(),
 		BuildReturnToKingScript(),
-		BuildChapterCompleteScript()
+		BuildChapterCompleteScript(),
+		// Service scripts
+		BuildWeaponShopScript(),
+		BuildArmorShopScript(),
+		BuildItemShopScript(),
+		BuildInnScript(),
+		BuildChurchScript()
 	];
 
 	/// <summary>

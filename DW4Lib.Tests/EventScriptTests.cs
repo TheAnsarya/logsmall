@@ -529,7 +529,8 @@ public class Chapter1EventsTests {
 	public void GetAllScripts_ReturnsAllChapter1Scripts() {
 		var scripts = Chapter1Events.GetAllScripts();
 
-		Assert.Equal(10, scripts.Length);
+		// 10 story scripts + 5 service scripts (3 shops, inn, church)
+		Assert.Equal(15, scripts.Length);
 	}
 
 	[Fact]
