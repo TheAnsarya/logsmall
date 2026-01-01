@@ -137,8 +137,10 @@ public static class FontToDQ3r {
 
 	/// <summary>
 	/// DQ3r control codes for dialog system.
+	/// Complete set of control codes for text rendering and game functions.
 	/// </summary>
 	public static class ControlCodes {
+		// === String Termination ===
 		/// <summary>[CODE AB] - Unknown function.</summary>
 		public const int CodeAB = 0x00AB;
 
@@ -154,6 +156,7 @@ public static class FontToDQ3r {
 		/// <summary>[WAIT] - Wait for player input.</summary>
 		public const int Wait = 0x00AF;
 
+		// === Name Placeholders ===
 		/// <summary>[HERO NAME] - Insert hero's name.</summary>
 		public const int HeroName = 0x00B0;
 
@@ -166,6 +169,45 @@ public static class FontToDQ3r {
 		/// <summary>[PARTY3] - Third party member name.</summary>
 		public const int Party3Name = 0x00B3;
 
+		/// <summary>[PARTY4] - Fourth party member name.</summary>
+		public const int Party4Name = 0x00B4;
+
+		// === Color Codes ===
+		/// <summary>[COLOR WHITE] - Set text color to white.</summary>
+		public const int ColorWhite = 0x00B5;
+
+		/// <summary>[COLOR RED] - Set text color to red.</summary>
+		public const int ColorRed = 0x00B6;
+
+		/// <summary>[COLOR GREEN] - Set text color to green.</summary>
+		public const int ColorGreen = 0x00B7;
+
+		/// <summary>[COLOR BLUE] - Set text color to blue.</summary>
+		public const int ColorBlue = 0x00B8;
+
+		/// <summary>[COLOR YELLOW] - Set text color to yellow.</summary>
+		public const int ColorYellow = 0x00B9;
+
+		/// <summary>[COLOR CYAN] - Set text color to cyan.</summary>
+		public const int ColorCyan = 0x00BA;
+
+		/// <summary>[COLOR MAGENTA] - Set text color to magenta.</summary>
+		public const int ColorMagenta = 0x00BB;
+
+		/// <summary>[COLOR DEFAULT] - Reset to default color.</summary>
+		public const int ColorDefault = 0x00BC;
+
+		// === Timing/Speed ===
+		/// <summary>[DELAY SHORT] - Short delay.</summary>
+		public const int DelayShort = 0x00BD;
+
+		/// <summary>[DELAY LONG] - Long delay.</summary>
+		public const int DelayLong = 0x00BE;
+
+		/// <summary>[SPEED FAST] - Fast text speed.</summary>
+		public const int SpeedFast = 0x00BF;
+
+		// === Dynamic Text Insertion ===
 		/// <summary>[ITEM] - Current item name.</summary>
 		public const int ItemName = 0x00C0;
 
@@ -177,6 +219,188 @@ public static class FontToDQ3r {
 
 		/// <summary>[SPELL] - Spell name.</summary>
 		public const int SpellName = 0x00C3;
+
+		/// <summary>[LOCATION] - Location name.</summary>
+		public const int LocationName = 0x00C4;
+
+		/// <summary>[GOLD] - Gold amount.</summary>
+		public const int Gold = 0x00C5;
+
+		/// <summary>[EXP] - Experience points.</summary>
+		public const int Experience = 0x00C6;
+
+		/// <summary>[HP] - Hit points.</summary>
+		public const int HitPoints = 0x00C7;
+
+		/// <summary>[MP] - Magic points.</summary>
+		public const int MagicPoints = 0x00C8;
+
+		/// <summary>[LEVEL] - Character level.</summary>
+		public const int Level = 0x00C9;
+
+		// === Window Control ===
+		/// <summary>[CLEAR] - Clear text window.</summary>
+		public const int Clear = 0x00CA;
+
+		/// <summary>[SCROLL] - Scroll text up.</summary>
+		public const int Scroll = 0x00CB;
+
+		/// <summary>[PAUSE] - Pause display.</summary>
+		public const int Pause = 0x00CC;
+
+		/// <summary>[CHOICE] - Start choice menu.</summary>
+		public const int Choice = 0x00CD;
+
+		/// <summary>[END CHOICE] - End choice menu.</summary>
+		public const int EndChoice = 0x00CE;
+
+		// === Sound/Effects ===
+		/// <summary>[SFX] - Play sound effect.</summary>
+		public const int SoundEffect = 0x00CF;
+
+		/// <summary>[MUSIC] - Change music.</summary>
+		public const int Music = 0x00D0;
+
+		// === Special Formatting ===
+		/// <summary>[INDENT] - Indent text.</summary>
+		public const int Indent = 0x00D1;
+
+		/// <summary>[CENTER] - Center text.</summary>
+		public const int Center = 0x00D2;
+
+		/// <summary>[RIGHT] - Right align text.</summary>
+		public const int RightAlign = 0x00D3;
+
+		// === Reserved Codes ===
+		/// <summary>[CODE D4] - Reserved.</summary>
+		public const int CodeD4 = 0x00D4;
+
+		/// <summary>[CODE D5] - Reserved.</summary>
+		public const int CodeD5 = 0x00D5;
+
+		/// <summary>[CODE D6] - Reserved.</summary>
+		public const int CodeD6 = 0x00D6;
+
+		/// <summary>[CODE D7] - Reserved.</summary>
+		public const int CodeD7 = 0x00D7;
+
+		/// <summary>[CODE D8] - Reserved.</summary>
+		public const int CodeD8 = 0x00D8;
+
+		/// <summary>[CODE D9] - Reserved.</summary>
+		public const int CodeD9 = 0x00D9;
+
+		/// <summary>[CODE DA] - Reserved.</summary>
+		public const int CodeDA = 0x00DA;
+
+		/// <summary>[CODE DB] - Reserved.</summary>
+		public const int CodeDB = 0x00DB;
+
+		/// <summary>[CODE DC] - Reserved.</summary>
+		public const int CodeDC = 0x00DC;
+
+		/// <summary>[CODE DD] - Reserved.</summary>
+		public const int CodeDD = 0x00DD;
+
+		/// <summary>
+		/// Get the name of a control code.
+		/// </summary>
+		public static string GetName(int code) {
+			return code switch {
+				CodeAB => "[CODE AB]",
+				EndStringAC => "[END]",
+				NewLine => "[LINE]",
+				EndStringAE => "[END AE]",
+				Wait => "[WAIT]",
+				HeroName => "[HERO]",
+				Party1Name => "[PARTY1]",
+				Party2Name => "[PARTY2]",
+				Party3Name => "[PARTY3]",
+				Party4Name => "[PARTY4]",
+				ColorWhite => "[WHITE]",
+				ColorRed => "[RED]",
+				ColorGreen => "[GREEN]",
+				ColorBlue => "[BLUE]",
+				ColorYellow => "[YELLOW]",
+				ColorCyan => "[CYAN]",
+				ColorMagenta => "[MAGENTA]",
+				ColorDefault => "[COLOR]",
+				DelayShort => "[DELAY]",
+				DelayLong => "[DELAY2]",
+				SpeedFast => "[FAST]",
+				ItemName => "[ITEM]",
+				Number => "[NUM]",
+				MonsterName => "[MONSTER]",
+				SpellName => "[SPELL]",
+				LocationName => "[LOCATION]",
+				Gold => "[GOLD]",
+				Experience => "[EXP]",
+				HitPoints => "[HP]",
+				MagicPoints => "[MP]",
+				Level => "[LV]",
+				Clear => "[CLEAR]",
+				Scroll => "[SCROLL]",
+				Pause => "[PAUSE]",
+				Choice => "[CHOICE]",
+				EndChoice => "[/CHOICE]",
+				SoundEffect => "[SFX]",
+				Music => "[MUSIC]",
+				Indent => "[INDENT]",
+				Center => "[CENTER]",
+				RightAlign => "[RIGHT]",
+				_ => $"[{code:X4}]",
+			};
+		}
+
+		/// <summary>
+		/// Try to parse a control code name to its value.
+		/// </summary>
+		public static bool TryParse(string name, out int code) {
+			code = name.ToUpperInvariant() switch {
+				"[END]" or "[END STRING]" => EndStringAC,
+				"[LINE]" or "[NEWLINE]" => NewLine,
+				"[END AE]" => EndStringAE,
+				"[WAIT]" => Wait,
+				"[HERO]" or "[HERO NAME]" => HeroName,
+				"[PARTY1]" => Party1Name,
+				"[PARTY2]" => Party2Name,
+				"[PARTY3]" => Party3Name,
+				"[PARTY4]" => Party4Name,
+				"[WHITE]" => ColorWhite,
+				"[RED]" => ColorRed,
+				"[GREEN]" => ColorGreen,
+				"[BLUE]" => ColorBlue,
+				"[YELLOW]" => ColorYellow,
+				"[CYAN]" => ColorCyan,
+				"[MAGENTA]" => ColorMagenta,
+				"[COLOR]" or "[DEFAULT]" => ColorDefault,
+				"[DELAY]" => DelayShort,
+				"[DELAY2]" => DelayLong,
+				"[FAST]" => SpeedFast,
+				"[ITEM]" => ItemName,
+				"[NUM]" or "[NUMBER]" => Number,
+				"[MONSTER]" => MonsterName,
+				"[SPELL]" => SpellName,
+				"[LOCATION]" => LocationName,
+				"[GOLD]" => Gold,
+				"[EXP]" => Experience,
+				"[HP]" => HitPoints,
+				"[MP]" => MagicPoints,
+				"[LV]" or "[LEVEL]" => Level,
+				"[CLEAR]" => Clear,
+				"[SCROLL]" => Scroll,
+				"[PAUSE]" => Pause,
+				"[CHOICE]" => Choice,
+				"[/CHOICE]" or "[ENDCHOICE]" => EndChoice,
+				"[SFX]" => SoundEffect,
+				"[MUSIC]" => Music,
+				"[INDENT]" => Indent,
+				"[CENTER]" => Center,
+				"[RIGHT]" => RightAlign,
+				_ => -1,
+			};
+			return code != -1;
+		}
 	}
 
 	/// <summary>
