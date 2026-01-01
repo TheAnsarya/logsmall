@@ -223,6 +223,16 @@ public class NpcData {
 	public int Index { get; set; }
 
 	/// <summary>
+	/// Map ID where NPC is located.
+	/// </summary>
+	public int MapId { get; set; }
+
+	/// <summary>
+	/// Submap index.
+	/// </summary>
+	public int SubmapIndex { get; set; }
+
+	/// <summary>
 	/// X coordinate.
 	/// </summary>
 	public byte X { get; set; }
@@ -243,9 +253,9 @@ public class NpcData {
 	public NpcMovement Movement { get; set; }
 
 	/// <summary>
-	/// Facing direction.
+	/// Facing direction (can use byte or Direction enum).
 	/// </summary>
-	public Direction Facing { get; set; }
+	public byte Facing { get; set; }
 
 	/// <summary>
 	/// Dialog ID or script pointer.
@@ -256,6 +266,11 @@ public class NpcData {
 	/// NPC flags (shop, inn, church, recruitable, etc.).
 	/// </summary>
 	public NpcFlags Flags { get; set; }
+
+	/// <summary>
+	/// NPC name (for documentation/debugging).
+	/// </summary>
+	public string Name { get; set; } = string.Empty;
 }
 
 /// <summary>
@@ -284,14 +299,14 @@ public enum Direction : byte {
 /// NPC behavior flags.
 /// </summary>
 [Flags]
-public enum NpcFlags : byte {
-	None = 0x00,
-	Shop = 0x01,
-	Inn = 0x02,
-	Church = 0x04,
-	Vault = 0x08,
-	Recruitable = 0x10,
-	Boss = 0x20,
-	Invisible = 0x40,
-	ScriptTrigger = 0x80
+public enum NpcFlags : ushort {
+	None = 0x0000,
+	Shop = 0x0001,
+	Inn = 0x0002,
+	Church = 0x0004,
+	Vault = 0x0008,
+	Recruitable = 0x0010,
+	Boss = 0x0020,
+	Invisible = 0x0040,
+	ScriptTrigger = 0x0080
 }
