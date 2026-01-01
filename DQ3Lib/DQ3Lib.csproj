@@ -11,4 +11,8 @@
     <Folder Include="Text\Dialog\ButThouMust\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Text\Dialog\ButThouMust\*.tbl" />
+  </ItemGroup>
+
 </Project>

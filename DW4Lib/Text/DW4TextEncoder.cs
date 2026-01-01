@@ -8,7 +8,7 @@ public static class DW4TextEncoder {
 	/// <summary>
 	/// DW4 character table mapping (based on standard DQ/DW encoding).
 	/// </summary>
-	private static readonly Dictionary<byte, char> DW4ToUnicode = new() {
+	public static readonly Dictionary<byte, char> DW4ToUnicode = new() {
 		// Numbers
 		[0x00] = '0', [0x01] = '1', [0x02] = '2', [0x03] = '3', [0x04] = '4',
 		[0x05] = '5', [0x06] = '6', [0x07] = '7', [0x08] = '8', [0x09] = '9',
@@ -48,7 +48,7 @@ public static class DW4TextEncoder {
 	/// <summary>
 	/// Reverse mapping for encoding.
 	/// </summary>
-	private static readonly Dictionary<char, byte> UnicodeToD4;
+	public static readonly Dictionary<char, byte> UnicodeToD4;
 
 	static DW4TextEncoder() {
 		UnicodeToD4 = DW4ToUnicode.ToDictionary(x => x.Value, x => x.Key);

@@ -1,0 +1,203 @@
+; DQ3r English Script Table File
+; For DW4→DQ3r Localization Project
+; Format: XXYY=character where XX=category, YY=index
+; Generated for English localization
+
+; =============================================================================
+; Control Codes (00XX range)
+; =============================================================================
+00AB=[CODE AB]
+00AC=[END STRING]
+00AD=[LINE]
+00AE=[END STRING AE]
+00AF=[WAIT]
+00B0=[HERO NAME]
+00B1=[PARTY1]
+00B2=[PARTY2]
+00B3=[PARTY3]
+00B4=[CODE B4]
+00B5=[CODE B5]
+00B6=[CODE B6]
+00B7=[CODE B7]
+00B8=[CODE B8]
+00B9=[CODE B9]
+00BA=[CODE BA]
+00BB=[CODE BB]
+00BC=[CODE BC]
+00BD=[CODE BD]
+00BE=[CODE BE]
+00BF=[CODE BF]
+00C0=[ITEM]
+00C1=[NUMBER]
+00C2=[MONSTER]
+00C3=[SPELL]
+00C4=[CODE C4]
+00C5=[CODE C5]
+00C6=[CODE C6]
+00C7=[CODE C7]
+00C8=[CODE C8]
+00C9=[CODE C9]
+00CA=[CODE CA]
+00CB=[CODE CB]
+00CC=[CODE CC]
+00CD=[CODE CD]
+00CE=[CODE CE]
+00CF=[CODE CF]
+00D0=[CODE D0]
+00D1=[CODE D1]
+00D2=[CODE D2]
+00D3=[CODE D3]
+00D4=[CODE D4]
+00D5=[CODE D5]
+00D6=[CODE D6]
+00D7=[CODE D7]
+00D8=[CODE D8]
+00D9=[CODE D9]
+00DA=[CODE DA]
+00DB=[CODE DB]
+00DC=[CODE DC]
+00DD=[CODE DD]
+
+; =============================================================================
+; English Characters (02XX range)
+; =============================================================================
+; Space
+0200= 
+
+; Numbers 0-9
+0201=0
+0202=1
+0203=2
+0204=3
+0205=4
+0206=5
+0207=6
+0208=7
+0209=8
+020A=9
+
+; Uppercase A-Z
+020B=A
+020C=B
+020D=C
+020E=D
+020F=E
+0210=F
+0211=G
+0212=H
+0213=I
+0214=J
+0215=K
+0216=L
+0217=M
+0218=N
+0219=O
+021A=P
+021B=Q
+021C=R
+021D=S
+021E=T
+021F=U
+0220=V
+0221=W
+0222=X
+0223=Y
+0224=Z
+
+; Lowercase a-z
+0225=a
+0226=b
+0227=c
+0228=d
+0229=e
+022A=f
+022B=g
+022C=h
+022D=i
+022E=j
+022F=k
+0230=l
+0231=m
+0232=n
+0233=o
+0234=p
+0235=q
+0236=r
+0237=s
+0238=t
+0239=u
+023A=v
+023B=w
+023C=x
+023D=y
+023E=z
+
+; Punctuation
+023F=.
+0240=,
+0241=!
+0242=?
+0243='
+0244="
+0245=:
+0246=;
+0247=-
+0248=(
+0249=)
+024A=/
+024B=*
+024C=+
+024D==
+024E=&
+024F=@
+0250=#
+0251=%
+0252=[
+0253=]
+0254=<
+0255=>
+0256=_
+0257=^
+0258=~
+0259=`
+025A=\
+025B=|
+025C={
+025D=}
+
+; Special game characters
+025E=♪
+025F=♥
+0260=→
+0261=←
+0262=↑
+0263=↓
+0264=●
+0265=○
+0266=■
+0267=□
+
+; =============================================================================
+; Extended Characters (03XX range) - Reserved for future use
+; =============================================================================
+; Could be used for accented characters, etc.
+
+; =============================================================================
+; Icon Characters (04XX range) - Game icons
+; =============================================================================
+0400=[SWORD]
+0401=[SHIELD]
+0402=[HELMET]
+0403=[ARMOR]
+0404=[ACCESSORY]
+0405=[HERB]
+0406=[KEY]
+0407=[GOLD]
+0408=[MP]
+0409=[HP]
+040A=[LV]
+040B=[EXP]
+040C=[ATTACK]
+040D=[DEFENSE]
+040E=[AGILITY]
+040F=[LUCK]

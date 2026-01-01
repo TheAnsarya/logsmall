@@ -16,12 +16,10 @@ internal class DecompressEngine {
 		var result = new List<string>();
 
 		while (!data.AtEnd) {
-			data
+			// TODO: Implement Huffman decompression
+			// For now, just skip bytes to prevent infinite loop
+			_ = data.ReadByte();
 		}
-
-
-
-
 
 		return [.. result];
 	}
