@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW4Extract", "DW4Extract\DW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW4Lib.Tests", "DW4Lib.Tests\DW4Lib.Tests.csproj", "{684E539C-0C01-476B-A11A-8396DE9EDD1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DQ4rLib", "DQ4rLib\DQ4rLib.csproj", "{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,18 @@ Global
 		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|x64.Build.0 = Release|Any CPU
 		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|x86.ActiveCfg = Release|Any CPU
 		{684E539C-0C01-476B-A11A-8396DE9EDD1E}.Release|x86.Build.0 = Release|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Debug|x64.Build.0 = Debug|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Debug|x86.Build.0 = Debug|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Release|x64.ActiveCfg = Release|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Release|x64.Build.0 = Release|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Release|x86.ActiveCfg = Release|Any CPU
+		{417E6E5C-7D8A-43D9-8160-EDB2FE4B047E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
