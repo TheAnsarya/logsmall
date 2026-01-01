@@ -36,6 +36,13 @@ public static class ItemIdConverter {
 	private const int DQ3R_CONSUMABLE_BASE = 0x140;
 
 	/// <summary>
+	/// Base offset for DQ3r character IDs.
+	/// DW4 character IDs start at 0x00 (Hero) through 0x0F.
+	/// DQ3r character IDs are offset to avoid collision.
+	/// </summary>
+	public const ushort CharacterIdOffset = 0x0100;
+
+	/// <summary>
 	/// Convert DW4 weapon ID to DQ3r format.
 	/// </summary>
 	public static int ConvertWeaponId(byte dw4WeaponId) {
