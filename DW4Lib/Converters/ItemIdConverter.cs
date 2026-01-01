@@ -145,4 +145,12 @@ public static class ItemIdConverter {
 			ConvertAccessoryId(accessory)
 		];
 	}
+
+	/// <summary>
+	/// Generic conversion for any item ID. Returns ushort for DQ3r compatibility.
+	/// </summary>
+	public static ushort ConvertToDQ3r(byte dw4ItemId) {
+		if (dw4ItemId == 0) return 0;
+		return (ushort)ConvertItemId(dw4ItemId);
+	}
 }
