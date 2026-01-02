@@ -113,6 +113,45 @@ while (eventEngine.IsExecuting)
 - 10 trigger types (MapEntry, Talk, Step, Item, etc.)
 - Battle and cutscene integration
 
+### Battle System
+
+`BattleManager` provides full turn-based combat:
+
+```csharp
+var battleManager = new BattleManager(chapterManager);
+battleManager.BattleStarted += (s, e) => Console.WriteLine("Battle!");
+battleManager.BattleEnded += (s, e) => Console.WriteLine($"Result: {e.Result.Outcome}");
+
+// Register monster data
+battleManager.RegisterMonster(new MonsterData {
+	Id = 1, Name = "Slime", MaxHp = 10, Attack = 5
+});
+
+// Register encounter
+battleManager.RegisterEncounter(new BattleEncounter {
+	Id = 1,
+	MonsterGroups = [new MonsterGroup { MonsterId = 1, MinCount = 2, MaxCount = 4 }]
+});
+
+// Start battle
+battleManager.StartBattle(encounterId: 1);
+
+// Set player actions
+battleManager.SetAction(new BattleAction {
+	Type = BattleActionType.Attack,
+	Targets = [enemy]
+});
+```
+
+**Features:**
+- Full turn-based combat with agility-based turn order
+- DQ4 AI tactics (ShowNoMercy, GoAllOut, WatchMyMp, etc.)
+- Spell system with damage, healing, buffs, debuffs
+- Status effects with duration tracking
+- Monster AI with weighted action selection
+- Boss battles with flee restriction
+- Experience/gold rewards and item drops
+
 ### Chapter Manager
 
 `ChapterManager` handles the 5-chapter structure:
@@ -132,12 +171,13 @@ DQ4rLib/
 ├── SaveManager.cs          # Save/load system
 ├── CutsceneManager.cs      # Cutscene playback
 ├── EventEngine.cs          # Event scripting
+├── BattleManager.cs        # Turn-based combat
 ├── ChapterManager.cs       # Chapter management
 ├── AssetPipeline.cs        # Asset processing
 ├── Models/
 │   ├── SaveData.cs         # Save file structure
 │   ├── ChapterState.cs     # Chapter state
-│   ├── InventoryData.cs    # Inventory management
+│   ├── Battle.cs           # Battle data models
 │   └── ...
 ├── Graphics/               # Graphics conversion
 ├── Audio/                  # Audio conversion
@@ -153,7 +193,7 @@ cd DQ4rLib.Tests
 dotnet test
 ```
 
-149 tests covering all major systems.
+177 tests covering all major systems.
 
 ## Requirements
 

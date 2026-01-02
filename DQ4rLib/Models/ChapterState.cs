@@ -74,6 +74,20 @@ public class ChapterState {
 	public byte[] WagonParty { get; set; } = new byte[4];
 
 	/// <summary>
+	/// Get list of active party member indices (excluding 0xFF/empty slots).
+	/// </summary>
+	public List<int> GetActiveParty() {
+		return ActiveParty.Where(id => id != 0xFF && id != 0).Select(id => (int)id).ToList();
+	}
+
+	/// <summary>
+	/// Get list of wagon party member indices (excluding 0xFF/empty slots).
+	/// </summary>
+	public List<int> GetWagonParty() {
+		return WagonParty.Where(id => id != 0xFF && id != 0).Select(id => (int)id).ToList();
+	}
+
+	/// <summary>
 	/// Event flags array (256 flags = 32 bytes).
 	/// </summary>
 	public byte[] EventFlags { get; set; } = new byte[32];
