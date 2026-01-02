@@ -97,6 +97,159 @@ public class SaveManagerTests {
 	}
 
 	[Fact]
+	public void CharacterSaveData_NewFieldsSerializeCorrectly() {
+		var character = new CharacterSaveData {
+			Id = 3,
+			ClassId = 2,
+			Name = "CRISTO",
+			Level = 30,
+			CurrentHp = 180,
+			MaxHp = 250,
+			CurrentMp = 80,
+			MaxMp = 100,
+			Strength = 60,
+			Agility = 50,
+			Vitality = 70,
+			Intelligence = 90,
+			Luck = 40,
+			Attack = 150,
+			Defense = 120,
+			Experience = 100000,
+			WeaponId = 0x25,
+			ArmorId = 0x30,
+			ShieldId = 0x10,
+			HelmetId = 0x15,
+			AccessoryId = 0x05,
+			Status = CharacterStatus.None,
+			Tactic = BattleTactic.DontUseMagic,
+			PartyPosition = 2
+		};
+
+		// Learn some spells
+		character.LearnSpell(0);  // Heal
+		character.LearnSpell(5);  // Midheal
+		character.LearnSpell(10); // Fullheal
+		character.LearnSpell(63); // Last spell slot
+
+		var bytes = character.ToSnesBytes();
+		Assert.Equal(48, bytes.Length);
+
+		var restored = CharacterSaveData.FromSnesBytes(bytes);
+
+		Assert.Equal(character.Id, restored.Id);
+		Assert.Equal(character.ClassId, restored.ClassId);
+		Assert.Equal(character.Name, restored.Name);
+		Assert.Equal(character.Level, restored.Level);
+		Assert.Equal(character.CurrentHp, restored.CurrentHp);
+		Assert.Equal(character.MaxHp, restored.MaxHp);
+		Assert.Equal(character.CurrentMp, restored.CurrentMp);
+		Assert.Equal(character.MaxMp, restored.MaxMp);
+		Assert.Equal(character.Strength, restored.Strength);
+		Assert.Equal(character.Agility, restored.Agility);
+		Assert.Equal(character.Vitality, restored.Vitality);
+		Assert.Equal(character.Intelligence, restored.Intelligence);
+		Assert.Equal(character.Luck, restored.Luck);
+		Assert.Equal(character.Attack, restored.Attack);
+		Assert.Equal(character.Defense, restored.Defense);
+		Assert.Equal(character.Experience, restored.Experience);
+		Assert.Equal(character.WeaponId, restored.WeaponId);
+		Assert.Equal(character.ArmorId, restored.ArmorId);
+		Assert.Equal(character.ShieldId, restored.ShieldId);
+		Assert.Equal(character.HelmetId, restored.HelmetId);
+		Assert.Equal(character.AccessoryId, restored.AccessoryId);
+		Assert.Equal(character.Status, restored.Status);
+		Assert.Equal(character.Tactic, restored.Tactic);
+		Assert.Equal(character.PartyPosition, restored.PartyPosition);
+
+		// Verify spells
+		Assert.True(restored.KnowsSpell(0));
+		Assert.True(restored.KnowsSpell(5));
+		Assert.True(restored.KnowsSpell(10));
+		Assert.True(restored.KnowsSpell(63));
+		Assert.False(restored.KnowsSpell(1));
+		Assert.False(restored.KnowsSpell(62));
+	}
+
+	[Fact]
+	public void CharacterSaveData_SpellManagement() {
+		var character = new CharacterSaveData();
+
+		// Initially no spells
+		Assert.False(character.KnowsSpell(0));
+		Assert.Empty(character.GetKnownSpells());
+
+		// Learn spells
+		character.LearnSpell(0);
+		character.LearnSpell(10);
+		character.LearnSpell(20);
+
+		Assert.True(character.KnowsSpell(0));
+		Assert.True(character.KnowsSpell(10));
+		Assert.True(character.KnowsSpell(20));
+		Assert.False(character.KnowsSpell(1));
+		Assert.Equal([0, 10, 20], character.GetKnownSpells());
+
+		// Forget a spell
+		character.ForgetSpell(10);
+		Assert.False(character.KnowsSpell(10));
+		Assert.Equal([0, 20], character.GetKnownSpells());
+
+		// Invalid spell IDs should be ignored
+		character.LearnSpell(64);
+		character.LearnSpell(-1);
+		Assert.False(character.KnowsSpell(64));
+	}
+
+	[Fact]
+	public void CharacterSaveData_StatusHelpers() {
+		var character = new CharacterSaveData {
+			CurrentHp = 100,
+			MaxHp = 200,
+			Status = CharacterStatus.None
+		};
+
+		// Alive and can act
+		Assert.True(character.IsAlive);
+		Assert.True(character.CanAct);
+
+		// Dead - not alive, can't act
+		character.Status = CharacterStatus.Dead;
+		Assert.False(character.IsAlive);
+		Assert.False(character.CanAct);
+
+		// Alive but asleep - can't act
+		character.Status = CharacterStatus.Asleep;
+		Assert.True(character.IsAlive);
+		Assert.False(character.CanAct);
+
+		// Alive but paralyzed - can't act
+		character.Status = CharacterStatus.Paralyzed;
+		Assert.True(character.IsAlive);
+		Assert.False(character.CanAct);
+
+		// Alive but confused - can't act (in terms of controlled actions)
+		character.Status = CharacterStatus.Confused;
+		Assert.True(character.IsAlive);
+		Assert.False(character.CanAct);
+
+		// Poisoned but can still act
+		character.Status = CharacterStatus.Poisoned;
+		Assert.True(character.IsAlive);
+		Assert.True(character.CanAct);
+
+		// Multiple status effects
+		character.Status = CharacterStatus.Poisoned | CharacterStatus.DefenseUp;
+		Assert.True(character.IsAlive);
+		Assert.True(character.CanAct);
+
+		// Zero HP means not alive even without Dead flag
+		character.CurrentHp = 0;
+		character.Status = CharacterStatus.None;
+		Assert.False(character.IsAlive);
+		Assert.False(character.CanAct);
+	}
+
+	[Fact]
 	public void InventoryData_SerializesCorrectly() {
 		var inventory = new InventoryData();
 		inventory.BagItems[0] = 0x10; // Medical herb

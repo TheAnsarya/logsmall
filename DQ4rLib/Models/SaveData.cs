@@ -1,6 +1,39 @@
 namespace DQ4rLib.Models;
 
 /// <summary>
+/// Character status effect flags.
+/// </summary>
+[Flags]
+public enum CharacterStatus : byte {
+	/// <summary>No status effects.</summary>
+	None = 0,
+
+	/// <summary>Character is dead.</summary>
+	Dead = 1 << 0,
+
+	/// <summary>Character is poisoned.</summary>
+	Poisoned = 1 << 1,
+
+	/// <summary>Character is asleep.</summary>
+	Asleep = 1 << 2,
+
+	/// <summary>Character is paralyzed.</summary>
+	Paralyzed = 1 << 3,
+
+	/// <summary>Character is confused.</summary>
+	Confused = 1 << 4,
+
+	/// <summary>Character is silenced (can't cast spells).</summary>
+	Silenced = 1 << 5,
+
+	/// <summary>Character has defense buff.</summary>
+	DefenseUp = 1 << 6,
+
+	/// <summary>Character has defense debuff.</summary>
+	DefenseDown = 1 << 7
+}
+
+/// <summary>
 /// Complete save data for a single save slot.
 /// Contains all game state needed to restore a saved game.
 /// </summary>
@@ -96,6 +129,18 @@ public class SaveData {
 	/// Serialize save data to SNES SRAM format (without checksum calculation).
 	/// Internal method used by both ToSnesBytes and CalculateChecksum.
 	/// </summary>
+	/// <remarks>
+	/// Memory layout (2KB = 0x800 bytes):
+	/// 0x000-0x00F: Header (version, checksum, reserved)
+	/// 0x010-0x04F: Chapter state (64 bytes)
+	/// 0x050-0x34F: Characters (16 × 48 bytes = 768 bytes)
+	/// 0x350-0x3CF: Inventory (128 bytes)
+	/// 0x3D0-0x3E3: Chapter gold (5 × 4 bytes = 20 bytes)
+	/// 0x3E4-0x3EF: Small medals, casino coins (12 bytes)
+	/// 0x400-0x41F: Monster encyclopedia (32 bytes)
+	/// 0x420-0x423: Save timestamp (4 bytes)
+	/// 0x424-0x7FF: Reserved
+	/// </remarks>
 	private byte[] ToSnesBytesWithoutChecksum() {
 		byte[] data = new byte[SaveSize];
 
@@ -108,41 +153,41 @@ public class SaveData {
 		byte[] chapterData = ChapterState.ToSnesBytes();
 		Array.Copy(chapterData, 0, data, 0x10, Math.Min(64, chapterData.Length));
 
-		// Character data (16 chars * 32 bytes = 512 bytes at 0x50)
+		// Character data (16 chars × 48 bytes = 768 bytes at 0x50)
 		for (int i = 0; i < 16; i++) {
 			if (Characters[i] != null) {
 				byte[] charData = Characters[i].ToSnesBytes();
-				Array.Copy(charData, 0, data, 0x50 + (i * 32), Math.Min(32, charData.Length));
+				Array.Copy(charData, 0, data, 0x50 + (i * 48), Math.Min(48, charData.Length));
 			}
 		}
 
-		// Inventory (128 bytes at 0x250)
+		// Inventory (128 bytes at 0x350)
 		byte[] invData = Inventory.ToSnesBytes();
-		Array.Copy(invData, 0, data, 0x250, Math.Min(128, invData.Length));
+		Array.Copy(invData, 0, data, 0x350, Math.Min(128, invData.Length));
 
-		// Chapter gold (5 * 4 bytes = 20 bytes at 0x2D0)
+		// Chapter gold (5 × 4 bytes = 20 bytes at 0x3D0)
 		for (int i = 0; i < 5; i++) {
-			data[0x2D0 + (i * 4)] = (byte)(ChapterGold[i] & 0xff);
-			data[0x2D1 + (i * 4)] = (byte)((ChapterGold[i] >> 8) & 0xff);
-			data[0x2D2 + (i * 4)] = (byte)((ChapterGold[i] >> 16) & 0xff);
-			data[0x2D3 + (i * 4)] = (byte)((ChapterGold[i] >> 24) & 0xff);
+			data[0x3D0 + (i * 4)] = (byte)(ChapterGold[i] & 0xff);
+			data[0x3D1 + (i * 4)] = (byte)((ChapterGold[i] >> 8) & 0xff);
+			data[0x3D2 + (i * 4)] = (byte)((ChapterGold[i] >> 16) & 0xff);
+			data[0x3D3 + (i * 4)] = (byte)((ChapterGold[i] >> 24) & 0xff);
 		}
 
-		// Small medals and casino (at 0x2E4)
-		data[0x2E4] = SmallMedals;
-		data[0x2E8] = (byte)(CasinoCoins & 0xff);
-		data[0x2E9] = (byte)((CasinoCoins >> 8) & 0xff);
-		data[0x2EA] = (byte)((CasinoCoins >> 16) & 0xff);
-		data[0x2EB] = (byte)((CasinoCoins >> 24) & 0xff);
+		// Small medals and casino (at 0x3E4)
+		data[0x3E4] = SmallMedals;
+		data[0x3E8] = (byte)(CasinoCoins & 0xff);
+		data[0x3E9] = (byte)((CasinoCoins >> 8) & 0xff);
+		data[0x3EA] = (byte)((CasinoCoins >> 16) & 0xff);
+		data[0x3EB] = (byte)((CasinoCoins >> 24) & 0xff);
 
-		// Monster encyclopedia (32 bytes at 0x300)
-		Array.Copy(MonsterEncyclopedia, 0, data, 0x300, 32);
+		// Monster encyclopedia (32 bytes at 0x400)
+		Array.Copy(MonsterEncyclopedia, 0, data, 0x400, 32);
 
-		// Save timestamp (4 bytes at 0x320)
-		data[0x320] = (byte)(SaveTimestamp & 0xff);
-		data[0x321] = (byte)((SaveTimestamp >> 8) & 0xff);
-		data[0x322] = (byte)((SaveTimestamp >> 16) & 0xff);
-		data[0x323] = (byte)((SaveTimestamp >> 24) & 0xff);
+		// Save timestamp (4 bytes at 0x420)
+		data[0x420] = (byte)(SaveTimestamp & 0xff);
+		data[0x421] = (byte)((SaveTimestamp >> 8) & 0xff);
+		data[0x422] = (byte)((SaveTimestamp >> 16) & 0xff);
+		data[0x423] = (byte)((SaveTimestamp >> 24) & 0xff);
 
 		return data;
 	}
@@ -170,49 +215,49 @@ public class SaveData {
 			Checksum = (ushort)(data[0x02] | (data[0x03] << 8))
 		};
 
-		// Chapter state
+		// Chapter state (64 bytes at 0x10)
 		byte[] chapterData = new byte[64];
 		Array.Copy(data, 0x10, chapterData, 0, 64);
 		save.ChapterState = ChapterState.FromSnesBytes(chapterData);
 
-		// Character data
+		// Character data (16 chars × 48 bytes at 0x50)
 		for (int i = 0; i < 16; i++) {
-			byte[] charData = new byte[32];
-			Array.Copy(data, 0x50 + (i * 32), charData, 0, 32);
+			byte[] charData = new byte[48];
+			Array.Copy(data, 0x50 + (i * 48), charData, 0, 48);
 			save.Characters[i] = CharacterSaveData.FromSnesBytes(charData);
 		}
 
-		// Inventory
+		// Inventory (128 bytes at 0x350)
 		byte[] invData = new byte[128];
-		Array.Copy(data, 0x250, invData, 0, 128);
+		Array.Copy(data, 0x350, invData, 0, 128);
 		save.Inventory = InventoryData.FromSnesBytes(invData);
 
-		// Chapter gold
+		// Chapter gold (5 × 4 bytes at 0x3D0)
 		for (int i = 0; i < 5; i++) {
 			save.ChapterGold[i] = (uint)(
-				data[0x2D0 + (i * 4)] |
-				(data[0x2D1 + (i * 4)] << 8) |
-				(data[0x2D2 + (i * 4)] << 16) |
-				(data[0x2D3 + (i * 4)] << 24));
+				data[0x3D0 + (i * 4)] |
+				(data[0x3D1 + (i * 4)] << 8) |
+				(data[0x3D2 + (i * 4)] << 16) |
+				(data[0x3D3 + (i * 4)] << 24));
 		}
 
-		// Small medals and casino
-		save.SmallMedals = data[0x2E4];
+		// Small medals and casino (at 0x3E4)
+		save.SmallMedals = data[0x3E4];
 		save.CasinoCoins = (uint)(
-			data[0x2E8] |
-			(data[0x2E9] << 8) |
-			(data[0x2EA] << 16) |
-			(data[0x2EB] << 24));
+			data[0x3E8] |
+			(data[0x3E9] << 8) |
+			(data[0x3EA] << 16) |
+			(data[0x3EB] << 24));
 
-		// Monster encyclopedia
-		Array.Copy(data, 0x300, save.MonsterEncyclopedia, 0, 32);
+		// Monster encyclopedia (32 bytes at 0x400)
+		Array.Copy(data, 0x400, save.MonsterEncyclopedia, 0, 32);
 
-		// Save timestamp
+		// Save timestamp (4 bytes at 0x420)
 		save.SaveTimestamp = (uint)(
-			data[0x320] |
-			(data[0x321] << 8) |
-			(data[0x322] << 16) |
-			(data[0x323] << 24));
+			data[0x420] |
+			(data[0x421] << 8) |
+			(data[0x422] << 16) |
+			(data[0x423] << 24));
 
 		return save;
 	}
@@ -232,15 +277,20 @@ public class SaveData {
 
 /// <summary>
 /// Character save data structure.
+/// Contains all persistent data for a single character including stats,
+/// equipment, spells, and status.
 /// </summary>
 public class CharacterSaveData {
-	/// <summary>Character ID.</summary>
+	/// <summary>Character ID (0-7 for party, 8+ for NPCs).</summary>
 	public byte Id { get; set; }
+
+	/// <summary>Character class/job ID.</summary>
+	public byte ClassId { get; set; }
 
 	/// <summary>Character name (8 characters max).</summary>
 	public string Name { get; set; } = string.Empty;
 
-	/// <summary>Current level.</summary>
+	/// <summary>Current level (1-99).</summary>
 	public byte Level { get; set; }
 
 	/// <summary>Current HP.</summary>
@@ -270,99 +320,161 @@ public class CharacterSaveData {
 	/// <summary>Luck stat.</summary>
 	public byte Luck { get; set; }
 
+	/// <summary>Attack power (calculated from strength + equipment).</summary>
+	public ushort Attack { get; set; }
+
+	/// <summary>Defense power (calculated from vitality + equipment).</summary>
+	public ushort Defense { get; set; }
+
 	/// <summary>Experience points.</summary>
 	public uint Experience { get; set; }
 
-	/// <summary>Equipped weapon ID.</summary>
+	/// <summary>Equipped weapon ID (0 = none).</summary>
 	public byte WeaponId { get; set; }
 
-	/// <summary>Equipped armor ID.</summary>
+	/// <summary>Equipped armor ID (0 = none).</summary>
 	public byte ArmorId { get; set; }
 
-	/// <summary>Equipped shield ID.</summary>
+	/// <summary>Equipped shield ID (0 = none).</summary>
 	public byte ShieldId { get; set; }
 
-	/// <summary>Equipped helmet ID.</summary>
+	/// <summary>Equipped helmet ID (0 = none).</summary>
 	public byte HelmetId { get; set; }
 
-	/// <summary>Equipped accessory ID.</summary>
+	/// <summary>Equipped accessory ID (0 = none).</summary>
 	public byte AccessoryId { get; set; }
 
 	/// <summary>Status effects bitmask.</summary>
-	public byte Status { get; set; }
+	public CharacterStatus Status { get; set; }
+
+	/// <summary>Learned spells bitmask (up to 64 spells).</summary>
+	public ulong LearnedSpells { get; set; }
 
 	/// <summary>Individual tactic for this character (Chapter 5).</summary>
 	public BattleTactic Tactic { get; set; }
 
-	/// <summary>Serialize to 32 bytes.</summary>
+	/// <summary>Position in party (0-3 active, 4-7 wagon).</summary>
+	public byte PartyPosition { get; set; }
+
+	/// <summary>Check if character knows a spell.</summary>
+	public bool KnowsSpell(int spellId) => spellId < 64 && (LearnedSpells & (1UL << spellId)) != 0;
+
+	/// <summary>Learn a spell.</summary>
+	public void LearnSpell(int spellId) {
+		if (spellId < 64)
+			LearnedSpells |= 1UL << spellId;
+	}
+
+	/// <summary>Forget a spell.</summary>
+	public void ForgetSpell(int spellId) {
+		if (spellId < 64)
+			LearnedSpells &= ~(1UL << spellId);
+	}
+
+	/// <summary>Get list of known spell IDs.</summary>
+	public List<int> GetKnownSpells() {
+		var spells = new List<int>();
+		for (int i = 0; i < 64; i++) {
+			if (KnowsSpell(i))
+				spells.Add(i);
+		}
+		return spells;
+	}
+
+	/// <summary>Check if character is alive.</summary>
+	public bool IsAlive => CurrentHp > 0 && !Status.HasFlag(CharacterStatus.Dead);
+
+	/// <summary>Check if character can act in battle.</summary>
+	public bool CanAct => IsAlive && !Status.HasFlag(CharacterStatus.Asleep)
+		&& !Status.HasFlag(CharacterStatus.Paralyzed) && !Status.HasFlag(CharacterStatus.Confused);
+
+	/// <summary>Serialize to 48 bytes.</summary>
 	public byte[] ToSnesBytes() {
-		byte[] data = new byte[32];
+		byte[] data = new byte[48];
 
 		data[0x00] = Id;
-		data[0x01] = Level;
-		data[0x02] = (byte)(CurrentHp & 0xff);
-		data[0x03] = (byte)(CurrentHp >> 8);
-		data[0x04] = (byte)(MaxHp & 0xff);
-		data[0x05] = (byte)(MaxHp >> 8);
-		data[0x06] = (byte)(CurrentMp & 0xff);
-		data[0x07] = (byte)(CurrentMp >> 8);
-		data[0x08] = (byte)(MaxMp & 0xff);
-		data[0x09] = (byte)(MaxMp >> 8);
-		data[0x0A] = Strength;
-		data[0x0B] = Agility;
-		data[0x0C] = Vitality;
-		data[0x0D] = Intelligence;
-		data[0x0E] = Luck;
-		data[0x0F] = Status;
-		data[0x10] = (byte)(Experience & 0xff);
-		data[0x11] = (byte)((Experience >> 8) & 0xff);
-		data[0x12] = (byte)((Experience >> 16) & 0xff);
-		data[0x13] = (byte)((Experience >> 24) & 0xff);
-		data[0x14] = WeaponId;
-		data[0x15] = ArmorId;
-		data[0x16] = ShieldId;
-		data[0x17] = HelmetId;
-		data[0x18] = AccessoryId;
-		data[0x19] = (byte)Tactic;
-		// 0x1A-0x1F: Name (6 bytes, encoded)
-		// Simplified - just store first 6 chars as ASCII
-		for (int i = 0; i < 6 && i < Name.Length; i++) {
-			data[0x1A + i] = (byte)Name[i];
+		data[0x01] = ClassId;
+		data[0x02] = Level;
+		data[0x03] = (byte)Status;
+		data[0x04] = (byte)(CurrentHp & 0xff);
+		data[0x05] = (byte)(CurrentHp >> 8);
+		data[0x06] = (byte)(MaxHp & 0xff);
+		data[0x07] = (byte)(MaxHp >> 8);
+		data[0x08] = (byte)(CurrentMp & 0xff);
+		data[0x09] = (byte)(CurrentMp >> 8);
+		data[0x0A] = (byte)(MaxMp & 0xff);
+		data[0x0B] = (byte)(MaxMp >> 8);
+		data[0x0C] = Strength;
+		data[0x0D] = Agility;
+		data[0x0E] = Vitality;
+		data[0x0F] = Intelligence;
+		data[0x10] = Luck;
+		data[0x11] = (byte)(Attack & 0xff);
+		data[0x12] = (byte)(Attack >> 8);
+		data[0x13] = (byte)(Defense & 0xff);
+		data[0x14] = (byte)(Defense >> 8);
+		data[0x15] = (byte)(Experience & 0xff);
+		data[0x16] = (byte)((Experience >> 8) & 0xff);
+		data[0x17] = (byte)((Experience >> 16) & 0xff);
+		data[0x18] = (byte)((Experience >> 24) & 0xff);
+		data[0x19] = WeaponId;
+		data[0x1A] = ArmorId;
+		data[0x1B] = ShieldId;
+		data[0x1C] = HelmetId;
+		data[0x1D] = AccessoryId;
+		data[0x1E] = (byte)Tactic;
+		data[0x1F] = PartyPosition;
+		// Learned spells (8 bytes at 0x20)
+		for (int i = 0; i < 8; i++) {
+			data[0x20 + i] = (byte)((LearnedSpells >> (i * 8)) & 0xff);
+		}
+		// Name (8 bytes at 0x28)
+		for (int i = 0; i < 8 && i < Name.Length; i++) {
+			data[0x28 + i] = (byte)Name[i];
 		}
 
 		return data;
 	}
 
-	/// <summary>Deserialize from 32 bytes.</summary>
+	/// <summary>Deserialize from 48 bytes.</summary>
 	public static CharacterSaveData FromSnesBytes(byte[] data) {
 		var chr = new CharacterSaveData {
 			Id = data[0x00],
-			Level = data[0x01],
-			CurrentHp = (ushort)(data[0x02] | (data[0x03] << 8)),
-			MaxHp = (ushort)(data[0x04] | (data[0x05] << 8)),
-			CurrentMp = (ushort)(data[0x06] | (data[0x07] << 8)),
-			MaxMp = (ushort)(data[0x08] | (data[0x09] << 8)),
-			Strength = data[0x0A],
-			Agility = data[0x0B],
-			Vitality = data[0x0C],
-			Intelligence = data[0x0D],
-			Luck = data[0x0E],
-			Status = data[0x0F],
-			Experience = (uint)(data[0x10] | (data[0x11] << 8) | (data[0x12] << 16) | (data[0x13] << 24)),
-			WeaponId = data[0x14],
-			ArmorId = data[0x15],
-			ShieldId = data[0x16],
-			HelmetId = data[0x17],
-			AccessoryId = data[0x18],
-			Tactic = (BattleTactic)data[0x19]
+			ClassId = data[0x01],
+			Level = data[0x02],
+			Status = (CharacterStatus)data[0x03],
+			CurrentHp = (ushort)(data[0x04] | (data[0x05] << 8)),
+			MaxHp = (ushort)(data[0x06] | (data[0x07] << 8)),
+			CurrentMp = (ushort)(data[0x08] | (data[0x09] << 8)),
+			MaxMp = (ushort)(data[0x0A] | (data[0x0B] << 8)),
+			Strength = data[0x0C],
+			Agility = data[0x0D],
+			Vitality = data[0x0E],
+			Intelligence = data[0x0F],
+			Luck = data[0x10],
+			Attack = (ushort)(data[0x11] | (data[0x12] << 8)),
+			Defense = (ushort)(data[0x13] | (data[0x14] << 8)),
+			Experience = (uint)(data[0x15] | (data[0x16] << 8) | (data[0x17] << 16) | (data[0x18] << 24)),
+			WeaponId = data[0x19],
+			ArmorId = data[0x1A],
+			ShieldId = data[0x1B],
+			HelmetId = data[0x1C],
+			AccessoryId = data[0x1D],
+			Tactic = (BattleTactic)data[0x1E],
+			PartyPosition = data[0x1F]
 		};
 
+		// Learned spells
+		for (int i = 0; i < 8; i++) {
+			chr.LearnedSpells |= (ulong)data[0x20 + i] << (i * 8);
+		}
+
 		// Decode name
-		char[] nameChars = new char[6];
+		char[] nameChars = new char[8];
 		int nameLen = 0;
-		for (int i = 0; i < 6; i++) {
-			if (data[0x1A + i] != 0) {
-				nameChars[i] = (char)data[0x1A + i];
+		for (int i = 0; i < 8; i++) {
+			if (data[0x28 + i] != 0) {
+				nameChars[i] = (char)data[0x28 + i];
 				nameLen = i + 1;
 			}
 		}
