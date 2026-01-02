@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DQ4rLib\DQ4rLib.csproj" />
+    <ProjectReference Include="..\DW4Lib\DW4Lib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
