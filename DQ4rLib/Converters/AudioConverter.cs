@@ -95,7 +95,8 @@ public static class AudioConverter {
 	private static int FindOptimalShift(ReadOnlySpan<short> samples) {
 		int maxAbs = 0;
 		foreach (short s in samples) {
-			int abs = Math.Abs(s);
+			// Handle short.MinValue specially to avoid overflow
+			int abs = s == short.MinValue ? short.MaxValue : Math.Abs(s);
 			if (abs > maxAbs) maxAbs = abs;
 		}
 
