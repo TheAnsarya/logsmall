@@ -3,8 +3,11 @@ namespace DW4Lib.DataStructures;
 /// <summary>
 /// Dragon Warrior IV NES Monster data structure (27 bytes).
 /// Located in Bank 6 at $A2A2.
-/// Format based on research in bank6_monster_table.txt.
+/// Format documented in monster_byte_structure.md with CDL verification.
 /// </summary>
+/// <remarks>
+/// CDL Verification: Bank 0x06 has 99.8% coverage (verified 2026-01-03).
+/// </remarks>
 public class Monster {
 	/// <summary>
 	/// Size of a single monster record in bytes.
@@ -22,134 +25,122 @@ public class Monster {
 	public const int TableAddress = 0xA2A2;
 
 	/// <summary>
-	/// Raw bytes 0-1: Experience points (16-bit little endian).
+	/// Bytes 0-1: Experience points (16-bit little endian).
 	/// </summary>
 	public ushort Experience { get; set; }
 
 	/// <summary>
-	/// Raw bytes 2-3: Gold dropped (16-bit little endian).
+	/// Bytes 2-3: Gold dropped (16-bit little endian).
 	/// </summary>
 	public ushort Gold { get; set; }
 
 	/// <summary>
-	/// Raw byte 4: Unknown byte 4.
+	/// Bytes 4-5: Hit Points (16-bit little endian).
+	/// Research indicates this is HP, not unknown bytes.
 	/// </summary>
-	public byte Byte4 { get; set; }
+	public ushort HitPoints { get; set; }
 
 	/// <summary>
-	/// Raw byte 5: Unknown byte 5.
-	/// </summary>
-	public byte Byte5 { get; set; }
-
-	/// <summary>
-	/// Raw byte 6: Attack Power.
+	/// Byte 6: Attack Power.
 	/// </summary>
 	public byte Attack { get; set; }
 
 	/// <summary>
-	/// Raw byte 7: Defense Power.
+	/// Byte 7: Defense Power.
 	/// </summary>
 	public byte Defense { get; set; }
 
 	/// <summary>
-	/// Raw byte 8: Agility.
+	/// Byte 8: Agility.
 	/// </summary>
 	public byte Agility { get; set; }
 
 	/// <summary>
-	/// Raw byte 9: Unknown byte 9.
+	/// Bytes 9-14: Skill/ability data (6 bytes).
+	/// High bits encode action chance, action count, HP regeneration.
 	/// </summary>
-	public byte Byte9 { get; set; }
+	public byte[] SkillData { get; set; } = new byte[6];
 
 	/// <summary>
-	/// Raw byte 10: Unknown byte 10 (possibly second ATK).
+	/// Bytes 15-18: Unknown/AI behavior (4 bytes).
+	/// Possibly AI patterns or behavior flags.
 	/// </summary>
-	public byte Byte10 { get; set; }
+	public byte[] BehaviorData { get; set; } = new byte[4];
 
 	/// <summary>
-	/// Raw byte 11: Unknown byte 11 (possibly second DEF).
+	/// Byte 19: Item drop ID.
+	/// References the item table for what this monster can drop.
 	/// </summary>
-	public byte Byte11 { get; set; }
+	public byte ItemDropId { get; set; }
 
 	/// <summary>
-	/// Raw byte 12: Unknown byte 12.
+	/// Byte 20: Unknown byte (Vaxherd: byte 17).
 	/// </summary>
-	public byte Byte12 { get; set; }
+	public byte Unknown20 { get; set; }
 
 	/// <summary>
-	/// Raw byte 13: Unknown byte 13.
+	/// Byte 21: Unknown byte (Vaxherd: byte 18).
 	/// </summary>
-	public byte Byte13 { get; set; }
+	public byte Unknown21 { get; set; }
 
 	/// <summary>
-	/// Raw byte 14: Unknown byte 14.
+	/// Byte 22: Metal monster flags (Vaxherd: byte 19).
+	/// Bits 0-1: Metal flag ($03 mask) - if set, takes 0-1 damage.
 	/// </summary>
-	public byte Byte14 { get; set; }
+	public byte MetalFlags { get; set; }
 
 	/// <summary>
-	/// Raw byte 15: Unknown byte 15 (possibly HP high).
+	/// Byte 23: Drop rate and flags (Vaxherd: byte 20).
+	/// Bits 0-2: Drop rate (0=0%, 1=1/2, 2=1/4, 3=1/8, 4=1/16, 5=1/32, 6=1/256, 7=100%).
 	/// </summary>
-	public byte Byte15 { get; set; }
+	public byte DropRateFlags { get; set; }
 
 	/// <summary>
-	/// Raw byte 16: Unknown byte 16.
+	/// Byte 24: Status vulnerability flags (Vaxherd: byte 21).
+	/// Bit 6: Paralysis vulnerability.
+	/// Bit 7: Confusion vulnerability or Bounce flag.
 	/// </summary>
-	public byte Byte16 { get; set; }
+	public byte StatusVulnerability { get; set; }
 
 	/// <summary>
-	/// Raw byte 17: Unknown byte 17.
+	/// Byte 25: Unknown byte.
 	/// </summary>
-	public byte Byte17 { get; set; }
+	public byte Unknown25 { get; set; }
 
 	/// <summary>
-	/// Raw byte 18: Unknown byte 18.
+	/// Byte 26: Unknown byte.
 	/// </summary>
-	public byte Byte18 { get; set; }
-
-	/// <summary>
-	/// Raw byte 19: Unknown byte 19.
-	/// </summary>
-	public byte Byte19 { get; set; }
-
-	/// <summary>
-	/// Raw byte 20: Unknown byte 20.
-	/// </summary>
-	public byte Byte20 { get; set; }
-
-	/// <summary>
-	/// Raw byte 21: Metal Monster flag (non-zero = metal).
-	/// </summary>
-	public byte MetalFlag { get; set; }
-
-	/// <summary>
-	/// Raw byte 22: Item drop ID.
-	/// </summary>
-	public byte ItemDrop { get; set; }
-
-	/// <summary>
-	/// Raw byte 23: Status/immunity flags.
-	/// </summary>
-	public byte StatusFlags { get; set; }
-
-	/// <summary>
-	/// Raw byte 24: Unknown byte 24.
-	/// </summary>
-	public byte Byte24 { get; set; }
-
-	/// <summary>
-	/// Raw byte 25: Unknown byte 25.
-	/// </summary>
-	public byte Byte25 { get; set; }
-
-	/// <summary>
-	/// Raw byte 26: Unknown byte 26.
-	/// </summary>
-	public byte Byte26 { get; set; }
+	public byte Unknown26 { get; set; }
 
 	/// <summary>
 	/// Whether this monster is a Metal type (takes 0-1 damage, flees often).
 	/// </summary>
-	public bool IsMetal => MetalFlag != 0;
+	public bool IsMetal => (MetalFlags & 0x03) != 0;
+
+	/// <summary>
+	/// Get the item drop rate as a fraction.
+	/// </summary>
+	public string DropRateString => (DropRateFlags & 0x07) switch {
+		0 => "0%",
+		1 => "1/2 (50%)",
+		2 => "1/4 (25%)",
+		3 => "1/8 (12.5%)",
+		4 => "1/16 (6.25%)",
+		5 => "1/32 (3.125%)",
+		6 => "1/256 (0.39%)",
+		7 => "100%",
+		_ => "Unknown"
+	};
+
+	/// <summary>
+	/// Whether this monster is vulnerable to paralysis.
+	/// </summary>
+	public bool VulnerableToParalysis => (StatusVulnerability & 0x40) != 0;
+
+	/// <summary>
+	/// Whether this monster is vulnerable to confusion or has Bounce.
+	/// </summary>
+	public bool VulnerableToConfusionOrBounce => (StatusVulnerability & 0x80) != 0;
 
 	/// <summary>
 	/// Parse a Monster from a 27-byte array.
@@ -159,67 +150,63 @@ public class Monster {
 			throw new ArgumentException($"Data must be at least {Size} bytes from offset");
 		}
 
-		return new Monster {
+		var monster = new Monster {
 			Experience = (ushort)(data[offset + 0] | (data[offset + 1] << 8)),
 			Gold = (ushort)(data[offset + 2] | (data[offset + 3] << 8)),
-			Byte4 = data[offset + 4],
-			Byte5 = data[offset + 5],
+			HitPoints = (ushort)(data[offset + 4] | (data[offset + 5] << 8)),
 			Attack = data[offset + 6],
 			Defense = data[offset + 7],
 			Agility = data[offset + 8],
-			Byte9 = data[offset + 9],
-			Byte10 = data[offset + 10],
-			Byte11 = data[offset + 11],
-			Byte12 = data[offset + 12],
-			Byte13 = data[offset + 13],
-			Byte14 = data[offset + 14],
-			Byte15 = data[offset + 15],
-			Byte16 = data[offset + 16],
-			Byte17 = data[offset + 17],
-			Byte18 = data[offset + 18],
-			Byte19 = data[offset + 19],
-			Byte20 = data[offset + 20],
-			MetalFlag = data[offset + 21],
-			ItemDrop = data[offset + 22],
-			StatusFlags = data[offset + 23],
-			Byte24 = data[offset + 24],
-			Byte25 = data[offset + 25],
-			Byte26 = data[offset + 26]
+			ItemDropId = data[offset + 19],
+			Unknown20 = data[offset + 20],
+			Unknown21 = data[offset + 21],
+			MetalFlags = data[offset + 22],
+			DropRateFlags = data[offset + 23],
+			StatusVulnerability = data[offset + 24],
+			Unknown25 = data[offset + 25],
+			Unknown26 = data[offset + 26]
 		};
+
+		// Copy skill data (bytes 9-14)
+		Array.Copy(data, offset + 9, monster.SkillData, 0, 6);
+
+		// Copy behavior data (bytes 15-18)
+		Array.Copy(data, offset + 15, monster.BehaviorData, 0, 4);
+
+		return monster;
 	}
 
 	/// <summary>
 	/// Convert Monster to 27-byte array.
 	/// </summary>
 	public byte[] ToBytes() {
-		return [
-			(byte)(Experience & 0xff),
-			(byte)((Experience >> 8) & 0xff),
-			(byte)(Gold & 0xff),
-			(byte)((Gold >> 8) & 0xff),
-			Byte4,
-			Byte5,
-			Attack,
-			Defense,
-			Agility,
-			Byte9,
-			Byte10,
-			Byte11,
-			Byte12,
-			Byte13,
-			Byte14,
-			Byte15,
-			Byte16,
-			Byte17,
-			Byte18,
-			Byte19,
-			Byte20,
-			MetalFlag,
-			ItemDrop,
-			StatusFlags,
-			Byte24,
-			Byte25,
-			Byte26
-		];
+		var data = new byte[Size];
+
+		data[0] = (byte)(Experience & 0xff);
+		data[1] = (byte)((Experience >> 8) & 0xff);
+		data[2] = (byte)(Gold & 0xff);
+		data[3] = (byte)((Gold >> 8) & 0xff);
+		data[4] = (byte)(HitPoints & 0xff);
+		data[5] = (byte)((HitPoints >> 8) & 0xff);
+		data[6] = Attack;
+		data[7] = Defense;
+		data[8] = Agility;
+
+		// Copy skill data (bytes 9-14)
+		Array.Copy(SkillData, 0, data, 9, 6);
+
+		// Copy behavior data (bytes 15-18)
+		Array.Copy(BehaviorData, 0, data, 15, 4);
+
+		data[19] = ItemDropId;
+		data[20] = Unknown20;
+		data[21] = Unknown21;
+		data[22] = MetalFlags;
+		data[23] = DropRateFlags;
+		data[24] = StatusVulnerability;
+		data[25] = Unknown25;
+		data[26] = Unknown26;
+
+		return data;
 	}
 }
