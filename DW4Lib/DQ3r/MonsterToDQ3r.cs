@@ -29,14 +29,14 @@ public static class MonsterToDQ3r {
 		return new DQ3rMonster {
 			Id = id,
 			Name = string.IsNullOrEmpty(name) ? $"Monster_{id:D3}" : name,
-			HP = ScaleStat(GetEstimatedHP(dw4Monster), ScalingFactors.HP),
+			HP = ScaleStat(dw4Monster.HitPoints, ScalingFactors.HP),
 			MP = 0, // DW4 doesn't track monster MP
 			Attack = ScaleStat(dw4Monster.Attack, ScalingFactors.Attack),
 			Defense = ScaleStat(dw4Monster.Defense, ScalingFactors.Defense),
 			Agility = ScaleStat(dw4Monster.Agility, ScalingFactors.Agility),
 			Experience = ScaleStat(dw4Monster.Experience, ScalingFactors.Experience),
 			Gold = ScaleStat(dw4Monster.Gold, ScalingFactors.Gold),
-			ItemDrop = dw4Monster.ItemDrop,
+			ItemDrop = dw4Monster.ItemDropId,
 			DropRate = 32, // Default 12.5% (32/256)
 			AIPattern = 0, // Unknown in 27-byte format
 			Spells = new List<int>(), // Unknown in 27-byte format
@@ -69,17 +69,6 @@ public static class MonsterToDQ3r {
 	}
 
 	/// <summary>
-	/// Estimate HP from unknown bytes. The exact HP byte location is still being researched.
-	/// Using Byte15 as potential HP high byte combined with some pattern.
-	/// </summary>
-	private static int GetEstimatedHP(Monster monster) {
-		// The exact HP format in 27-byte structure is unknown
-		// For now, use a reasonable estimate based on Attack/Defense levels
-		// This should be updated once the HP byte position is confirmed
-		return Math.Max(monster.Attack, monster.Defense);
-	}
-
-	/// <summary>
 	/// Build conversion notes with raw byte information for debugging.
 	/// </summary>
 	private static string BuildConversionNotes(Monster monster, int id) {
@@ -88,8 +77,8 @@ public static class MonsterToDQ3r {
 			$"IsMetal: {monster.IsMetal}"
 		};
 
-		if (monster.StatusFlags != 0) {
-			notes.Add($"StatusFlags: 0x{monster.StatusFlags:X2}");
+		if (monster.StatusVulnerability != 0) {
+			notes.Add($"StatusFlags: 0x{monster.StatusVulnerability:X2}");
 		}
 
 		// Note sprite mapping status

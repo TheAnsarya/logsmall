@@ -21,13 +21,13 @@ public static class ItemConverter {
 		return new ItemJson {
 			Index = index,
 			Name = name ?? $"Item_{index:D3}",
-			NameIndex = item.NameIndex,
 			Type = item.EquipmentSlot,
-			StatBonus = item.StatBonus,
-			SpecialEffect = item.SpecialEffect,
-			Price = item.Price,
+			StatModifier = item.StatModifier,
+			SpecialFlags = item.SpecialFlags,
+			BuyPrice = item.BuyPrice,
+			SellPrice = item.SellPrice,
 			EquippableBy = ParseEquipFlags(item.EquipFlags),
-			IconID = item.IconID
+			IsCursed = item.IsCursed
 		};
 	}
 
@@ -66,13 +66,12 @@ public static class ItemConverter {
 	/// </summary>
 	public static Item FromJson(ItemJson json) {
 		return new Item {
-			NameIndex = json.NameIndex,
 			TypeFlags = (byte)json.Type,
-			StatBonus = json.StatBonus,
-			SpecialEffect = json.SpecialEffect,
-			Price = json.Price,
-			EquipFlags = PackEquipFlags(json.EquippableBy),
-			IconID = json.IconID
+			StatModifier = json.StatModifier,
+			SpecialFlags = json.SpecialFlags,
+			BuyPrice = json.BuyPrice,
+			SellPrice = json.SellPrice,
+			EquipFlags = PackEquipFlags(json.EquippableBy)
 		};
 	}
 
@@ -115,13 +114,13 @@ public static class ItemConverter {
 public class ItemJson {
 	public int Index { get; set; }
 	public string Name { get; set; } = "";
-	public byte NameIndex { get; set; }
 	public ItemType Type { get; set; }
-	public byte StatBonus { get; set; }
-	public byte SpecialEffect { get; set; }
-	public ushort Price { get; set; }
+	public sbyte StatModifier { get; set; }
+	public byte SpecialFlags { get; set; }
+	public ushort BuyPrice { get; set; }
+	public ushort SellPrice { get; set; }
 	public EquipFlags EquippableBy { get; set; } = new();
-	public byte IconID { get; set; }
+	public bool IsCursed { get; set; }
 }
 
 /// <summary>

@@ -58,11 +58,12 @@ public class DataExtractor {
 				RomOffset = $"0x{offset:x5}",
 				Experience = monster.Experience,
 				Gold = monster.Gold,
+				HitPoints = monster.HitPoints,
 				Attack = monster.Attack,
 				Defense = monster.Defense,
 				Agility = monster.Agility,
-				ItemDropId = monster.ItemDrop,
-				StatusFlags = monster.StatusFlags,
+				ItemDropId = monster.ItemDropId,
+				StatusFlags = monster.StatusVulnerability,
 				IsMetal = monster.IsMetal,
 				RawHex = BitConverter.ToString(monsterData).Replace("-", " ")
 			});
@@ -258,6 +259,7 @@ public class MonsterExport {
 	public string? RomOffset { get; set; }
 	public int Experience { get; set; }
 	public int Gold { get; set; }
+	public int HitPoints { get; set; }
 	public int Attack { get; set; }
 	public int Defense { get; set; }
 	public int Agility { get; set; }

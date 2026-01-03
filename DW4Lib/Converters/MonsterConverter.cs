@@ -23,32 +23,23 @@ public static class MonsterConverter {
 			Name = name ?? $"Monster_{index:D3}",
 			Experience = monster.Experience,
 			Gold = monster.Gold,
+			HitPoints = monster.HitPoints,
 			Attack = monster.Attack,
 			Defense = monster.Defense,
 			Agility = monster.Agility,
-			ItemDrop = monster.ItemDrop,
-			StatusFlags = monster.StatusFlags,
+			ItemDrop = monster.ItemDropId,
+			StatusFlags = monster.StatusVulnerability,
 			IsMetal = monster.IsMetal,
 			// Store raw bytes for unknown fields
 			RawBytes = new MonsterRawBytes {
-				Byte4 = monster.Byte4,
-				Byte5 = monster.Byte5,
-				Byte9 = monster.Byte9,
-				Byte10 = monster.Byte10,
-				Byte11 = monster.Byte11,
-				Byte12 = monster.Byte12,
-				Byte13 = monster.Byte13,
-				Byte14 = monster.Byte14,
-				Byte15 = monster.Byte15,
-				Byte16 = monster.Byte16,
-				Byte17 = monster.Byte17,
-				Byte18 = monster.Byte18,
-				Byte19 = monster.Byte19,
-				Byte20 = monster.Byte20,
-				MetalFlag = monster.MetalFlag,
-				Byte24 = monster.Byte24,
-				Byte25 = monster.Byte25,
-				Byte26 = monster.Byte26
+				SkillData = monster.SkillData,
+				BehaviorData = monster.BehaviorData,
+				Unknown20 = monster.Unknown20,
+				Unknown21 = monster.Unknown21,
+				MetalFlags = monster.MetalFlags,
+				DropRateFlags = monster.DropRateFlags,
+				Unknown25 = monster.Unknown25,
+				Unknown26 = monster.Unknown26
 			}
 		};
 	}
@@ -87,34 +78,32 @@ public static class MonsterConverter {
 	/// Convert JSON object back to Monster.
 	/// </summary>
 	public static Monster FromJson(MonsterJson json) {
-		return new Monster {
+		var monster = new Monster {
 			Experience = json.Experience,
 			Gold = json.Gold,
+			HitPoints = json.HitPoints,
 			Attack = json.Attack,
 			Defense = json.Defense,
 			Agility = json.Agility,
-			ItemDrop = json.ItemDrop,
-			StatusFlags = json.StatusFlags,
-			// Restore raw bytes
-			Byte4 = json.RawBytes.Byte4,
-			Byte5 = json.RawBytes.Byte5,
-			Byte9 = json.RawBytes.Byte9,
-			Byte10 = json.RawBytes.Byte10,
-			Byte11 = json.RawBytes.Byte11,
-			Byte12 = json.RawBytes.Byte12,
-			Byte13 = json.RawBytes.Byte13,
-			Byte14 = json.RawBytes.Byte14,
-			Byte15 = json.RawBytes.Byte15,
-			Byte16 = json.RawBytes.Byte16,
-			Byte17 = json.RawBytes.Byte17,
-			Byte18 = json.RawBytes.Byte18,
-			Byte19 = json.RawBytes.Byte19,
-			Byte20 = json.RawBytes.Byte20,
-			MetalFlag = json.RawBytes.MetalFlag,
-			Byte24 = json.RawBytes.Byte24,
-			Byte25 = json.RawBytes.Byte25,
-			Byte26 = json.RawBytes.Byte26
+			ItemDropId = json.ItemDrop,
+			Unknown20 = json.RawBytes.Unknown20,
+			Unknown21 = json.RawBytes.Unknown21,
+			MetalFlags = json.RawBytes.MetalFlags,
+			DropRateFlags = json.RawBytes.DropRateFlags,
+			StatusVulnerability = json.StatusFlags,
+			Unknown25 = json.RawBytes.Unknown25,
+			Unknown26 = json.RawBytes.Unknown26
 		};
+
+		// Copy skill and behavior data if present
+		if (json.RawBytes.SkillData != null) {
+			Array.Copy(json.RawBytes.SkillData, monster.SkillData, Math.Min(6, json.RawBytes.SkillData.Length));
+		}
+		if (json.RawBytes.BehaviorData != null) {
+			Array.Copy(json.RawBytes.BehaviorData, monster.BehaviorData, Math.Min(4, json.RawBytes.BehaviorData.Length));
+		}
+
+		return monster;
 	}
 }
 
@@ -126,6 +115,7 @@ public class MonsterJson {
 	public string Name { get; set; } = "";
 	public ushort Experience { get; set; }
 	public ushort Gold { get; set; }
+	public ushort HitPoints { get; set; }
 	public byte Attack { get; set; }
 	public byte Defense { get; set; }
 	public byte Agility { get; set; }
@@ -136,25 +126,15 @@ public class MonsterJson {
 }
 
 /// <summary>
-/// Raw byte storage for unknown monster data fields.
+/// Raw byte storage for monster data fields with research-documented names.
 /// </summary>
 public class MonsterRawBytes {
-	public byte Byte4 { get; set; }
-	public byte Byte5 { get; set; }
-	public byte Byte9 { get; set; }
-	public byte Byte10 { get; set; }
-	public byte Byte11 { get; set; }
-	public byte Byte12 { get; set; }
-	public byte Byte13 { get; set; }
-	public byte Byte14 { get; set; }
-	public byte Byte15 { get; set; }
-	public byte Byte16 { get; set; }
-	public byte Byte17 { get; set; }
-	public byte Byte18 { get; set; }
-	public byte Byte19 { get; set; }
-	public byte Byte20 { get; set; }
-	public byte MetalFlag { get; set; }
-	public byte Byte24 { get; set; }
-	public byte Byte25 { get; set; }
-	public byte Byte26 { get; set; }
+	public byte[] SkillData { get; set; } = new byte[6];
+	public byte[] BehaviorData { get; set; } = new byte[4];
+	public byte Unknown20 { get; set; }
+	public byte Unknown21 { get; set; }
+	public byte MetalFlags { get; set; }
+	public byte DropRateFlags { get; set; }
+	public byte Unknown25 { get; set; }
+	public byte Unknown26 { get; set; }
 }

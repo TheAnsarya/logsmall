@@ -9,36 +9,33 @@ public class ItemTests {
 	[Fact]
 	public void FromBytes_WithValidData_ReturnsCorrectItem() {
 		// Arrange - Sample item data (8 bytes)
-		// NameIndex=0x10, TypeFlags=0x01 (weapon), StatBonus=50, SpecialEffect=0,
-		// PriceLow=0x64, PriceHigh=0x00 (100 gold), EquipFlags=0x05, IconID=2
-		var data = new byte[] { 0x10, 0x01, 50, 0, 0x64, 0x00, 0x05, 2 };
+		// TypeFlags=0x01 (weapon), StatModifier=50, SpecialFlags=0,
+		// BuyPrice=0x0064 (100 gold, big-endian), SellPrice=0x0032 (50 gold), EquipFlags=0x05
+		var data = new byte[] { 0x01, 50, 0, 0x00, 0x64, 0x00, 0x32, 0x05 };
 
 		// Act
 		var item = Item.FromBytes(data);
 
 		// Assert
-		Assert.Equal(0x10, item.NameIndex);
 		Assert.Equal(0x01, item.TypeFlags);
 		Assert.Equal(ItemType.Weapon, item.EquipmentSlot);
-		Assert.Equal(50, item.StatBonus);
-		Assert.Equal(0, item.SpecialEffect);
-		Assert.Equal(100, (int)item.Price);
+		Assert.Equal(50, item.StatModifier);
+		Assert.Equal(0, item.SpecialFlags);
+		Assert.Equal(100, (int)item.BuyPrice);
+		Assert.Equal(50, (int)item.SellPrice);
 		Assert.Equal(0x05, item.EquipFlags);
-		Assert.Equal(2, item.IconID);
 	}
 
 	[Fact]
 	public void ToBytes_RoundTrip_PreservesData() {
 		// Arrange
 		var original = new Item {
-			NameIndex = 25,
 			TypeFlags = 0x02, // Armor
-			StatBonus = 45,
-			SpecialEffect = 10,
-			PriceLow = 0x50,
-			PriceHigh = 0x01, // 336 gold
-			EquipFlags = 0x07,
-			IconID = 5
+			StatModifier = 45,
+			SpecialFlags = 10,
+			BuyPrice = 336,
+			SellPrice = 168,
+			EquipFlags = 0x07
 		};
 
 		// Act
@@ -46,13 +43,12 @@ public class ItemTests {
 		var roundTrip = Item.FromBytes(bytes);
 
 		// Assert
-		Assert.Equal(original.NameIndex, roundTrip.NameIndex);
 		Assert.Equal(original.TypeFlags, roundTrip.TypeFlags);
-		Assert.Equal(original.StatBonus, roundTrip.StatBonus);
-		Assert.Equal(original.SpecialEffect, roundTrip.SpecialEffect);
-		Assert.Equal(original.Price, roundTrip.Price);
+		Assert.Equal(original.StatModifier, roundTrip.StatModifier);
+		Assert.Equal(original.SpecialFlags, roundTrip.SpecialFlags);
+		Assert.Equal(original.BuyPrice, roundTrip.BuyPrice);
+		Assert.Equal(original.SellPrice, roundTrip.SellPrice);
 		Assert.Equal(original.EquipFlags, roundTrip.EquipFlags);
-		Assert.Equal(original.IconID, roundTrip.IconID);
 	}
 
 	[Fact]
@@ -72,15 +68,15 @@ public class ItemTests {
 	public void FromBytes_WithOffset_ReadsCorrectData() {
 		// Arrange - Put item data at offset 5
 		var data = new byte[20];
-		data[5 + 1] = 0x02; // Armor type
-		data[5 + 2] = 75;   // StatBonus
+		data[5 + 0] = 0x02; // Armor type
+		data[5 + 1] = 75;   // StatModifier
 
 		// Act
 		var item = Item.FromBytes(data, 5);
 
 		// Assert
 		Assert.Equal(ItemType.Armor, item.EquipmentSlot);
-		Assert.Equal(75, item.StatBonus);
+		Assert.Equal(75, item.StatModifier);
 	}
 
 	[Fact]
@@ -104,17 +100,60 @@ public class ItemTests {
 	}
 
 	[Fact]
-	public void Price_SetAndGet_WorksCorrectly() {
-		// Arrange
-		var item = new Item();
+	public void BuyPrice_BigEndian_ParsesCorrectly() {
+		// Arrange - Buy price 0x04D2 = 1234 in big-endian
+		var data = new byte[] { 0x01, 0, 0, 0x04, 0xD2, 0x02, 0x69, 0xFF };
 
 		// Act
-		item.Price = 1234;
+		var item = Item.FromBytes(data);
 
 		// Assert
-		Assert.Equal(1234, (int)item.Price);
-		Assert.Equal(0xD2, item.PriceLow);  // 1234 & 0xFF = 210 = 0xD2
-		Assert.Equal(0x04, item.PriceHigh); // 1234 >> 8 = 4
+		Assert.Equal(1234, (int)item.BuyPrice);
+		Assert.Equal(617, (int)item.SellPrice); // 0x0269 = 617
+	}
+
+	[Fact]
+	public void IsCursed_WithNegativeModifier_ReturnsTrue() {
+		// Arrange - Cursed item with -5 stat modifier
+		var item = new Item { StatModifier = -5 };
+
+		// Assert
+		Assert.True(item.IsCursed);
+		Assert.Equal(-5, item.StatModifier);
+	}
+
+	[Fact]
+	public void IsCursed_WithPositiveModifier_ReturnsFalse() {
+		// Arrange - Normal item with +10 stat modifier
+		var item = new Item { StatModifier = 10 };
+
+		// Assert
+		Assert.False(item.IsCursed);
+	}
+
+	[Fact]
+	public void EquipableByString_ReturnsCorrectCharacters() {
+		// Arrange - Hero, Ragnar, and Taloon can equip (bits 0, 1, 5)
+		var item = new Item { EquipFlags = 0x23 }; // 0010 0011
+
+		// Act
+		var result = item.EquipableByString;
+
+		// Assert
+		Assert.Contains("Hero", result);
+		Assert.Contains("Ragnar", result);
+		Assert.Contains("Taloon", result);
+		Assert.DoesNotContain("Alena", result);
+	}
+
+	[Fact]
+	public void Constants_AreCorrect() {
+		// Assert ROM location constants
+		Assert.Equal(8, Item.Size);
+		Assert.Equal(7, Item.Bank);
+		Assert.Equal(0x8000, Item.TableAddress);
+		Assert.Equal(0x1C010, Item.FileOffset);
+		Assert.Equal(220, Item.TotalItems);
 	}
 
 	[Fact]

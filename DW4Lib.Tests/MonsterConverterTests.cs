@@ -14,12 +14,13 @@ public class MonsterConverterTests {
 		var monster = new Monster {
 			Experience = 1500,
 			Gold = 750,
+			HitPoints = 200,
 			Attack = 80,
 			Defense = 60,
 			Agility = 45,
-			ItemDrop = 12,
-			StatusFlags = 0x1f,
-			MetalFlag = 0
+			ItemDropId = 12,
+			StatusVulnerability = 0x1f,
+			MetalFlags = 0
 		};
 
 		// Act
@@ -30,6 +31,7 @@ public class MonsterConverterTests {
 		Assert.Equal("Test Monster", json.Name);
 		Assert.Equal(1500, (int)json.Experience);
 		Assert.Equal(750, (int)json.Gold);
+		Assert.Equal(200, (int)json.HitPoints);
 		Assert.Equal(80, json.Attack);
 		Assert.Equal(60, json.Defense);
 		Assert.Equal(45, json.Agility);
@@ -58,6 +60,7 @@ public class MonsterConverterTests {
 			Name = "Slime",
 			Experience = 2,
 			Gold = 1,
+			HitPoints = 10,
 			Attack = 5,
 			Defense = 4,
 			Agility = 3,
@@ -73,6 +76,7 @@ public class MonsterConverterTests {
 		// Assert
 		Assert.Equal(2, (int)monster.Experience);
 		Assert.Equal(1, (int)monster.Gold);
+		Assert.Equal(10, (int)monster.HitPoints);
 		Assert.Equal(5, monster.Attack);
 		Assert.Equal(4, monster.Defense);
 		Assert.Equal(3, monster.Agility);
@@ -117,13 +121,15 @@ public class MonsterConverterTests {
 	public void RoundTrip_ThroughJson_PreservesRawBytes() {
 		// Arrange
 		var original = new Monster {
-			Byte4 = 0xaa,
-			Byte5 = 0xbb,
-			Byte9 = 0xcc,
-			Byte10 = 0xdd,
-			Byte24 = 0xee,
-			Byte25 = 0xff,
-			Byte26 = 0x12
+			HitPoints = 500,
+			SkillData = [0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff],
+			BehaviorData = [0x11, 0x22, 0x33, 0x44],
+			ItemDropId = 42,
+			Unknown20 = 0x55,
+			Unknown21 = 0x66,
+			StatusVulnerability = 0x77,
+			Unknown25 = 0x88,
+			Unknown26 = 0x99
 		};
 		var json = MonsterConverter.ToJson(original, 0);
 
@@ -131,12 +137,10 @@ public class MonsterConverterTests {
 		var roundTrip = MonsterConverter.FromJson(json);
 
 		// Assert
-		Assert.Equal(original.Byte4, roundTrip.Byte4);
-		Assert.Equal(original.Byte5, roundTrip.Byte5);
-		Assert.Equal(original.Byte9, roundTrip.Byte9);
-		Assert.Equal(original.Byte10, roundTrip.Byte10);
-		Assert.Equal(original.Byte24, roundTrip.Byte24);
-		Assert.Equal(original.Byte25, roundTrip.Byte25);
-		Assert.Equal(original.Byte26, roundTrip.Byte26);
+		Assert.Equal(original.HitPoints, roundTrip.HitPoints);
+		Assert.Equal(original.SkillData, roundTrip.SkillData);
+		Assert.Equal(original.BehaviorData, roundTrip.BehaviorData);
+		Assert.Equal(original.ItemDropId, roundTrip.ItemDropId);
+		Assert.Equal(original.StatusVulnerability, roundTrip.StatusVulnerability);
 	}
 }

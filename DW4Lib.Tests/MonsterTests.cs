@@ -9,18 +9,20 @@ public class MonsterTests {
 	[Fact]
 	public void FromBytes_WithValidData_ReturnsCorrectMonster() {
 		// Arrange - Sample monster data (27 bytes)
-		// EXP=1000 (0x03E8), Gold=500 (0x01F4), ATK=50, DEF=40, AGI=30
+		// EXP=1000 (0x03E8), Gold=500 (0x01F4), HP=150, ATK=50, DEF=40, AGI=30
 		var data = new byte[27];
 		data[0] = 0xe8; // EXP low
 		data[1] = 0x03; // EXP high
 		data[2] = 0xf4; // Gold low
 		data[3] = 0x01; // Gold high
+		data[4] = 150;  // HP low
+		data[5] = 0x00; // HP high
 		data[6] = 50;   // Attack
 		data[7] = 40;   // Defense
 		data[8] = 30;   // Agility
-		data[21] = 1;   // Metal flag (set)
-		data[22] = 15;  // Item drop
-		data[23] = 0x0f; // Status flags
+		data[19] = 15;  // Item drop ID
+		data[22] = 1;   // Metal flags (set)
+		data[24] = 0x0f; // Status vulnerability
 
 		// Act
 		var monster = Monster.FromBytes(data);
@@ -28,12 +30,13 @@ public class MonsterTests {
 		// Assert
 		Assert.Equal(1000, (int)monster.Experience);
 		Assert.Equal(500, (int)monster.Gold);
+		Assert.Equal(150, (int)monster.HitPoints);
 		Assert.Equal(50, monster.Attack);
 		Assert.Equal(40, monster.Defense);
 		Assert.Equal(30, monster.Agility);
 		Assert.True(monster.IsMetal);
-		Assert.Equal(15, monster.ItemDrop);
-		Assert.Equal(0x0f, monster.StatusFlags);
+		Assert.Equal(15, monster.ItemDropId);
+		Assert.Equal(0x0f, monster.StatusVulnerability);
 	}
 
 	[Fact]
@@ -42,15 +45,15 @@ public class MonsterTests {
 		var original = new Monster {
 			Experience = 12345,
 			Gold = 6789,
+			HitPoints = 500,
 			Attack = 100,
 			Defense = 80,
 			Agility = 60,
-			Byte4 = 0xaa,
-			Byte5 = 0xbb,
-			Byte9 = 0x11,
-			MetalFlag = 0,
-			ItemDrop = 42,
-			StatusFlags = 0xff
+			SkillData = [0xaa, 0xbb, 0x00, 0x00, 0x00, 0x00],
+			BehaviorData = [0x11, 0x00, 0x00, 0x00],
+			MetalFlags = 0,
+			ItemDropId = 42,
+			StatusVulnerability = 0xff
 		};
 
 		// Act - Convert to bytes and back
@@ -60,15 +63,16 @@ public class MonsterTests {
 		// Assert
 		Assert.Equal(original.Experience, roundTrip.Experience);
 		Assert.Equal(original.Gold, roundTrip.Gold);
+		Assert.Equal(original.HitPoints, roundTrip.HitPoints);
 		Assert.Equal(original.Attack, roundTrip.Attack);
 		Assert.Equal(original.Defense, roundTrip.Defense);
 		Assert.Equal(original.Agility, roundTrip.Agility);
-		Assert.Equal(original.Byte4, roundTrip.Byte4);
-		Assert.Equal(original.Byte5, roundTrip.Byte5);
-		Assert.Equal(original.Byte9, roundTrip.Byte9);
-		Assert.Equal(original.MetalFlag, roundTrip.MetalFlag);
-		Assert.Equal(original.ItemDrop, roundTrip.ItemDrop);
-		Assert.Equal(original.StatusFlags, roundTrip.StatusFlags);
+		Assert.Equal(original.SkillData[0], roundTrip.SkillData[0]);
+		Assert.Equal(original.SkillData[1], roundTrip.SkillData[1]);
+		Assert.Equal(original.BehaviorData[0], roundTrip.BehaviorData[0]);
+		Assert.Equal(original.MetalFlags, roundTrip.MetalFlags);
+		Assert.Equal(original.ItemDropId, roundTrip.ItemDropId);
+		Assert.Equal(original.StatusVulnerability, roundTrip.StatusVulnerability);
 	}
 
 	[Fact]
@@ -112,7 +116,7 @@ public class MonsterTests {
 	[Fact]
 	public void IsMetal_WithMetalFlagSet_ReturnsTrue() {
 		// Arrange
-		var monster = new Monster { MetalFlag = 5 };
+		var monster = new Monster { MetalFlags = 5 };
 
 		// Assert
 		Assert.True(monster.IsMetal);
@@ -121,7 +125,7 @@ public class MonsterTests {
 	[Fact]
 	public void IsMetal_WithMetalFlagZero_ReturnsFalse() {
 		// Arrange
-		var monster = new Monster { MetalFlag = 0 };
+		var monster = new Monster { MetalFlags = 0 };
 
 		// Assert
 		Assert.False(monster.IsMetal);

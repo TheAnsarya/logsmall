@@ -35,7 +35,7 @@ public static class ItemToDQ3r {
 	/// </summary>
 	public static DQ3rItem Convert(Item dw4Item, int id, string name = "") {
 		var type = MapItemType(dw4Item.EquipmentSlot);
-		int buyPrice = (int)(dw4Item.Price * PriceScaling);
+		int buyPrice = (int)(dw4Item.BuyPrice * PriceScaling);
 
 		return new DQ3rItem {
 			Id = id,
@@ -43,15 +43,15 @@ public static class ItemToDQ3r {
 			Type = type,
 			BuyPrice = buyPrice,
 			SellPrice = buyPrice / 2,
-			AttackBonus = type == DQ3rItemType.Weapon ? ScaleStat(dw4Item.StatBonus) : 0,
-			DefenseBonus = IsDefensiveEquipment(type) ? ScaleStat(dw4Item.StatBonus) : 0,
+			AttackBonus = type == DQ3rItemType.Weapon ? ScaleStat(dw4Item.StatModifier) : 0,
+			DefenseBonus = IsDefensiveEquipment(type) ? ScaleStat(dw4Item.StatModifier) : 0,
 			AgilityMod = 0, // DW4 doesn't have agility mods on items
-			SpecialEffect = MapSpecialEffect(dw4Item.SpecialEffect),
+			SpecialEffect = MapSpecialEffect(dw4Item.SpecialFlags),
 			EquipFlags = ConvertEquipFlags(dw4Item.EquipFlags),
-			IconId = dw4Item.IconID,
+			IconId = 0, // No longer tracked in Item.cs
 			Description = GenerateDescription(dw4Item, type),
-			IsCursed = (dw4Item.SpecialEffect & 0x80) != 0, // Assuming high bit = cursed
-			UsableInBattle = type == DQ3rItemType.Consumable || HasBattleUse(dw4Item.SpecialEffect),
+			IsCursed = dw4Item.IsCursed,
+			UsableInBattle = type == DQ3rItemType.Consumable || HasBattleUse(dw4Item.SpecialFlags),
 			UsableInField = type == DQ3rItemType.Consumable || type == DQ3rItemType.Tool,
 			SourceDW4Id = id,
 			Notes = $"Converted from DW4 item {id}"
@@ -78,8 +78,8 @@ public static class ItemToDQ3r {
 			: DQ3rItemType.Consumable;
 	}
 
-	private static int ScaleStat(byte value) {
-		return (int)Math.Round(value * StatScaling);
+	private static int ScaleStat(sbyte value) {
+		return (int)Math.Round(Math.Abs(value) * StatScaling);
 	}
 
 	private static bool IsDefensiveEquipment(DQ3rItemType type) {
@@ -110,11 +110,12 @@ public static class ItemToDQ3r {
 	}
 
 	private static string GenerateDescription(Item item, DQ3rItemType type) {
+		var stat = ScaleStat(item.StatModifier);
 		return type switch {
-			DQ3rItemType.Weapon => $"ATK +{ScaleStat(item.StatBonus)}",
-			DQ3rItemType.Armor => $"DEF +{ScaleStat(item.StatBonus)}",
-			DQ3rItemType.Shield => $"DEF +{ScaleStat(item.StatBonus)}",
-			DQ3rItemType.Helmet => $"DEF +{ScaleStat(item.StatBonus)}",
+			DQ3rItemType.Weapon => $"ATK +{stat}",
+			DQ3rItemType.Armor => $"DEF +{stat}",
+			DQ3rItemType.Shield => $"DEF +{stat}",
+			DQ3rItemType.Helmet => $"DEF +{stat}",
 			DQ3rItemType.Accessory => $"Accessory",
 			DQ3rItemType.Consumable => "Consumable item",
 			DQ3rItemType.KeyItem => "Key item",
