@@ -75,27 +75,20 @@ public class FfmqSpellReader {
 	/// <summary>Spell data base address (SNES: $D50000)</summary>
 	public const int SpellTableAddress = 0x150000; // PC address
 
-	/// <summary>Spell names base address (SNES: $D52000)</summary>
-	public const int SpellNamesAddress = 0x152000; // PC address
-
 	/// <summary>Number of spells</summary>
 	public const int SpellCount = 16;
 
 	/// <summary>Bytes per spell entry</summary>
 	public const int SpellEntrySize = 12;
 
-	/// <summary>Standard spell names in order</summary>
-	private static readonly string[] SpellNames = [
-		"Cure", "Life", "Heal", "Exit",           // White Magic
-		"Fire", "Blizzard", "Thunder", "Quake",    // Black Magic
-		"Aero", "Flare", "Meteor", "White",        // Wizard Magic
-		"Sleep", "Confuse", "Silence", "Death"     // Special
-	];
-
 	private readonly byte[] _romData;
+	private readonly FfmqTextDecoder _textDecoder;
+	private readonly string[] _spellNames;
 
 	public FfmqSpellReader(byte[] romData) {
 		_romData = romData ?? throw new ArgumentNullException(nameof(romData));
+		_textDecoder = new FfmqTextDecoder();
+		_spellNames = _textDecoder.ReadTable(_romData, FfmqTextTables.SpellNames);
 	}
 
 	/// <summary>
@@ -110,7 +103,7 @@ public class FfmqSpellReader {
 
 		return new FfmqSpell {
 			Id = (byte)id,
-			Name = SpellNames[id],
+			Name = id < _spellNames.Length ? _spellNames[id] : $"Spell_{id:D2}",
 			BasePower = _romData[offset + 0x00],
 			Element = (FfmqElement)_romData[offset + 0x01],
 			EffectType = _romData[offset + 0x02],

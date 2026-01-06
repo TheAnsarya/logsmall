@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DQ4rLib", "DQ4rLib\DQ4rLib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DQ4rLib.Tests", "DQ4rLib.Tests\DQ4rLib.Tests.csproj", "{A04E057C-2499-44EC-9C67-905BF844D5D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFMQLib.Tests", "FFMQLib.Tests\FFMQLib.Tests.csproj", "{69EEC199-83A6-4CF8-B439-DB63A40721E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,18 @@ Global
 		{A04E057C-2499-44EC-9C67-905BF844D5D0}.Release|x64.Build.0 = Release|Any CPU
 		{A04E057C-2499-44EC-9C67-905BF844D5D0}.Release|x86.ActiveCfg = Release|Any CPU
 		{A04E057C-2499-44EC-9C67-905BF844D5D0}.Release|x86.Build.0 = Release|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Debug|x64.Build.0 = Debug|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Debug|x86.Build.0 = Debug|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Release|x64.ActiveCfg = Release|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Release|x64.Build.0 = Release|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{69EEC199-83A6-4CF8-B439-DB63A40721E9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -73,9 +73,6 @@ public class FfmqMonsterReader {
 	/// <summary>Monster stats table base address (SNES: $D18000)</summary>
 	public const int StatsTableAddress = 0x118000; // PC address
 
-	/// <summary>Monster names table base address (SNES: $D20000)</summary>
-	public const int NamesTableAddress = 0x120000; // PC address
-
 	/// <summary>Number of monsters in ROM</summary>
 	public const int MonsterCount = 60;
 
@@ -83,9 +80,13 @@ public class FfmqMonsterReader {
 	public const int StatsEntrySize = 16;
 
 	private readonly byte[] _romData;
+	private readonly FfmqTextDecoder _textDecoder;
+	private readonly string[] _monsterNames;
 
 	public FfmqMonsterReader(byte[] romData) {
 		_romData = romData ?? throw new ArgumentNullException(nameof(romData));
+		_textDecoder = new FfmqTextDecoder();
+		_monsterNames = _textDecoder.ReadTable(_romData, FfmqTextTables.MonsterNames);
 	}
 
 	/// <summary>
@@ -100,7 +101,7 @@ public class FfmqMonsterReader {
 
 		return new FfmqMonster {
 			Id = (byte)id,
-			Name = ReadMonsterName(id),
+			Name = id < _monsterNames.Length ? _monsterNames[id] : $"Monster_{id:D2}",
 			Hp = BitConverter.ToUInt16(_romData, offset + 0x00),
 			Attack = _romData[offset + 0x02],
 			Defense = _romData[offset + 0x03],
@@ -125,11 +126,5 @@ public class FfmqMonsterReader {
 		for (int i = 0; i < MonsterCount; i++) {
 			yield return ReadMonster(i);
 		}
-	}
-
-	private string ReadMonsterName(int id) {
-		// Name table has pointers, then strings
-		// For now, return placeholder - actual implementation needs text decoding
-		return $"Monster_{id:D2}";
 	}
 }
