@@ -249,37 +249,38 @@ public class FfmqTextDecoder {
 }
 
 /// <summary>
-/// FFMQ text table definitions for ROM extraction
+/// FFMQ text table definitions for ROM extraction.
+/// Note: Addresses are PC file offsets (e.g., 0x064BA0).
 /// </summary>
 public static class FfmqTextTables {
-	/// <summary>Item names: 232 entries × 12 bytes at $064120</summary>
+	/// <summary>Item names: 232 entries × 12 bytes at 0x064120</summary>
 	public static readonly FfmqTextTable ItemNames = new("item_names", 0x064120, 232, 12);
 
-	/// <summary>Spell names: 32 entries × 12 bytes at $064210</summary>
+	/// <summary>Spell names: 32 entries × 12 bytes at 0x064210</summary>
 	public static readonly FfmqTextTable SpellNames = new("spell_names", 0x064210, 32, 12);
 
-	/// <summary>Weapon names: 57 entries × 12 bytes at $0642A0</summary>
+	/// <summary>Weapon names: 57 entries × 12 bytes at 0x0642A0</summary>
 	public static readonly FfmqTextTable WeaponNames = new("weapon_names", 0x0642A0, 57, 12);
 
-	/// <summary>Helmet names: 10 entries × 12 bytes at $064354</summary>
+	/// <summary>Helmet names: 10 entries × 12 bytes at 0x064354</summary>
 	public static readonly FfmqTextTable HelmetNames = new("helmet_names", 0x064354, 10, 12);
 
-	/// <summary>Armor names: 20 entries × 12 bytes at $064378</summary>
+	/// <summary>Armor names: 20 entries × 12 bytes at 0x064378</summary>
 	public static readonly FfmqTextTable ArmorNames = new("armor_names", 0x064378, 20, 12);
 
-	/// <summary>Shield names: 10 entries × 12 bytes at $0643CC</summary>
+	/// <summary>Shield names: 10 entries × 12 bytes at 0x0643CC</summary>
 	public static readonly FfmqTextTable ShieldNames = new("shield_names", 0x0643CC, 10, 12);
 
-	/// <summary>Accessory names: 24 entries × 12 bytes at $0643FC</summary>
+	/// <summary>Accessory names: 24 entries × 12 bytes at 0x0643FC</summary>
 	public static readonly FfmqTextTable AccessoryNames = new("accessory_names", 0x0643FC, 24, 12);
 
-	/// <summary>Attack names: 128 entries × 12 bytes at $064420</summary>
+	/// <summary>Attack names: 128 entries × 12 bytes at 0x064420</summary>
 	public static readonly FfmqTextTable AttackNames = new("attack_names", 0x064420, 128, 12);
 
-	/// <summary>Monster names: 256 entries × 16 bytes at $064BA0</summary>
+	/// <summary>Monster names: 256 entries × 16 bytes at 0x064BA0</summary>
 	public static readonly FfmqTextTable MonsterNames = new("monster_names", 0x064BA0, 256, 16);
 
-	/// <summary>Location names: 37 entries × 16 bytes at $063ED0</summary>
+	/// <summary>Location names: 37 entries × 16 bytes at 0x063ED0</summary>
 	public static readonly FfmqTextTable LocationNames = new("location_names", 0x063ED0, 37, 16);
 
 	/// <summary>All text tables in ROM order</summary>
@@ -294,7 +295,7 @@ public static class FfmqTextTables {
 /// Text table configuration
 /// </summary>
 /// <param name="Name">Table identifier</param>
-/// <param name="Address">PC address in ROM</param>
+/// <param name="Address">PC file offset in ROM</param>
 /// <param name="Count">Number of entries</param>
 /// <param name="EntryLength">Bytes per entry</param>
 public record FfmqTextTable(string Name, int Address, int Count, int EntryLength) {

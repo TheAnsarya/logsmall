@@ -1,17 +1,18 @@
 namespace FFMQLib;
 
 /// <summary>
-/// FFMQ Monster data structure (variable size, ~16 bytes base stats).
-/// ROM address: $D18000+ (stats), $D20000+ (names)
+/// FFMQ Monster data structure.
+/// Stats table: 14 bytes per entry at PC 0x14275
+/// Level table: 3 bytes per entry at PC 0x1417C
 /// </summary>
 /// <remarks>
-/// Total: ~60 monsters (40 normal, 15 bosses, 4 Dark King phases)
+/// Total: 83 monsters
 /// </remarks>
 public record FfmqMonster {
-	/// <summary>Monster ID (0-59)</summary>
+	/// <summary>Monster ID (0-82)</summary>
 	public byte Id { get; init; }
 
-	/// <summary>Monster name (ASCII)</summary>
+	/// <summary>Monster name (from text table)</summary>
 	public string Name { get; init; } = string.Empty;
 
 	/// <summary>Hit points (2 bytes, little-endian)</summary>
@@ -32,52 +33,46 @@ public record FfmqMonster {
 	/// <summary>Magic defense</summary>
 	public byte MagicDefense { get; init; }
 
-	/// <summary>Experience reward (×10)</summary>
+	/// <summary>Experience multiplier</summary>
 	public byte ExpReward { get; init; }
 
-	/// <summary>Gold reward</summary>
-	public ushort GoldReward { get; init; }
+	/// <summary>Gold multiplier</summary>
+	public byte GoldReward { get; init; }
 
-	/// <summary>Drop item ID</summary>
-	public byte DropItemId { get; init; }
-
-	/// <summary>Drop rate (1-255, 255 = guaranteed)</summary>
-	public byte DropRate { get; init; }
-
-	/// <summary>Elemental weaknesses</summary>
+	/// <summary>Elemental weaknesses (16-bit flags)</summary>
 	public FfmqElement Weaknesses { get; init; }
 
-	/// <summary>Elemental resistances</summary>
+	/// <summary>Elemental resistances (16-bit flags)</summary>
 	public FfmqElement Resistances { get; init; }
 
-	/// <summary>Status immunities</summary>
-	public FfmqStatus StatusImmunities { get; init; }
-
-	/// <summary>Graphics pointer (bank + offset)</summary>
-	public int GraphicsPointer { get; init; }
-
-	/// <summary>AI script ID</summary>
-	public byte AiScriptId { get; init; }
-
-	/// <summary>Is this a boss monster?</summary>
-	public bool IsBoss => Id >= 45;
-
-	/// <summary>Actual EXP value (ExpReward × 10)</summary>
-	public int ActualExp => ExpReward * 10;
+	/// <summary>Is this a boss monster? (ID >= 63)</summary>
+	public bool IsBoss => Id >= 63;
 }
 
 /// <summary>
 /// Reads FFMQ monster data from ROM
 /// </summary>
 public class FfmqMonsterReader {
-	/// <summary>Monster stats table base address (SNES: $D18000)</summary>
-	public const int StatsTableAddress = 0x118000; // PC address
+	/// <summary>
+	/// Monster stats table base address.
+	/// SNES: Bank $02, ROM $C275 -> PC: 0x02 * 0x8000 + (0xC275 - 0x8000) = 0x14275
+	/// </summary>
+	public const int StatsTableAddress = 0x14275;
+
+	/// <summary>
+	/// Monster level/multiplier table base address.
+	/// SNES: Bank $02, ROM $C17C -> PC: 0x02 * 0x8000 + (0xC17C - 0x8000) = 0x1417C
+	/// </summary>
+	public const int LevelTableAddress = 0x1417C;
 
 	/// <summary>Number of monsters in ROM</summary>
-	public const int MonsterCount = 60;
+	public const int MonsterCount = 83;
 
-	/// <summary>Bytes per monster stat entry</summary>
-	public const int StatsEntrySize = 16;
+	/// <summary>Bytes per monster stat entry (14 bytes)</summary>
+	public const int StatsEntrySize = 14;
+
+	/// <summary>Bytes per monster level entry (3 bytes)</summary>
+	public const int LevelEntrySize = 3;
 
 	private readonly byte[] _romData;
 	private readonly FfmqTextDecoder _textDecoder;
@@ -97,25 +92,40 @@ public class FfmqMonsterReader {
 			throw new ArgumentOutOfRangeException(nameof(id), $"Monster ID must be 0-{MonsterCount - 1}");
 		}
 
-		int offset = StatsTableAddress + (id * StatsEntrySize);
+		int statsOffset = StatsTableAddress + (id * StatsEntrySize);
+		int levelOffset = LevelTableAddress + (id * LevelEntrySize);
+
+		// Stats layout (14 bytes):
+		// 0-1: HP (16-bit)
+		// 2: Attack
+		// 3: Defense
+		// 4: Speed
+		// 5: Magic Attack
+		// 6-7: Resistances (16-bit flags)
+		// 8: Magic Defense
+		// 9: Magic Evade
+		// 10: Accuracy
+		// 11: Evade
+		// 12-13: Weaknesses (16-bit flags)
+
+		// Level layout (3 bytes):
+		// 0: Level
+		// 1: XP multiplier
+		// 2: GP multiplier
 
 		return new FfmqMonster {
 			Id = (byte)id,
 			Name = id < _monsterNames.Length ? _monsterNames[id] : $"Monster_{id:D2}",
-			Hp = BitConverter.ToUInt16(_romData, offset + 0x00),
-			Attack = _romData[offset + 0x02],
-			Defense = _romData[offset + 0x03],
-			Speed = _romData[offset + 0x04],
-			MagicAttack = _romData[offset + 0x05],
-			MagicDefense = _romData[offset + 0x06],
-			ExpReward = _romData[offset + 0x07],
-			GoldReward = BitConverter.ToUInt16(_romData, offset + 0x08),
-			DropItemId = _romData[offset + 0x0A],
-			DropRate = _romData[offset + 0x0B],
-			Weaknesses = (FfmqElement)_romData[offset + 0x0C],
-			Resistances = (FfmqElement)_romData[offset + 0x0D],
-			StatusImmunities = (FfmqStatus)_romData[offset + 0x0E],
-			AiScriptId = _romData[offset + 0x0F]
+			Hp = BitConverter.ToUInt16(_romData, statsOffset + 0),
+			Attack = _romData[statsOffset + 2],
+			Defense = _romData[statsOffset + 3],
+			Speed = _romData[statsOffset + 4],
+			MagicAttack = _romData[statsOffset + 5],
+			Resistances = (FfmqElement)BitConverter.ToUInt16(_romData, statsOffset + 6),
+			MagicDefense = _romData[statsOffset + 8],
+			Weaknesses = (FfmqElement)BitConverter.ToUInt16(_romData, statsOffset + 12),
+			ExpReward = _romData[levelOffset + 1],  // XP multiplier
+			GoldReward = _romData[levelOffset + 2], // GP multiplier
 		};
 	}
 

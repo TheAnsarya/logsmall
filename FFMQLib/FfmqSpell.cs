@@ -1,11 +1,11 @@
 namespace FFMQLib;
 
 /// <summary>
-/// FFMQ Spell data structure (12 bytes).
-/// ROM address: $D50000+
+/// FFMQ Spell data structure (6 bytes).
+/// ROM address: 0x060F36
 /// </summary>
 /// <remarks>
-/// 16 total spells: 4 categories × 4 levels each
+/// 16 total spells
 /// No MP cost in FFMQ - unlimited magic use
 /// </remarks>
 public record FfmqSpell {
@@ -18,10 +18,10 @@ public record FfmqSpell {
 	/// <summary>Base power for damage/healing calculation</summary>
 	public byte BasePower { get; init; }
 
-	/// <summary>Element flags</summary>
+	/// <summary>Element flags (may be hardcoded in execution code)</summary>
 	public FfmqElement Element { get; init; }
 
-	/// <summary>Effect type: 0=damage, 1=heal, 2=status</summary>
+	/// <summary>Effect type byte</summary>
 	public byte EffectType { get; init; }
 
 	/// <summary>Target type</summary>
@@ -32,24 +32,6 @@ public record FfmqSpell {
 
 	/// <summary>Sound effect ID</summary>
 	public byte SoundEffectId { get; init; }
-
-	/// <summary>Status effect ID (for status spells)</summary>
-	public byte StatusEffectId { get; init; }
-
-	/// <summary>Status success chance (0-100%)</summary>
-	public byte StatusChance { get; init; }
-
-	/// <summary>Required story flag to unlock</summary>
-	public byte RequiredStoryFlag { get; init; }
-
-	/// <summary>Is this a damage spell?</summary>
-	public bool IsDamageSpell => EffectType == 0;
-
-	/// <summary>Is this a healing spell?</summary>
-	public bool IsHealingSpell => EffectType == 1;
-
-	/// <summary>Is this a status spell?</summary>
-	public bool IsStatusSpell => EffectType == 2;
 
 	/// <summary>Targets enemies?</summary>
 	public bool TargetsEnemies => TargetType is FfmqTargetType.SingleEnemy or FfmqTargetType.AllEnemies;
@@ -72,14 +54,17 @@ public enum FfmqSpellCategory {
 /// Reads FFMQ spell data from ROM
 /// </summary>
 public class FfmqSpellReader {
-	/// <summary>Spell data base address (SNES: $D50000)</summary>
-	public const int SpellTableAddress = 0x150000; // PC address
+	/// <summary>
+	/// Spell data base address.
+	/// Address: 0x060F36 (Bank $0C, 6 bytes per spell)
+	/// </summary>
+	public const int SpellTableAddress = 0x060F36;
 
 	/// <summary>Number of spells</summary>
 	public const int SpellCount = 16;
 
 	/// <summary>Bytes per spell entry</summary>
-	public const int SpellEntrySize = 12;
+	public const int SpellEntrySize = 6;
 
 	private readonly byte[] _romData;
 	private readonly FfmqTextDecoder _textDecoder;
@@ -101,18 +86,23 @@ public class FfmqSpellReader {
 
 		int offset = SpellTableAddress + (id * SpellEntrySize);
 
+		// Spell data: 6 bytes
+		// 0: Base power
+		// 1: Unknown (possibly type flags)
+		// 2: Unknown (possibly element - but may be hardcoded)
+		// 3: Target type
+		// 4: Animation ID
+		// 5: Sound effect ID
+
 		return new FfmqSpell {
 			Id = (byte)id,
 			Name = id < _spellNames.Length ? _spellNames[id] : $"Spell_{id:D2}",
-			BasePower = _romData[offset + 0x00],
-			Element = (FfmqElement)_romData[offset + 0x01],
-			EffectType = _romData[offset + 0x02],
-			TargetType = (FfmqTargetType)_romData[offset + 0x03],
-			AnimationId = _romData[offset + 0x04],
-			SoundEffectId = _romData[offset + 0x05],
-			StatusEffectId = _romData[offset + 0x06],
-			StatusChance = _romData[offset + 0x07],
-			RequiredStoryFlag = _romData[offset + 0x08]
+			BasePower = _romData[offset + 0],
+			EffectType = _romData[offset + 1],
+			Element = (FfmqElement)_romData[offset + 2],
+			TargetType = (FfmqTargetType)_romData[offset + 3],
+			AnimationId = _romData[offset + 4],
+			SoundEffectId = _romData[offset + 5],
 		};
 	}
 

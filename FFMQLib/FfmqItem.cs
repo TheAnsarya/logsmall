@@ -1,14 +1,14 @@
 namespace FFMQLib;
 
 /// <summary>
-/// FFMQ Weapon data structure (8 bytes).
-/// ROM address: $D2A000+
+/// FFMQ Weapon data structure (16 bytes).
+/// ROM address: 0x066000
 /// </summary>
 /// <remarks>
-/// 16 total weapons: 4 categories × 4 levels each
+/// 15 weapons total
 /// </remarks>
 public record FfmqWeapon {
-	/// <summary>Weapon ID (0-15)</summary>
+	/// <summary>Weapon ID (0-14)</summary>
 	public byte Id { get; init; }
 
 	/// <summary>Weapon name</summary>
@@ -22,62 +22,17 @@ public record FfmqWeapon {
 
 	/// <summary>Special effect ID (0 = none)</summary>
 	public byte SpecialEffectId { get; init; }
-
-	/// <summary>Menu icon ID</summary>
-	public byte IconId { get; init; }
-
-	/// <summary>Equipment slot category</summary>
-	public FfmqWeaponSlot Slot { get; init; }
-
-	/// <summary>Required level to use (0 = always available)</summary>
-	public byte RequiredLevel { get; init; }
-
-	/// <summary>Weapon tier within category (0-3)</summary>
-	public int Tier => Id % 4;
-
-	/// <summary>Display name based on slot and tier</summary>
-	public string CategoryName => Slot switch {
-		FfmqWeaponSlot.Sword => Tier switch {
-			0 => "Steel Sword",
-			1 => "Knight Sword",
-			2 => "Excalibur",
-			3 => "Dragon Claw",
-			_ => "Unknown Sword"
-		},
-		FfmqWeaponSlot.Axe => Tier switch {
-			0 => "Battleaxe",
-			1 => "Great Axe",
-			2 => "Giant Axe",
-			3 => "Zeus Axe",
-			_ => "Unknown Axe"
-		},
-		FfmqWeaponSlot.Claw => Tier switch {
-			0 => "Cat Claw",
-			1 => "Charm Claw",
-			2 => "Dragon Claw",
-			3 => "Gemini Claw",
-			_ => "Unknown Claw"
-		},
-		FfmqWeaponSlot.Bomb => Tier switch {
-			0 => "Bombs",
-			1 => "Mega Grenades",
-			2 => "Jumbo Bombs",
-			3 => "Super Bombs",
-			_ => "Unknown Bomb"
-		},
-		_ => "Unknown"
-	};
 }
 
 /// <summary>
-/// FFMQ Armor data structure (6 bytes).
-/// ROM address: $D2C000+
+/// FFMQ Armor data structure (16 bytes).
+/// ROM address: 0x066100
 /// </summary>
 /// <remarks>
-/// 16 total armor pieces: 4 slots × 4 levels each
+/// 7 armor pieces
 /// </remarks>
 public record FfmqArmor {
-	/// <summary>Armor ID (0-15)</summary>
+	/// <summary>Armor ID (0-6)</summary>
 	public byte Id { get; init; }
 
 	/// <summary>Armor name</summary>
@@ -86,7 +41,7 @@ public record FfmqArmor {
 	/// <summary>Physical defense power</summary>
 	public byte DefensePower { get; init; }
 
-	/// <summary>Magic defense power</summary>
+	/// <summary>Magic defense / evade</summary>
 	public byte MagicDefense { get; init; }
 
 	/// <summary>Elemental resistances</summary>
@@ -94,14 +49,11 @@ public record FfmqArmor {
 
 	/// <summary>Status resistances</summary>
 	public FfmqStatus StatusResistance { get; init; }
-
-	/// <summary>Equipment slot</summary>
-	public FfmqArmorSlot Slot { get; init; }
 }
 
 /// <summary>
-/// FFMQ Consumable item data structure.
-/// ROM address: $D28000+
+/// FFMQ Consumable item data structure (8 bytes).
+/// ROM address: 0x066380
 /// </summary>
 public record FfmqItem {
 	/// <summary>Item ID</summary>
@@ -109,52 +61,72 @@ public record FfmqItem {
 
 	/// <summary>Item name</summary>
 	public string Name { get; init; } = string.Empty;
-
-	/// <summary>Effect type (heal, cure status, etc.)</summary>
-	public byte EffectType { get; init; }
-
-	/// <summary>Effect power/amount</summary>
-	public byte EffectPower { get; init; }
-
-	/// <summary>Target type</summary>
-	public FfmqTargetType TargetType { get; init; }
-
-	/// <summary>Menu icon ID</summary>
-	public byte IconId { get; init; }
 }
 
 /// <summary>
 /// Reads FFMQ item/weapon/armor data from ROM
 /// </summary>
 public class FfmqItemReader {
-	/// <summary>Consumable items base address (SNES: $D28000)</summary>
-	public const int ItemsTableAddress = 0x128000; // PC address
+	/// <summary>Consumable items base address: 0x066380 (20 items, 8 bytes each)</summary>
+	public const int ItemsTableAddress = 0x066380;
 
-	/// <summary>Weapons table base address (SNES: $D2A000)</summary>
-	public const int WeaponsTableAddress = 0x12A000; // PC address
+	/// <summary>Weapons table base address: 0x066000 (15 weapons, 16 bytes each)</summary>
+	public const int WeaponsTableAddress = 0x066000;
 
-	/// <summary>Armor table base address (SNES: $D2C000)</summary>
-	public const int ArmorTableAddress = 0x12C000; // PC address
+	/// <summary>Armor table base address: 0x066100 (7 armors, 16 bytes each)</summary>
+	public const int ArmorTableAddress = 0x066100;
+
+	/// <summary>Helmets table base address: 0x066180 (7 helmets, 16 bytes each)</summary>
+	public const int HelmetsTableAddress = 0x066180;
+
+	/// <summary>Shields table base address: 0x066200 (7 shields, 16 bytes each)</summary>
+	public const int ShieldsTableAddress = 0x066200;
+
+	/// <summary>Accessories table base address: 0x066280 (11 accessories, 16 bytes each)</summary>
+	public const int AccessoriesTableAddress = 0x066280;
 
 	/// <summary>Number of consumable items</summary>
-	public const int ItemCount = 15;
+	public const int ItemCount = 20;
 
 	/// <summary>Number of weapons</summary>
-	public const int WeaponCount = 16;
+	public const int WeaponCount = 15;
 
 	/// <summary>Number of armor pieces</summary>
-	public const int ArmorCount = 16;
+	public const int ArmorCount = 7;
+
+	/// <summary>Number of helmets</summary>
+	public const int HelmetCount = 7;
+
+	/// <summary>Number of shields</summary>
+	public const int ShieldCount = 7;
+
+	/// <summary>Number of accessories</summary>
+	public const int AccessoryCount = 11;
 
 	/// <summary>Bytes per weapon entry</summary>
-	public const int WeaponEntrySize = 8;
+	public const int WeaponEntrySize = 16;
 
-	/// <summary>Bytes per armor entry</summary>
-	public const int ArmorEntrySize = 6;
+	/// <summary>Bytes per armor/helmet/shield entry</summary>
+	public const int ArmorEntrySize = 16;
+
+	/// <summary>Bytes per accessory entry</summary>
+	public const int AccessoryEntrySize = 16;
+
+	/// <summary>Bytes per consumable entry</summary>
+	public const int ConsumableEntrySize = 8;
 
 	private readonly byte[] _romData;
+	private readonly FfmqTextDecoder _textDecoder;
+	private readonly string[] _weaponNames;
+	private readonly string[] _armorNames;
+	private readonly string[] _itemNames;
 
 	public FfmqItemReader(byte[] romData) {
 		_romData = romData ?? throw new ArgumentNullException(nameof(romData));
+		_textDecoder = new FfmqTextDecoder();
+		_weaponNames = _textDecoder.ReadTable(_romData, FfmqTextTables.WeaponNames);
+		_armorNames = _textDecoder.ReadTable(_romData, FfmqTextTables.ArmorNames);
+		_itemNames = _textDecoder.ReadTable(_romData, FfmqTextTables.ItemNames);
 	}
 
 	/// <summary>
@@ -167,14 +139,23 @@ public class FfmqItemReader {
 
 		int offset = WeaponsTableAddress + (id * WeaponEntrySize);
 
+		// Weapon layout (16 bytes):
+		// 0: Attack power
+		// 1: Accuracy
+		// 2: Element
+		// 3: Special effects
+		// 4: Character equip mask
+		// 5-6: Buy price (16-bit)
+		// 7-8: Sell price (16-bit)
+		// 9: Flags
+		// 10-15: Unused
+
 		return new FfmqWeapon {
 			Id = (byte)id,
-			AttackPower = _romData[offset + 0x00],
-			Element = (FfmqElement)_romData[offset + 0x01],
-			SpecialEffectId = _romData[offset + 0x02],
-			IconId = _romData[offset + 0x03],
-			Slot = (FfmqWeaponSlot)_romData[offset + 0x04],
-			RequiredLevel = _romData[offset + 0x05]
+			Name = id < _weaponNames.Length ? _weaponNames[id] : $"Weapon_{id:D2}",
+			AttackPower = _romData[offset + 0],
+			Element = (FfmqElement)_romData[offset + 2],
+			SpecialEffectId = _romData[offset + 3],
 		};
 	}
 
@@ -197,13 +178,24 @@ public class FfmqItemReader {
 
 		int offset = ArmorTableAddress + (id * ArmorEntrySize);
 
+		// Armor layout (16 bytes):
+		// 0: Defense power
+		// 1: Evade
+		// 2: Element resistance
+		// 3: Status resistance
+		// 4: Character equip mask
+		// 5-6: Buy price (16-bit)
+		// 7-8: Sell price (16-bit)
+		// 9: Flags
+		// 10-15: Unused
+
 		return new FfmqArmor {
 			Id = (byte)id,
-			DefensePower = _romData[offset + 0x00],
-			MagicDefense = _romData[offset + 0x01],
-			ElementResistance = (FfmqElement)_romData[offset + 0x02],
-			StatusResistance = (FfmqStatus)_romData[offset + 0x03],
-			Slot = (FfmqArmorSlot)_romData[offset + 0x04]
+			Name = id < _armorNames.Length ? _armorNames[id] : $"Armor_{id:D2}",
+			DefensePower = _romData[offset + 0],
+			MagicDefense = _romData[offset + 1],
+			ElementResistance = (FfmqElement)_romData[offset + 2],
+			StatusResistance = (FfmqStatus)_romData[offset + 3],
 		};
 	}
 
@@ -215,4 +207,53 @@ public class FfmqItemReader {
 			yield return ReadArmor(i);
 		}
 	}
+
+	/// <summary>
+	/// Read a single item by ID
+	/// </summary>
+	public FfmqItem ReadItem(int id) {
+		if (id < 0 || id >= ItemCount) {
+			throw new ArgumentOutOfRangeException(nameof(id), $"Item ID must be 0-{ItemCount - 1}");
+		}
+
+		return new FfmqItem {
+			Id = (byte)id,
+			Name = id < _itemNames.Length ? _itemNames[id] : $"Item_{id:D2}"
+			// Note: Item stats would need additional ROM address research
+		};
+	}
+
+	/// <summary>
+	/// Read all items from ROM
+	/// </summary>
+	public IEnumerable<FfmqItem> ReadAllItems() {
+		for (int i = 0; i < ItemCount; i++) {
+			yield return ReadItem(i);
+		}
+	}
+
+	/// <summary>
+	/// Get all helmet names
+	/// </summary>
+	public string[] GetHelmetNames() => _textDecoder.ReadTable(_romData, FfmqTextTables.HelmetNames);
+
+	/// <summary>
+	/// Get all shield names
+	/// </summary>
+	public string[] GetShieldNames() => _textDecoder.ReadTable(_romData, FfmqTextTables.ShieldNames);
+
+	/// <summary>
+	/// Get all accessory names
+	/// </summary>
+	public string[] GetAccessoryNames() => _textDecoder.ReadTable(_romData, FfmqTextTables.AccessoryNames);
+
+	/// <summary>
+	/// Get all attack/ability names
+	/// </summary>
+	public string[] GetAttackNames() => _textDecoder.ReadTable(_romData, FfmqTextTables.AttackNames);
+
+	/// <summary>
+	/// Get all location names
+	/// </summary>
+	public string[] GetLocationNames() => _textDecoder.ReadTable(_romData, FfmqTextTables.LocationNames);
 }
