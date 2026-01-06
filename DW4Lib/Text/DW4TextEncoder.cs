@@ -1,47 +1,68 @@
 namespace DW4Lib.Text;
 
 /// <summary>
-/// Dragon Warrior IV text encoding and dialog system.
+/// Dragon Warrior IV (NES) text encoding and dialog system.
 /// Handles conversion between game text format and ASCII/Unicode.
 /// </summary>
+/// <remarks>
+/// Character table verified from Dragon Warrior 4 (NES) - English.tbl
+/// Ranges:
+///   0x00: Space
+///   0x01-0x0A: Digits (0-9)
+///   0x0B-0x24: Lowercase (a-z)
+///   0x25-0x3E: Uppercase (A-Z)
+///   0x65-0x79: Punctuation
+///   0xF0-0xFF: Control codes
+/// </remarks>
 public static class DW4TextEncoder {
 	/// <summary>
-	/// DW4 character table mapping (based on standard DQ/DW encoding).
+	/// DW4 character table mapping (verified from GameInfo TBL file).
 	/// </summary>
 	public static readonly Dictionary<byte, char> DW4ToUnicode = new() {
-		// Numbers
-		[0x00] = '0', [0x01] = '1', [0x02] = '2', [0x03] = '3', [0x04] = '4',
-		[0x05] = '5', [0x06] = '6', [0x07] = '7', [0x08] = '8', [0x09] = '9',
+		// Space
+		[0x00] = ' ',
 
-		// Uppercase letters
-		[0x0A] = 'A', [0x0B] = 'B', [0x0C] = 'C', [0x0D] = 'D', [0x0E] = 'E',
-		[0x0F] = 'F', [0x10] = 'G', [0x11] = 'H', [0x12] = 'I', [0x13] = 'J',
-		[0x14] = 'K', [0x15] = 'L', [0x16] = 'M', [0x17] = 'N', [0x18] = 'O',
-		[0x19] = 'P', [0x1A] = 'Q', [0x1B] = 'R', [0x1C] = 'S', [0x1D] = 'T',
-		[0x1E] = 'U', [0x1F] = 'V', [0x20] = 'W', [0x21] = 'X', [0x22] = 'Y',
-		[0x23] = 'Z',
+		// Numbers 0-9 (0x01-0x0A)
+		[0x01] = '0', [0x02] = '1', [0x03] = '2', [0x04] = '3', [0x05] = '4',
+		[0x06] = '5', [0x07] = '6', [0x08] = '7', [0x09] = '8', [0x0A] = '9',
 
-		// Lowercase letters
-		[0x24] = 'a', [0x25] = 'b', [0x26] = 'c', [0x27] = 'd', [0x28] = 'e',
-		[0x29] = 'f', [0x2A] = 'g', [0x2B] = 'h', [0x2C] = 'i', [0x2D] = 'j',
-		[0x2E] = 'k', [0x2F] = 'l', [0x30] = 'm', [0x31] = 'n', [0x32] = 'o',
-		[0x33] = 'p', [0x34] = 'q', [0x35] = 'r', [0x36] = 's', [0x37] = 't',
-		[0x38] = 'u', [0x39] = 'v', [0x3A] = 'w', [0x3B] = 'x', [0x3C] = 'y',
-		[0x3D] = 'z',
+		// Lowercase letters a-z (0x0B-0x24)
+		[0x0B] = 'a', [0x0C] = 'b', [0x0D] = 'c', [0x0E] = 'd', [0x0F] = 'e',
+		[0x10] = 'f', [0x11] = 'g', [0x12] = 'h', [0x13] = 'i', [0x14] = 'j',
+		[0x15] = 'k', [0x16] = 'l', [0x17] = 'm', [0x18] = 'n', [0x19] = 'o',
+		[0x1A] = 'p', [0x1B] = 'q', [0x1C] = 'r', [0x1D] = 's', [0x1E] = 't',
+		[0x1F] = 'u', [0x20] = 'v', [0x21] = 'w', [0x22] = 'x', [0x23] = 'y',
+		[0x24] = 'z',
 
-		// Punctuation and symbols
-		[0x3E] = ' ', [0x3F] = '.', [0x40] = ',', [0x41] = '-', [0x42] = '!',
-		[0x43] = '?', [0x44] = '\'', [0x45] = '"', [0x46] = ':', [0x47] = ';',
-		[0x48] = '(', [0x49] = ')', [0x4A] = '/', [0x4B] = '*',
+		// Uppercase letters A-Z (0x25-0x3E)
+		[0x25] = 'A', [0x26] = 'B', [0x27] = 'C', [0x28] = 'D', [0x29] = 'E',
+		[0x2A] = 'F', [0x2B] = 'G', [0x2C] = 'H', [0x2D] = 'I', [0x2E] = 'J',
+		[0x2F] = 'K', [0x30] = 'L', [0x31] = 'M', [0x32] = 'N', [0x33] = 'O',
+		[0x34] = 'P', [0x35] = 'Q', [0x36] = 'R', [0x37] = 'S', [0x38] = 'T',
+		[0x39] = 'U', [0x3A] = 'V', [0x3B] = 'W', [0x3C] = 'X', [0x3D] = 'Y',
+		[0x3E] = 'Z',
 
-		// Special characters
-		[0x4C] = '♪', // Music note (used in jingles)
-		[0x4D] = '♥', // Heart
-		[0x4E] = '→', // Arrow
-		[0x4F] = '·', // Middle dot
+		// Punctuation (0x65-0x79)
+		[0x65] = '\u2014', // Em dash —
+		[0x66] = '\u201C', // Left double quote "
+		[0x67] = '\u201D', // Right double quote "
+		[0x68] = '\u2018', // Left single quote '
+		[0x69] = '\u2019', // Right single quote '
+		[0x6A] = '\'',     // Apostrophe
+		[0x6B] = '\'',     // Apostrophe variant
+		[0x6D] = '?',      // Question mark
+		[0x6E] = '!',      // Exclamation mark
+		[0x6F] = '-',      // Hyphen
+		[0x70] = '*',      // Asterisk
+		[0x71] = ':',      // Colon
+		[0x72] = '\u2026', // Ellipsis …
+		[0x75] = '(',      // Left parenthesis
+		[0x76] = ')',      // Right parenthesis
+		[0x77] = ',',      // Comma
+		[0x78] = '.',      // Period
 
 		// Control codes
-		[0xFE] = '\n', // Newline
+		[0xFE] = '\n', // Newline/pause
 		[0xFF] = '\0'  // End of string
 	};
 
@@ -51,7 +72,13 @@ public static class DW4TextEncoder {
 	public static readonly Dictionary<char, byte> UnicodeToD4;
 
 	static DW4TextEncoder() {
-		UnicodeToD4 = DW4ToUnicode.ToDictionary(x => x.Value, x => x.Key);
+		// Build reverse mapping, keeping first occurrence for duplicate values
+		UnicodeToD4 = [];
+		foreach (var kvp in DW4ToUnicode) {
+			if (!UnicodeToD4.ContainsKey(kvp.Value)) {
+				UnicodeToD4[kvp.Value] = kvp.Key;
+			}
+		}
 	}
 
 	/// <summary>
@@ -95,7 +122,7 @@ public static class DW4TextEncoder {
 				// Skip carriage return
 			} else {
 				// Unknown character - use space
-				result.Add(0x3E);
+				result.Add(0x00); // Space at 0x00
 			}
 		}
 		result.Add(0xFF); // End marker
